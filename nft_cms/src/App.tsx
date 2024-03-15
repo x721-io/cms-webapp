@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
+import SignIn from './views/auth/SignIn';
 
 function App() {
   return (
     <div className="font-bold text-3xl">
-      NFT Marketplace CMS
+      <SignIn />
     </div>
   );
 }
