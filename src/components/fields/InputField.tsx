@@ -92,7 +92,7 @@ export default function Input({
       {!!appendIcon && (
         <div
           className={classNames(
-            "absolute inset-y-0 end-0 flex items-center pe-3.5 pointer-events-none",
+            "absolute inset-y-0 end-0 flex items-center pe-3.5",
             appendIconContainerClass,
           )}
         >

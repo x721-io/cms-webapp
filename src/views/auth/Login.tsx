@@ -4,17 +4,52 @@ import { FormState } from "../../types/form";
 import { formRulesLogin } from "../../config/formRules";
 import Text from "../../components/Text";
 import Input from "../../components/fields/InputField";
-
+import { useMarketplaceApi } from "../../hooks/useMarketplaceApi";
+import { toast } from "react-toastify";
+import { useAuth } from "../../hooks/useAuth";
+import { useState } from "react";
+import EyeIcon from "../../assets/svg/EyeIcon";
+import EyeOffIcon from "../../assets/svg/EyeOffIcon";
 
 export default function Login() {
+  const api = useMarketplaceApi();
+  const { onAuth } = useAuth();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<FormState.Login>();
 
-  const onSubmit = () => {
+  const togglePasswordVisibility = () => {
     console.log('1');
+
+    setIsPasswordVisible(!isPasswordVisible)
+  }
+
+  const onSubmit = async ({ username, password }: FormState.Login) => {
+    const toastId = toast.loading("Preparing data...", { type: "info" });
+    try {
+      await api.login({ username: username, password: password })
+      await onAuth(username, password)
+
+      toast.update(toastId, {
+        render: "Login has been successfully",
+        type: "success",
+        autoClose: 1000,
+        closeButton: true,
+        isLoading: false,
+      });
+    } catch (e) {
+      console.error(e);
+      toast.update(toastId, {
+        render: "Login error",
+        type: "error",
+        autoClose: 1000,
+        closeButton: true,
+        isLoading: false,
+      });
+    }
 
   }
   return (
@@ -45,16 +80,25 @@ export default function Login() {
                 error={!!errors.password}
                 placeholder="Enter your password"
                 register={register("password", formRulesLogin.password)}
-                type="password"
+                type={isPasswordVisible ? "text" : "password"}
+                appendIcon={isPasswordVisible ? (
+                  <div onClick={togglePasswordVisibility}>
+                    <EyeIcon />
+                  </div>
+                ) : (
+                  <div onClick={togglePasswordVisibility}>
+                    <EyeOffIcon />
+                  </div>
+                )}
               />
             </div>
+            <FormValidationMessages errors={errors} />
+            <button
+              className="linear mt-7 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"
+              style={{ background: 'linear-gradient(to right, #5c6bc0, #512da8)' }}>
+              Login
+            </button>
           </div>
-          <FormValidationMessages errors={errors} />
-          <button
-            className="linear mt-7 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"
-            style={{ background: 'linear-gradient(to right, #5c6bc0, #512da8)' }}>
-            Login
-          </button>
         </form>
       </div>
     </div>
