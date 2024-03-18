@@ -1,46 +1,105 @@
-// Custom components
-import React from "react";
+import React, { InputHTMLAttributes, useMemo } from "react";
+import { UseFormRegisterReturn } from "react-hook-form";
+import { classNames } from "../../utils/string";
 
-function InputField(props: {
-  id: string;
-  label: string;
-  extra: string;
-  placeholder: string;
-  variant: string;
-  state?: string;
-  disabled?: boolean;
-  type?: string;
-}) {
-  const { label, id, extra, type, placeholder, variant, state, disabled } =
-    props;
+export interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  containerClass?: string;
+  scale?: "md" | "lg" | "sm";
+  prependIcon?: React.ReactNode;
+  prependIconContainerClass?: string;
+  appendIcon?: React.ReactNode;
+  appendIconContainerClass?: string;
+  error?: boolean;
+  success?: boolean;
+  errorMessage?: string;
+  register?: UseFormRegisterReturn;
+}
+
+export default function Input({
+  prependIcon,
+  prependIconContainerClass,
+  appendIcon,
+  appendIconContainerClass,
+  containerClass,
+  scale,
+  success,
+  error,
+  errorMessage,
+  className,
+  register,
+  ...rest
+}: BaseInputProps) {
+  const baseClass =
+    "bg-surface-soft outline-none placeholder:text-gray-200 placeholder:font-light focus-visible:ring-[0.5px] w-full transition-all";
+
+  const scaleClass = useMemo(() => {
+    switch (scale) {
+      case "lg":
+        return classNames(
+          "text-base rounded-2xl min-w-72 h-14 p-4",
+          !!prependIcon && "ps-10",
+          !!appendIcon && "pe-10",
+        );
+      case "sm":
+        return classNames(
+          "text-sm rounded-xl min-w-72 h-10 px-4 py-2",
+          !!prependIcon && "ps-9",
+          !!appendIcon && "pe-9",
+        );
+      case "md":
+      default:
+        return classNames(
+          "text-base rounded-2xl min-w-72 h-12 p-3",
+          !!prependIcon && "ps-10",
+          !!appendIcon && "pe-10",
+        );
+    }
+  }, [scale, prependIcon, appendIcon]);
+
+  const colorClass = useMemo(() => {
+    switch (true) {
+      case success:
+        return "text-success ring-success";
+      case error:
+        return "text-red-600 border-red-600 border-[0.5px]";
+      default:
+        return "text-primary focus-visible:ring-primary border-gray-300 border";
+    }
+  }, [success, error]);
 
   return (
-    <div className={`${extra}`}>
-      <label
-        htmlFor={id}
-        className={`text-sm text-navy-700 dark:text-white ${
-          variant === "auth" ? "ml-1.5 font-medium" : "ml-3 font-bold"
-        }`}
-      >
-        {label}
-      </label>
+    <div
+      className={classNames(
+        "flex items-center relative w-auto",
+        containerClass,
+      )}
+    >
+      {!!prependIcon && (
+        <div
+          className={classNames(
+            "absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none",
+            prependIconContainerClass,
+          )}
+        >
+          {prependIcon}
+        </div>
+      )}
       <input
-        disabled={disabled}
-        type={type}
-        id={id}
-        placeholder={placeholder}
-        className={`mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none ${
-          disabled === true
-            ? "!border-none !bg-gray-100 dark:!bg-white/5 dark:placeholder:!text-[rgba(255,255,255,0.15)]"
-            : state === "error"
-            ? "border-red-500 text-red-500 placeholder:text-red-500 dark:!border-red-400 dark:!text-red-400 dark:placeholder:!text-red-400"
-            : state === "success"
-            ? "border-green-500 text-green-500 placeholder:text-green-500 dark:!border-green-400 dark:!text-green-400 dark:placeholder:!text-green-400"
-            : "border-gray-200 dark:!border-white/10 dark:text-white"
-        }`}
+        className={classNames(baseClass, scaleClass, colorClass, className)}
+        {...register}
+        {...rest}
       />
+      {!!appendIcon && (
+        <div
+          className={classNames(
+            "absolute inset-y-0 end-0 flex items-center pe-3.5 pointer-events-none",
+            appendIconContainerClass,
+          )}
+        >
+          {appendIcon}
+        </div>
+      )}
     </div>
   );
 }
 
-export default InputField;
