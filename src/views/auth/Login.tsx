@@ -4,18 +4,43 @@ import { FormState } from "../../types/form";
 import { formRulesLogin } from "../../config/formRules";
 import Text from "../../components/Text";
 import Input from "../../components/fields/InputField";
-
+import { useMarketplaceApi } from "../../hooks/useMarketplaceApi";
+import { toast } from "react-toastify";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Login() {
+  const api = useMarketplaceApi();
+  const { onAuth } = useAuth();
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<FormState.Login>();
 
-  const onSubmit = () => {
-    console.log('1');
-
+  const onSubmit = async ({ username, password}: FormState.Login) => {
+    const toastId = toast.loading("Preparing data...", { type: "info" });
+    try {
+      await api.login({username: username, password: password})
+      await onAuth(username, password)
+      
+      toast.update(toastId, {
+        render: "Login has been successfully",
+        type: "success",
+        autoClose: 1000,
+        closeButton: true,
+        isLoading: false,
+      });
+    } catch (e) {
+      console.error(e);
+      toast.update(toastId, {
+        render: "Login error",
+        type: "error",
+        autoClose: 1000,
+        closeButton: true,
+        isLoading: false,
+      });
+    } 
+    
   }
   return (
     <div className='m-0 p-0 flex justify-center items-center'
