@@ -30,7 +30,7 @@ export default function Input({
   ...rest
 }: BaseInputProps) {
   const baseClass =
-    "bg-surface-soft border-gray-400 border outline-none placeholder:text-tertiary focus-visible:ring-[0.5px] w-full transition-all";
+    "bg-surface-soft outline-none placeholder:text-gray-200 placeholder:font-light focus-visible:ring-[0.5px] w-full transition-all";
 
   const scaleClass = useMemo(() => {
     switch (scale) {
@@ -63,7 +63,7 @@ export default function Input({
       case error:
         return "text-red-600 border-red-600 border-[0.5px]";
       default:
-        return "text-primary focus-visible:ring-primary border-none";
+        return "text-primary focus-visible:ring-primary border-gray-300 border";
     }
   }, [success, error]);
 

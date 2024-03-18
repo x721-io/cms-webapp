@@ -1,10 +1,12 @@
-import { emailRegex } from "../utils/regex";
-
 // Login
 export const formRulesLogin = {
-    email: {
-        required: "Please input your email",
-        pattern: { value: emailRegex, message: "Invalid email address" },
+    username: {
+        required: "Please input username",
+        minLength: {
+            value: 6,
+            message: "Username must have at least 6 characters",
+        },
+        maxLength: { value: 25, message: "Username cannot exceed 25 characters" },
     },
     password: {
         required: "Please input your password",

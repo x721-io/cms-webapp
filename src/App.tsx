@@ -1,10 +1,10 @@
 import React from 'react';
-import SignIn from './views/auth/SignIn';
+import Login from './views/auth/Login';
 
 function App() {
   return (
     <div className="font-bold text-3xl">
-      <SignIn />
+      <Login />
     </div>
   );
 }
