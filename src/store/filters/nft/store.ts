@@ -18,20 +18,20 @@ export const useNFTFilterStore = create(
   devtools<NFTFilterState & NFTFilterAction>(
     (set, get) => ({
       ...DEFAULT_NFT_FILTERS_STATE,
-      toggleFilter: (bool : any) =>
-        set((state : any) => ({
+      toggleFilter: (bool: any) =>
+        set((state: any) => ({
           showFilters: bool === undefined ? !state.showFilters : bool,
         })),
-      setFilters: (filters : any) => set(() => ({ filters })),
-      updateFilters: (filters : any) =>
-        set((state : any) => ({
+      setFilters: (filters: any) => set(() => ({ filters })),
+      updateFilters: (filters: any) =>
+        set((state: any) => ({
           filters: {
             ...state.filters,
             ...filters,
           },
         })),
       resetFilters: () =>
-        set((state : any) => ({
+        set((state: any) => ({
           ...DEFAULT_NFT_FILTERS_STATE,
           showFilters: state.showFilters,
         })),

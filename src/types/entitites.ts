@@ -1,5 +1,3 @@
-
-
 export type AssetType = "ERC721" | "ERC1155";
 
 export interface User {
@@ -26,4 +24,3 @@ export interface User {
   accountStatus?: boolean;
   verifyEmail?: boolean;
 }
-

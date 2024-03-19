@@ -1,6 +1,5 @@
 import { APIParams } from "../../../services/api/types";
 
-
 export interface NFTFilterState {
   showFilters: boolean;
   filters: APIParams.FetchNFTs;

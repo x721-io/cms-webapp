@@ -4,11 +4,7 @@ type Props = {
   color?: string;
 };
 
-export default function CommandIcon({
-  width,
-  height,
-  color
-}: Props) {
+export default function CommandIcon({ width, height, color }: Props) {
   return (
     <svg
       width={width}

@@ -30,10 +30,7 @@ export default function FormValidationMessages({ errors }: Props) {
 
       <div className="flex flex-col gap-1">
         {Object.entries(errors).map(([key, error]) => (
-          <Text
-            key={key}
-            className="font-semibold text-red-600 italic text-sm"
-          >
+          <Text key={key} className="font-semibold text-red-600 italic text-sm">
             {error?.message as string}
           </Text>
         ))}
