@@ -22,8 +22,6 @@ export default function Login() {
   } = useForm<FormState.Login>();
 
   const togglePasswordVisibility = () => {
-    console.log('1');
-
     setIsPasswordVisible(!isPasswordVisible)
   }
 
