@@ -1,5 +1,5 @@
-import React from 'react';
-import Login from './views/auth/Login';
+import React from "react";
+import Login from "./views/auth/Login";
 
 function App() {
   return (

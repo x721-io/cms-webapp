@@ -1,9 +1,5 @@
 // Icon Imports
-import {
-  MdHome,
-  MdOutlineShoppingCart,
-  MdBarChart,
-} from "react-icons/md";
+import { MdHome, MdOutlineShoppingCart, MdBarChart } from "react-icons/md";
 
 const routes = [
   {
@@ -27,6 +23,6 @@ const routes = [
     icon: <MdBarChart className="h-6 w-6" />,
     path: "data-tables",
     component: <></>,
-  }
+  },
 ];
 export default routes;
