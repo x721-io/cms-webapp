@@ -1,9 +1,5 @@
 // Icon Imports
-import {
-  MdHome,
-  MdOutlineShoppingCart,
-  MdBarChart,
-} from "react-icons/md";
+import { MdHome, MdOutlineShoppingCart, MdBarChart } from "react-icons/md";
 
 import MainDashboard from "./views/admin/AdminDashboard";
 import Profile from "./views/admin/profile";
@@ -39,5 +35,6 @@ const routes = [
     path: "profile",
     component: <Profile/>,
   }
+
 ];
 export default routes;

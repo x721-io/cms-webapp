@@ -1,7 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import React from "react";
+import Login from "./views/auth/Login";
 
 import AdminLayout from "./layouts/admin/AdminLayout";
-import Login from "./views/auth/Login";
 const App = () => {
   return (
       <Routes>
