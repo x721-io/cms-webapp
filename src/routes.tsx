@@ -1,18 +1,22 @@
 // Icon Imports
 import { MdHome, MdOutlineShoppingCart, MdBarChart } from "react-icons/md";
 
+import MainDashboard from "./views/admin/AdminDashboard";
+import Profile from "./views/admin/profile";
+
+
 const routes = [
   {
     name: "Main Dashboard",
     layout: "/admin",
     path: "default",
     icon: <MdHome className="h-6 w-6" />,
-    component: <></>,
+    component: <MainDashboard/>,
   },
   {
     name: "NFT Marketplace",
     layout: "/admin",
-    path: "default",
+    path: "marketplace",
     icon: <MdOutlineShoppingCart className="h-6 w-6" />,
     component: <></>,
     secondary: true,
@@ -21,8 +25,16 @@ const routes = [
     name: "Launchpad",
     layout: "/admin",
     icon: <MdBarChart className="h-6 w-6" />,
-    path: "data-tables",
+    path: "launchpad",
     component: <></>,
   },
+  {
+    name: "Profile",
+    layout: "/admin",
+    icon: <MdBarChart className="h-6 w-6" />,
+    path: "profile",
+    component: <Profile/>,
+  }
+
 ];
 export default routes;
