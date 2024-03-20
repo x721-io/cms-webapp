@@ -1,12 +1,14 @@
-import React from 'react';
-import Login from './views/auth/Login';
+import { Routes, Route, Navigate } from "react-router-dom";
 
-function App() {
+import AdminLayout from "./layouts/admin/AdminLayout";
+import Login from "./views/auth/Login";
+const App = () => {
   return (
-    <div className="font-bold text-3xl">
-      <Login />
-    </div>
+      <Routes>
+        <Route path="admin/*" element={<AdminLayout />} />
+        <Route path="/" element={<Login/>} />
+      </Routes>
   );
-}
+};
 
 export default App;
