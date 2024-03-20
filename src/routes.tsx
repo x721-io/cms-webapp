@@ -5,6 +5,7 @@ import MainDashboard from "./views/admin/AdminDashboard";
 import Profile from "./views/admin/profile";
 
 
+
 const routes = [
   {
     name: "Main Dashboard",
@@ -33,6 +34,13 @@ const routes = [
     layout: "/admin",
     icon: <MdBarChart className="h-6 w-6" />,
     path: "profile",
+    component: <Profile/>,
+  },
+  {
+    name: "Account",
+    layout: "/admin",
+    icon: <MdBarChart className="h-6 w-6" />,
+    path: "account",
     component: <Profile/>,
   }
 
