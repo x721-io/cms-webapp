@@ -54,7 +54,7 @@ export default function Login() {
   };
   return (
     <div
-      className="m-0 p-0 flex justify-center items-center"
+      className="m-0 flex items-center justify-center p-0"
       style={{
         backgroundColor: "#c9d6ff",
         background: "linear-gradient(to right, #e2e2e2, #c9d6ff)",
@@ -62,14 +62,14 @@ export default function Login() {
       }}
     >
       {/* Login section */}
-      <div className="bg-white rounded-3xl shadow-md w-full max-w-full flex-col items-center xl:max-w-[420px] p-8">
+      <div className="w-full max-w-full flex-col items-center rounded-3xl bg-white p-8 shadow-md xl:max-w-[420px]">
         <h4 className="mb-7 text-4xl font-bold text-navy-700 dark:text-white">
           Login
         </h4>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-5">
             <div>
-              <Text className="text-base font-semibold mb-1">Username</Text>
+              <Text className="mb-1 text-base font-semibold">Username</Text>
               <Input
                 error={!!errors.username}
                 placeholder="Enter your username"
@@ -77,7 +77,7 @@ export default function Login() {
               />
             </div>
             <div>
-              <Text className="text-base font-semibold mb-1">Password</Text>
+              <Text className="mb-1 text-base font-semibold">Password</Text>
               <Input
                 error={!!errors.password}
                 placeholder="Enter your password"

@@ -12,7 +12,7 @@ export default function Collection() {
 
   const searchText = useMemo(
     () => collectionSearchText,
-    [collectionSearchText],
+    [collectionSearchText]
   );
 
   const handleInputText = (value: any) => {
@@ -20,7 +20,7 @@ export default function Collection() {
   };
 
   return (
-    <div className="p-8 flex flex-col gap-8">
+    <div className="flex flex-col gap-8 p-8">
       {/* Search */}
       <div className="w-10">
         <Input
