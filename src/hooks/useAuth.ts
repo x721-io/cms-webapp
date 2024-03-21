@@ -6,7 +6,6 @@ export const useAuth = () => {
   const { setCredentials } = useAuthStore();
 
   const onAuth = async (username: string, password: string) => {
-
     const credentials = await api.login({
       username: username,
       password: password,
