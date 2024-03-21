@@ -3,6 +3,7 @@ import { MdHome, MdOutlineShoppingCart, MdBarChart } from "react-icons/md";
 
 import MainDashboard from "./views/admin/AdminDashboard";
 import Profile from "./views/admin/profile";
+import Marketplace from "./views/admin/marketplace/Marketplace";
 
 
 const routes = [
@@ -18,7 +19,7 @@ const routes = [
     layout: "/admin",
     path: "marketplace",
     icon: <MdOutlineShoppingCart className="h-6 w-6" />,
-    component: <></>,
+    component: <Marketplace/>,
     secondary: true,
   },
   {

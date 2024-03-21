@@ -10,10 +10,12 @@ import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
 import EyeIcon from "../../assets/svg/EyeIcon";
 import EyeOffIcon from "../../assets/svg/EyeOffIcon";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const api = useMarketplaceApi();
   const { onAuth } = useAuth();
+  const navigate = useNavigate();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const {
     handleSubmit,
@@ -26,11 +28,12 @@ export default function Login() {
   };
 
   const onSubmit = async ({ username, password }: FormState.Login) => {
+    
     const toastId = toast.loading("Preparing data...", { type: "info" });
     try {
       await api.login({ username: username, password: password });
       await onAuth(username, password);
-
+      navigate("/admin");
       toast.update(toastId, {
         render: "Login has been successfully",
         type: "success",
