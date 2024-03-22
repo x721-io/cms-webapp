@@ -17,6 +17,18 @@ interface Params {
   offset?: number;
 }
 
+export const useFetchUserList = (filters: APIParams.FetchUsers) => {
+  const api = useMarketplaceApi();
+
+  return useSWRInfinite(
+    (index) => ({
+      ...filters,
+      page: index + 1,
+    }),
+    (params) => api.fetchUsers(sanitizeObject(params) as APIParams.FetchUsers),
+  );
+};
+
 export const useFetchCollectionList = (filters: APIParams.FetchCollections) => {
   const api = useMarketplaceApi();
 
