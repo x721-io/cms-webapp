@@ -29,7 +29,6 @@ export default function TableNFT({
   items, showFilters, activeFilters, onApplyFilters, onResetFilters, traitFilters, onClose, isLoadMore, isLoading, error, dataCollectionType, userId, showCreateNFT, currentHasNext
 }: Props) {
 
-
   const renderList = () => {
     if (error && !items) {
       return (
@@ -50,8 +49,6 @@ export default function TableNFT({
         </div>
       );
     }
-    console.log('items: ', items);
-
 
     return (
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -92,7 +89,12 @@ export default function TableNFT({
               <td className="px-6 py-4">{item.collection.type}</td>
               <td className="px-6 py-4">
                 <div className="flex items-center">
-                  <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>{" "}
+                  {item.status === "SUCCESS" ? 
+                    <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> 
+                    : item.status === "PENDING" 
+                    ? <div className="h-2.5 w-2.5 rounded-full bg-yellow-500 me-2"></div>
+                    : <div className="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>}
+                  {" "}
                   {item.status}
                 </div>
               </td>
