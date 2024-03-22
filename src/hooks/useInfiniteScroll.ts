@@ -17,6 +17,21 @@ interface Params {
   offset?: number;
 }
 
+export const useFetchCollectionList = (filters: APIParams.FetchCollections) => {
+  const api = useMarketplaceApi();
+
+  return useSWRInfinite(
+    (index) => ({
+      ...filters,
+      page: index + 1,
+    }),
+    (params) =>
+      api.fetchCollections(
+        sanitizeObject(params) as APIParams.FetchCollections,
+      ),
+  );
+};
+
 export const useFetchNFTList = (filters: APIParams.FetchNFTs) => {
   const api = useMarketplaceApi();
 

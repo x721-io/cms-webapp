@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import SearchIcon from "../../../../assets/svg/SearchIcon";
 import Input from "../../../../components/fields/InputField";
-import { useNFTFilterStore } from "../../../../store/filters/nft/store";
 import { Dropdown } from "flowbite-react";
 import ChevronDownIcon from "../../../../assets/svg/ChevronDown";
+import { useCollectionFilterStore } from "../../../../store/filters/collections/store";
 
-export default function NFTNavbar() {
+export default function CollectionNavbar() {
     const dropdownItems = [
         // { name: "Price: Ascending", order: "asc", orderBy: "price" },
         // { name: "Price: Descending", order: "desc", orderBy: "price" },
@@ -18,12 +18,15 @@ export default function NFTNavbar() {
         orderBy: "time",
     });
     const {
-        filters: { name: nftSearchText },
-        updateFilters: updateNFTFilters
-    } = useNFTFilterStore((state) => state);
-    const searchText = useMemo(() => nftSearchText, [nftSearchText]);
+        filters: { name: collectionSearchText },
+        // showFilters: showCollectionFilters,
+        // toggleFilter: toggleCollectionFilters,
+        updateFilters: updateCollectionFilters,
+      } = useCollectionFilterStore((state) => state);
+
+    const searchText = useMemo(() => collectionSearchText, [collectionSearchText]);
     const handleInputText = (value: any) => {
-        updateNFTFilters({ name: value });
+        updateCollectionFilters({ name: value });
     };
     const handleChange = (selectedOption: any) => {
         let order = "",
@@ -53,15 +56,15 @@ export default function NFTNavbar() {
         }
         setSortOption({ name, order, orderBy });
     };
-    const sortNFTs = (sortOptionNFT: any) => {
-        updateNFTFilters({
-            orderBy: sortOptionNFT?.orderBy,
-            order: sortOptionNFT?.order,
+    const sortCollections = (sortOptionCollection: any) => {
+        updateCollectionFilters({
+          orderBy: sortOptionCollection?.orderBy,
+          order: sortOptionCollection?.order,
         });
-    };
+      };
 
     useEffect(() => {
-        sortNFTs(sortOption);
+        sortCollections(sortOption);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortOption]);
 

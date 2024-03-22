@@ -1,6 +1,63 @@
+import { Spinner } from "flowbite-react";
 import avatar from "../../../../assets/avatars/avatar1.png";
+import { Collection } from "../../../../types/entitites";
+import Text from "../../../../components/Text";
 
-export default function TableCollection() {
+interface Props {
+  isLoading?: boolean;
+  isLoadMore?: boolean | undefined;
+  error?: boolean;
+  collections?: Collection[];
+  showFilter?: boolean;
+  showCreateCollection?: boolean;
+  creator?: string;
+  currentHasNext: boolean;
+}
+
+export default function TableCollection({
+  collections,
+  currentHasNext,
+  isLoading,
+  isLoadMore,
+  error,
+  showFilter,
+  showCreateCollection,
+  creator,
+}: Props) {
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-56 flex justify-center items-center">
+        <Spinner size="xl" />
+      </div>
+    );
+  }
+
+  if (error && !collections) {
+    return (
+      <div className="w-full h-56 flex justify-center items-center p-7 rounded-2xl border border-disabled border-dashed">
+        <Text variant="heading-xs" className="text-center">
+          Network Error!
+          <br />
+          Please try again later
+        </Text>
+      </div>
+    );
+  }
+
+  if (!collections || !collections.length) {
+    return (
+      <div className="w-full h-56 flex justify-center items-center p-7 rounded-2xl border border-disabled border-dashed">
+        <Text className="text-secondary font-semibold text-body-18">
+          Nothing to show
+        </Text>
+      </div>
+    );
+  }
+
+  console.log('collection: ', collections);
+  
+
   return (
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
       <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

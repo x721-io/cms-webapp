@@ -1,4 +1,4 @@
-import { AssetType, Collection, NFT } from "../../types/entitites";
+import { AssetType, Collection, NFT, User } from "../../types/entitites";
 
 /********** =========== Queries & Params for Api call ========== ***********/
 export namespace APIParams {
@@ -35,14 +35,19 @@ export namespace APIParams {
 
 /********** =========== API Response types ========== ***********/
 export namespace APIResponse {
-  export interface FetchNFTs {
-    data: NFT[];
-    paging: Pagination;
-  }
   export interface Pagination {
     page: number;
     limit: number;
     hasNext: boolean;
+  }
+
+  export interface FetchNFTs {
+    data: NFT[];
+    paging: Pagination;
+  }
+  export interface FetchCollections {
+    data: Collection[];
+    paging: Pagination;
   }
   export interface Login {
     accessToken: string;
@@ -68,5 +73,9 @@ export namespace APIResponse {
       totalNft: number;
       floorPrice: string;
     };
+  }
+  export interface UsersData {
+    data: User[];
+    paging: Pagination;
   }
 }
