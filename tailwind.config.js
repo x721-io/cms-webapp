@@ -1,9 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: "class",
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}",'node_modules/flowbite-react/lib/esm/**/*.js',
+  ],
   theme: {
     extend: {
+      screens: {
+        mobile: '480px',
+        tablet: '768px',
+        desktop: '1280px'
+      },
       width: {
         "1p": "1%",
         "2p": "2%",

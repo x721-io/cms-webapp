@@ -68,7 +68,7 @@ const Navbar = (props: {
         >
           <FiAlignJustify className="h-5 w-5" />
         </span>
-        {/* start Notification */}
+        {/* start Permission */}
         <Dropdown
           button={
             <p className="cursor-pointer">

@@ -42,7 +42,7 @@ export default function Input({
         );
       case "sm":
         return classNames(
-          "text-sm rounded-xl min-w-72 h-10 px-4 py-2",
+          "text-sm rounded-xl h-10 px-4 py-2",
           !!prependIcon && "ps-9",
           !!appendIcon && "pe-9"
         );
@@ -70,7 +70,7 @@ export default function Input({
   return (
     <div
       className={classNames(
-        "relative flex w-auto items-center",
+        "relative flex w-full items-center",
         containerClass
       )}
     >

@@ -20,7 +20,7 @@ export const navs: NavItem[] = [
     label: 'Create',
     href: '/create/nft',
     items: [
-      { href: '/create/collection', label: 'Collection' },
+      { href: '/create/create', label: 'Create' },
       { href: '/create/nft', label: 'NFT' }
     ]
   },

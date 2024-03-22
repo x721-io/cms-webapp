@@ -3,7 +3,7 @@ import { MdHome, MdOutlineShoppingCart, MdBarChart } from "react-icons/md";
 
 import MainDashboard from "./views/admin/AdminDashboard";
 import Profile from "./views/admin/profile";
-import Account from "./views/admin/account/Account";
+import Account from "./views/admin/account";
 import Marketplace from "./views/admin/marketplace/Marketplace";
 
 const routes = [
