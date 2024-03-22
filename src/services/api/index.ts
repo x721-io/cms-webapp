@@ -13,4 +13,13 @@ const marketplaceApi = axios.create({
   ...BASE_REQUEST_OPTIONS,
 });
 
+marketplaceApi.interceptors.response.use(
+  (response) => {
+    return response.data;
+  },
+  (error) => {
+    return Promise.reject(error.response.data);
+  },
+);
+
 export { marketplaceApi };

@@ -1,39 +1,46 @@
-import { useMemo } from "react";
 import TableNFT from "./TableNFT";
 import { useNFTFilterStore } from "../../../../store/filters/nft/store";
-import Input from "../../../../components/fields/InputField";
-import SearchIcon from "../../../../assets/svg/SearchIcon";
+import { useFetchNFTList, useInfiniteScroll } from "../../../../hooks/useInfiniteScroll";
+import NFTNavbar from "./NFTNavbar";
 
 export default function NFT() {
   const {
-    filters: { name: nftSearchText },
+    filters: filterNFT,
+    showFilters: showNFTFilters,
+    toggleFilter: toggleNFTFilters,
     updateFilters: updateNFTFilters,
+    resetFilters: resetNFTFilters,
   } = useNFTFilterStore((state) => state);
 
-  const searchText = useMemo(() => nftSearchText, [nftSearchText]);
+  const { error, isLoading, setSize, size, data } = useFetchNFTList(filterNFT);
 
-  const handleInputText = (value: any) => {
-    updateNFTFilters({ name: value });
-  };
+  const { isLoadingMore, list: items } = useInfiniteScroll({
+    data,
+    loading: isLoading,
+    page: size,
+    onNext: () => setSize(size + 1),
+  });
+
 
   return (
     <div className="flex flex-col gap-8">
       {/* Search */}
-      <div className="w-10">
-        <Input
-          prependIcon={
-            <SearchIcon color="text-gray-400" width={16} height={16} />
-          }
-          placeholder="Search"
-          onChange={(e) => handleInputText(e.target.value)}
-          value={searchText}
-          className="h-14 w-4"
-        />
-      </div>
+      <NFTNavbar />
 
       {/* Table */}
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <TableNFT />
+        <TableNFT
+          onClose={() => toggleNFTFilters(false)}
+          isLoading={isLoading}
+          isLoadMore={isLoadingMore}
+          activeFilters={filterNFT}
+          onApplyFilters={updateNFTFilters}
+          onResetFilters={resetNFTFilters}
+          showFilters={showNFTFilters}
+          items={items.concatenatedData}
+          currentHasNext={items.currentHasNext}
+          error={error}
+        />
       </div>
     </div>
   );
