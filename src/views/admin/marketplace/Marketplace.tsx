@@ -18,7 +18,7 @@ export default function Marketplace() {
             <div className="my-6 grid grid-cols-4 gap-3">
                 {/* Tab 1 */}
                 <div
-                    className={`flex items-center gap-4 rounded-[10px] border-[1px] border-gray-200  bg-clip-border hover:cursor-pointer shadow-md hover:shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none p-4 ${activeTab === 1 ? 'bg-blue-400' : 'bg-white'} `}
+                    className={`flex items-center gap-4 rounded-[10px] border-[1px] border-gray-200  bg-clip-border hover:cursor-pointer shadow-md hover:shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33]  dark:text-white dark:shadow-none p-4 ${activeTab === 1 ? 'bg-blue-400 dark:bg-navy-600' : 'bg-white dark:bg-navy-800'} `}
                     onClick={() => handleChangeTab(1)}
                 >
                     <div className="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
@@ -30,7 +30,7 @@ export default function Marketplace() {
                 </div>
                 {/* Tab 2 */}
                 <div
-                    className={`flex items-center gap-4 rounded-[10px] border-[1px] border-gray-200 bg-clip-border hover:cursor-pointer shadow-md hover:shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none p-4 ${activeTab === 2 ? 'bg-blue-400' : 'bg-white'}`}
+                    className={`flex items-center gap-4 rounded-[10px] border-[1px] border-gray-200 bg-clip-border hover:cursor-pointer shadow-md hover:shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:text-white dark:shadow-none p-4 ${activeTab === 2 ? 'bg-blue-400 dark:bg-navy-600' : 'bg-white dark:bg-navy-800'}`}
                     onClick={() => handleChangeTab(2)}
                 >
                     <div className="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
@@ -42,7 +42,7 @@ export default function Marketplace() {
                 </div>
                 {/* Tab 3 */}
                 <div
-                    className={`flex items-center gap-4 rounded-[10px] border-[1px] border-gray-200 bg-clip-border hover:cursor-pointer shadow-md hover:shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none p-4 ${activeTab === 3 ? 'bg-blue-400' : 'bg-white'}`}
+                    className={`flex items-center gap-4 rounded-[10px] border-[1px] border-gray-200 bg-clip-border hover:cursor-pointer shadow-md hover:shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:text-white dark:shadow-none p-4 ${activeTab === 3 ? 'bg-blue-400 dark:bg-navy-600' : 'bg-white dark:bg-navy-800'}`}
                     onClick={() => handleChangeTab(3)}
                 >
                     <div className="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">

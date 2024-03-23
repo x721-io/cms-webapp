@@ -3,11 +3,16 @@ import Text from "../../../../components/Text";
 import { convertImageUrl } from "../../../../utils/nft";
 import { useNFTFilterStore } from "../../../../store/filters/nft/store";
 import { useFetchNFTList, useInfiniteScroll } from "../../../../hooks/useInfiniteScroll";
+import { useState } from "react";
+import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
+type CheckboxState = Record<string, boolean>;
 
 export default function TableNFT() {
+  const api = useMarketplaceApi()
   const { filters } = useNFTFilterStore((state) => state);
-
   const { error, isLoading, setSize, size, data } = useFetchNFTList(filters);
+  const [checkboxState, setCheckboxState] = useState<CheckboxState>({});
+
 
   const { list: items } = useInfiniteScroll({
     data,
@@ -45,6 +50,18 @@ export default function TableNFT() {
       </div>
     );
   }
+
+  const handleCheckboxChange = async (collectionId: any, itemId: any, active: boolean) => {
+    try {
+      await api.handleActiveNFT({ collectionId: collectionId, id: itemId, isActive: active })
+      setCheckboxState(prevState => ({
+        ...prevState,
+        [itemId]: active
+      }));
+    } catch (error) {
+      console.error(':', error);
+    }
+  };
 
   return (
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -85,11 +102,11 @@ export default function TableNFT() {
             <td className="px-6 py-4">{item.collection.type}</td>
             <td className="px-6 py-4">
               <div className="flex items-center">
-                {item.status === "SUCCESS" ? 
-                  <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> 
-                  : item.status === "PENDING" 
-                  ? <div className="h-2.5 w-2.5 rounded-full bg-yellow-500 me-2"></div>
-                  : <div className="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>}
+                {item.status === "SUCCESS" ?
+                  <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
+                  : item.status === "PENDING"
+                    ? <div className="h-2.5 w-2.5 rounded-full bg-yellow-500 me-2"></div>
+                    : <div className="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>}
                 {" "}
                 {item.status}
               </div>
@@ -97,7 +114,12 @@ export default function TableNFT() {
             <td className="px-6 py-4">
               <div className="flex gap-2">
                 <label className="inline-flex items-center mb-5 cursor-pointer">
-                <input type="checkbox" value="" className="sr-only peer" checked={item.isActive} />
+                  <input
+                    type="checkbox"
+                    className="sr-only peer"
+                    checked={checkboxState[item.id] ?? item.isActive}
+                    onChange={(e) => handleCheckboxChange(item.collectionId, item.id, e.target.checked)}
+                  />
                   <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                 </label>
               </div>
