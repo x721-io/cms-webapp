@@ -4,18 +4,19 @@ import { Link } from "react-router-dom";
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
 import avatar from "../../assets/img/avatars/avatar4.png";
 import { useAuth } from "../../hooks/useAuth";
+import { FiAlignJustify } from "react-icons/fi";
 
 const Navbar = (props: {
   onOpenSidenav: () => void;
   brandText: string;
   secondary?: boolean | string;
 }) => {
-  const { brandText } = props;
+  const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = React.useState(false);
   const { onLogout } = useAuth();
 
   return (
-    <nav className="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
+    <nav className="sticky top-0 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 px-2 py-4 backdrop-blur-xl dark:bg-[#0b14374d]">
       <div className="ml-[6px]">
         <div className="h-6 w-[224px] pt-1">
           <a
@@ -46,6 +47,12 @@ const Navbar = (props: {
       </div>
 
       <div className="relative mt-[3px] flex h-[61px] w-[355px] flex-grow items-center justify-around gap-2 rounded-full bg-white px-2 py-2 shadow-xl shadow-shadow-500 dark:!bg-navy-800 dark:shadow-none md:w-[120px] md:flex-grow-0 md:gap-1 xl:w-[120px] xl:gap-2">
+        <span
+          className="flex cursor-pointer text-xl text-gray-600 dark:text-white xl:hidden"
+          onClick={onOpenSidenav}
+        >
+          <FiAlignJustify className="h-5 w-5" />
+        </span>
         <div
           className="cursor-pointer text-gray-600"
           onClick={() => {

@@ -66,9 +66,9 @@ export default function NFTNavbar() {
     }, [sortOption]);
 
     return (
-        <div className="flex justify-between items-center">
+        <div className="flex md:justify-between md:items-center flex-col md:flex-row gap-4">
             {/* Search */}
-            <div className="w-10">
+            <div className="md:w-10">
                 <Input
                     prependIcon={
                         <SearchIcon color="text-gray-400" width={16} height={16} />
@@ -76,7 +76,7 @@ export default function NFTNavbar() {
                     placeholder="Search"
                     onChange={(e) => handleInputText(e.target.value)}
                     value={searchText}
-                    className="h-14 w-4"
+                    className="h-14 w-4 dark:bg-navy-800 dark:text-white bg-white text-black"
                 />
             </div>
             {/* Sort */}
@@ -84,7 +84,7 @@ export default function NFTNavbar() {
                 <Dropdown
                     label=""
                     renderTrigger={() => (
-                        <div className="bg-white flex items-center border-gray-300 border rounded-2xl p-4 h-full cursor-pointer focus-visible:ring-primary">
+                        <div className="dark:bg-navy-800 dark:text-white bg-white text-black flex items-center border-gray-300 border rounded-2xl p-4 h-full cursor-pointer focus-visible:ring-primary justify-between md:justify-center">
                             {sortOption.name}
                             <div className="rounded-lg p-1 ml-2 bg-surface-medium">
                                 <ChevronDownIcon color="text-gray-500" width={16} height={16} />
@@ -93,7 +93,7 @@ export default function NFTNavbar() {
                     )}
                 >
                     {dropdownItems.map((item: any, i: any) => (
-                        <Dropdown.Item key={i} onClick={() => handleChange(item.name)}>
+                        <Dropdown.Item className="dark:bg-navy-800 dark:text-white bg-white text-black" key={i} onClick={() => handleChange(item.name)}>
                             {item.name}
                         </Dropdown.Item>
                     ))}

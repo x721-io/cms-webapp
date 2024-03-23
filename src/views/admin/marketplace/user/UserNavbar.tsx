@@ -18,7 +18,7 @@ export default function UserNavbar() {
     return (
         <div className="flex justify-between items-center">
             {/* Search */}
-            <div className="w-10">
+            <div className="md:w-10">
                 <Input
                     prependIcon={
                         <SearchIcon color="text-gray-400" width={16} height={16} />
@@ -26,7 +26,7 @@ export default function UserNavbar() {
                     placeholder="Search"
                     onChange={(e) => handleInputText(e.target.value)}
                     value={searchText}
-                    className="h-14 w-4"
+                    className="h-14 w-4 dark:bg-navy-800 dark:text-white bg-white text-black"
                 />
             </div>
         </div>

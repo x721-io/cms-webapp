@@ -19,15 +19,15 @@ const Sidebar = ({ open, onClose }: Props) => {
       }`}
     >
       <span
-        className="absolute right-4 top-4 block cursor-pointer"
+        className="absolute top-4 right-4 block cursor-pointer lg:hidden xl:hidden"
         onClick={onClose}
       >
         <HiX />
       </span>
 
-      <div className={`mx-[50px] mt-[50px] flex items-center`}>
-        <div className="ml-1 mt-1 h-2.5 font-poppins text-[26px] font-bold uppercase text-navy-700 dark:text-white">
-          Dashboard
+      <div className={`mx-[20px] mt-[50px] flex items-center`}>
+        <div className="ml-1 mt-1 h-2.5 font-poppins text-[18px] font-bold uppercase text-navy-700 dark:text-white">
+          NFT Marketplace CMS
         </div>
       </div>
       <div className="mb-7 mt-[58px] h-px bg-gray-300 dark:bg-white/30" />

@@ -15,7 +15,7 @@ export default function Marketplace() {
     return (
         <div>
             {/* Header */}
-            <div className="my-6 grid grid-cols-4 gap-3">
+            <div className="my-6 grid md:grid-cols-4 grid-cols-1 gap-3">
                 {/* Tab 1 */}
                 <div
                     className={`flex items-center gap-4 rounded-[10px] border-[1px] border-gray-200  bg-clip-border hover:cursor-pointer shadow-md hover:shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33]  dark:text-white dark:shadow-none p-4 ${activeTab === 1 ? 'bg-blue-400 dark:bg-navy-600' : 'bg-white dark:bg-navy-800'} `}
