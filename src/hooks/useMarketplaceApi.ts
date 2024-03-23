@@ -30,6 +30,15 @@ export const useMarketplaceApi = () => {
       fetchUsers: async (params: APIParams.FetchUsers): Promise<APIResponse.UsersData> =>
         marketplaceApi.get(API_ENDPOINTS.SEARCH_USER + parseQueries(params), authHeader()),
 
+      handleActiveNFT: (params: APIParams.HandleActiveNFT) =>
+        marketplaceApi.post(API_ENDPOINTS.HANDLE_ACTIVE_NFT, params, authHeader()),
+
+      handleActiveCollection: (params: APIParams.HandleActiveCollection) =>
+        marketplaceApi.post(API_ENDPOINTS.HANDLE_ACTIVE_COLLECTION, params, authHeader()),
+
+      handleActiveUser: (params: APIParams.HandleActiveUser) =>
+        marketplaceApi.post(API_ENDPOINTS.HANDLE_ACTIVE_USER, params, authHeader())
+
     };
   }, [authHeader]);
 };
