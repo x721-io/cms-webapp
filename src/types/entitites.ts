@@ -3,7 +3,6 @@ import { MarketEventType } from "./market";
 export type AssetType = "ERC721" | "ERC1155";
 export type EntityStatus = "PENDING" | "SUCCESS" | "FAILED";
 
-
 export interface User {
   id: string;
   email: string;
@@ -28,7 +27,6 @@ export interface User {
   accountStatus?: boolean;
   verifyEmail?: boolean;
 }
-
 
 export interface Account {
   id: string;

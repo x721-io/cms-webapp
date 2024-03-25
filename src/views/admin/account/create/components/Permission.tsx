@@ -7,7 +7,7 @@ import {
   ADMIN_NFT,
   ADMIN_USER,
   CREATOR,
-  VIEWER
+  VIEWER,
 } from "../../../../../config/contanst";
 import { CustomFlowbiteTheme, ToggleSwitch } from "flowbite-react";
 import { useAccount } from "../../../../../hooks/useAccount";
@@ -15,30 +15,27 @@ import { useFormContext } from "react-hook-form";
 import { FormState } from "../../../../../types/form";
 import { useEffect } from "react";
 
-
-const toggleSwitchTheme: CustomFlowbiteTheme['toggleSwitch'] = {
+const toggleSwitchTheme: CustomFlowbiteTheme["toggleSwitch"] = {
   root: {
-    label: "ml-3 text-md font-medium text-gray-900 dark:text-gray-300"
+    label: "ml-3 text-md font-medium text-gray-900 dark:text-gray-300",
   },
-}
+};
 
 function Permission() {
- const { roles, roleExists, handleSwitchChange } = useAccount();
+  const { roles, roleExists, handleSwitchChange } = useAccount();
   const { setValue } = useFormContext<FormState.CreateAccount>();
 
   useEffect(() => {
     if (roles) {
-      setValue('roles', roles);
+      setValue("roles", roles);
     }
   }, [roles]);
-
-
 
   return (
     <Card extra={"w-full h-full p-3"}>
       <div className="relative mb-3 flex items-center justify-between pt-1">
         <h4 className="text-xl font-bold text-navy-700 dark:text-white">
-         Permissions
+          Permissions
         </h4>
       </div>
       <div className="flex flex-col">
@@ -114,12 +111,8 @@ function Permission() {
           />
         </div>
       </div>
-
     </Card>
   );
 }
 
 export default Permission;
-
-
-

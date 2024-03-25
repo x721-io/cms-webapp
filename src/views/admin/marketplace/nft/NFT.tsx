@@ -1,6 +1,9 @@
 import TableNFT from "./TableNFT";
 import { useNFTFilterStore } from "../../../../store/filters/nft/store";
-import { useFetchNFTList, useInfiniteScroll } from "../../../../hooks/useInfiniteScroll";
+import {
+  useFetchNFTList,
+  useInfiniteScroll,
+} from "../../../../hooks/useInfiniteScroll";
 import NFTNavbar from "./NFTNavbar";
 
 export default function NFT() {
@@ -20,7 +23,6 @@ export default function NFT() {
     page: size,
     onNext: () => setSize(size + 1),
   });
-
 
   return (
     <div className="flex flex-col gap-8">

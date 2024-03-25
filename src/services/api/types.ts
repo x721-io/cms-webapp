@@ -1,4 +1,10 @@
-import { Account, AssetType, Collection, NFT, User } from "../../types/entitites";
+import {
+  Account,
+  AssetType,
+  Collection,
+  NFT,
+  User,
+} from "../../types/entitites";
 
 /********** =========== Queries & Params for Api call ========== ***********/
 export namespace APIParams {
@@ -96,6 +102,6 @@ export namespace APIResponse {
   }
 
   export interface UploadImage {
-    fileHashes: string[]
+    fileHashes: string[];
   }
 }

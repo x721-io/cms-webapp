@@ -5,13 +5,13 @@ export namespace FormState {
   }
 
   export interface CreateAccount {
-    avatar: Blob[]
+    avatar: Blob[];
     username: string;
     password: string;
-    email: string
-    twitterLink?: string
-    telegramLink?: string
-    phone: string
+    email: string;
+    twitterLink?: string;
+    telegramLink?: string;
+    phone: string;
     roles: string[];
   }
 }

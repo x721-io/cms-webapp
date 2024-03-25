@@ -3,12 +3,10 @@ import { useState } from "react";
 import { VIEWER } from "../config/contanst";
 import { APIParams } from "../services/api/types";
 
-
 export const useAccount = () => {
   const api = useMarketplaceApi();
 
   const [roles, setRoles] = useState<string[]>([VIEWER]);
-
 
   const roleExists = (role: string) => {
     return roles.includes(role);
@@ -16,14 +14,14 @@ export const useAccount = () => {
 
   const handleSwitchChange = (role: string) => {
     if (roleExists(role)) {
-      setRoles(prevRoles => prevRoles.filter(r => r !== role));
+      setRoles((prevRoles) => prevRoles.filter((r) => r !== role));
     } else {
-      setRoles(prevRoles => [...prevRoles, role]);
+      setRoles((prevRoles) => [...prevRoles, role]);
     }
   };
 
-  const onCreateAccount = (params: APIParams.CreateAccount) => api.createAccount(params)
-
+  const onCreateAccount = (params: APIParams.CreateAccount) =>
+    api.createAccount(params);
 
   return {
     handleSwitchChange,

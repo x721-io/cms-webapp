@@ -28,7 +28,6 @@ export default function Login() {
   };
 
   const onSubmit = async ({ username, password }: FormState.Login) => {
-    
     const toastId = toast.loading("Preparing data...", { type: "info" });
     try {
       await api.login({ username: username, password: password });

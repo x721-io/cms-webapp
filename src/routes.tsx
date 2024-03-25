@@ -19,7 +19,7 @@ const routes = [
     layout: "/admin",
     path: "marketplace",
     icon: <MdOutlineShoppingCart className="h-6 w-6" />,
-    component: <Marketplace/>,
+    component: <Marketplace />,
     secondary: true,
   },
   {

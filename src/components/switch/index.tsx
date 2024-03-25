@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from "react";
 
-
 const Switch = (props: {
   extra?: string;
   color?:
@@ -24,7 +23,7 @@ const Switch = (props: {
 
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleCheckboxChange = (event : ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);
   };
 
