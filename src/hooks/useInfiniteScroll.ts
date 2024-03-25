@@ -17,6 +17,18 @@ interface Params {
   offset?: number;
 }
 
+export const useFetchUserList = (filters: APIParams.FetchUsers) => {
+  const api = useMarketplaceApi();
+
+  return useSWRInfinite(
+    (index) => ({
+      ...filters,
+      page: index + 1,
+    }),
+    (params) => api.fetchUsers(sanitizeObject(params) as APIParams.FetchUsers)
+  );
+};
+
 export const useFetchCollectionList = (filters: APIParams.FetchCollections) => {
   const api = useMarketplaceApi();
 
@@ -26,9 +38,7 @@ export const useFetchCollectionList = (filters: APIParams.FetchCollections) => {
       page: index + 1,
     }),
     (params) =>
-      api.fetchCollections(
-        sanitizeObject(params) as APIParams.FetchCollections,
-      ),
+      api.fetchCollections(sanitizeObject(params) as APIParams.FetchCollections)
   );
 };
 
@@ -40,7 +50,7 @@ export const useFetchNFTList = (filters: APIParams.FetchNFTs) => {
       ...filters,
       page: index + 1,
     }),
-    (params) => api.fetchNFTs(sanitizeObject(params) as APIParams.FetchNFTs),
+    (params) => api.fetchNFTs(sanitizeObject(params) as APIParams.FetchNFTs)
   );
 };
 
@@ -63,11 +73,9 @@ export const useInfiniteScroll = ({
         }
       });
     }
-  
+
     return { concatenatedData, currentHasNext };
   }, [data]);
-  
-  
 
   const isLoadingMore =
     loading || (page > 0 && data && data[page - 1] === undefined);
@@ -89,7 +97,7 @@ export const useInfiniteScroll = ({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoadingMore, page, list.currentHasNext]);
 
   return {

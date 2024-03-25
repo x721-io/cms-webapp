@@ -1,4 +1,3 @@
-
 import { BigNumberish } from "ethers";
 import { Collection, User } from "./entitites";
 
@@ -26,13 +25,7 @@ export interface MarketEvent {
 
   collection?: Pick<
     Collection,
-    | "id"
-    | "isU2U"
-    | "name"
-    | "shortUrl"
-    | "status"
-    | "txCreationHash"
-    | "type"
+    "id" | "isU2U" | "name" | "shortUrl" | "status" | "txCreationHash" | "type"
   >;
   price: BigNumberish;
   to: Partial<User> | null;

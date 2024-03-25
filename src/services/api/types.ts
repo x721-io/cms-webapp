@@ -31,6 +31,21 @@ export namespace APIParams {
   export interface FetchUsers extends PaginationParams {
     search?: string;
   }
+
+  export interface HandleActiveNFT {
+    collectionId?: string;
+    id?: string;
+    isActive?: boolean;
+  }
+
+  export interface HandleActiveCollection {
+    id?: string;
+    isActive?: boolean;
+  }
+  export interface HandleActiveUser {
+    id?: string;
+    isActive?: boolean;
+  }
 }
 
 /********** =========== API Response types ========== ***********/

@@ -4,11 +4,7 @@ type Props = {
   color?: string;
 };
 
-export default function ChevronDownIcon({
-  color,
-  width,
-  height,
-}: Props) {
+export default function ChevronDownIcon({ color, width, height }: Props) {
   return (
     <svg
       width={width}
