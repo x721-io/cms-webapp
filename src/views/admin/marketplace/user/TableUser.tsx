@@ -121,8 +121,8 @@ export default function TableUser() {
                   <div className="me-2 h-2.5 w-2.5 rounded-full bg-red-500"></div>
                 )}{" "}
                 {user.accountStatus === true
-                  ? "Account has been verified"
-                  : "Account is not verified"}
+                  ? "Verified"
+                  : "Not verified"}
               </div>
             </td>
             <td className="px-6 py-4">
