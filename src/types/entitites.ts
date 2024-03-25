@@ -28,6 +28,19 @@ export interface User {
   verifyEmail?: boolean;
 }
 
+export interface Account {
+  id: string;
+  email: string;
+  avatar?: string;
+  username: string;
+  createdAt: string;
+  updatedAt?: string;
+  twitterLink?: string;
+  telegramLink?: string;
+  phone?: string;
+  roles?: string[];
+}
+
 export interface Collection {
   id: string;
   txCreationHash: string;

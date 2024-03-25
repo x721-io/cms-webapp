@@ -43,6 +43,22 @@ export const useMarketplaceApi = () => {
           authHeader()
         ),
 
+      createAccount: (
+        params: APIParams.CreateAccount
+      ): Promise<APIResponse.AccountData> =>
+        marketplaceApi.post(API_ENDPOINTS.CREATE_ACCOUNT, params, authHeader()),
+
+      uploadFile: (files: Blob[] | Blob): Promise<APIResponse.UploadImage> => {
+        const form = new FormData();
+        if (Array.isArray(files)) {
+          files.forEach((file) => {
+            form.append("files", file);
+          });
+        } else {
+          form.append("files", files, (files as any).name);
+        }
+        return marketplaceApi.post(API_ENDPOINTS.UPLOAD_IMAGE, form);
+      },
       handleActiveNFT: (params: APIParams.HandleActiveNFT) =>
         marketplaceApi.post(
           API_ENDPOINTS.HANDLE_ACTIVE_NFT,

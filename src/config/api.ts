@@ -9,4 +9,6 @@ export const API_ENDPOINTS = {
   HANDLE_ACTIVE_COLLECTION: "/cms/handle-active/collection",
   HANDLE_ACTIVE_USER: "/cms/handle-active/user",
   HANDLE_VERIFY_COLLECTION: "/cms/handle-verify/collection",
+  UPLOAD_IMAGE: "/common/upload-image",
+  CREATE_ACCOUNT: "/cms/create-account",
 };

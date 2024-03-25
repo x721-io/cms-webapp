@@ -72,6 +72,7 @@ export default function CollectionNavbar() {
   }, [sortOption]);
 
   return (
+
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       {/* Search */}
       <div className="md:w-10">
@@ -82,6 +83,7 @@ export default function CollectionNavbar() {
           placeholder="Search"
           onChange={(e) => handleInputText(e.target.value)}
           value={searchText}
+
           className="h-14 w-4 bg-white text-black dark:bg-navy-800 dark:text-white"
         />
       </div>

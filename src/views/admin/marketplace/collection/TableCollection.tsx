@@ -86,7 +86,6 @@ export default function TableCollection() {
     );
   }
 
-  console.log("collections: ", collections.concatenatedData);
 
   return (
     <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
