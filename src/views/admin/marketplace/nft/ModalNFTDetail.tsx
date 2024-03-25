@@ -30,16 +30,7 @@ export default function ModalNFTDetail({ onClose, show, item }: Props) {
     >
       <Modal.Header className="p-4">NFT Detail</Modal.Header>
       <Modal.Body className="p-4">
-        <div className="flex gap-4">
-          <div className="h-[50px] w-[50px]">
-            <img
-              src={convertImageUrl(item.image)}
-              alt="NFT Avatar"
-              className="h-full w-full rounded-full object-cover"
-            />
-          </div>
-          <div className="text-base font-semibold">{item.name}</div>
-        </div>
+        <div className="flex gap-4"></div>
       </Modal.Body>
     </Modal>
   );

@@ -2,8 +2,6 @@ import TableNFT from "./TableNFT";
 import NFTNavbar from "./NFTNavbar";
 
 export default function NFT() {
-
-
   return (
     <div className="flex flex-col gap-8">
       {/* Search */}

@@ -46,6 +46,11 @@ export namespace APIParams {
     id?: string;
     isActive?: boolean;
   }
+
+  export interface HandleVerifyCollection {
+    id?: string;
+    isVerified?: boolean;
+  }
 }
 
 /********** =========== API Response types ========== ***********/

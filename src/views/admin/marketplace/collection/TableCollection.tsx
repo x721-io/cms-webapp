@@ -6,10 +6,16 @@ import {
   useInfiniteScroll,
 } from "../../../../hooks/useInfiniteScroll";
 import { getCollectionAvatarImage } from "../../../../utils/string";
+import { useState } from "react";
+import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
+
+type CheckboxState = Record<string, boolean>;
 
 export default function TableCollection() {
+  const api = useMarketplaceApi();
   const { filters } = useCollectionFilterStore((state) => state);
-
+  const [activeCollection, setActiveCollection] = useState<CheckboxState>({});
+  const [verifyCollection, setVerifyCollection] = useState<CheckboxState>({});
   const { data, size, setSize, isLoading, error } =
     useFetchCollectionList(filters);
 
@@ -19,6 +25,36 @@ export default function TableCollection() {
     page: size,
     onNext: () => setSize(size + 1),
   });
+
+  const handleActiveCollection = async (itemId: any, active: boolean) => {
+    try {
+      await api.handleActiveCollection({
+        id: itemId,
+        isActive: active,
+      });
+      setActiveCollection((prevState) => ({
+        ...prevState,
+        [itemId]: active,
+      }));
+    } catch (error) {
+      console.error(":", error);
+    }
+  };
+
+  const handleVerifyCollection = async (itemId: any, active: boolean) => {
+    try {
+      await api.handleVerifyCollection({
+        id: itemId,
+        isVerified: active,
+      });
+      setVerifyCollection((prevState) => ({
+        ...prevState,
+        [itemId]: active,
+      }));
+    } catch (error) {
+      console.error(":", error);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -49,6 +85,8 @@ export default function TableCollection() {
       </div>
     );
   }
+
+  console.log("collections: ", collections.concatenatedData);
 
   return (
     <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
@@ -94,7 +132,12 @@ export default function TableCollection() {
                     type="checkbox"
                     value=""
                     className="peer sr-only"
-                    checked={collection.isVerified}
+                    checked={
+                      verifyCollection[collection.id] ?? collection.isVerified
+                    }
+                    onChange={(e) =>
+                      handleVerifyCollection(collection.id, e.target.checked)
+                    }
                   />
                   <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
                 </label>
@@ -107,7 +150,12 @@ export default function TableCollection() {
                     type="checkbox"
                     value=""
                     className="peer sr-only"
-                    checked={collection.isActive}
+                    checked={
+                      activeCollection[collection.id] ?? collection.isActive
+                    }
+                    onChange={(e) =>
+                      handleActiveCollection(collection.id, e.target.checked)
+                    }
                   />
                   <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
                 </label>
