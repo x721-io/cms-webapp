@@ -66,9 +66,10 @@ export default function NFTNavbar() {
   }, [sortOption]);
 
   return (
-    <div className="flex items-center justify-between">
+
+    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       {/* Search */}
-      <div className="w-10">
+      <div className="md:w-10">
         <Input
           prependIcon={
             <SearchIcon color="text-gray-400" width={16} height={16} />
@@ -76,7 +77,7 @@ export default function NFTNavbar() {
           placeholder="Search"
           onChange={(e) => handleInputText(e.target.value)}
           value={searchText}
-          className="h-14 w-4"
+          className="h-14 w-4 bg-white text-black dark:bg-navy-800 dark:text-white"
         />
       </div>
       {/* Sort */}
@@ -84,7 +85,7 @@ export default function NFTNavbar() {
         <Dropdown
           label=""
           renderTrigger={() => (
-            <div className="focus-visible:ring-primary flex h-full cursor-pointer items-center rounded-2xl border border-gray-300 bg-white p-4">
+            <div className="focus-visible:ring-primary flex h-full cursor-pointer items-center justify-between rounded-2xl border border-gray-300 bg-white p-4 text-black dark:bg-navy-800 dark:text-white md:justify-center">
               {sortOption.name}
               <div className="bg-surface-medium ml-2 rounded-lg p-1">
                 <ChevronDownIcon color="text-gray-500" width={16} height={16} />
@@ -93,7 +94,11 @@ export default function NFTNavbar() {
           )}
         >
           {dropdownItems.map((item: any, i: any) => (
-            <Dropdown.Item key={i} onClick={() => handleChange(item.name)}>
+            <Dropdown.Item
+              className="bg-white text-black dark:bg-navy-800 dark:text-white"
+              key={i}
+              onClick={() => handleChange(item.name)}
+            >
               {item.name}
             </Dropdown.Item>
           ))}

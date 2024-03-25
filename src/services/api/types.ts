@@ -48,6 +48,26 @@ export namespace APIParams {
     phone?: string;
     roles: string[];
   }
+
+  export interface HandleActiveNFT {
+    collectionId?: string;
+    id?: string;
+    isActive?: boolean;
+  }
+
+  export interface HandleActiveCollection {
+    id?: string;
+    isActive?: boolean;
+  }
+  export interface HandleActiveUser {
+    id?: string;
+    isActive?: boolean;
+  }
+
+  export interface HandleVerifyCollection {
+    id?: string;
+    isVerified?: boolean;
+  }
 }
 
 /********** =========== API Response types ========== ***********/

@@ -31,7 +31,7 @@ export const useMarketplaceApi = () => {
       ): Promise<APIResponse.FetchCollections> =>
         marketplaceApi.get(
           API_ENDPOINTS.SEARCH_COLLECTION +
-            parseQueries(sanitizeObject({ ...params })),
+          parseQueries(sanitizeObject({ ...params })),
           authHeader()
         ),
 
@@ -59,6 +59,33 @@ export const useMarketplaceApi = () => {
         }
         return marketplaceApi.post(API_ENDPOINTS.UPLOAD_IMAGE, form);
       },
+      handleActiveNFT: (params: APIParams.HandleActiveNFT) =>
+        marketplaceApi.post(
+          API_ENDPOINTS.HANDLE_ACTIVE_NFT,
+          params,
+          authHeader()
+        ),
+
+      handleActiveCollection: (params: APIParams.HandleActiveCollection) =>
+        marketplaceApi.post(
+          API_ENDPOINTS.HANDLE_ACTIVE_COLLECTION,
+          params,
+          authHeader()
+        ),
+
+      handleActiveUser: (params: APIParams.HandleActiveUser) =>
+        marketplaceApi.post(
+          API_ENDPOINTS.HANDLE_ACTIVE_USER,
+          params,
+          authHeader()
+        ),
+
+      handleVerifyCollection: (params: APIParams.HandleVerifyCollection) =>
+        marketplaceApi.post(
+          API_ENDPOINTS.HANDLE_VERIFY_COLLECTION,
+          params,
+          authHeader()
+        ),
     };
   }, [authHeader]);
 };

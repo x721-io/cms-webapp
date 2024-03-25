@@ -8,16 +8,22 @@ import User from "./user/User";
 export default function Marketplace() {
   const [activeTab, setActiveTab] = useState(1);
 
+  const handleChangeTab = (tab: number) => {
+    setActiveTab(tab);
+  };
+
   return (
     <div>
       {/* Header */}
-      <div className="my-6 grid grid-cols-4 gap-3">
+      <div className="my-6 grid grid-cols-1 gap-3 md:grid-cols-4">
         {/* Tab 1 */}
         <div
-          className={`flex items-center gap-4 rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border p-4 shadow-md shadow-[#F3F3F3] hover:cursor-pointer hover:shadow-md dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none ${
-            activeTab === 1 ? "bg-blue-400" : ""
-          }`}
-          onClick={() => setActiveTab(1)}
+          className={`flex items-center gap-4 rounded-[10px] border-[1px] border-gray-200  bg-clip-border p-4 shadow-md shadow-[#F3F3F3] hover:cursor-pointer hover:shadow-md  dark:border-[#ffffff33] dark:text-white dark:shadow-none ${
+            activeTab === 1
+              ? "bg-blue-400 dark:bg-navy-600"
+              : "bg-white dark:bg-navy-800"
+          } `}
+          onClick={() => handleChangeTab(1)}
         >
           <div className="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
             <span className="flex items-center text-brand-500 dark:text-white">
@@ -28,10 +34,12 @@ export default function Marketplace() {
         </div>
         {/* Tab 2 */}
         <div
-          className={`flex items-center gap-4 rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border p-4 shadow-md shadow-[#F3F3F3] hover:cursor-pointer hover:shadow-md dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none ${
-            activeTab === 2 ? "bg-blue-400" : ""
+          className={`flex items-center gap-4 rounded-[10px] border-[1px] border-gray-200 bg-clip-border p-4 shadow-md shadow-[#F3F3F3] hover:cursor-pointer hover:shadow-md dark:border-[#ffffff33] dark:text-white dark:shadow-none ${
+            activeTab === 2
+              ? "bg-blue-400 dark:bg-navy-600"
+              : "bg-white dark:bg-navy-800"
           }`}
-          onClick={() => setActiveTab(2)}
+          onClick={() => handleChangeTab(2)}
         >
           <div className="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
             <span className="flex items-center text-brand-500 dark:text-white">
@@ -42,10 +50,12 @@ export default function Marketplace() {
         </div>
         {/* Tab 3 */}
         <div
-          className={`flex items-center gap-4 rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border p-4 shadow-md shadow-[#F3F3F3] hover:cursor-pointer hover:shadow-md dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none ${
-            activeTab === 3 ? "bg-blue-400" : ""
+          className={`flex items-center gap-4 rounded-[10px] border-[1px] border-gray-200 bg-clip-border p-4 shadow-md shadow-[#F3F3F3] hover:cursor-pointer hover:shadow-md dark:border-[#ffffff33] dark:text-white dark:shadow-none ${
+            activeTab === 3
+              ? "bg-blue-400 dark:bg-navy-600"
+              : "bg-white dark:bg-navy-800"
           }`}
-          onClick={() => setActiveTab(3)}
+          onClick={() => handleChangeTab(3)}
         >
           <div className="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
             <span className="flex items-center text-brand-500 dark:text-white">

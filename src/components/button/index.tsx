@@ -23,7 +23,7 @@ export default function Button({
 }: ButtonProps) {
   const baseClass = useMemo(() => {
     return classNames(
-      `transition-all duration-500 whitespace-nowrap text-ellipsis hover:shadow`,
+      `transition-all duration-500 whitespace-nowrap text-ellipsis`,
       disabled ? "cursor-not-allowed text-disabled" : "cursor-pointer"
     );
   }, [disabled]);

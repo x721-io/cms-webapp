@@ -1,66 +1,88 @@
 import { Spinner } from "flowbite-react";
-import avatar from "../../../../assets/avatars/avatar1.png";
 import Text from "../../../../components/Text";
-import { APIParams, APIResponse } from "../../../../services/api/types";
-import { AssetType, NFT } from "../../../../types/entitites";
 import { convertImageUrl } from "../../../../utils/nft";
+import { useNFTFilterStore } from "../../../../store/filters/nft/store";
+import {
+  useFetchNFTList,
+  useInfiniteScroll,
+} from "../../../../hooks/useInfiniteScroll";
+import { useState } from "react";
+import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
+import ModalNFTDetail from "./ModalNFTDetail";
+type CheckboxState = Record<string, boolean>;
 
-interface Props {
-  items?: NFT[];
-  showFilters: boolean;
-  // filters?: FilterType[];
-  activeFilters: APIParams.FetchNFTs;
-  onApplyFilters: (filtersParams: APIParams.FetchNFTs) => void;
-  onResetFilters: () => void;
-  traitFilters?: APIResponse.CollectionDetails["traitAvailable"];
-  onClose?: () => void; // For mobile only: Close modal filters
-  isLoading?: boolean;
-  isLoadMore?: boolean | undefined;
-  error?: boolean;
-  dataCollectionType?: AssetType;
-  userId?: string;
-  showCreateNFT?: boolean;
-  currentHasNext: boolean;
-}
+export default function TableNFT() {
+  const api = useMarketplaceApi();
+  const { filters } = useNFTFilterStore((state) => state);
+  const { error, isLoading, setSize, size, data } = useFetchNFTList(filters);
+  const [activeNFT, setActiveNFT] = useState<CheckboxState>({});
+  const [showModalNFTDetail, setShowModalNFTDetail] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
-export default function TableNFT({
-  items,
-  showFilters,
-  activeFilters,
-  onApplyFilters,
-  onResetFilters,
-  traitFilters,
-  onClose,
-  isLoadMore,
-  isLoading,
-  error,
-  dataCollectionType,
-  userId,
-  showCreateNFT,
-  currentHasNext,
-}: Props) {
-  const renderList = () => {
-    if (error && !items) {
-      return (
-        <div className="border-disabled flex h-56 w-full items-center justify-center rounded-2xl border border-dashed p-7">
-          <Text variant="heading-xs" className="text-center">
-            Network Error!
-            <br />
-            Please try again later
-          </Text>
-        </div>
-      );
-    }
+  const { list: items } = useInfiniteScroll({
+    data,
+    loading: isLoading,
+    page: size,
+    onNext: () => setSize(size + 1),
+  });
 
-    if (isLoading) {
-      return (
-        <div className="flex h-56 w-full items-center justify-center">
-          <Spinner size="xl" />
-        </div>
-      );
-    }
-
+  if (isLoading) {
     return (
+      <div className="flex h-56 w-full items-center justify-center">
+        <Spinner size="xl" />
+      </div>
+    );
+  }
+
+  if (error && !items) {
+    return (
+      <div className="border-disabled flex h-56 w-full items-center justify-center rounded-2xl border border-dashed p-7">
+        <Text variant="heading-xs" className="text-center">
+          Network Error!
+          <br />
+          Please try again later
+        </Text>
+      </div>
+    );
+  }
+
+  if (!items.concatenatedData || !items.concatenatedData.length) {
+    return (
+      <div className="border-disabled flex h-56 w-full items-center justify-center rounded-2xl border border-dashed p-7">
+        <Text className="text-secondary text-body-18 font-semibold">
+          Nothing to show
+        </Text>
+      </div>
+    );
+  }
+
+  const handleActiveNFT = async (
+    collectionId: any,
+    itemId: any,
+    active: boolean
+  ) => {
+    try {
+      await api.handleActiveNFT({
+        collectionId: collectionId,
+        id: itemId,
+        isActive: active,
+      });
+      setActiveNFT((prevState) => ({
+        ...prevState,
+        [itemId]: active,
+      }));
+    } catch (error) {
+      console.error(":", error);
+    }
+  };
+
+  const handleDetailNFT = (item: any) => {
+    setSelectedItem(item);
+    setShowModalNFTDetail(true);
+  };
+
+  return (
+    <div>
       <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
         <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -79,7 +101,7 @@ export default function TableNFT({
           </tr>
         </thead>
         <tbody>
-          {items?.map((item) => (
+          {items.concatenatedData?.map((item) => (
             <tr
               key={item.id}
               className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
@@ -88,10 +110,13 @@ export default function TableNFT({
                 scope="row"
                 className="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white"
               >
-                <div className="flex items-center gap-2 ps-3">
+                <div
+                  className="flex cursor-pointer items-center gap-2 ps-3"
+                  onClick={() => handleDetailNFT(item)}
+                >
                   <div className="h-[50px] w-[50px]">
                     <img
-                      src={avatar}
+                      src={convertImageUrl(item.animationUrl || item.image)}
                       alt="NFT Avatar"
                       className="h-full w-full rounded-full object-cover"
                     />
@@ -117,9 +142,15 @@ export default function TableNFT({
                   <label className="mb-5 inline-flex cursor-pointer items-center">
                     <input
                       type="checkbox"
-                      value=""
                       className="peer sr-only"
-                      checked={item.isActive}
+                      checked={activeNFT[item.id] ?? item.isActive}
+                      onChange={(e) =>
+                        handleActiveNFT(
+                          item.collectionId,
+                          item.id,
+                          e.target.checked
+                        )
+                      }
                     />
                     <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
                   </label>
@@ -129,7 +160,11 @@ export default function TableNFT({
           ))}
         </tbody>
       </table>
-    );
-  };
-  return <div className="flex-1">{renderList()}</div>;
+      <ModalNFTDetail
+        item={selectedItem}
+        show={showModalNFTDetail}
+        onClose={() => setShowModalNFTDetail(false)}
+      />
+    </div>
+  );
 }

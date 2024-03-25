@@ -10,8 +10,8 @@ const DEFAULT_STATE: CollectionFilterState = {
     max: "",
     page: 1,
     limit: 20,
-    order: "",
     orderBy: "",
+    order: "",
   },
 };
 

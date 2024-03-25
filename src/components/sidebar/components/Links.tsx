@@ -29,7 +29,7 @@ export const SidebarLinks = (props: { routes: RoutesType[] }): JSX.Element => {
                   className={`${
                     activeRoute(route.path)
                       ? "font-bold text-brand-500 dark:text-white"
-                      : "font-medium text-gray-600"
+                      : "font-medium text-gray-500"
                   }`}
                 >
                   {route.icon ? route.icon : <DashIcon />}{" "}
@@ -37,8 +37,8 @@ export const SidebarLinks = (props: { routes: RoutesType[] }): JSX.Element => {
                 <p
                   className={`leading-1 ml-4 flex ${
                     activeRoute(route.path)
-                      ? "font-bold text-navy-700 dark:text-white"
-                      : "font-medium text-gray-600"
+                      ? "font-bold text-brand-500 dark:text-white"
+                      : "font-medium text-gray-500"
                   }`}
                 >
                   {route.name}
