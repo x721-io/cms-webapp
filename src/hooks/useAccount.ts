@@ -1,12 +1,14 @@
 import { useMarketplaceApi } from "./useMarketplaceApi";
 import { useState } from "react";
 import { VIEWER } from "../config/contanst";
+import { APIParams } from "../services/api/types";
 
 
 export const useAccount = () => {
   const api = useMarketplaceApi();
 
   const [roles, setRoles] = useState<string[]>([VIEWER]);
+
 
   const roleExists = (role: string) => {
     return roles.includes(role);
@@ -20,10 +22,14 @@ export const useAccount = () => {
     }
   };
 
+  const onCreateAccount = (params: APIParams.CreateAccount) => api.createAccount(params)
+
+
   return {
     handleSwitchChange,
     roleExists,
     roles,
-    setRoles
+    setRoles,
+    onCreateAccount,
   };
 };

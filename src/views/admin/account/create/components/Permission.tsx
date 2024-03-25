@@ -11,6 +11,9 @@ import {
 } from "../../../../../config/contanst";
 import { CustomFlowbiteTheme, ToggleSwitch } from "flowbite-react";
 import { useAccount } from "../../../../../hooks/useAccount";
+import { useFormContext } from "react-hook-form";
+import { FormState } from "../../../../../types/form";
+import { useEffect } from "react";
 
 
 const toggleSwitchTheme: CustomFlowbiteTheme['toggleSwitch'] = {
@@ -20,7 +23,16 @@ const toggleSwitchTheme: CustomFlowbiteTheme['toggleSwitch'] = {
 }
 
 function Permission() {
- const { roleExists, handleSwitchChange } = useAccount();
+ const { roles, roleExists, handleSwitchChange } = useAccount();
+  const { setValue } = useFormContext<FormState.CreateAccount>();
+
+  useEffect(() => {
+    if (roles) {
+      setValue('roles', roles);
+    }
+  }, [roles]);
+
+
 
   return (
     <Card extra={"w-full h-full p-3"}>
@@ -102,6 +114,7 @@ function Permission() {
           />
         </div>
       </div>
+
     </Card>
   );
 }

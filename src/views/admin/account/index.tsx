@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MdBarChart } from "react-icons/md";
 import Text from "../../../components/Text";
-import Create from "./create/components/Create";
+import Create from "./create";
 import Accounts from "./accounts/Accounts";
 
 export default function Index() {

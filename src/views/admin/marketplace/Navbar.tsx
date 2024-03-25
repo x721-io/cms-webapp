@@ -7,8 +7,8 @@ import { Dropdown, Tabs, TabsRef } from "flowbite-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { useLocation } from "react-router";
-import Button from "../../../components/button";
 import { useNFTFilterStore } from "../../../store/filters/nft/store";
+import Button from "../../../components/Button";
 
 
 export default function Navbar() {

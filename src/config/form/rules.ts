@@ -3,7 +3,7 @@ import {
     emailRegex,
     nameRegex,
     noSpecialCharacterRegex,
-    passwordRegex, phoneNumberRegex,
+    passwordRegex, phoneNumberRegex, urlRegex,
     usernameRegex
 } from "../../utils/regex";
 
@@ -41,11 +41,29 @@ export const formRulesAccount = {
         pattern: { value: emailRegex, message: 'Invalid email address' }
     },
     socialLink: {
-        pattern: { value: nameRegex, message: 'Invalid short link' },
+        pattern: { value: urlRegex, message: 'Invalid URL link' },
     },
     phone: {
         pattern: { value: phoneNumberRegex, message: 'Invalid phone number' },
     },
+}
+
+
+// Create NFT
+export const formRulesUploadFile = {
+    avatar: {
+        validate: {
+            required: (v: Blob[]) => (v && v.length > 0) || 'Account image is required',
+            audio: (values: Blob[]) => {
+                if (values && values.length > 0) {
+                    const firstFileType = values[0].type.split('/')[0];
+                    if (firstFileType && firstFileType !== 'audio') return true;
+                    return !!values[1] || 'Cover photo is required';
+                }
+                return 'Cover photo is required';
+            }
+        }
+    }
 }
 
 // Profile setting

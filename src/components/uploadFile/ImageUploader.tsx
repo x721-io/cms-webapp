@@ -4,7 +4,7 @@
 import { useMemo, useRef, useState } from 'react'
 import { Spinner } from 'flowbite-react'
 import { toast } from 'react-toastify'
-import { MdFileUpload } from "react-icons/md";
+import { MdClose, MdFileUpload } from "react-icons/md";
 import Text from "../Text";
 import Button from "../Button";
 import { classNames } from "../../utils/string";
@@ -136,7 +136,7 @@ export default function ImageUploader({
             variant="icon"
             className="absolute right-0 top-[-18px]"
             onClick={handleClearFile}>
-            {/*<CloseIcon width={20} height={20} />*/}
+            <MdClose width={20} height={20} />
           </Button>)
       }
     </div>

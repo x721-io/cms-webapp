@@ -1,13 +1,14 @@
 import Card from "../../../../../components/card";
 import Input from "../../../../../components/fields/InputField";
 import { FormState } from "../../../../../types/form";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { formRulesAccount } from "../../../../../config/form/rules";
+import FormValidationMessages from "../../../../../components/Form/ValidationMessages";
 
 
 const AccountInfo = () => {
 
-  const { handleSubmit, register, formState: { isDirty, errors }, setValue } = useForm<FormState.CreateAccount>();
+  const { register, formState: {  errors } } = useFormContext<FormState.CreateAccount>();
 
 
   return (
@@ -29,7 +30,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Limit 6 to 25 characters"
-              // error={!!errors.username}
+              error={!!errors.username}
               type="text"
               register={register('username', formRulesAccount.username)}
             />
@@ -46,7 +47,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              // error={!!errors.username}
+              error={!!errors.username}
               type="text"
               register={register('password', formRulesAccount.password)}
             />
@@ -62,7 +63,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              // error={!!errors.username}
+              error={!!errors.username}
               type="text"
               register={register('email', formRulesAccount.email)}
             />
@@ -78,7 +79,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              // error={!!errors.username}
+              error={!!errors.username}
               type="text"
               register={register('twitterLink', formRulesAccount.socialLink)}
             />
@@ -94,7 +95,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              // error={!!errors.username}
+              error={!!errors.username}
               type="text"
               register={register('telegramLink', formRulesAccount.socialLink)}
             />
@@ -110,7 +111,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              // error={!!errors.username}
+              error={!!errors.username}
               type="text"
               register={register('phone', formRulesAccount.phone)}
             />
@@ -118,6 +119,8 @@ const AccountInfo = () => {
         </div>
 
       </div>
+      <FormValidationMessages errors={errors} />
+
     </Card>
   );
 };
