@@ -15,7 +15,7 @@ export default function TableNFT() {
   const api = useMarketplaceApi();
   const { filters } = useNFTFilterStore((state) => state);
   const { error, isLoading, setSize, size, data } = useFetchNFTList(filters);
-  const [checkboxState, setCheckboxState] = useState<CheckboxState>({});
+  const [activeNFT, setActiveNFT] = useState<CheckboxState>({});
   const [showModalNFTDetail, setShowModalNFTDetail] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -56,7 +56,7 @@ export default function TableNFT() {
     );
   }
 
-  const handleCheckboxChange = async (
+  const handleActiveNFT = async (
     collectionId: any,
     itemId: any,
     active: boolean
@@ -67,7 +67,7 @@ export default function TableNFT() {
         id: itemId,
         isActive: active,
       });
-      setCheckboxState((prevState) => ({
+      setActiveNFT((prevState) => ({
         ...prevState,
         [itemId]: active,
       }));
@@ -143,9 +143,9 @@ export default function TableNFT() {
                     <input
                       type="checkbox"
                       className="peer sr-only"
-                      checked={checkboxState[item.id] ?? item.isActive}
+                      checked={activeNFT[item.id] ?? item.isActive}
                       onChange={(e) =>
-                        handleCheckboxChange(
+                        handleActiveNFT(
                           item.collectionId,
                           item.id,
                           e.target.checked

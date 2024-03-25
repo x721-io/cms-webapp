@@ -6,10 +6,15 @@ import {
 import { useUserFilterStore } from "../../../../store/filters/users/store";
 import Text from "../../../../components/Text";
 import { getUserAvatarImage } from "../../../../utils/string";
+import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
+import { useState } from "react";
+
+type CheckboxState = Record<string, boolean>;
 
 export default function TableUser() {
+  const api = useMarketplaceApi();
   const { filters } = useUserFilterStore();
-
+  const [activeUser, setActiveUser] = useState<CheckboxState>({});
   const { data, size, isLoading, setSize, error } = useFetchUserList(filters);
 
   const { list: users } = useInfiniteScroll({
@@ -18,6 +23,21 @@ export default function TableUser() {
     page: size,
     onNext: () => setSize(size + 1),
   });
+
+  const handleActiveUser = async (itemId: any, active: boolean) => {
+    try {
+      await api.handleActiveUser({
+        id: itemId,
+        isActive: active,
+      });
+      setActiveUser((prevState) => ({
+        ...prevState,
+        [itemId]: active,
+      }));
+    } catch (error) {
+      console.error(":", error);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -101,8 +121,8 @@ export default function TableUser() {
                   <div className="me-2 h-2.5 w-2.5 rounded-full bg-red-500"></div>
                 )}{" "}
                 {user.accountStatus === true
-                  ? "Account has been verified"
-                  : "Account is not verified"}
+                  ? "Verified"
+                  : "Not verified"}
               </div>
             </td>
             <td className="px-6 py-4">
@@ -124,7 +144,10 @@ export default function TableUser() {
                     type="checkbox"
                     value=""
                     className="peer sr-only"
-                    checked={user.isActive}
+                    checked={activeUser[user.id] ?? user.isActive}
+                    onChange={(e) =>
+                      handleActiveUser(user.id, e.target.checked)
+                    }
                   />
                   <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
                 </label>

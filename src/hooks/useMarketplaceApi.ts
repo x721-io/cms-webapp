@@ -31,7 +31,7 @@ export const useMarketplaceApi = () => {
       ): Promise<APIResponse.FetchCollections> =>
         marketplaceApi.get(
           API_ENDPOINTS.SEARCH_COLLECTION +
-            parseQueries(sanitizeObject({ ...params })),
+          parseQueries(sanitizeObject({ ...params })),
           authHeader()
         ),
 
@@ -60,6 +60,13 @@ export const useMarketplaceApi = () => {
       handleActiveUser: (params: APIParams.HandleActiveUser) =>
         marketplaceApi.post(
           API_ENDPOINTS.HANDLE_ACTIVE_USER,
+          params,
+          authHeader()
+        ),
+
+      handleVerifyCollection: (params: APIParams.HandleVerifyCollection) =>
+        marketplaceApi.post(
+          API_ENDPOINTS.HANDLE_VERIFY_COLLECTION,
           params,
           authHeader()
         ),
