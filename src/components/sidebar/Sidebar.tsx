@@ -19,7 +19,7 @@ const Sidebar = ({ open, onClose }: Props) => {
       }`}
     >
       <span
-        className="absolute top-4 right-4 block cursor-pointer lg:hidden xl:hidden"
+        className="absolute right-4 top-4 block cursor-pointer lg:hidden xl:hidden"
         onClick={onClose}
       >
         <HiX />

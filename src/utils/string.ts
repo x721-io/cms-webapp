@@ -7,13 +7,13 @@ export const classNames = (
 };
 
 export const getUserAvatarImage = (
-  user?: Partial<Pick<User, "username" | "avatar">> | null,
+  user?: Partial<Pick<User, "username" | "avatar">> | null
 ) => {
   return user?.avatar || `https://avatar.vercel.sh/${user?.username}`;
 };
 
 export const getCollectionAvatarImage = (
-  collection?: Partial<Pick<Collection, "name" | "avatar">> | null,
+  collection?: Partial<Pick<Collection, "name" | "avatar">> | null
 ) => {
   return collection?.avatar || `https://avatar.vercel.sh/${collection?.name}`;
 };

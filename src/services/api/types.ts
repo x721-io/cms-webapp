@@ -33,18 +33,18 @@ export namespace APIParams {
   }
 
   export interface HandleActiveNFT {
-    collectionId?: string
-    id?: string,
-    isActive?: boolean
+    collectionId?: string;
+    id?: string;
+    isActive?: boolean;
   }
 
   export interface HandleActiveCollection {
-    id?: string,
-    isActive?: boolean
+    id?: string;
+    isActive?: boolean;
   }
   export interface HandleActiveUser {
-    id?: string,
-    isActive?: boolean
+    id?: string;
+    isActive?: boolean;
   }
 }
 

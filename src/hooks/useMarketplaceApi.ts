@@ -13,7 +13,7 @@ export const useMarketplaceApi = () => {
     (accessToken?: string) => ({
       headers: { Authorization: `Bearer ${accessToken || bearerToken}` },
     }),
-    [bearerToken],
+    [bearerToken]
   );
 
   return useMemo(() => {
@@ -21,24 +21,48 @@ export const useMarketplaceApi = () => {
       login: (params: APIParams.Login): Promise<APIResponse.Login> =>
         marketplaceApi.post(API_ENDPOINTS.LOGIN, params),
 
-      fetchNFTs: (params: APIParams.FetchNFTs): Promise<APIResponse.FetchNFTs> =>
+      fetchNFTs: (
+        params: APIParams.FetchNFTs
+      ): Promise<APIResponse.FetchNFTs> =>
         marketplaceApi.post(API_ENDPOINTS.SEARCH_NFT, params, authHeader()),
 
-      fetchCollections: (params: APIParams.FetchCollections): Promise<APIResponse.FetchCollections> =>
-        marketplaceApi.get(API_ENDPOINTS.SEARCH_COLLECTION + parseQueries(sanitizeObject({ ...params })), authHeader()),
+      fetchCollections: (
+        params: APIParams.FetchCollections
+      ): Promise<APIResponse.FetchCollections> =>
+        marketplaceApi.get(
+          API_ENDPOINTS.SEARCH_COLLECTION +
+            parseQueries(sanitizeObject({ ...params })),
+          authHeader()
+        ),
 
-      fetchUsers: async (params: APIParams.FetchUsers): Promise<APIResponse.UsersData> =>
-        marketplaceApi.get(API_ENDPOINTS.SEARCH_USER + parseQueries(params), authHeader()),
+      fetchUsers: async (
+        params: APIParams.FetchUsers
+      ): Promise<APIResponse.UsersData> =>
+        marketplaceApi.get(
+          API_ENDPOINTS.SEARCH_USER + parseQueries(params),
+          authHeader()
+        ),
 
       handleActiveNFT: (params: APIParams.HandleActiveNFT) =>
-        marketplaceApi.post(API_ENDPOINTS.HANDLE_ACTIVE_NFT, params, authHeader()),
+        marketplaceApi.post(
+          API_ENDPOINTS.HANDLE_ACTIVE_NFT,
+          params,
+          authHeader()
+        ),
 
       handleActiveCollection: (params: APIParams.HandleActiveCollection) =>
-        marketplaceApi.post(API_ENDPOINTS.HANDLE_ACTIVE_COLLECTION, params, authHeader()),
+        marketplaceApi.post(
+          API_ENDPOINTS.HANDLE_ACTIVE_COLLECTION,
+          params,
+          authHeader()
+        ),
 
       handleActiveUser: (params: APIParams.HandleActiveUser) =>
-        marketplaceApi.post(API_ENDPOINTS.HANDLE_ACTIVE_USER, params, authHeader())
-
+        marketplaceApi.post(
+          API_ENDPOINTS.HANDLE_ACTIVE_USER,
+          params,
+          authHeader()
+        ),
     };
   }, [authHeader]);
 };
