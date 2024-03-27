@@ -31,7 +31,7 @@ export const useMarketplaceApi = () => {
       ): Promise<APIResponse.FetchCollections> =>
         marketplaceApi.get(
           API_ENDPOINTS.SEARCH_COLLECTION +
-          parseQueries(sanitizeObject({ ...params })),
+            parseQueries(sanitizeObject({ ...params })),
           authHeader()
         ),
 
@@ -40,6 +40,14 @@ export const useMarketplaceApi = () => {
       ): Promise<APIResponse.UsersData> =>
         marketplaceApi.get(
           API_ENDPOINTS.SEARCH_USER + parseQueries(params),
+          authHeader()
+        ),
+
+      fetchAccounts: async (
+        params: APIParams.FetchAccounts
+      ): Promise<APIResponse.AccountData> =>
+        marketplaceApi.get(
+          API_ENDPOINTS.SEARCH_ACCOUNT + parseQueries(params),
           authHeader()
         ),
 

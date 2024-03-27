@@ -66,7 +66,6 @@ export default function NFTNavbar() {
   }, [sortOption]);
 
   return (
-
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       {/* Search */}
       <div className="md:w-10">

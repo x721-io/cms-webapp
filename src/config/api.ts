@@ -5,6 +5,7 @@ export const API_ENDPOINTS = {
   SEARCH_NFT: "/cms/manage/search-nft",
   SEARCH_COLLECTION: "/cms/manage/search-collection",
   SEARCH_USER: "/cms/manage/search-user",
+  SEARCH_ACCOUNT: "/cms/manage/search-account",
   HANDLE_ACTIVE_NFT: "/cms/handle-active/nft",
   HANDLE_ACTIVE_COLLECTION: "/cms/handle-active/collection",
   HANDLE_ACTIVE_USER: "/cms/handle-active/user",

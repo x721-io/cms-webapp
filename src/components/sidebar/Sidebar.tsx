@@ -34,7 +34,7 @@ const Sidebar = ({ open, onClose }: Props) => {
       {/* Nav item */}
 
       <ul className="mb-auto pt-1">
-        <Links routes={routes} />
+        <Links />
       </ul>
 
       {/* Nav item end */}

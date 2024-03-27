@@ -3,10 +3,12 @@ import { MdHome, MdOutlineShoppingCart, MdBarChart } from "react-icons/md";
 
 import MainDashboard from "./views/admin/AdminDashboard";
 import Profile from "./views/admin/profile";
-import Account from "./views/admin/account";
+import CreateAccount from "./views/admin/account/create";
 import Marketplace from "./views/admin/marketplace/Marketplace";
+import AccountDetail from "./views/admin/account/accountDetail";
+import Accounts from "./views/admin/account/accounts";
 
-const routes = [
+const ROUTES: RoutesType[] = [
   {
     name: "Main Dashboard",
     layout: "/admin",
@@ -20,7 +22,6 @@ const routes = [
     path: "marketplace",
     icon: <MdOutlineShoppingCart className="h-6 w-6" />,
     component: <Marketplace />,
-    secondary: true,
   },
   {
     name: "Launchpad",
@@ -38,10 +39,21 @@ const routes = [
   },
   {
     name: "Account",
-    layout: "/admin",
     icon: <MdBarChart className="h-6 w-6" />,
     path: "account",
-    component: <Account />,
+    links: [
+      {
+        name: "Create Account",
+        path: "create-account",
+        component: <CreateAccount />,
+      },
+      { name: "Accounts", path: "accounts", component: <Accounts /> },
+      {
+        name: "Account Detail",
+        path: "account-overview",
+        component: <AccountDetail />,
+      },
+    ],
   },
 ];
-export default routes;
+export default ROUTES;
