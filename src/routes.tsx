@@ -5,6 +5,7 @@ import MainDashboard from "./views/admin/AdminDashboard";
 import Profile from "./views/admin/profile";
 import Account from "./views/admin/account";
 import Marketplace from "./views/admin/marketplace/Marketplace";
+import LaunchpadPage from "./views/admin/launchpad/LaunchpadPage";
 
 const routes = [
   {
@@ -27,7 +28,7 @@ const routes = [
     layout: "/admin",
     icon: <MdBarChart className="h-6 w-6" />,
     path: "launchpad",
-    component: <></>,
+    component: <LaunchpadPage />,
   },
   {
     name: "Profile",

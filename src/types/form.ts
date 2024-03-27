@@ -14,4 +14,10 @@ export namespace FormState {
     phone: string;
     roles: string[];
   }
+
+  export interface UpdateRound {
+    name: string;
+    type: string;
+    description: string;
+  }
 }

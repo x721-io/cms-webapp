@@ -16,3 +16,16 @@ export const formRulesLogin = {
     },
   },
 };
+
+// Update Round 
+export const formRulesRound = {
+  name: {
+    required: "Please input round name",
+  },
+  type: {
+    required: "Please input type round",
+  },
+  description: {
+    required: "Please input description"
+  }
+};
