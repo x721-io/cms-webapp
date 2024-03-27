@@ -1,6 +1,5 @@
 import Card from "../../../../../components/card";
 
-
 const General = () => {
   return (
     <Card extra={"w-full h-full p-3"}>

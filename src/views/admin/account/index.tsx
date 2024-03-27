@@ -2,7 +2,6 @@ import { useState } from "react";
 import { MdBarChart } from "react-icons/md";
 import Text from "../../../components/Text";
 
-
 export default function Index() {
   const [activeTab, setActiveTab] = useState(1);
 
@@ -61,7 +60,6 @@ export default function Index() {
         {/*/!* Content Tab 2 *!/*/}
         {/*{activeTab === 2 && <Accounts />}*/}
         {/*{activeTab === 3 && <AccountDetail />}*/}
-
       </div>
     </div>
   );

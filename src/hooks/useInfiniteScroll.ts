@@ -62,7 +62,8 @@ export const useFetchAccounts = (filters: APIParams.FetchAccounts) => {
       ...filters,
       page: index + 1,
     }),
-    (params) => api.fetchAccounts(sanitizeObject(params) as APIParams.FetchAccounts)
+    (params) =>
+      api.fetchAccounts(sanitizeObject(params) as APIParams.FetchAccounts)
   );
 };
 

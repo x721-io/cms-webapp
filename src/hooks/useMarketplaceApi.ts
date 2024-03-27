@@ -31,7 +31,7 @@ export const useMarketplaceApi = () => {
       ): Promise<APIResponse.FetchCollections> =>
         marketplaceApi.get(
           API_ENDPOINTS.SEARCH_COLLECTION +
-          parseQueries(sanitizeObject({ ...params })),
+            parseQueries(sanitizeObject({ ...params })),
           authHeader()
         ),
 

@@ -8,8 +8,7 @@ import Marketplace from "./views/admin/marketplace/Marketplace";
 import AccountDetail from "./views/admin/account/accountDetail";
 import Accounts from "./views/admin/account/accounts";
 
-
-const ROUTES : RoutesType[]= [
+const ROUTES: RoutesType[] = [
   {
     name: "Main Dashboard",
     layout: "/admin",
@@ -43,10 +42,18 @@ const ROUTES : RoutesType[]= [
     icon: <MdBarChart className="h-6 w-6" />,
     path: "account",
     links: [
-      {name: 'Create Account', path: 'create-account', component:<CreateAccount />,},
-      {name: 'Accounts',path: 'accounts',component:<Accounts />,},
-      {name: 'Account Detail',path: 'account-overview', component:<AccountDetail/>},
-    ]
+      {
+        name: "Create Account",
+        path: "create-account",
+        component: <CreateAccount />,
+      },
+      { name: "Accounts", path: "accounts", component: <Accounts /> },
+      {
+        name: "Account Detail",
+        path: "account-overview",
+        component: <AccountDetail />,
+      },
+    ],
   },
 ];
 export default ROUTES;

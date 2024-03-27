@@ -4,7 +4,6 @@ import { BsThreeDots } from "react-icons/bs";
 import Dropdown from "../../../../components/dropdown";
 import { MdPassword, MdRemove } from "react-icons/md";
 
-
 function CardMenu(props: { transparent?: boolean }) {
   const { transparent } = props;
   const [open, setOpen] = React.useState(false);
@@ -38,7 +37,7 @@ function CardMenu(props: { transparent?: boolean }) {
             </span>
             Reset Password
           </p>
-          <p className="mt-2 flex cursor-pointer items-center gap-2 pt-1 text-red-600 hover:font-medium hover:text-red">
+          <p className="hover:text-red mt-2 flex cursor-pointer items-center gap-2 pt-1 text-red-600 hover:font-medium">
             <span>
               <MdRemove />
             </span>

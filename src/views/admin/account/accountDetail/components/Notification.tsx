@@ -2,7 +2,6 @@ import Card from "../../../../../components/card";
 import CardMenu from "../../../../../components/card/CardMenu";
 import Switch from "../../../../../components/switch";
 
-
 function Notification() {
   return (
     <Card extra={"w-full h-full p-3"}>

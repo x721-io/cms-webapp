@@ -6,10 +6,7 @@ import avatar from "../../assets/img/avatars/avatar4.png";
 import { useAuth } from "../../hooks/useAuth";
 import { FiAlignJustify } from "react-icons/fi";
 
-const Navbar = (props: {
-  onOpenSidenav: () => void;
-  brandText: string;
-}) => {
+const Navbar = (props: { onOpenSidenav: () => void; brandText: string }) => {
   const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = React.useState(false);
   const { onLogout } = useAuth();

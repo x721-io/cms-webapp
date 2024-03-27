@@ -50,7 +50,9 @@ export default function Admin(props: { [x: string]: any }) {
     if (Array.isArray(ROUTES)) {
       return ROUTES.map((prop, key) => {
         if (prop.layout && prop.layout === "/admin") {
-          return <Route path={`/${prop.path}`} element={prop.component} key={key} />;
+          return (
+            <Route path={`/${prop.path}`} element={prop.component} key={key} />
+          );
         } else if (prop.links && Array.isArray(prop.links)) {
           return (
             <React.Fragment key={key}>
@@ -94,7 +96,7 @@ export default function Admin(props: { [x: string]: any }) {
                 {getRoutes(ROUTES)}
                 <Route
                   path="/"
-                  element={<Navigate to="/admin/default" replace  />}
+                  element={<Navigate to="/admin/default" replace />}
                 />
               </Routes>
             </div>
