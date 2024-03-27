@@ -9,7 +9,6 @@ import { FiAlignJustify } from "react-icons/fi";
 const Navbar = (props: {
   onOpenSidenav: () => void;
   brandText: string;
-  secondary?: boolean | string;
 }) => {
   const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = React.useState(false);

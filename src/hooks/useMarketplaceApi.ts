@@ -43,6 +43,14 @@ export const useMarketplaceApi = () => {
           authHeader()
         ),
 
+      fetchAccounts: async (
+        params: APIParams.FetchAccounts
+      ): Promise<APIResponse.AccountData> =>
+        marketplaceApi.get(
+          API_ENDPOINTS.SEARCH_ACCOUNT + parseQueries(params),
+          authHeader()
+        ),
+
       createAccount: (
         params: APIParams.CreateAccount
       ): Promise<APIResponse.AccountData> =>

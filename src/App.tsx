@@ -13,6 +13,11 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="admin/*" element={<AdminLayout />} />
+          <Route path="admin/*" element={<AdminLayout />} />
+          <Route path="admin/*" element={<AdminLayout />} />
+          <Route path="admin/*" element={<AdminLayout />} />
+          <Route path="admin/*" element={<AdminLayout />} />
+
         </Routes>
       </FormProvider>
     </>

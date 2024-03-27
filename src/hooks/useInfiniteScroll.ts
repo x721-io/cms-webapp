@@ -54,6 +54,18 @@ export const useFetchNFTList = (filters: APIParams.FetchNFTs) => {
   );
 };
 
+export const useFetchAccounts = (filters: APIParams.FetchAccounts) => {
+  const api = useMarketplaceApi();
+
+  return useSWRInfinite(
+    (index) => ({
+      ...filters,
+      page: index + 1,
+    }),
+    (params) => api.fetchAccounts(sanitizeObject(params) as APIParams.FetchAccounts)
+  );
+};
+
 export const useInfiniteScroll = ({
   data,
   loading,
