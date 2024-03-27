@@ -57,7 +57,6 @@ export const useFetchNFTList = (filters: APIParams.FetchNFTs) => {
 
 export const useFetchRoundList = (filters: APIParams.FetchRounds) => {
   const api = useLaunchpadApi();
-
   return useSWRInfinite(
     (index) => ({
       ...filters,
@@ -67,6 +66,18 @@ export const useFetchRoundList = (filters: APIParams.FetchRounds) => {
       api.fetchRounds(sanitizeObject(params) as APIParams.FetchRounds)
   );
 };
+
+export const useFetchAccounts = (filters: APIParams.FetchAccounts) => {
+  const api = useMarketplaceApi();
+  return useSWRInfinite(
+    (index) => ({
+      ...filters,
+      page: index + 1,
+    }),
+    (params) =>
+      api.fetchAccounts(sanitizeObject(params) as APIParams.FetchAccounts)
+  );
+}
 
 export const useInfiniteScroll = ({
   data,

@@ -36,8 +36,14 @@ export namespace APIParams {
     order?: string;
     orderBy?: string;
   }
+  export interface FetchAccounts extends PaginationParams {
+    search?: string;
+  }
+
   export interface FetchUsers extends PaginationParams {
     search?: string;
+    order?: string;
+    orderBy?: string;
   }
 
   export interface FetchRounds extends PaginationParams {
