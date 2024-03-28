@@ -3,6 +3,9 @@ import Input from "../../../../components/fields/InputField";
 import { useForm } from "react-hook-form";
 import { FormState } from "../../../../types/form";
 import { formRulesRound } from "../../../../config/formRules";
+import FormValidationMessages from "../../../../components/Form/ValidationMessages";
+import { useLaunchpadApi } from "../../../../hooks/useLaunchpadApi";
+import { toast } from "react-toastify";
 
 interface Props extends ModalProps {
     item: any;
@@ -21,22 +24,52 @@ const modalTheme: CustomFlowbiteTheme["modal"] = {
 
 export default function UpdateRound({ onClose, show, item }: Props) {
     console.log("item: ", item);
+    const api = useLaunchpadApi()
     const {
         handleSubmit,
         register,
-        formState: { isDirty, errors },
-        setValue,
+        formState: { errors },
+        reset,
+        getValues
     } = useForm<FormState.UpdateRound>({
         defaultValues: {
-            name: item?.roundname,
+            id: item?.id,
+            name: item?.name,
             type: item?.type,
             description: item?.description,
         },
     });
 
-    const onUpdateRound = async (params: FormState.UpdateRound) => {
-        console.log('1');
+    const onUpdateRound = async () => {
+        const toastId = toast.loading("Uploading Round...", { type: "info" });
+        const formData = getValues();
+        try {
+            await api.updateRound(formData);
+            toast.update(toastId, {
+                render: "Round updated successfully",
+                type: "success",
+                isLoading: false,
+                autoClose: 1000,
+                closeButton: true,
+              });
+        } catch (error : any) {
+            console.error('Update Round failed:', error);
+            toast.update(toastId, {
+                render: `Round updating: ${error.message}`,
+                type: "error",
+                isLoading: false,
+                autoClose: 1000,
+                closeButton: true,
+              });
+        } finally {
+            onClose?.()
+        }
+    }
 
+
+    const onCloseModal = () => {
+        onClose?.()
+        reset?.()
     }
 
     return (
@@ -50,8 +83,21 @@ export default function UpdateRound({ onClose, show, item }: Props) {
         >
             <Modal.Header className="p-4">Update Round</Modal.Header>
             <Modal.Body className="p-4">
-                <form className="flex-1 gap-4 flex-col" onSubmit={handleSubmit(onUpdateRound)}>
-                    <div className="flex gap-4 flex-col">
+                <form className="gap-4 flex-col flex justify-center items-center" onSubmit={handleSubmit(onUpdateRound)}>
+                    <div className="flex gap-4 flex-col w-full">
+                        <div className="flex gap-1 flex-col">
+                            <label className="block mb-2 font-semibold text-primary">
+                                Id
+                            </label>
+                            <Input
+                                type="text"
+                                error={!!errors.id}
+                                register={register("id", formRulesRound.id)}
+                                defaultValue={item?.id}
+                                className="bg-gray-200"
+                                readOnly
+                            />
+                        </div>
                         <div className="flex gap-1 flex-col">
                             <label className="block mb-2 font-semibold text-primary">
                                 Name
@@ -60,6 +106,7 @@ export default function UpdateRound({ onClose, show, item }: Props) {
                                 type="text"
                                 error={!!errors.name}
                                 register={register("name", formRulesRound.name)}
+                                defaultValue={item?.name}
                             />
                         </div>
                         <div className="flex gap-1 flex-col">
@@ -70,6 +117,7 @@ export default function UpdateRound({ onClose, show, item }: Props) {
                                 type="text"
                                 error={!!errors.type}
                                 register={register("type", formRulesRound.type)}
+                                defaultValue={item?.type}
                             />
                         </div>
                         <div className="flex gap-1 flex-col">
@@ -80,12 +128,20 @@ export default function UpdateRound({ onClose, show, item }: Props) {
                                 type="text"
                                 error={!!errors.description}
                                 register={register("description", formRulesRound.description)}
+                                defaultValue={item?.description}
                             />
                         </div>
                     </div>
-                    <button type="submit" className="linear rounded-md bg-brand-600 px-4 py-2 text-base font-medium text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700 dark:bg-brand-400 dark:hover:bg-brand-300 dark:active:opacity-90">
-                        Update Round
-                    </button>
+                    <FormValidationMessages errors={errors} />
+                    <div className="flex gap-1">
+                        <button onClick={onCloseModal} className="bg-white border px-9 py-2 text-base font-medium transition duration-200 rounded-md">
+                            Cancel
+                        </button>
+                        <button type="submit" className="linear rounded-md bg-brand-600 px-4 py-2 text-base font-medium text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700 dark:bg-brand-400 dark:hover:bg-brand-300 dark:active:opacity-90">
+                            Update Round
+                        </button>
+                    </div>
+
                 </form>
             </Modal.Body>
         </Modal>

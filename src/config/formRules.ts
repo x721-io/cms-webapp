@@ -19,6 +19,7 @@ export const formRulesLogin = {
 
 // Update Round 
 export const formRulesRound = {
+  id: {},
   name: {
     required: "Please input round name",
   },

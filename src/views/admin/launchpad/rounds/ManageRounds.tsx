@@ -7,8 +7,10 @@ import { FiEdit3 } from "react-icons/fi";
 import { MdAdd } from "react-icons/md";
 import UpdateRound from "./UpdateRound";
 import { useState } from "react";
+import { useLaunchpadApi } from "../../../../hooks/useLaunchpadApi";
 
 export default function ManageRounds() {
+    const api = useLaunchpadApi()
     const { filters } = useRoundFilterStore((state) => state);
     const { data, size, setSize, isLoading, error } = useFetchRoundList(filters);
     const [selectedRound, setSelectedRound] = useState(null);
@@ -25,6 +27,7 @@ export default function ManageRounds() {
         setSelectedRound(item);
         setShowModalRoundDetail(true);
     };
+
 
     if (isLoading) {
         return (
@@ -56,8 +59,7 @@ export default function ManageRounds() {
         );
     }
 
-    console.log('data: ', rounds.concatenatedData);
-
+    
     return (
         <div className="flex flex-col gap-1">
             <div className="flex justify-end">
@@ -75,7 +77,7 @@ export default function ManageRounds() {
                     </thead>
                     <tbody>
                         {rounds.concatenatedData?.map((round: any) => (
-                            <tr className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600" >
+                            <tr key={round.id} className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600" >
                                 <th className="px-6 py-4">{round.name}</th>
                                 <td className="px-6 py-4">{round.description}</td>
                                 <td className="px-6 py-4">{round.type}</td>
@@ -95,7 +97,8 @@ export default function ManageRounds() {
             <UpdateRound
                 item={selectedRound}
                 show={showModaRoundDetail}
-                onClose={() => setShowModalRoundDetail(false)} />
+                onClose={() => setShowModalRoundDetail(false)}
+                />
         </div>
     )
 }

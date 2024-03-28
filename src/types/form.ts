@@ -16,6 +16,7 @@ export namespace FormState {
   }
 
   export interface UpdateRound {
+    id: string;
     name: string;
     type: string;
     description: string;
