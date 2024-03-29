@@ -17,7 +17,7 @@ export default function TableAccounts() {
   const [activeUser, setActiveUser] = useState<CheckboxState>({});
   const { filters } = useAccountFilterStore();
   const { data, size, isLoading, setSize, error } = useFetchAccounts(filters);
-  const { list: accounts } = useInfiniteScroll({
+  const { isLoadingMore, list: accounts } = useInfiniteScroll({
     data,
     loading: isLoading,
     page: size,
@@ -69,8 +69,9 @@ export default function TableAccounts() {
     );
   }
   return (
-    <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-      <thead className="bg-gray-50  text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+    <>
+      <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+        <thead className="bg-gray-50  text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
         <tr className="text-center">
           <th scope="col" className="px-4 py-3">
             Username
@@ -95,8 +96,8 @@ export default function TableAccounts() {
           </th>
           <th scope="col" className="py-3"></th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         {accounts.concatenatedData?.map((account: any) => (
           <tr
             key={account.id}
@@ -149,7 +150,7 @@ export default function TableAccounts() {
 
             <td className="px-4 py-3 text-center">{account.phone}</td>
             <td className="px-4 py-3 text-center ">
-              {account.roles.map((role: string, index: number) => (
+              {!account.roles && account.roles.map((role: string, index: number) => (
                 <div key={index}>
                   {role
                     .split("_")
@@ -185,7 +186,20 @@ export default function TableAccounts() {
             </td>
           </tr>
         ))}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+      <div className="flex justify-center items-center">
+        {isLoadingMore && (
+          <div className="w-full h-56 flex justify-center items-center">
+            <Spinner size="xl" />
+          </div>
+        )}
+        {!accounts.currentHasNext && (
+          <div className="w-full h-36 flex justify-center items-center">
+            No more data
+          </div>
+        )}
+      </div>
+    </>
   );
 }

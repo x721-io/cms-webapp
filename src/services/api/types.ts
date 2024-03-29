@@ -97,6 +97,7 @@ export namespace APIResponse {
     accessTokenExpire: number;
     refreshToken: string;
     refreshTokenExpire: number;
+    accountId: string;
     userId: string;
   }
 
@@ -130,4 +131,6 @@ export namespace APIResponse {
   export interface UploadImage {
     fileHashes: string[];
   }
+
+  export type AccountOverview = Account;
 }
