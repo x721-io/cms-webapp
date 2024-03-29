@@ -20,7 +20,7 @@ export default function CreateTab() {
 
   const resetForm = () => {
     reset();
-    navigate("/admin/account");
+    navigate("/admin/create-account");
   };
 
   const onSubmit = async ({ avatar, ...rest }: FormState.CreateAccount) => {
@@ -38,7 +38,6 @@ export default function CreateTab() {
       };
 
       await onCreateAccount(params);
-
       toast.update(createAccountToast, {
         render: "Item created successfully!",
         type: "success",

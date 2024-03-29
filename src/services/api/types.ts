@@ -55,6 +55,16 @@ export namespace APIParams {
     roles: string[];
   }
 
+
+  export interface UpdateAccount {
+    username: string;
+    email: string;
+    twitterLink?: string;
+    telegramLink?: string;
+    phone: string;
+  }
+
+
   export interface HandleActiveNFT {
     collectionId?: string;
     id?: string;

@@ -13,5 +13,7 @@ export const API_ENDPOINTS = {
   UPLOAD_IMAGE: "/common/upload-image",
   CREATE_ACCOUNT: "/cms/create-account",
   ACCOUNT_DETAIL: "/cms/account/get-detail",
+  UPDATE_ACCOUNT: "/cms/update-account",
+
 
 };

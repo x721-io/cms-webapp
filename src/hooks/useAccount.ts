@@ -1,12 +1,28 @@
 import { useMarketplaceApi } from "./useMarketplaceApi";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { VIEWER } from "../config/contanst";
 import { APIParams } from "../services/api/types";
 import useAccountStore from "../store/account/store";
+import useAuthStore from "../store/auth/store";
+
 
 export const useAccount = () => {
   const api = useMarketplaceApi();
+  const { setAccountProfile } = useAccountStore();
+  const { credentials } = useAuthStore();
+
+  const bearerToken = credentials?.accessToken;
+
   const accountRoles = useAccountStore((state) => state.accountProfile?.roles);
+
+  const onUpdateAccount = useCallback(
+    async (params: APIParams.UpdateAccount) => {
+      if (!bearerToken) return;
+      const profile = await api.updateAccount(params);
+      setAccountProfile(profile);
+    },
+    [bearerToken]
+  );
 
   const [roles, setRoles] = useState<string[]>([VIEWER]);
   const [newRoles, setNewRoles] = useState<string[]>(accountRoles || []);
@@ -47,6 +63,7 @@ export const useAccount = () => {
     onCreateAccount,
     handleUpdateRoles,
     newRoles,
-    newRoleExists
+    newRoleExists,
+    onUpdateAccount
   };
 };
