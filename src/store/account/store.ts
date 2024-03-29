@@ -2,7 +2,6 @@ import { devtools, persist } from "zustand/middleware";
 import { create } from "zustand";
 import { AccountStoreAction, AccountStoreState } from "./types";
 
-
 const DEFAULT_STATE: AccountStoreState = {
   accountProfile: null,
 };

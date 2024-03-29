@@ -33,6 +33,12 @@ function CardMenu(props: { transparent?: boolean }) {
           </p>
           <p className="mt-2 flex cursor-pointer items-center gap-2 pt-1 text-gray-600 hover:font-medium hover:text-black">
             <span>
+              <AiFillEdit />
+            </span>
+            Edit Roles
+          </p>
+          <p className="mt-2 flex cursor-pointer items-center gap-2 pt-1 text-gray-600 hover:font-medium hover:text-black">
+            <span>
               <MdPassword />
             </span>
             Reset Password

@@ -10,7 +10,11 @@ import {
   ADMIN_COLLECTION,
   ADMIN_LAUNCHPAD,
   ADMIN_MARKETPLACE,
-  ADMIN_NFT, ADMIN_USER, ADMINISTRATOR, CREATOR, VIEWER
+  ADMIN_NFT,
+  ADMIN_USER,
+  ADMINISTRATOR,
+  CREATOR,
+  VIEWER,
 } from "../../../../config/contanst";
 
 const toggleSwitchTheme: CustomFlowbiteTheme["toggleSwitch"] = {
@@ -20,20 +24,14 @@ const toggleSwitchTheme: CustomFlowbiteTheme["toggleSwitch"] = {
 };
 
 function Permission() {
-  const accountRoles = useAccountStore((state) => state.accountProfile?.roles);
-  console.log(accountRoles);
-
   const { newRoles, newRoleExists, handleUpdateRoles } = useAccount();
   const { setValue } = useFormContext<FormState.UpdateRoles>();
-
 
   useEffect(() => {
     if (newRoles) {
       setValue("roles", newRoles);
     }
   }, [newRoles]);
-
-
 
   return (
     <Card extra={"w-full h-full p-3"}>
