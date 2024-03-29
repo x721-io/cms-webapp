@@ -21,4 +21,9 @@ export namespace FormState {
     type: string;
     description: string;
   }
+  export interface CreateRound {
+    name: string;
+    type: string;
+    description: string;
+  }
 }

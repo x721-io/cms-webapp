@@ -31,8 +31,11 @@ export const useLaunchpadApi = () => {
       launchpadAPI.post(API_ENDPOINTS.CREATE_ROUND, params, authHeader()),
 
     updateRound: (params: APIParams.UpdateRound) =>
-      launchpadAPI.put(API_ENDPOINTS.UPDATE_ROUND, params, authHeader() ),
-
+      launchpadAPI.put(API_ENDPOINTS.UPDATE_ROUND, params, authHeader()),
+      
+    deleteRound: (roundId: string): Promise<void> => {
+      return launchpadAPI.delete(API_ENDPOINTS.DELETE_ROUND + `/${roundId}`, authHeader());
+    },
 
     fetchProjects: (
       params?: APIParams.FetchProjects,

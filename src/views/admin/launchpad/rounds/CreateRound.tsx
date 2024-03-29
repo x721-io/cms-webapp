@@ -2,17 +2,13 @@ import { CustomFlowbiteTheme, Modal, ModalProps } from "flowbite-react";
 import Input from "../../../../components/fields/InputField";
 import { useForm } from "react-hook-form";
 import { FormState } from "../../../../types/form";
-import { formRulesRound } from "../../../../config/formRules";
+import { formRulesCreateRound } from "../../../../config/formRules";
 import FormValidationMessages from "../../../../components/Form/ValidationMessages";
 import { useLaunchpadApi } from "../../../../hooks/useLaunchpadApi";
 import { toast } from "react-toastify";
-import { APIParams } from "../../../../services/api/types";
-import { useRoundFilters } from "../../../../hooks/useFilters";
 
 interface Props extends ModalProps {
-    item: any;
-    activeFilters: APIParams.FetchRounds,
-    onApplyFilters?: (filters: APIParams.FetchRounds) => void,
+    // item: any;
 }
 
 const modalTheme: CustomFlowbiteTheme["modal"] = {
@@ -26,7 +22,7 @@ const modalTheme: CustomFlowbiteTheme["modal"] = {
     },
 };
 
-export default function UpdateRound({ onClose, show, item, activeFilters, onApplyFilters }: Props) {
+export default function CreateRound({ onClose, show }: Props) {
     const api = useLaunchpadApi()
     const {
         handleSubmit,
@@ -34,34 +30,25 @@ export default function UpdateRound({ onClose, show, item, activeFilters, onAppl
         formState: { errors },
         reset,
         getValues
-    } = useForm<FormState.UpdateRound>({
-        defaultValues: {
-            id: item?.id,
-            name: item?.name,
-            type: item?.type,
-            description: item?.description,
-        },
+    } = useForm<FormState.CreateRound>({
     });
 
-    const {
-        handleChange,
-    } = useRoundFilters(activeFilters, onApplyFilters);
-
-    const onUpdateRound = async () => {
-        const toastId = toast.loading("Uploading Round...", { type: "info" });
+    const onCreateRound = async () => {
+        const toastId = toast.loading("Creating Round...", { type: "info" });
         const formData = getValues();
         try {
-            await api.updateRound(formData);
-            handleChange(formData)
+            await api.createRounds(formData);
+
             toast.update(toastId, {
-                render: "Round updated successfully",
+                render: "Create Round updated successfully",
                 type: "success",
                 isLoading: false,
                 autoClose: 1000,
                 closeButton: true,
             });
+            reset()
         } catch (error: any) {
-            console.error('Update Round failed:', error);
+            console.error('Create Round failed:', error);
             toast.update(toastId, {
                 render: `Round updating: ${error.message}`,
                 type: "error",
@@ -71,6 +58,7 @@ export default function UpdateRound({ onClose, show, item, activeFilters, onAppl
             });
         } finally {
             onClose?.()
+
         }
     }
 
@@ -89,23 +77,10 @@ export default function UpdateRound({ onClose, show, item, activeFilters, onAppl
             size="md"
             className=" bg-black bg-opacity-50"
         >
-            <Modal.Header className="p-4">Update Round</Modal.Header>
+            <Modal.Header className="p-4">Create Round</Modal.Header>
             <Modal.Body className="p-4">
-                <form className="gap-4 flex-col flex justify-center items-center" onSubmit={handleSubmit(onUpdateRound)}>
+                <form className="gap-4 flex-col flex justify-center items-center" onSubmit={handleSubmit(onCreateRound)}>
                     <div className="flex gap-4 flex-col w-full">
-                        <div className="flex gap-1 flex-col">
-                            <label className="block mb-2 font-semibold text-primary">
-                                Id
-                            </label>
-                            <Input
-                                type="text"
-                                error={!!errors.id}
-                                register={register("id", formRulesRound.id)}
-                                defaultValue={item?.id}
-                                className="bg-gray-200"
-                                readOnly
-                            />
-                        </div>
                         <div className="flex gap-1 flex-col">
                             <label className="block mb-2 font-semibold text-primary">
                                 Name
@@ -113,8 +88,7 @@ export default function UpdateRound({ onClose, show, item, activeFilters, onAppl
                             <Input
                                 type="text"
                                 error={!!errors.name}
-                                register={register("name", formRulesRound.name)}
-                                defaultValue={item?.name}
+                                register={register("name", formRulesCreateRound.name)}
                             />
                         </div>
                         <div className="flex gap-1 flex-col">
@@ -124,8 +98,7 @@ export default function UpdateRound({ onClose, show, item, activeFilters, onAppl
                             <Input
                                 type="text"
                                 error={!!errors.type}
-                                register={register("type", formRulesRound.type)}
-                                defaultValue={item?.type}
+                                register={register("type", formRulesCreateRound.type)}
                             />
                         </div>
                         <div className="flex gap-1 flex-col">
@@ -135,8 +108,7 @@ export default function UpdateRound({ onClose, show, item, activeFilters, onAppl
                             <Input
                                 type="text"
                                 error={!!errors.description}
-                                register={register("description", formRulesRound.description)}
-                                defaultValue={item?.description}
+                                register={register("description", formRulesCreateRound.description)}
                             />
                         </div>
                     </div>
@@ -146,7 +118,7 @@ export default function UpdateRound({ onClose, show, item, activeFilters, onAppl
                             Cancel
                         </button>
                         <button type="submit" className="linear rounded-md bg-brand-600 px-4 py-2 text-base font-medium text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700 dark:bg-brand-400 dark:hover:bg-brand-300 dark:active:opacity-90">
-                            Update Round
+                            Create Round
                         </button>
                     </div>
 

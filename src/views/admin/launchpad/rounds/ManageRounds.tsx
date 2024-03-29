@@ -6,16 +6,18 @@ import { IoMdTrash } from "react-icons/io";
 import { FiEdit3 } from "react-icons/fi";
 import { MdAdd } from "react-icons/md";
 import UpdateRound from "./UpdateRound";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLaunchpadApi } from "../../../../hooks/useLaunchpadApi";
+import CreateRound from "./CreateRound";
+import { toast } from "react-toastify";
 
 export default function ManageRounds() {
     const api = useLaunchpadApi()
-    const { filters } = useRoundFilterStore((state) => state);
+    const { filters, updateFilters } = useRoundFilterStore((state) => state);
     const { data, size, setSize, isLoading, error } = useFetchRoundList(filters);
     const [selectedRound, setSelectedRound] = useState(null);
     const [showModaRoundDetail, setShowModalRoundDetail] = useState(false);
-
+    const [showModaCreateRound, setShowModalCreateRound] = useState(false);
     const { list: rounds } = useInfiniteScroll({
         data,
         loading: isLoading,
@@ -27,7 +29,36 @@ export default function ManageRounds() {
         setSelectedRound(item);
         setShowModalRoundDetail(true);
     };
+    console.log('rounds: ', rounds.concatenatedData);
+    
 
+    const handleDeleteRound = async (item: any) => {
+        const toastId = toast.loading("Creating Round...", { type: "info" });
+        try {
+            await await api.deleteRound(item.id)
+            toast.update(toastId, {
+                render: "Create Round updated successfully",
+                type: "success",
+                isLoading: false,
+                autoClose: 1000,
+                closeButton: true,
+            });
+        } catch (error: any) {
+            console.error('Create Round failed:', error);
+            toast.update(toastId, {
+                render: `Round updating: ${error.message}`,
+                type: "error",
+                isLoading: false,
+                autoClose: 1000,
+                closeButton: true,
+            });
+        }
+    };
+
+    useEffect(() => {
+        console.log('data: ', data);
+
+    }, [data])
 
     if (isLoading) {
         return (
@@ -59,11 +90,15 @@ export default function ManageRounds() {
         );
     }
 
-    
+
     return (
         <div className="flex flex-col gap-1">
             <div className="flex justify-end">
-                <button className="flex gap-1 bg-white text-gray-700 p-4 border rounded-xl font-semibold hover:bg-blue-300 active:bg-blue-300"><MdAdd size={24} /> Create Round</button>
+                <button
+                    onClick={() => setShowModalCreateRound(true)}
+                    className="flex gap-1 bg-white text-gray-700 p-4 border rounded-xl font-semibold hover:bg-blue-300 active:bg-blue-300">
+                    <MdAdd size={24} /> Create Round
+                </button>
             </div>
             <div className="my-6">
                 <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
@@ -85,7 +120,7 @@ export default function ManageRounds() {
                                     <button className="p-1" onClick={() => handleDetailRound(round)}>
                                         <FiEdit3 color="red" size={24} />
                                     </button>
-                                    <button className="p-1">
+                                    <button className="p-1" onClick={() => handleDeleteRound(round)}>
                                         <IoMdTrash color="green" size={24} />
                                     </button>
                                 </td>
@@ -98,7 +133,13 @@ export default function ManageRounds() {
                 item={selectedRound}
                 show={showModaRoundDetail}
                 onClose={() => setShowModalRoundDetail(false)}
-                />
+                activeFilters={filters}
+                onApplyFilters={updateFilters}
+            />
+            <CreateRound
+                show={showModaCreateRound}
+                onClose={() => setShowModalCreateRound(false)}
+            />
         </div>
     )
 }

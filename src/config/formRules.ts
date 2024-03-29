@@ -30,3 +30,16 @@ export const formRulesRound = {
     required: "Please input description"
   }
 };
+
+// Create Round 
+export const formRulesCreateRound = {
+  name: {
+    required: "Please input round name",
+  },
+  type: {
+    required: "Please input type round",
+  },
+  description: {
+    required: "Please input description"
+  }
+};
