@@ -11,11 +11,10 @@ import { useAccount } from "../../../../hooks/useAccount";
 import Button from "../../../../components/button";
 import { useNavigate } from "react-router-dom";
 
-
 const AccountInfo = () => {
   const navigate = useNavigate();
   const accountProfile = useAccountStore((state) => state.accountProfile);
-  const {onUpdateAccount} = useAccount();
+  const { onUpdateAccount } = useAccount();
 
   const {
     register,
@@ -28,7 +27,7 @@ const AccountInfo = () => {
       email: accountProfile?.email,
       twitterLink: accountProfile?.twitterLink,
       telegramLink: accountProfile?.telegramLink,
-      phone: accountProfile?.phone
+      phone: accountProfile?.phone,
     },
   });
 
@@ -36,7 +35,6 @@ const AccountInfo = () => {
     reset();
     navigate("/admin/profile");
   };
-
 
   const onSubmitProfile = async (params: FormState.UpdateAccountInfo) => {
     const toastId = toast.loading("Uploading Profile...", { type: "info" });
@@ -50,7 +48,7 @@ const AccountInfo = () => {
         autoClose: 1000,
         closeButton: true,
       });
-      resetForm()
+      resetForm();
       window.location.reload();
     } catch (e: any) {
       console.error("Error:", e);
@@ -65,8 +63,8 @@ const AccountInfo = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmitProfile)} >
-      <Card extra={"w-full h-full p-3"} >
+    <form onSubmit={handleSubmit(onSubmitProfile)}>
+      <Card extra={"w-full h-full p-3"}>
         {/* Header */}
         <div className=" mt-2 w-full">
           <h4 className="px-2 text-xl font-bold text-navy-700 dark:text-white">
@@ -109,7 +107,9 @@ const AccountInfo = () => {
           {/*</div>*/}
 
           <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-            <label className="text-primary mb-2 block font-semibold">Email</label>
+            <label className="text-primary mb-2 block font-semibold">
+              Email
+            </label>
             <div className="w-full">
               <Input
                 scale="sm"
@@ -169,19 +169,22 @@ const AccountInfo = () => {
               />
             </div>
           </div>
-
         </div>
-        {isDirty ?  <div className="w-full flex justify-center items-center tablet:w-auto desktop:w-auto pt-5">
-          <Button
-            type="submit"
-            scale="sm"
-            variant="outlined"
-            disabled={!isDirty}
-            className="w-full tablet:w-auto desktop:w-auto"
-          >
-            Save Account
-          </Button>
-        </div> : <></> }
+        {isDirty ? (
+          <div className="flex w-full items-center justify-center pt-5 tablet:w-auto desktop:w-auto">
+            <Button
+              type="submit"
+              scale="sm"
+              variant="outlined"
+              disabled={!isDirty}
+              className="w-full tablet:w-auto desktop:w-auto"
+            >
+              Save Account
+            </Button>
+          </div>
+        ) : (
+          <></>
+        )}
 
         <FormValidationMessages errors={errors} />
       </Card>

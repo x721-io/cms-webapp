@@ -13,7 +13,6 @@ import EyeOffIcon from "../../assets/svg/EyeOffIcon";
 import { useNavigate } from "react-router-dom";
 import useAccountStore from "../../store/account/store";
 
-
 export default function Login() {
   const api = useMarketplaceApi();
   const { onAuth } = useAuth();
@@ -36,10 +35,10 @@ export default function Login() {
       await api.login({ username: username, password: password });
       const credentials = await onAuth(username, password);
 
-      if (credentials.accessToken){
-        const account = await api.accountOverview(credentials?.accountId)
+      if (credentials.accessToken) {
+        const account = await api.accountOverview(credentials?.accountId);
         if (account) {
-          setAccountProfile(account)
+          setAccountProfile(account);
         }
       }
       navigate("/admin");

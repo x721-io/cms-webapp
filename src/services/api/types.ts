@@ -55,7 +55,6 @@ export namespace APIParams {
     roles: string[];
   }
 
-
   export interface UpdateAccount {
     username: string;
     email: string;
@@ -63,7 +62,6 @@ export namespace APIParams {
     telegramLink?: string;
     phone: string;
   }
-
 
   export interface HandleActiveNFT {
     collectionId?: string;

@@ -5,7 +5,6 @@ import { APIParams } from "../services/api/types";
 import useAccountStore from "../store/account/store";
 import useAuthStore from "../store/auth/store";
 
-
 export const useAccount = () => {
   const api = useMarketplaceApi();
   const { setAccountProfile } = useAccountStore();
@@ -26,7 +25,6 @@ export const useAccount = () => {
 
   const [roles, setRoles] = useState<string[]>([VIEWER]);
   const [newRoles, setNewRoles] = useState<string[]>(accountRoles || []);
-
 
   const roleExists = (role: string) => {
     return roles.includes(role);
@@ -64,6 +62,6 @@ export const useAccount = () => {
     handleUpdateRoles,
     newRoles,
     newRoleExists,
-    onUpdateAccount
+    onUpdateAccount,
   };
 };

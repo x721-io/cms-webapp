@@ -8,19 +8,20 @@ import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
 import useSWR from "swr";
 import { useAuth } from "../../../../hooks/useAuth";
 
-
 export default function AccountDetail() {
   const api = useMarketplaceApi();
-  const { accountId } = useAuth()
+  const { accountId } = useAuth();
 
   const {
     data: account,
     isLoading,
     error,
-    mutate
-  } = useSWR([accountId], (accountId) => api.accountOverview(accountId.toString()),
-    { revalidateOnFocus: false });
-
+    mutate,
+  } = useSWR(
+    [accountId],
+    (accountId) => api.accountOverview(accountId.toString()),
+    { revalidateOnFocus: false }
+  );
 
   return (
     <div className="flex w-full flex-col gap-5">

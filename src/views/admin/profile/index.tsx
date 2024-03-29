@@ -2,7 +2,6 @@ import Banner from "./components/Banner";
 import Permission from "./components/Permission";
 import AccountInfo from "./components/AccountInfo";
 
-
 const ProfileOverview = () => {
   return (
     <div className="flex w-full flex-col gap-5">

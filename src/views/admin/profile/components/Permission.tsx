@@ -10,7 +10,11 @@ import {
   ADMIN_COLLECTION,
   ADMIN_LAUNCHPAD,
   ADMIN_MARKETPLACE,
-  ADMIN_NFT, ADMIN_USER, ADMINISTRATOR, CREATOR, VIEWER
+  ADMIN_NFT,
+  ADMIN_USER,
+  ADMINISTRATOR,
+  CREATOR,
+  VIEWER,
 } from "../../../../config/contanst";
 
 const toggleSwitchTheme: CustomFlowbiteTheme["toggleSwitch"] = {

@@ -4,7 +4,6 @@ import { BsThreeDots } from "react-icons/bs";
 import Dropdown from "../../../../components/dropdown";
 import { MdPassword, MdRemove } from "react-icons/md";
 
-
 function CardMenu(props: { transparent?: boolean }) {
   const { transparent } = props;
   const [open, setOpen] = React.useState(false);
