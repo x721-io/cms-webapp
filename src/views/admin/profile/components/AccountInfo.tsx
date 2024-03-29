@@ -1,15 +1,31 @@
-import Card from "../../../../../components/card";
-import Input from "../../../../../components/fields/InputField";
-import { FormState } from "../../../../../types/form";
-import { useFormContext } from "react-hook-form";
-import { formRulesAccount } from "../../../../../config/form/rules";
-import FormValidationMessages from "../../../../../components/Form/ValidationMessages";
+import React from "react";
+import Card from "../../../../components/card";
+import Input from "../../../../components/fields/InputField";
+import { formRulesAccount } from "../../../../config/form/rules";
+import FormValidationMessages from "../../../../components/Form/ValidationMessages";
+import { FormState } from "../../../../types/form";
+import { useForm } from "react-hook-form";
+import useAccountStore from "../../../../store/account/store";
+
 
 const AccountInfo = () => {
+  const accountProfile = useAccountStore((state) => state.accountProfile);
+
   const {
     register,
-    formState: { errors },
-  } = useFormContext<FormState.CreateAccount>();
+    handleSubmit,
+    reset,
+    formState: { isDirty, errors },
+    getValues,
+  } = useForm<FormState.UpdateAccountInfo>({
+    defaultValues: {
+      username: accountProfile?.username,
+      email: accountProfile?.email,
+      twitterLink: accountProfile?.twitterLink,
+      telegramLink: accountProfile?.telegramLink,
+      phone: accountProfile?.phone
+    },
+  });
 
   return (
     <Card extra={"w-full h-full p-3"}>
@@ -37,21 +53,21 @@ const AccountInfo = () => {
           </div>
         </div>
 
-        <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-          <label className="text-primary mb-2 block font-semibold">
-            Password
-          </label>
-          <div className="w-full">
-            <Input
-              scale="sm"
-              className="min-w-0"
-              placeholder="Minimum 8 characters"
-              error={!!errors.password}
-              type="text"
-              register={register("password", formRulesAccount.password)}
-            />
-          </div>
-        </div>
+        {/*<div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">*/}
+        {/*  <label className="text-primary mb-2 block font-semibold">*/}
+        {/*    Password*/}
+        {/*  </label>*/}
+        {/*  <div className="w-full">*/}
+        {/*    <Input*/}
+        {/*      scale="sm"*/}
+        {/*      className="min-w-0"*/}
+        {/*      placeholder="Minimum 8 characters"*/}
+        {/*      error={!!errors.username}*/}
+        {/*      type="text"*/}
+        {/*      // register={register("password", formRulesAccount.password)}*/}
+        {/*    />*/}
+        {/*  </div>*/}
+        {/*</div>*/}
 
         <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
           <label className="text-primary mb-2 block font-semibold">Email</label>
@@ -60,7 +76,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              error={!!errors.email}
+              error={!!errors.username}
               type="text"
               register={register("email", formRulesAccount.email)}
             />
@@ -76,7 +92,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              error={!!errors.twitterLink}
+              error={!!errors.username}
               type="text"
               register={register("twitterLink", formRulesAccount.socialLink)}
             />
@@ -92,7 +108,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              error={!!errors.telegramLink}
+              error={!!errors.username}
               type="text"
               register={register("telegramLink", formRulesAccount.socialLink)}
             />
@@ -108,7 +124,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              error={!!errors.phone}
+              error={!!errors.username}
               type="text"
               register={register("phone", formRulesAccount.phone)}
             />

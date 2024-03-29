@@ -12,4 +12,6 @@ export const API_ENDPOINTS = {
   HANDLE_VERIFY_COLLECTION: "/cms/handle-verify/collection",
   UPLOAD_IMAGE: "/common/upload-image",
   CREATE_ACCOUNT: "/cms/create-account",
+  ACCOUNT_DETAIL: "/cms/account/get-detail",
+
 };

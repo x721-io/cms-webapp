@@ -4,8 +4,24 @@ import Notification from "./components/Notification";
 import Project from "./components/Project";
 import Storage from "./components/Storage";
 import Upload from "./components/Upload";
+import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
+import useSWR from "swr";
+import { useAuth } from "../../../../hooks/useAuth";
+
 
 export default function AccountDetail() {
+  const api = useMarketplaceApi();
+  const { accountId } = useAuth()
+
+  const {
+    data: account,
+    isLoading,
+    error,
+    mutate
+  } = useSWR([accountId], (accountId) => api.accountOverview(accountId.toString()),
+    { revalidateOnFocus: false });
+
+
   return (
     <div className="flex w-full flex-col gap-5">
       <div className="w-ful mt-3 flex h-fit flex-col gap-5 lg:grid lg:grid-cols-12">

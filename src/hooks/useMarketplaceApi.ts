@@ -94,6 +94,8 @@ export const useMarketplaceApi = () => {
           params,
           authHeader()
         ),
+      accountOverview: (id: string): Promise<APIResponse.AccountOverview> => marketplaceApi.get(API_ENDPOINTS.ACCOUNT_DETAIL + `/${id}`, authHeader()),
+
     };
   }, [authHeader]);
 };
