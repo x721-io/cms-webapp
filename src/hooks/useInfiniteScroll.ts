@@ -3,6 +3,7 @@ import useSWRInfinite from "swr/infinite";
 import { APIParams, APIResponse } from "../services/api/types";
 import { useMarketplaceApi } from "./useMarketplaceApi";
 import { sanitizeObject } from "../utils";
+import { useLaunchpadApi } from "./useLaunchpadApi";
 
 interface ListData {
   data: any[];
@@ -54,9 +55,20 @@ export const useFetchNFTList = (filters: APIParams.FetchNFTs) => {
   );
 };
 
+export const useFetchRoundList = (filters: APIParams.FetchRounds) => {
+  const api = useLaunchpadApi();
+  return useSWRInfinite(
+    (index) => ({
+      ...filters,
+      page: index + 1,
+    }),
+    (params) =>
+      api.fetchRounds(sanitizeObject(params) as APIParams.FetchRounds)
+  );
+};
+
 export const useFetchAccounts = (filters: APIParams.FetchAccounts) => {
   const api = useMarketplaceApi();
-
   return useSWRInfinite(
     (index) => ({
       ...filters,
@@ -65,7 +77,7 @@ export const useFetchAccounts = (filters: APIParams.FetchAccounts) => {
     (params) =>
       api.fetchAccounts(sanitizeObject(params) as APIParams.FetchAccounts)
   );
-};
+}
 
 export const useInfiniteScroll = ({
   data,

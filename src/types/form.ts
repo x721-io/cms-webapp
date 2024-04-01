@@ -15,6 +15,17 @@ export namespace FormState {
     roles: string[];
   }
 
+  export interface UpdateRound {
+    id: string;
+    name: string;
+    type: string;
+    description: string;
+  }
+  export interface CreateRound {
+    name: string;
+    type: string;
+    description: string;
+  }
   export interface UpdateAccountInfo {
     username: string;
     email: string;
