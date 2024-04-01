@@ -46,7 +46,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              error={!!errors.username}
+              error={!!errors.password}
               type="text"
               register={register("password", formRulesAccount.password)}
             />
@@ -60,7 +60,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              error={!!errors.username}
+              error={!!errors.email}
               type="text"
               register={register("email", formRulesAccount.email)}
             />
@@ -76,7 +76,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              error={!!errors.username}
+              error={!!errors.twitterLink}
               type="text"
               register={register("twitterLink", formRulesAccount.socialLink)}
             />
@@ -92,7 +92,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              error={!!errors.username}
+              error={!!errors.telegramLink}
               type="text"
               register={register("telegramLink", formRulesAccount.socialLink)}
             />
@@ -108,7 +108,7 @@ const AccountInfo = () => {
               scale="sm"
               className="min-w-0"
               placeholder="Minimum 8 characters"
-              error={!!errors.username}
+              error={!!errors.phone}
               type="text"
               register={register("phone", formRulesAccount.phone)}
             />

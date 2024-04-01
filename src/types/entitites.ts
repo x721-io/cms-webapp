@@ -5,6 +5,7 @@ export type EntityStatus = "PENDING" | "SUCCESS" | "FAILED";
 
 export interface User {
   id: string;
+  accountId: string;
   email: string;
   avatar?: string;
   username: string;

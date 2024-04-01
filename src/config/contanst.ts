@@ -15,3 +15,4 @@ export const CREATOR = "CREATOR";
 export const ADMIN_MARKETPLACE = "ADMIN_MARKETPLACE";
 export const ADMIN_USER = "ADMIN_USER";
 export const VIEWER = "VIEWER";
+export const ADMINISTRATOR = "ADMINISTRATOR";

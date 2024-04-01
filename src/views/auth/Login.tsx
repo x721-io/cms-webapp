@@ -11,10 +11,13 @@ import { useState } from "react";
 import EyeIcon from "../../assets/svg/EyeIcon";
 import EyeOffIcon from "../../assets/svg/EyeOffIcon";
 import { useNavigate } from "react-router-dom";
+import useAccountStore from "../../store/account/store";
 
 export default function Login() {
   const api = useMarketplaceApi();
   const { onAuth } = useAuth();
+  const { setAccountProfile } = useAccountStore();
+
   const navigate = useNavigate();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const {
@@ -26,12 +29,18 @@ export default function Login() {
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
-
   const onSubmit = async ({ username, password }: FormState.Login) => {
     const toastId = toast.loading("Preparing data...", { type: "info" });
     try {
       await api.login({ username: username, password: password });
-      await onAuth(username, password);
+      const credentials = await onAuth(username, password);
+
+      if (credentials.accessToken) {
+        const account = await api.accountOverview(credentials?.accountId);
+        if (account) {
+          setAccountProfile(account);
+        }
+      }
       navigate("/admin");
       toast.update(toastId, {
         render: "Login has been successfully",

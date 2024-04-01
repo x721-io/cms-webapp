@@ -66,6 +66,13 @@ export namespace APIParams {
     type: string;
     description?: string;
   }
+  export interface UpdateAccount {
+    username: string;
+    email: string;
+    twitterLink?: string;
+    telegramLink?: string;
+    phone: string;
+  }
 
   export interface HandleActiveNFT {
     collectionId?: string;
@@ -139,6 +146,7 @@ export namespace APIResponse {
     accessTokenExpire: number;
     refreshToken: string;
     refreshTokenExpire: number;
+    accountId: string;
     userId: string;
   }
 
@@ -182,4 +190,5 @@ export namespace APIResponse {
     data: Round[];
     paging: Pagination;
   }
+  export type AccountOverview = Account;
 }

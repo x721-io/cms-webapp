@@ -22,5 +22,7 @@ export const API_ENDPOINTS = {
   SEARCH_ROUND:"/cms/launchpad/search-round",
   CREATE_ROUND:"/cms/launchpad/create-round",
   UPDATE_ROUND:"/cms/launchpad/update-round",
-  DELETE_ROUND:"/cms/launchpad/round"
+  DELETE_ROUND:"/cms/launchpad/round",
+  ACCOUNT_DETAIL: "/cms/account/get-detail",
+  UPDATE_ACCOUNT: "/cms/update-account",
 };

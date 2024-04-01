@@ -3,7 +3,7 @@ import { useMarketplaceApi } from "./useMarketplaceApi";
 
 export const useAuth = () => {
   const api = useMarketplaceApi();
-  const { setCredentials } = useAuthStore();
+  const { setCredentials, credentials } = useAuthStore();
 
   const onAuth = async (username: string, password: string) => {
     const credentials = await api.login({
@@ -13,6 +13,7 @@ export const useAuth = () => {
     setCredentials(credentials);
     return credentials;
   };
+  const accountId = credentials?.accountId;
 
   const onLogout = async () => {
     clearProfile();
@@ -21,5 +22,6 @@ export const useAuth = () => {
   return {
     onAuth,
     onLogout,
+    accountId,
   };
 };

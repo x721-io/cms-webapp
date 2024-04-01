@@ -26,4 +26,19 @@ export namespace FormState {
     type: string;
     description: string;
   }
+  export interface UpdateAccountInfo {
+    username: string;
+    email: string;
+    twitterLink?: string;
+    telegramLink?: string;
+    phone: string;
+  }
+
+  export interface UpdateRoles {
+    roles: string[];
+  }
+
+  export interface UpdateAvatar {
+    avatar: Blob[];
+  }
 }
