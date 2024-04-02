@@ -104,6 +104,15 @@ export const useMarketplaceApi = () => {
         params: APIParams.UpdateAccount
       ): Promise<APIResponse.AccountOverview> =>
         marketplaceApi.put(API_ENDPOINTS.UPDATE_ACCOUNT, params, authHeader()),
+
+      updateRoles: (params: APIParams.UpdateRoles) =>
+        marketplaceApi.put(API_ENDPOINTS.UPDATE_ROLES, params, authHeader()),
+
+      fetchRoles: (id: string): Promise<APIResponse.Roles> =>
+        marketplaceApi.get(
+          API_ENDPOINTS.ACCOUNT_ROLES + `/${id}`,
+          authHeader()
+        ),
     };
   }, [authHeader]);
 };

@@ -1,7 +1,4 @@
-import {
-  useFetchAccounts,
-  useInfiniteScroll,
-} from "../../../../hooks/useInfiniteScroll";
+import { useFetchAccounts, useInfiniteScroll } from "../../../../hooks/useInfiniteScroll";
 import { useAccountFilterStore } from "../../../../store/filters/accounts/store";
 import { Spinner } from "flowbite-react";
 import Text from "../../../../components/Text";
@@ -9,6 +6,8 @@ import { getUserAvatarImage } from "../../../../utils/string";
 import { useState } from "react";
 import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
 import CardMenu from "./CardMenu";
+import { VIEWER } from "../../../../config/contanst";
+
 
 type CheckboxState = Record<string, boolean>;
 
@@ -17,12 +16,14 @@ export default function TableAccounts() {
   const [activeUser, setActiveUser] = useState<CheckboxState>({});
   const { filters } = useAccountFilterStore();
   const { data, size, isLoading, setSize, error } = useFetchAccounts(filters);
+
   const { isLoadingMore, list: accounts } = useInfiniteScroll({
     data,
     loading: isLoading,
     page: size,
     onNext: () => setSize(size + 1),
   });
+
 
   if (isLoading) {
     return (
@@ -150,20 +151,22 @@ export default function TableAccounts() {
 
               <td className="px-4 py-3 text-center">{account.phone}</td>
               <td className="px-4 py-3 text-center ">
-                {!account.roles &&
-                  account.roles.map((role: string, index: number) => (
-                    <div key={index}>
-                      {role
-                        .split("_")
-                        .map(
-                          (word: string) =>
-                            word.charAt(0).toUpperCase() +
-                            word.slice(1).toLowerCase()
-                        )
-                        .join(" ")}
-                      {index < account.roles.length - 1 && ", "}
-                    </div>
-                  ))}
+                {account.roles &&
+                  account.roles
+                    .filter((role: string) => role !== VIEWER)
+                    .map((role: string, index: number) => (
+                      <div key={index}>
+                        {role
+                          .split("_")
+                          .map(
+                            (word: string) =>
+                              word.charAt(0).toUpperCase() +
+                              word.slice(1).toLowerCase()
+                          )
+                          .join(" ")}
+                        {index < account.roles.length - 1 && " "}
+                      </div>
+                    ))}
               </td>
 
               <td className="px-4 py-3 text-center">
@@ -183,12 +186,13 @@ export default function TableAccounts() {
                 </div>
               </td>
               <td className="py-3 text-center">
-                <CardMenu />
+                <CardMenu accountId={account.id} roles={account.roles} />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
       <div className="flex items-center justify-center">
         {isLoadingMore && (
           <div className="flex h-56 w-full items-center justify-center">

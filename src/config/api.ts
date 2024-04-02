@@ -14,4 +14,8 @@ export const API_ENDPOINTS = {
   CREATE_ACCOUNT: "/cms/create-account",
   ACCOUNT_DETAIL: "/cms/account/get-detail",
   UPDATE_ACCOUNT: "/cms/update-account",
+  UPDATE_ROLES: "/cms/account/update-roles",
+  ACCOUNT_ROLES: "/cms/account/get-roles",
+
+
 };

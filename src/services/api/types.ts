@@ -82,6 +82,11 @@ export namespace APIParams {
     id?: string;
     isVerified?: boolean;
   }
+
+  export interface UpdateRoles {
+    id: string;
+    roles: string[];
+  }
 }
 
 /********** =========== API Response types ========== ***********/
@@ -138,6 +143,10 @@ export namespace APIResponse {
 
   export interface UploadImage {
     fileHashes: string[];
+  }
+
+  export interface Roles {
+    roles: string[];
   }
 
   export type AccountOverview = Account;

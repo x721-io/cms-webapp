@@ -35,7 +35,7 @@ export default function Login() {
       await api.login({ username: username, password: password });
       const credentials = await onAuth(username, password);
 
-      if (credentials.accessToken) {
+      if (credentials.accountId) {
         const account = await api.accountOverview(credentials?.accountId);
         if (account) {
           setAccountProfile(account);
