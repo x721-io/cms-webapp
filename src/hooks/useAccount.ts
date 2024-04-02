@@ -37,6 +37,6 @@ export const useAccount = () => {
     onCreateAccount,
     onUpdateAccount,
     onUpdateRoles,
-    onResetPassword
+    onResetPassword,
   };
 };

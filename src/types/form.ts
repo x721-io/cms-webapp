@@ -47,6 +47,5 @@ export namespace FormState {
     id: string;
     newPassword: string;
     confirmPassword: string;
-
   }
 }

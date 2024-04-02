@@ -54,7 +54,9 @@ function CardMenu({ transparent, roles, accountId }: Props) {
                   <span>
                     <AiFillEdit />
                   </span>
-                  <button onClick={() => setShoUpdateRolesModal(true)}>Edit Roles</button>
+                  <button onClick={() => setShoUpdateRolesModal(true)}>
+                    Edit Roles
+                  </button>
                 </p>
 
                 <p className="mt-2 flex cursor-pointer items-center gap-2 pt-1 text-gray-600 hover:font-medium hover:text-black">

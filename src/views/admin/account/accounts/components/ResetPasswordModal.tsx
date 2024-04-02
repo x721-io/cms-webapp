@@ -2,7 +2,10 @@ import { CustomFlowbiteTheme, Modal, ModalProps } from "flowbite-react";
 import React, { useState } from "react";
 import Card from "../../../../../components/card";
 import Input from "../../../../../components/fields/InputField";
-import { formRulesAccount, formRulesResetPassword } from "../../../../../config/form/rules";
+import {
+  formRulesAccount,
+  formRulesResetPassword,
+} from "../../../../../config/form/rules";
 import { useForm } from "react-hook-form";
 import { FormState } from "../../../../../types/form";
 import Button from "../../../../../components/button";
@@ -14,7 +17,6 @@ import EyeOffIcon from "../../../../../assets/svg/EyeOffIcon";
 import { id } from "ethers";
 import { Simulate } from "react-dom/test-utils";
 import reset = Simulate.reset;
-
 
 interface Props extends ModalProps {
   accountId: string;
@@ -32,21 +34,18 @@ const modalTheme: CustomFlowbiteTheme["modal"] = {
 };
 
 export default function ResetPasswordModal({
-                                           onClose,
-                                           show,
-                                           accountId,
-                                         }: Props) {
-
-
-const {onResetPassword} = useAccount();
+  onClose,
+  show,
+  accountId,
+}: Props) {
+  const { onResetPassword } = useAccount();
   const {
     register,
     handleSubmit,
     watch,
     reset,
     formState: { isDirty, errors },
-  } = useForm<FormState.ResetPassword>({defaultValues:{id: accountId}}
-  );
+  } = useForm<FormState.ResetPassword>({ defaultValues: { id: accountId } });
   const newPassword = watch("newPassword");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -54,7 +53,10 @@ const {onResetPassword} = useAccount();
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const onSubmitReset = async ({newPassword,id}: FormState.ResetPassword) => {
+  const onSubmitReset = async ({
+    newPassword,
+    id,
+  }: FormState.ResetPassword) => {
     const toastId = toast.loading("Reset Password...", { type: "info" });
 
     try {
@@ -73,7 +75,7 @@ const {onResetPassword} = useAccount();
       if (onClose) {
         onClose();
       }
-      reset()
+      reset();
     } catch (e: any) {
       console.error("Error:", e);
       toast.update(toastId, {
@@ -101,7 +103,7 @@ const {onResetPassword} = useAccount();
           <form className="w-full" onSubmit={handleSubmit(onSubmitReset)}>
             <Card extra={"w-full h-full p-3"}>
               {/* Cards */}
-              <div className="flex flex-col gap-4 px-0 tablet:grid tablet:grid-cols-2 tablet:px-2 desktop:grid desktop:grid-cols-1 w-full">
+              <div className="flex w-full flex-col gap-4 px-0 tablet:grid tablet:grid-cols-2 tablet:px-2 desktop:grid desktop:grid-cols-1">
                 <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-2 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
                   <label className="text-primary mb-2 block font-semibold">
                     New Password
@@ -112,7 +114,10 @@ const {onResetPassword} = useAccount();
                       className="min-w-0"
                       placeholder="Minimum 8 characters"
                       error={!!errors.newPassword}
-                      register={register("newPassword", formRulesResetPassword.password)}
+                      register={register(
+                        "newPassword",
+                        formRulesResetPassword.password
+                      )}
                       type={isPasswordVisible ? "text" : "password"}
                       appendIcon={
                         isPasswordVisible ? (
@@ -142,7 +147,8 @@ const {onResetPassword} = useAccount();
                       register={register("confirmPassword", {
                         required: "Confirm password is required",
                         validate: (value: string) =>
-                          value === newPassword || "Confirm Passwords do not match",
+                          value === newPassword ||
+                          "Confirm Passwords do not match",
                       })}
                       type={isPasswordVisible ? "text" : "password"}
                       appendIcon={
@@ -167,7 +173,7 @@ const {onResetPassword} = useAccount();
                     scale="sm"
                     variant="outlined"
                     disabled={!isDirty}
-                    className="w-full tablet:w-auto desktop:w-auto flex justify-center items-center"
+                    className="flex w-full items-center justify-center tablet:w-auto desktop:w-auto"
                   >
                     Confirm
                   </Button>
