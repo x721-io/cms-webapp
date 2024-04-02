@@ -1,4 +1,7 @@
-import { useFetchAccounts, useInfiniteScroll } from "../../../../hooks/useInfiniteScroll";
+import {
+  useFetchAccounts,
+  useInfiniteScroll,
+} from "../../../../hooks/useInfiniteScroll";
 import { useAccountFilterStore } from "../../../../store/filters/accounts/store";
 import { Spinner } from "flowbite-react";
 import Text from "../../../../components/Text";
@@ -7,7 +10,6 @@ import { useState } from "react";
 import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
 import CardMenu from "./CardMenu";
 import { VIEWER } from "../../../../config/contanst";
-
 
 type CheckboxState = Record<string, boolean>;
 
@@ -23,7 +25,6 @@ export default function TableAccounts() {
     page: size,
     onNext: () => setSize(size + 1),
   });
-
 
   if (isLoading) {
     return (

@@ -11,7 +11,6 @@ import { useAccount } from "../../../../hooks/useAccount";
 import Button from "../../../../components/button";
 import { useNavigate } from "react-router-dom";
 
-
 const AccountInfo = () => {
   const navigate = useNavigate();
   const accountProfile = useAccountStore((state) => state.accountProfile);

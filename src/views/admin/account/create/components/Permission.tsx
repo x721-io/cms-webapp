@@ -7,13 +7,12 @@ import {
   ADMIN_NFT,
   ADMIN_USER,
   CREATOR,
-  VIEWER
+  VIEWER,
 } from "../../../../../config/contanst";
 import { CustomFlowbiteTheme, ToggleSwitch } from "flowbite-react";
 import { useFormContext } from "react-hook-form";
 import { FormState } from "../../../../../types/form";
 import { useEffect, useState } from "react";
-
 
 const toggleSwitchTheme: CustomFlowbiteTheme["toggleSwitch"] = {
   root: {

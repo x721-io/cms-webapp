@@ -31,8 +31,7 @@ const Banner = () => {
               .filter((role: string) => role !== VIEWER)
               .map(
                 (word: string) =>
-                  word.charAt(0).toUpperCase() +
-                  word.slice(1).toLowerCase()
+                  word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
               )
               .join(" ")}
         </p>

@@ -62,8 +62,7 @@ export const useFetchRoundList = (filters: APIParams.FetchRounds) => {
       ...filters,
       page: index + 1,
     }),
-    (params) =>
-      api.fetchRounds(sanitizeObject(params) as APIParams.FetchRounds)
+    (params) => api.fetchRounds(sanitizeObject(params) as APIParams.FetchRounds)
   );
 };
 
@@ -77,7 +76,7 @@ export const useFetchAccounts = (filters: APIParams.FetchAccounts) => {
     (params) =>
       api.fetchAccounts(sanitizeObject(params) as APIParams.FetchAccounts)
   );
-}
+};
 
 export const useInfiniteScroll = ({
   data,

@@ -4,14 +4,11 @@ import { APIParams } from "../services/api/types";
 import useAccountStore from "../store/account/store";
 import useAuthStore from "../store/auth/store";
 
-
 export const useAccount = () => {
   const api = useMarketplaceApi();
   const { credentials } = useAuthStore();
   const bearerToken = credentials?.accessToken;
   const { setAccountProfile } = useAccountStore();
-
-
 
   const onUpdateAccount = useCallback(
     async (params: APIParams.UpdateAccount) => {
@@ -23,7 +20,7 @@ export const useAccount = () => {
   );
 
   const onUpdateRoles = useCallback(
-    async (params : APIParams.UpdateRoles) => {
+    async (params: APIParams.UpdateRoles) => {
       if (!bearerToken) return;
       await api.updateRoles(params);
     },
@@ -36,6 +33,6 @@ export const useAccount = () => {
   return {
     onCreateAccount,
     onUpdateAccount,
-    onUpdateRoles
+    onUpdateRoles,
   };
 };

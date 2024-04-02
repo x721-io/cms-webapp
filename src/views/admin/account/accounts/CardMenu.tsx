@@ -7,18 +7,18 @@ import ModalUpdateRoles from "./ModalUpdateRoles";
 import useAccountStore from "../../../../store/account/store";
 import { ADMINISTRATOR } from "../../../../config/contanst";
 
-
 interface Props {
   accountId: string;
   transparent?: boolean;
   roles: string[];
-
 }
 
-function CardMenu({transparent, roles  ,accountId}:Props) {
+function CardMenu({ transparent, roles, accountId }: Props) {
   const [open, setOpen] = React.useState(false);
   const [showModal, setShowModal] = useState(false);
-  const accountRoles = useAccountStore((state) => state.accountProfile?.roles || []);
+  const accountRoles = useAccountStore(
+    (state) => state.accountProfile?.roles || []
+  );
 
   const roleExists = (role: string) => {
     return accountRoles.includes(role);
@@ -41,32 +41,31 @@ function CardMenu({transparent, roles  ,accountId}:Props) {
                 <BsThreeDots className="h-4 w-4" />
               </button>
             }
-            animation={"origin-top-right transition-all duration-300 ease-in-out"}
+            animation={
+              "origin-top-right transition-all duration-300 ease-in-out"
+            }
             classNames={`${transparent ? "top-8" : "top-11"} right-0 w-max`}
             children={
               <div className="z-50 w-max rounded-xl bg-white px-4 py-3 text-sm shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
                 <p className="mt-2 flex cursor-pointer items-center gap-2 pt-1 text-gray-600 hover:font-medium hover:text-black">
-            <span>
-              <AiFillEdit />
-            </span>
-                  <button onClick={()=> setShowModal(true)}>
-                    Edit Roles
-                  </button>
+                  <span>
+                    <AiFillEdit />
+                  </span>
+                  <button onClick={() => setShowModal(true)}>Edit Roles</button>
                 </p>
 
-
                 <p className="mt-2 flex cursor-pointer items-center gap-2 pt-1 text-gray-600 hover:font-medium hover:text-black">
-            <span>
-              <MdPassword />
-            </span>
-                  <button onClick={()=> setShowModal(true)}>
+                  <span>
+                    <MdPassword />
+                  </span>
+                  <button onClick={() => setShowModal(true)}>
                     Reset Password
                   </button>
                 </p>
                 <p className="hover:text-red mt-2 flex cursor-pointer items-center gap-2 pt-1 text-red-600 hover:font-medium">
-            <span>
-              <MdRemove />
-            </span>
+                  <span>
+                    <MdRemove />
+                  </span>
                   Remove
                 </p>
               </div>
@@ -80,8 +79,7 @@ function CardMenu({transparent, roles  ,accountId}:Props) {
           />
         </div>
       )}
-  </>
-
+    </>
   );
 }
 

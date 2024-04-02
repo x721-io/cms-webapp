@@ -119,10 +119,10 @@ export namespace APIParams {
   }
 
   export interface UpdateRound {
-    id?:  string,
-    name?: string,
-    type?: string,
-    description?: string
+    id?: string;
+    name?: string;
+    type?: string;
+    description?: string;
   }
 }
 
