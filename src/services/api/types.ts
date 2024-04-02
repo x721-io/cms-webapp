@@ -129,10 +129,12 @@ export namespace APIParams {
 /********** =========== API Response types ========== ***********/
 export namespace APIResponse {
   export type FetchProjects = Project[];
+
   export interface Snapshot {
     stakingTotal: string;
     lastDateRecord: Date;
   }
+
   export interface Pagination {
     page: number;
     limit: number;
@@ -143,10 +145,12 @@ export namespace APIResponse {
     data: NFT[];
     paging: Pagination;
   }
+
   export interface FetchCollections {
     data: Collection[];
     paging: Pagination;
   }
+
   export interface Login {
     accessToken: string;
     accessTokenExpire: number;
@@ -173,6 +177,7 @@ export namespace APIResponse {
       floorPrice: string;
     };
   }
+
   export interface UsersData {
     data: User[];
     paging: Pagination;
@@ -202,5 +207,4 @@ export namespace APIResponse {
   }
 
   export type AccountOverview = Account;
-
 }
