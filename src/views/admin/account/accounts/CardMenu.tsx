@@ -3,9 +3,9 @@ import { AiFillEdit } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import Dropdown from "../../../../components/dropdown";
 import { MdPassword, MdRemove } from "react-icons/md";
-import ModalUpdateRoles from "./ModalUpdateRoles";
 import useAccountStore from "../../../../store/account/store";
 import { ADMINISTRATOR } from "../../../../config/contanst";
+import UpdateRolesModal from "./UpdateRolesModal";
 
 interface Props {
   accountId: string;
@@ -71,7 +71,7 @@ function CardMenu({ transparent, roles, accountId }: Props) {
               </div>
             }
           />
-          <ModalUpdateRoles
+          <UpdateRolesModal
             accountId={accountId}
             roles={roles}
             show={showModal}

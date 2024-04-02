@@ -18,7 +18,7 @@ const modalTheme: CustomFlowbiteTheme["modal"] = {
   },
 };
 
-export default function ModalUpdateRoles({
+export default function UpdateRolesModal({
   onClose,
   show,
   roles,
