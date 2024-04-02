@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
-import Dropdown from "../../../../components/dropdown";
+import Dropdown from "../../../../../components/dropdown";
 import { MdPassword, MdRemove } from "react-icons/md";
-import useAccountStore from "../../../../store/account/store";
-import { ADMINISTRATOR } from "../../../../config/contanst";
+import useAccountStore from "../../../../../store/account/store";
+import { ADMINISTRATOR } from "../../../../../config/contanst";
 import UpdateRolesModal from "./UpdateRolesModal";
+import ResetPasswordModal from "./ResetPasswordModal";
 
 interface Props {
   accountId: string;
@@ -15,7 +16,9 @@ interface Props {
 
 function CardMenu({ transparent, roles, accountId }: Props) {
   const [open, setOpen] = React.useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showUpdateRolesModal, setShoUpdateRolesModal] = useState(false);
+  const [showResetPasswordModal, setShoResetPasswordModal] = useState(false);
+
   const accountRoles = useAccountStore(
     (state) => state.accountProfile?.roles || []
   );
@@ -51,14 +54,14 @@ function CardMenu({ transparent, roles, accountId }: Props) {
                   <span>
                     <AiFillEdit />
                   </span>
-                  <button onClick={() => setShowModal(true)}>Edit Roles</button>
+                  <button onClick={() => setShoUpdateRolesModal(true)}>Edit Roles</button>
                 </p>
 
                 <p className="mt-2 flex cursor-pointer items-center gap-2 pt-1 text-gray-600 hover:font-medium hover:text-black">
                   <span>
                     <MdPassword />
                   </span>
-                  <button onClick={() => setShowModal(true)}>
+                  <button onClick={() => setShoResetPasswordModal(true)}>
                     Reset Password
                   </button>
                 </p>
@@ -74,8 +77,13 @@ function CardMenu({ transparent, roles, accountId }: Props) {
           <UpdateRolesModal
             accountId={accountId}
             roles={roles}
-            show={showModal}
-            onClose={() => setShowModal(false)}
+            show={showUpdateRolesModal}
+            onClose={() => setShoUpdateRolesModal(false)}
+          />
+          <ResetPasswordModal
+            accountId={accountId}
+            show={showResetPasswordModal}
+            onClose={() => setShoResetPasswordModal(false)}
           />
         </div>
       )}

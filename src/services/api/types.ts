@@ -124,6 +124,11 @@ export namespace APIParams {
     type?: string;
     description?: string;
   }
+
+  export interface ResetPassword {
+    id: string;
+    newPassword: string;
+  }
 }
 
 /********** =========== API Response types ========== ***********/

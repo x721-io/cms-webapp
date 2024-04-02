@@ -30,9 +30,13 @@ export const useAccount = () => {
   const onCreateAccount = (params: APIParams.CreateAccount) =>
     api.createAccount(params);
 
+  const onResetPassword = (params: APIParams.ResetPassword) =>
+    api.resetPassword(params);
+
   return {
     onCreateAccount,
     onUpdateAccount,
     onUpdateRoles,
+    onResetPassword
   };
 };

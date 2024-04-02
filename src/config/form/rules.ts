@@ -50,6 +50,18 @@ export const formRulesAccount = {
   },
 };
 
+export const formRulesResetPassword = {
+  password: {
+    required: "Please input password",
+    pattern: { value: passwordRegex, message: "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character" },
+  },
+  confirmPassword: {
+    required: "Please input confirm password",
+    pattern: { message: "Passwords do not match" },
+  }
+
+};
+
 // Create NFT
 export const formRulesUploadFile = {
   avatar: {

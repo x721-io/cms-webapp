@@ -1,6 +1,6 @@
 import { CustomFlowbiteTheme, Modal, ModalProps } from "flowbite-react";
 import React from "react";
-import UpdatePermission from "../../../../components/permission/Permission";
+import UpdatePermission from "../../../../../components/permission/Permission";
 
 interface Props extends ModalProps {
   roles: string[];
