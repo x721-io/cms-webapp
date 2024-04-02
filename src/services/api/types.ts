@@ -1,3 +1,4 @@
+import { Address } from "wagmi";
 import {
   Account,
   AssetType,
@@ -5,6 +6,7 @@ import {
   NFT,
   User,
 } from "../../types/entitites";
+import { Project, Round, RoundStatus } from "../../types/launchpad";
 
 /********** =========== Queries & Params for Api call ========== ***********/
 export namespace APIParams {
@@ -44,6 +46,10 @@ export namespace APIParams {
     orderBy?: string;
   }
 
+  export interface FetchRounds extends PaginationParams {
+    name?: string;
+  }
+
   export interface CreateAccount {
     avatar?: string;
     password: string;
@@ -53,6 +59,12 @@ export namespace APIParams {
     telegramLink?: string;
     phone?: string;
     roles: string[];
+  }
+
+  export interface CreateRound {
+    name?: string;
+    type: string;
+    description?: string;
   }
 
   export interface UpdateAccount {
@@ -87,10 +99,40 @@ export namespace APIParams {
     id: string;
     roles: string[];
   }
+
+  export interface FetchProjects {
+    mode?: RoundStatus;
+  }
+
+  export interface SubscribeRoundZero {
+    projectId: string;
+    walletAddress: Address;
+  }
+
+  export interface FetchSnapshot {
+    userId: Address;
+    projectId: string | string[];
+  }
+  export interface CrawlNFTInfo {
+    collectionAddress: Address;
+    txCreation: Address;
+  }
+
+  export interface UpdateRound {
+    id?:  string,
+    name?: string,
+    type?: string,
+    description?: string
+  }
 }
 
 /********** =========== API Response types ========== ***********/
 export namespace APIResponse {
+  export type FetchProjects = Project[];
+  export interface Snapshot {
+    stakingTotal: string;
+    lastDateRecord: Date;
+  }
   export interface Pagination {
     page: number;
     limit: number;
@@ -141,6 +183,11 @@ export namespace APIResponse {
     paging: Pagination;
   }
 
+  export interface RoundData {
+    data: Round[];
+    paging: Pagination;
+  }
+
   export interface UploadImage {
     fileHashes: string[];
   }
@@ -149,5 +196,11 @@ export namespace APIResponse {
     roles: string[];
   }
 
+  export interface FetchRounds {
+    data: Round[];
+    paging: Pagination;
+  }
+
   export type AccountOverview = Account;
+
 }

@@ -13,6 +13,11 @@ const marketplaceApi = axios.create({
   ...BASE_REQUEST_OPTIONS,
 });
 
+const launchpadAPI = axios.create({
+  baseURL: BASE_API_URL,
+  ...BASE_REQUEST_OPTIONS,
+});
+
 marketplaceApi.interceptors.response.use(
   (response) => {
     return response.data;
@@ -22,4 +27,13 @@ marketplaceApi.interceptors.response.use(
   }
 );
 
-export { marketplaceApi };
+launchpadAPI.interceptors.response.use(
+  (response) => {
+    return response.data;
+  },
+  (error) => {
+    return Promise.reject(error.response.data);
+  },
+);
+
+export { marketplaceApi, launchpadAPI };

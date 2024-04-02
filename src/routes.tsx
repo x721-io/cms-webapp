@@ -5,6 +5,7 @@ import MainDashboard from "./views/admin/AdminDashboard";
 import Profile from "./views/admin/profile";
 import CreateAccount from "./views/admin/account/create";
 import Marketplace from "./views/admin/marketplace/Marketplace";
+import LaunchpadPage from "./views/admin/launchpad/LaunchpadPage";
 import AccountDetail from "./views/admin/account/accountDetail";
 import Accounts from "./views/admin/account/accounts";
 
@@ -28,7 +29,7 @@ const ROUTES: RoutesType[] = [
     layout: "/admin",
     icon: <MdBarChart className="h-6 w-6" />,
     path: "launchpad",
-    component: <></>,
+    component: <LaunchpadPage />,
   },
   {
     name: "Profile",

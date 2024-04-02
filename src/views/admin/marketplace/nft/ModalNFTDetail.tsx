@@ -17,8 +17,6 @@ const modalTheme: CustomFlowbiteTheme["modal"] = {
 };
 
 export default function ModalNFTDetail({ onClose, show, item }: Props) {
-  console.log("item: ", item);
-
   return (
     <Modal
       theme={modalTheme}
