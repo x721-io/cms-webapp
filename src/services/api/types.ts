@@ -66,6 +66,7 @@ export namespace APIParams {
     type: string;
     description?: string;
   }
+
   export interface UpdateAccount {
     username: string;
     email: string;
@@ -94,6 +95,11 @@ export namespace APIParams {
     isVerified?: boolean;
   }
 
+  export interface UpdateRoles {
+    id: string;
+    roles: string[];
+  }
+
   export interface FetchProjects {
     mode?: RoundStatus;
   }
@@ -113,20 +119,22 @@ export namespace APIParams {
   }
 
   export interface UpdateRound {
-    id?:  string,
-    name?: string,
-    type?: string,
-    description?: string
+    id?: string;
+    name?: string;
+    type?: string;
+    description?: string;
   }
 }
 
 /********** =========== API Response types ========== ***********/
 export namespace APIResponse {
   export type FetchProjects = Project[];
+
   export interface Snapshot {
     stakingTotal: string;
     lastDateRecord: Date;
   }
+
   export interface Pagination {
     page: number;
     limit: number;
@@ -137,10 +145,12 @@ export namespace APIResponse {
     data: NFT[];
     paging: Pagination;
   }
+
   export interface FetchCollections {
     data: Collection[];
     paging: Pagination;
   }
+
   export interface Login {
     accessToken: string;
     accessTokenExpire: number;
@@ -167,6 +177,7 @@ export namespace APIResponse {
       floorPrice: string;
     };
   }
+
   export interface UsersData {
     data: User[];
     paging: Pagination;
@@ -186,9 +197,14 @@ export namespace APIResponse {
     fileHashes: string[];
   }
 
+  export interface Roles {
+    roles: string[];
+  }
+
   export interface FetchRounds {
     data: Round[];
     paging: Pagination;
   }
+
   export type AccountOverview = Account;
 }

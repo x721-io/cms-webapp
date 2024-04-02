@@ -35,6 +35,7 @@ export namespace FormState {
   }
 
   export interface UpdateRoles {
+    id: string;
     roles: string[];
   }
 

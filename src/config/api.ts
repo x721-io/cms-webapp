@@ -19,10 +19,12 @@ export const API_ENDPOINTS = {
   NFT_CRAWL_INFO: "/nft/crawl-nft-info",
   SNAPSHOT: "/user/projects",
 
-  SEARCH_ROUND:"/cms/launchpad/search-round",
-  CREATE_ROUND:"/cms/launchpad/create-round",
-  UPDATE_ROUND:"/cms/launchpad/update-round",
-  DELETE_ROUND:"/cms/launchpad/round",
+  SEARCH_ROUND: "/cms/launchpad/search-round",
+  CREATE_ROUND: "/cms/launchpad/create-round",
+  UPDATE_ROUND: "/cms/launchpad/update-round",
+  DELETE_ROUND: "/cms/launchpad/round",
   ACCOUNT_DETAIL: "/cms/account/get-detail",
   UPDATE_ACCOUNT: "/cms/update-account",
+  UPDATE_ROLES: "/cms/account/update-roles",
+  ACCOUNT_ROLES: "/cms/account/get-roles",
 };

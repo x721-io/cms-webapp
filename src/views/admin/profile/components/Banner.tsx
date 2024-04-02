@@ -1,8 +1,13 @@
 import avatar from "../../../../assets/img/avatars/avatar11.png";
 import banner from "../../../../assets/img/profile/banner.png";
 import Card from "../../../../components/card";
+import useAccountStore from "../../../../store/account/store";
+import { VIEWER } from "../../../../config/contanst";
 
 const Banner = () => {
+  const accountRoles = useAccountStore((state) => state.accountProfile?.roles);
+
+  console.log(accountRoles);
   return (
     <Card extra={"items-center w-full h-full p-[16px] bg-cover"}>
       {/* Background and profile */}
@@ -20,7 +25,16 @@ const Banner = () => {
         <h4 className="text-xl font-bold text-navy-700 dark:text-white">
           Adela Parkson
         </h4>
-        <p className="text-base font-normal text-gray-600">Product Manager</p>
+        <p className="text-base font-normal text-gray-600">
+          {accountRoles &&
+            accountRoles
+              .filter((role: string) => role !== VIEWER)
+              .map(
+                (word: string) =>
+                  word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+              )
+              .join(" ")}
+        </p>
       </div>
 
       {/* Post followers */}

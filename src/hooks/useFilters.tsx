@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { APIParams } from "../services/api/types";
 
-
 export const useRoundFilters = (
   activeFilters: APIParams.FetchRounds,
-  onApplyFilters?: (filters: APIParams.FetchRounds) => void,
+  onApplyFilters?: (filters: APIParams.FetchRounds) => void
 ) => {
   const [localFilters, setLocalFilters] =
     useState<APIParams.FetchRounds>(activeFilters);
@@ -18,10 +17,8 @@ export const useRoundFilters = (
     if (updateOnChange) {
       onApplyFilters?.(newFilters);
     }
-    console.log('newFilters: ', newFilters);
-
-  };  
-  
+    console.log("newFilters: ", newFilters);
+  };
 
   useEffect(() => {
     setLocalFilters(activeFilters);

@@ -33,7 +33,7 @@ launchpadAPI.interceptors.response.use(
   },
   (error) => {
     return Promise.reject(error.response.data);
-  },
+  }
 );
 
 export { marketplaceApi, launchpadAPI };

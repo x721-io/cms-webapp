@@ -17,7 +17,7 @@ export const formRulesLogin = {
   },
 };
 
-// Update Round 
+// Update Round
 export const formRulesRound = {
   id: {},
   name: {
@@ -27,11 +27,11 @@ export const formRulesRound = {
     required: "Please input type round",
   },
   description: {
-    required: "Please input description"
-  }
+    required: "Please input description",
+  },
 };
 
-// Create Round 
+// Create Round
 export const formRulesCreateRound = {
   name: {
     required: "Please input round name",
@@ -40,6 +40,6 @@ export const formRulesCreateRound = {
     required: "Please input type round",
   },
   description: {
-    required: "Please input description"
-  }
+    required: "Please input description",
+  },
 };
