@@ -108,6 +108,9 @@ export const useMarketplaceApi = () => {
       updateRoles: (params: APIParams.UpdateRoles) =>
         marketplaceApi.put(API_ENDPOINTS.UPDATE_ROLES, params, authHeader()),
 
+      resetPassword: (params: APIParams.ResetPassword) =>
+        marketplaceApi.put(API_ENDPOINTS.RESET_PASSWORD, params, authHeader()),
+
       fetchRoles: (id: string): Promise<APIResponse.Roles> =>
         marketplaceApi.get(
           API_ENDPOINTS.ACCOUNT_ROLES + `/${id}`,

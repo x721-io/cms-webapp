@@ -6,8 +6,6 @@ const DEFAULT_STATE: AccountFilterState = {
   showFilters: false,
   filters: {
     search: "",
-    page: 1,
-    limit: 20,
   },
 };
 

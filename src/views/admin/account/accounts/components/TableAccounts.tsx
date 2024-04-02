@@ -1,15 +1,15 @@
 import {
   useFetchAccounts,
   useInfiniteScroll,
-} from "../../../../hooks/useInfiniteScroll";
-import { useAccountFilterStore } from "../../../../store/filters/accounts/store";
+} from "../../../../../hooks/useInfiniteScroll";
+import { useAccountFilterStore } from "../../../../../store/filters/accounts/store";
 import { Spinner } from "flowbite-react";
-import Text from "../../../../components/Text";
-import { getUserAvatarImage } from "../../../../utils/string";
+import Text from "../../../../../components/Text";
+import { getUserAvatarImage } from "../../../../../utils/string";
 import { useState } from "react";
-import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
+import { useMarketplaceApi } from "../../../../../hooks/useMarketplaceApi";
 import CardMenu from "./CardMenu";
-import { VIEWER } from "../../../../config/contanst";
+import { VIEWER } from "../../../../../config/contanst";
 
 type CheckboxState = Record<string, boolean>;
 

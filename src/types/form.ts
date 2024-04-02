@@ -42,4 +42,10 @@ export namespace FormState {
   export interface UpdateAvatar {
     avatar: Blob[];
   }
+
+  export interface ResetPassword {
+    id: string;
+    newPassword: string;
+    confirmPassword: string;
+  }
 }

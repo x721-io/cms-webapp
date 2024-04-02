@@ -1,6 +1,5 @@
 import Banner from "./components/Banner";
 import AccountInfo from "./components/AccountInfo";
-import Permission from "../../../components/permission/Permission";
 
 const ProfileOverview = () => {
   return (
@@ -17,9 +16,6 @@ const ProfileOverview = () => {
         <div className="col-span-12 lg:!mb-0">
           <AccountInfo />
         </div>
-        {/*<div className="col-span-5 lg:col-span-12 lg:mb-0 3xl:!col-span-3">*/}
-        {/*  <Permission />*/}
-        {/*</div>*/}
       </div>
     </div>
   );
