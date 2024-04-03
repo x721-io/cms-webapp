@@ -17,7 +17,6 @@ export const useRoundFilters = (
     if (updateOnChange) {
       onApplyFilters?.(newFilters);
     }
-    console.log("newFilters: ", newFilters);
   };
 
   useEffect(() => {

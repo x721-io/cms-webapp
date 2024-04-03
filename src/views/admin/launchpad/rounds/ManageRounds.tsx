@@ -32,7 +32,6 @@ export default function ManageRounds() {
     setSelectedRound(item);
     setShowModalRoundDetail(true);
   };
-  console.log("rounds: ", rounds.concatenatedData);
 
   const handleDeleteRound = async (item: any) => {
     const toastId = toast.loading("Creating Round...", { type: "info" });
@@ -56,10 +55,6 @@ export default function ManageRounds() {
       });
     }
   };
-
-  useEffect(() => {
-    console.log("data: ", data);
-  }, [data]);
 
   if (isLoading) {
     return (

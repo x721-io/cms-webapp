@@ -7,6 +7,7 @@ export namespace FormState {
   export interface CreateAccount {
     avatar: Blob[];
     username: string;
+    fullName: string;
     password: string;
     email: string;
     twitterLink?: string;
@@ -28,6 +29,7 @@ export namespace FormState {
   }
   export interface UpdateAccountInfo {
     username: string;
+    fullName: string;
     email: string;
     twitterLink?: string;
     telegramLink?: string;

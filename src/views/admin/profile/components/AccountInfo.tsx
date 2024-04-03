@@ -29,6 +29,7 @@ const AccountInfo = () => {
       twitterLink: accountProfile?.twitterLink,
       telegramLink: accountProfile?.telegramLink,
       phone: accountProfile?.phone,
+      fullName: accountProfile?.fullName
     },
   });
 
@@ -38,7 +39,7 @@ const AccountInfo = () => {
   };
 
   const onSubmitProfile = async (params: FormState.UpdateAccountInfo) => {
-    const toastId = toast.loading("Uploading Profile...", { type: "info" });
+    const toastId = toast.loading("Updating Profile...", { type: "info" });
 
     try {
       await onUpdateAccount(params);
@@ -92,21 +93,21 @@ const AccountInfo = () => {
             </div>
           </div>
 
-          {/*<div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">*/}
-          {/*  <label className="text-primary mb-2 block font-semibold">*/}
-          {/*    Password*/}
-          {/*  </label>*/}
-          {/*  <div className="w-full">*/}
-          {/*    <Input*/}
-          {/*      scale="sm"*/}
-          {/*      className="min-w-0"*/}
-          {/*      placeholder="Minimum 8 characters"*/}
-          {/*      error={!!errors.username}*/}
-          {/*      type="text"*/}
-          {/*      // register={register("password", formRulesAccount.password)}*/}
-          {/*    />*/}
-          {/*  </div>*/}
-          {/*</div>*/}
+          <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+            <label className="text-primary mb-2 block font-semibold">
+              Full Name
+            </label>
+            <div className="w-full">
+              <Input
+                scale="sm"
+                className="min-w-0"
+                placeholder="Minimum 8 characters"
+                error={!!errors.fullName}
+                type="text"
+                register={register("fullName", formRulesAccount.fullName)}
+              />
+            </div>
+          </div>
 
           <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
             <label className="text-primary mb-2 block font-semibold">
@@ -172,23 +173,24 @@ const AccountInfo = () => {
             </div>
           </div>
         </div>
+        {isDirty ? (
+          <div className="flex w-full items-center justify-center pt-5 tablet:w-auto desktop:w-auto">
+            <Button
+              type="submit"
+              scale="sm"
+              variant="outlined"
+              disabled={!isDirty}
+              className="w-full tablet:w-auto desktop:w-auto flex items-center hover:bg-brand-600 active:bg-brand-700 bg-brand-400 text-white"
+            >
+              Update Account
+            </Button>
+          </div>
+        ) : (
+          <></>
+        )}
+
       </form>
 
-      {isDirty ? (
-        <div className="flex w-full items-center justify-center pt-5 tablet:w-auto desktop:w-auto">
-          <Button
-            type="submit"
-            scale="sm"
-            variant="outlined"
-            disabled={!isDirty}
-            className="w-full tablet:w-auto desktop:w-auto"
-          >
-            Save Account
-          </Button>
-        </div>
-      ) : (
-        <></>
-      )}
 
       <FormValidationMessages errors={errors} />
     </Card>

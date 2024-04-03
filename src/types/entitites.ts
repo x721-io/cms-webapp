@@ -32,6 +32,7 @@ export interface User {
 export interface Account {
   id: string;
   email: string;
+  fullName: string;
   avatar?: string;
   username: string;
   createdAt: string;

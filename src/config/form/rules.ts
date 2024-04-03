@@ -38,6 +38,10 @@ export const formRulesAccount = {
     required: "Please input password",
     pattern: { value: passwordRegex, message: "Invalid password" },
   },
+  fullName: {
+    required: "Please input full name",
+    pattern: { value: nameRegex, message: "Invalid name" },
+  },
   email: {
     required: "Please input your email",
     pattern: { value: emailRegex, message: "Invalid email address" },

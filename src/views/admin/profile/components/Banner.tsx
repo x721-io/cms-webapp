@@ -5,9 +5,8 @@ import useAccountStore from "../../../../store/account/store";
 import { VIEWER } from "../../../../config/contanst";
 
 const Banner = () => {
-  const accountRoles = useAccountStore((state) => state.accountProfile?.roles);
+  const account = useAccountStore((state) => state.accountProfile);
 
-  console.log(accountRoles);
   return (
     <Card extra={"items-center w-full h-full p-[16px] bg-cover"}>
       {/* Background and profile */}
@@ -23,15 +22,17 @@ const Banner = () => {
       {/* Name and position */}
       <div className="mt-16 flex flex-col items-center">
         <h4 className="text-xl font-bold text-navy-700 dark:text-white">
-          Adela Parkson
+          {account?.fullName ? account?.fullName : account?.username}
         </h4>
         <p className="text-base font-normal text-gray-600">
-          {accountRoles &&
-            accountRoles
+          {account?.roles &&
+            account?.roles
               .filter((role: string) => role !== VIEWER)
-              .map(
-                (word: string) =>
-                  word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+              .map((role: string) =>
+                role
+                  .split("_")
+                  .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                  .join(" ")
               )
               .join(" ")}
         </p>
