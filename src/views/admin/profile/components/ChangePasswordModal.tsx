@@ -1,19 +1,19 @@
 import { CustomFlowbiteTheme, Modal, ModalProps } from "flowbite-react";
 import React, { useState } from "react";
-import Card from "../../../../../components/card";
-import Input from "../../../../../components/fields/InputField";
-import { formRulesResetPassword } from "../../../../../config/form/rules";
 import { useForm } from "react-hook-form";
-import { FormState } from "../../../../../types/form";
-import Button from "../../../../../components/button";
 import { toast } from "react-toastify";
-import { useAccount } from "../../../../../hooks/useAccount";
-import FormValidationMessages from "../../../../../components/Form/ValidationMessages";
-import EyeIcon from "../../../../../assets/svg/EyeIcon";
-import EyeOffIcon from "../../../../../assets/svg/EyeOffIcon";
+import { useAccount } from "../../../../hooks/useAccount";
+import { FormState } from "../../../../types/form";
+import Card from "../../../../components/card";
+import { formRulesResetPassword } from "../../../../config/form/rules";
+import EyeIcon from "../../../../assets/svg/EyeIcon";
+import EyeOffIcon from "../../../../assets/svg/EyeOffIcon";
+import Input from "../../../../components/fields/InputField";
+import Button from "../../../../components/button";
+import FormValidationMessages from "../../../../components/Form/ValidationMessages";
 
 interface Props extends ModalProps {
-  accountId: string;
+  accountId?: string;
 }
 
 const modalTheme: CustomFlowbiteTheme["modal"] = {
@@ -27,19 +27,15 @@ const modalTheme: CustomFlowbiteTheme["modal"] = {
   },
 };
 
-export default function ResetPasswordModal({
-  onClose,
-  show,
-  accountId,
-}: Props) {
-  const { onResetPassword } = useAccount();
+export default function ResetPasswordModal({ onClose, show }: Props) {
+  const { onChangePassword } = useAccount();
   const {
     register,
     handleSubmit,
     watch,
     reset,
     formState: { isDirty, errors },
-  } = useForm<FormState.ResetPassword>({ defaultValues: { id: accountId } });
+  } = useForm<FormState.ChangePassword>();
   const newPassword = watch("newPassword");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -47,20 +43,20 @@ export default function ResetPasswordModal({
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const onSubmitReset = async ({
+  const onSubmitChange = async ({
     newPassword,
-    id,
-  }: FormState.ResetPassword) => {
-    const toastId = toast.loading("Reset Password...", { type: "info" });
+    currentPassword,
+  }: FormState.ChangePassword) => {
+    const toastId = toast.loading("Change Password...", { type: "info" });
 
     try {
       const params = {
-        id: id,
+        currentPassword: currentPassword,
         newPassword: newPassword,
       };
-      await onResetPassword(params);
+      await onChangePassword(params);
       toast.update(toastId, {
-        render: "Reset Password successfully",
+        render: "Change Password successfully",
         type: "success",
         isLoading: false,
         autoClose: 1000,
@@ -94,10 +90,39 @@ export default function ResetPasswordModal({
       <Modal.Header className="p-4">Reset Password</Modal.Header>
       <Modal.Body className="p-4">
         <div className="flex flex-col items-center justify-center gap-4">
-          <form className="w-full" onSubmit={handleSubmit(onSubmitReset)}>
+          <form className="w-full" onSubmit={handleSubmit(onSubmitChange)}>
             <Card extra={"w-full h-full p-3"}>
               {/* Cards */}
               <div className="flex w-full flex-col gap-4 px-0 tablet:grid tablet:grid-cols-2 tablet:px-2 desktop:grid desktop:grid-cols-1">
+                <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-2 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                  <label className="text-primary mb-2 block font-semibold">
+                    Current Password
+                  </label>
+                  <div className="w-full">
+                    <Input
+                      scale="sm"
+                      className="min-w-0"
+                      placeholder="Minimum 8 characters"
+                      error={!!errors.currentPassword}
+                      register={register(
+                        "currentPassword",
+                        formRulesResetPassword.currentPassword
+                      )}
+                      type={isPasswordVisible ? "text" : "password"}
+                      appendIcon={
+                        isPasswordVisible ? (
+                          <div onClick={togglePasswordVisibility}>
+                            <EyeIcon />
+                          </div>
+                        ) : (
+                          <div onClick={togglePasswordVisibility}>
+                            <EyeOffIcon />
+                          </div>
+                        )
+                      }
+                    />
+                  </div>
+                </div>
                 <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-2 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
                   <label className="text-primary mb-2 block font-semibold">
                     New Password
