@@ -48,4 +48,10 @@ export namespace FormState {
     newPassword: string;
     confirmPassword: string;
   }
+
+  export interface ChangePassword {
+    currentPassword: string;
+    newPassword: string;
+    confirmPassword: string;
+  }
 }

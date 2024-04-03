@@ -129,6 +129,11 @@ export namespace APIParams {
     id: string;
     newPassword: string;
   }
+
+  export interface ChangePassword {
+    currentPassword: string;
+    newPassword: string;
+  }
 }
 
 /********** =========== API Response types ========== ***********/

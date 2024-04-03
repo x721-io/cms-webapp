@@ -4,6 +4,7 @@ import { APIParams } from "../services/api/types";
 import useAccountStore from "../store/account/store";
 import useAuthStore from "../store/auth/store";
 
+
 export const useAccount = () => {
   const api = useMarketplaceApi();
   const { credentials } = useAuthStore();
@@ -33,10 +34,14 @@ export const useAccount = () => {
   const onResetPassword = (params: APIParams.ResetPassword) =>
     api.resetPassword(params);
 
+  const onChangePassword = (params: APIParams.ChangePassword) =>
+    api.changePassword(params);
+
   return {
     onCreateAccount,
     onUpdateAccount,
     onUpdateRoles,
     onResetPassword,
+    onChangePassword
   };
 };

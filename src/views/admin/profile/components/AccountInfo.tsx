@@ -10,6 +10,7 @@ import useAccountStore from "../../../../store/account/store";
 import { useAccount } from "../../../../hooks/useAccount";
 import Button from "../../../../components/button";
 import { useNavigate } from "react-router-dom";
+import CardMenu from "./CardMenu";
 
 const AccountInfo = () => {
   const navigate = useNavigate();
@@ -63,15 +64,16 @@ const AccountInfo = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmitProfile)}>
       <Card extra={"w-full h-full p-3"}>
         {/* Header */}
-        <div className=" mt-2 w-full">
-          <h4 className="px-2 text-xl font-bold text-navy-700 dark:text-white">
+        <div className="px-3 pb-1 mt-1 w-full flex justify-between">
+          <h4 className=" text-xl font-bold text-navy-700 dark:text-white">
             Account Information
           </h4>
+          <CardMenu />
         </div>
         {/* Cards */}
+        <form onSubmit={handleSubmit(onSubmitProfile)}>
         <div className="flex flex-col gap-4 px-0 tablet:grid tablet:grid-cols-2 tablet:px-2 desktop:grid desktop:grid-cols-2">
           <div className="flex w-full flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
             <label className="text-primary mb-2 block font-semibold">
@@ -170,6 +172,8 @@ const AccountInfo = () => {
             </div>
           </div>
         </div>
+        </form>
+
         {isDirty ? (
           <div className="flex w-full items-center justify-center pt-5 tablet:w-auto desktop:w-auto">
             <Button
@@ -188,7 +192,6 @@ const AccountInfo = () => {
 
         <FormValidationMessages errors={errors} />
       </Card>
-    </form>
   );
 };
 
