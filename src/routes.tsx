@@ -5,9 +5,10 @@ import MainDashboard from "./views/admin/AdminDashboard";
 import Profile from "./views/admin/profile";
 import CreateAccount from "./views/admin/account/create";
 import Marketplace from "./views/admin/marketplace/Marketplace";
-import LaunchpadPage from "./views/admin/launchpad/LaunchpadPage";
 import AccountDetail from "./views/admin/account/accountDetail";
 import Accounts from "./views/admin/account/accounts";
+import Project from "./views/admin/launchpad/projects/Project";
+import CreateProject from "./views/admin/launchpad/projects/CreateProject";
 
 const ROUTES: RoutesType[] = [
   {
@@ -26,10 +27,20 @@ const ROUTES: RoutesType[] = [
   },
   {
     name: "Launchpad",
-    layout: "/admin",
     icon: <MdBarChart className="h-6 w-6" />,
-    path: "launchpad",
-    component: <LaunchpadPage />,
+    path: "",
+    links: [
+      {
+        name: "Create Project",
+        path: "create-project",
+        component: <CreateProject />,
+      },
+      {
+        name: "Projects",
+        path: "projects",
+        component: <Project />
+      },
+    ],
   },
   {
     name: "Profile",

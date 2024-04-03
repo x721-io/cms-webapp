@@ -50,6 +50,11 @@ export namespace APIParams {
     name?: string;
   }
 
+  export interface FetchProjects extends PaginationParams {
+    name?: string;
+    mode?: RoundStatus;
+  }
+
   export interface CreateAccount {
     avatar?: string;
     password: string;
@@ -94,10 +99,6 @@ export namespace APIParams {
     isVerified?: boolean;
   }
 
-  export interface FetchProjects {
-    mode?: RoundStatus;
-  }
-
   export interface SubscribeRoundZero {
     projectId: string;
     walletAddress: Address;
@@ -113,16 +114,62 @@ export namespace APIParams {
   }
 
   export interface UpdateRound {
-    id?:  string,
+    id?: string,
     name?: string,
     type?: string,
     description?: string
+  }
+
+  export interface CreateProject {
+    name?: string,
+    idOnchain?: string,
+    banner?: string,
+    description?: string,
+    organization?: string,
+    website?: string,
+    details?: [
+      {
+        key: string,
+        content: string,
+      }
+    ],
+    twitter?: string,
+    telegram?: string,
+    discord?: string,
+    facebook?: string,
+    instagram?: string,
+    logo?: string,
+    collectionId?: Address,
+    rounds: Round[]
+  }
+
+  export interface UpdateProject {
+    id?: string,
+    name?: string,
+    idOnchain?: string,
+    banner?: string,
+    description?: string,
+    organization?: string,
+    website?: string,
+    details?: [
+      {
+        key: string,
+        content: string,
+      }
+    ],
+    twitter?: string,
+    telegram?: string,
+    discord?: string,
+    facebook?: string,
+    instagram?: string,
+    logo?: string,
+    collectionId?: Address,
+    rounds?: Round[]
   }
 }
 
 /********** =========== API Response types ========== ***********/
 export namespace APIResponse {
-  export type FetchProjects = Project[];
   export interface Snapshot {
     stakingTotal: string;
     lastDateRecord: Date;
@@ -190,5 +237,22 @@ export namespace APIResponse {
     data: Round[];
     paging: Pagination;
   }
+
+  export interface FetchProjects {
+    data: Project[];
+    paging: Pagination;
+  }
+
+  export interface RoundData {
+    data: Round[];
+    paging: Pagination;
+  }
+
+  export interface ProjectData {
+    data: Project[];
+    paging: Pagination;
+  }
+
+
   export type AccountOverview = Account;
 }

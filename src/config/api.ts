@@ -23,6 +23,12 @@ export const API_ENDPOINTS = {
   CREATE_ROUND:"/cms/launchpad/create-round",
   UPDATE_ROUND:"/cms/launchpad/update-round",
   DELETE_ROUND:"/cms/launchpad/round",
+
+  SEARCH_PROJECT:"/cms/launchpad/search-project",
+  CREATE_PROJECT:"/cms/launchpad/create-project",
+  UPDATE_PROJECT:"/cms/launchpad/update-project",
+  DELETE_PROJECT:"",
+  
   ACCOUNT_DETAIL: "/cms/account/get-detail",
   UPDATE_ACCOUNT: "/cms/update-account",
 };

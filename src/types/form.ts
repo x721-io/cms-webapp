@@ -1,3 +1,5 @@
+import { Address } from "wagmi";
+
 export namespace FormState {
   export interface Login {
     username: string;
@@ -40,5 +42,24 @@ export namespace FormState {
 
   export interface UpdateAvatar {
     avatar: Blob[];
+  }
+
+  export interface UpdateProject {
+    name: string;
+    collection: string;
+    description: string;
+    discord: string;
+    facebook: string;
+    instagram: string;
+    twitter: string;
+    telegram: string;
+    address: Address;
+    banner: string;
+    organization: string;
+    logo: string;
+    collectionId: Address;
+  }
+  export interface CreateProject { 
+
   }
 }

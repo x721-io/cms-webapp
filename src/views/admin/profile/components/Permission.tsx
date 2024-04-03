@@ -1,10 +1,9 @@
 import { CustomFlowbiteTheme, ToggleSwitch } from "flowbite-react";
-import { useForm, useFormContext } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { useEffect } from "react";
 import { FormState } from "../../../../types/form";
 import { useAccount } from "../../../../hooks/useAccount";
 import Card from "../../../../components/card";
-import useAccountStore from "../../../../store/account/store";
 import {
   ADMIN_BLOG,
   ADMIN_COLLECTION,

@@ -7,7 +7,7 @@ import FormValidationMessages from "../../../../components/Form/ValidationMessag
 import { useLaunchpadApi } from "../../../../hooks/useLaunchpadApi";
 import { toast } from "react-toastify";
 import { APIParams } from "../../../../services/api/types";
-import { useRoundFilters } from "../../../../hooks/useFilters";
+import { useRoundFilterStore } from "../../../../store/filters/rounds/store";
 
 interface Props extends ModalProps {
     item: any;
@@ -44,15 +44,15 @@ export default function UpdateRound({ onClose, show, item, activeFilters, onAppl
     });
 
     const {
-        handleChange,
-    } = useRoundFilters(activeFilters, onApplyFilters);
+        updateFilters: updateRoundFilters,
+      } = useRoundFilterStore((state) => state);
 
     const onUpdateRound = async () => {
         const toastId = toast.loading("Uploading Round...", { type: "info" });
         const formData = getValues();
         try {
             await api.updateRound(formData);
-            handleChange(formData)
+            updateRoundFilters({name: formData?.name})
             toast.update(toastId, {
                 render: "Round updated successfully",
                 type: "success",

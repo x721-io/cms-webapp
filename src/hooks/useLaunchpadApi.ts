@@ -32,36 +32,27 @@ export const useLaunchpadApi = () => {
 
     updateRound: (params: APIParams.UpdateRound) =>
       launchpadAPI.put(API_ENDPOINTS.UPDATE_ROUND, params, authHeader()),
-      
+
     deleteRound: (roundId: string): Promise<void> => {
       return launchpadAPI.delete(API_ENDPOINTS.DELETE_ROUND + `/${roundId}`, authHeader());
     },
 
     fetchProjects: (
-      params?: APIParams.FetchProjects,
-    ): Promise<APIResponse.FetchProjects> => {
-      return launchpadAPI.get(API_ENDPOINTS.LAUNCHPAD + parseQueries(params));
-    },
-    fetchProjectById: (id: string): Promise<Project> => {
-      return launchpadAPI.get(API_ENDPOINTS.LAUNCHPAD + `/${id}`);
-    },
-    checkIsSubscribed: (params: APIParams.SubscribeRoundZero) => {
-      return launchpadAPI.get(
-        API_ENDPOINTS.CHECK_IS_SUBSCRIBED + parseQueries(params),
-      );
-    },
-    subscribeRoundZero: (params: APIParams.SubscribeRoundZero) => {
-      return launchpadAPI.post(API_ENDPOINTS.SUBSCRIBE_ROUND_ZERO, params);
-    },
-    fetchSnapshot: (
-      params: APIParams.FetchSnapshot,
-    ): Promise<APIResponse.Snapshot> => {
-      return launchpadAPI.get(API_ENDPOINTS.SNAPSHOT + parseQueries(params));
-    },
-    crawlNFTInfo: (params: APIParams.CrawlNFTInfo) => {
-      return launchpadAPI.get(
-        API_ENDPOINTS.NFT_CRAWL_INFO + parseQueries(params),
-      );
+      params: APIParams.FetchProjects
+    ): Promise<APIResponse.FetchProjects> =>
+      launchpadAPI.get(
+        API_ENDPOINTS.SEARCH_PROJECT + parseQueries(sanitizeObject({ ...params })), authHeader()),
+
+    createProjects: (
+      params: APIParams.CreateProject
+    ): Promise<APIResponse.ProjectData> =>
+      launchpadAPI.post(API_ENDPOINTS.CREATE_PROJECT, params, authHeader()),
+
+    updateProject: (params: APIParams.UpdateProject) =>
+      launchpadAPI.put(API_ENDPOINTS.UPDATE_PROJECT, params, authHeader()),
+
+    deleteProject: (roundId: string): Promise<void> => {
+      return launchpadAPI.delete(API_ENDPOINTS.DELETE_PROJECT + `/${roundId}`, authHeader());
     },
   };
 };

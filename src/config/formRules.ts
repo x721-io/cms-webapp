@@ -43,3 +43,46 @@ export const formRulesCreateRound = {
     required: "Please input description"
   }
 };
+
+// Update Round 
+export const formRulesUpdateProject = {
+  banner: {
+    required: "Please input banner",
+  },
+  name: {
+    required: "Please input name",
+  },
+  collection: {
+    required: "Please input collection",
+  },
+  description: {
+    required: "Please input description"
+  },
+  discord: {
+    required: "Please input total discord"
+  },
+  facebook: {
+    required: "Please input facebook",
+  },
+  instagram: {
+    required: "Please input instagram"
+  },
+  twitter: {
+    required: "Please input total twitter"
+  },
+  telegram: {
+    required: "Please input telegram",
+  },
+  address: {
+    required: "Please input address",
+  },
+  organization: {
+    required: "Please input organization"
+  },
+  collectionId: {
+    required: "Please input collectionId"
+  },
+  logo: {
+    required: "Please input logo"
+  }
+};

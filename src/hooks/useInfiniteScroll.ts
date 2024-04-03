@@ -67,6 +67,18 @@ export const useFetchRoundList = (filters: APIParams.FetchRounds) => {
   );
 };
 
+export const useFetchProjectList = (filters: APIParams.FetchProjects) => {
+  const api = useLaunchpadApi();
+  return useSWRInfinite(
+    (index) => ({
+      ...filters,
+      page: index + 1,
+    }),
+    (params) =>
+      api.fetchProjects(sanitizeObject(params) as APIParams.FetchRounds)
+  );
+};
+
 export const useFetchAccounts = (filters: APIParams.FetchAccounts) => {
   const api = useMarketplaceApi();
   return useSWRInfinite(
