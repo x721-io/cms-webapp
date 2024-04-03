@@ -27,10 +27,7 @@ const modalTheme: CustomFlowbiteTheme["modal"] = {
   },
 };
 
-export default function ResetPasswordModal({
-  onClose,
-  show,
-}: Props) {
+export default function ResetPasswordModal({ onClose, show }: Props) {
   const { onChangePassword } = useAccount();
   const {
     register,

@@ -64,16 +64,16 @@ const AccountInfo = () => {
   };
 
   return (
-      <Card extra={"w-full h-full p-3"}>
-        {/* Header */}
-        <div className="px-3 pb-1 mt-1 w-full flex justify-between">
-          <h4 className=" text-xl font-bold text-navy-700 dark:text-white">
-            Account Information
-          </h4>
-          <CardMenu />
-        </div>
-        {/* Cards */}
-        <form onSubmit={handleSubmit(onSubmitProfile)}>
+    <Card extra={"w-full h-full p-3"}>
+      {/* Header */}
+      <div className="mt-1 flex w-full justify-between px-3 pb-1">
+        <h4 className=" text-xl font-bold text-navy-700 dark:text-white">
+          Account Information
+        </h4>
+        <CardMenu />
+      </div>
+      {/* Cards */}
+      <form onSubmit={handleSubmit(onSubmitProfile)}>
         <div className="flex flex-col gap-4 px-0 tablet:grid tablet:grid-cols-2 tablet:px-2 desktop:grid desktop:grid-cols-2">
           <div className="flex w-full flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
             <label className="text-primary mb-2 block font-semibold">
@@ -172,26 +172,26 @@ const AccountInfo = () => {
             </div>
           </div>
         </div>
-        </form>
+      </form>
 
-        {isDirty ? (
-          <div className="flex w-full items-center justify-center pt-5 tablet:w-auto desktop:w-auto">
-            <Button
-              type="submit"
-              scale="sm"
-              variant="outlined"
-              disabled={!isDirty}
-              className="w-full tablet:w-auto desktop:w-auto"
-            >
-              Save Account
-            </Button>
-          </div>
-        ) : (
-          <></>
-        )}
+      {isDirty ? (
+        <div className="flex w-full items-center justify-center pt-5 tablet:w-auto desktop:w-auto">
+          <Button
+            type="submit"
+            scale="sm"
+            variant="outlined"
+            disabled={!isDirty}
+            className="w-full tablet:w-auto desktop:w-auto"
+          >
+            Save Account
+          </Button>
+        </div>
+      ) : (
+        <></>
+      )}
 
-        <FormValidationMessages errors={errors} />
-      </Card>
+      <FormValidationMessages errors={errors} />
+    </Card>
   );
 };
 

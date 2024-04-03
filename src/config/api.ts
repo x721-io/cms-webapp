@@ -27,5 +27,4 @@ export const API_ENDPOINTS = {
   ACCOUNT_ROLES: "/cms/account/get-roles",
   RESET_PASSWORD: "/cms/account/reset-password",
   CHANGE_PASSWORD: "/cms/account/update-password",
-
 };

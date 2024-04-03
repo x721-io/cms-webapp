@@ -61,7 +61,11 @@ export const formRulesResetPassword = {
   },
   currentPassword: {
     required: "Please input current password",
-    pattern: { value: passwordRegex, message: "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character" },
+    pattern: {
+      value: passwordRegex,
+      message:
+        "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+    },
   },
   confirmPassword: {
     required: "Please input confirm password",

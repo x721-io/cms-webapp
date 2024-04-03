@@ -12,7 +12,6 @@ import FormValidationMessages from "../../../../../components/Form/ValidationMes
 import EyeIcon from "../../../../../assets/svg/EyeIcon";
 import EyeOffIcon from "../../../../../assets/svg/EyeOffIcon";
 
-
 interface Props extends ModalProps {
   accountId: string;
 }
