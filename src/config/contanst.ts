@@ -16,3 +16,10 @@ export const ADMIN_MARKETPLACE = "ADMIN_MARKETPLACE";
 export const ADMIN_USER = "ADMIN_USER";
 export const VIEWER = "VIEWER";
 export const ADMINISTRATOR = "ADMINISTRATOR";
+
+export const TINYMCE_API_KEY = "2en91klyibcpg1ev0vv4ggbm2ya7ybfepmd0t3ddmj3jfvpf";
+export const TINYMCE_PLUGINS = "advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount";
+export const TINYMCE_TOOLBAR = "undo redo | styleselect | fontsizeselect| code | bold italic | alignleft aligncenter alignright alignjustify | outdent indent";
+
+
+

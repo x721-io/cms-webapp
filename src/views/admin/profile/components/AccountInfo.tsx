@@ -6,15 +6,16 @@ import FormValidationMessages from "../../../../components/Form/ValidationMessag
 import { FormState } from "../../../../types/form";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import useAccountStore from "../../../../store/account/store";
 import { useAccount } from "../../../../hooks/useAccount";
 import Button from "../../../../components/button";
 import { useNavigate } from "react-router-dom";
 import CardMenu from "./CardMenu";
+import useAuthStore from "../../../../store/auth/store";
+
 
 const AccountInfo = () => {
   const navigate = useNavigate();
-  const accountProfile = useAccountStore((state) => state.accountProfile);
+  const accountProfile = useAuthStore((state) => state.profile);
   const { onUpdateAccount } = useAccount();
 
   const {

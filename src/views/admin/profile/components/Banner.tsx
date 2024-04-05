@@ -1,11 +1,12 @@
 import avatar from "../../../../assets/img/avatars/avatar11.png";
 import banner from "../../../../assets/img/profile/banner.png";
 import Card from "../../../../components/card";
-import useAccountStore from "../../../../store/account/store";
 import { VIEWER } from "../../../../config/contanst";
+import useAuthStore from "../../../../store/auth/store";
+
 
 const Banner = () => {
-  const account = useAccountStore((state) => state.accountProfile);
+  const account = useAuthStore((state) => state.profile);
 
   return (
     <Card extra={"items-center w-full h-full p-[16px] bg-cover"}>

@@ -28,8 +28,8 @@ export default function Collapsible({
     <div className={classNames(`w-full`, className)} {...rest}>
       <div
         className={classNames(
-          "flex w-full cursor-pointer select-none items-center justify-between rounded-2xl hover:opacity-100",
-          expanded ? "opacity-100" : "opacity-60"
+          "flex w-full cursor-pointer  select-none items-center justify-between rounded-2xl hover:opacity-100",
+          expanded ? "font-bold text-gray-500" : "font-medium"
         )}
         onClick={handleToggle}
       >
