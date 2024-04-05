@@ -10,10 +10,9 @@ import {
   VIEWER,
 } from "../../../../../config/contanst";
 import { CustomFlowbiteTheme, ToggleSwitch } from "flowbite-react";
-import { useAccount } from "../../../../../hooks/useAccount";
 import { useFormContext } from "react-hook-form";
 import { FormState } from "../../../../../types/form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const toggleSwitchTheme: CustomFlowbiteTheme["toggleSwitch"] = {
   root: {
@@ -22,8 +21,21 @@ const toggleSwitchTheme: CustomFlowbiteTheme["toggleSwitch"] = {
 };
 
 function Permission() {
-  const { roles, roleExists, handleSwitchChange } = useAccount();
   const { setValue } = useFormContext<FormState.CreateAccount>();
+
+  const [roles, setRoles] = useState<string[]>([VIEWER]);
+
+  const roleExists = (role: string) => {
+    return roles.includes(role);
+  };
+
+  const handleSwitchChange = (role: string) => {
+    if (roleExists(role)) {
+      setRoles((prevRoles) => prevRoles.filter((r) => r !== role));
+    } else {
+      setRoles((prevRoles) => [...prevRoles, role]);
+    }
+  };
 
   useEffect(() => {
     if (roles) {

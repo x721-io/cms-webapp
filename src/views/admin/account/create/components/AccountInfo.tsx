@@ -53,6 +53,22 @@ const AccountInfo = () => {
           </div>
         </div>
 
+        <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+          <label className="text-primary mb-2 block font-semibold">
+            Full Name
+          </label>
+          <div className="w-full">
+            <Input
+              scale="sm"
+              className="min-w-0"
+              placeholder="Minimum 8 characters"
+              error={!!errors.fullName}
+              type="text"
+              register={register("fullName", formRulesAccount.fullName)}
+            />
+          </div>
+        </div>
+
         <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
           <label className="text-primary mb-2 block font-semibold">Email</label>
           <div className="w-full">

@@ -38,6 +38,10 @@ export const formRulesAccount = {
     required: "Please input password",
     pattern: { value: passwordRegex, message: "Invalid password" },
   },
+  fullName: {
+    required: "Please input full name",
+    pattern: { value: nameRegex, message: "Invalid name" },
+  },
   email: {
     required: "Please input your email",
     pattern: { value: emailRegex, message: "Invalid email address" },
@@ -47,6 +51,29 @@ export const formRulesAccount = {
   },
   phone: {
     pattern: { value: phoneNumberRegex, message: "Invalid phone number" },
+  },
+};
+
+export const formRulesResetPassword = {
+  newPassword: {
+    required: "Please input password",
+    pattern: {
+      value: passwordRegex,
+      message:
+        "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+    },
+  },
+  currentPassword: {
+    required: "Please input current password",
+    pattern: {
+      value: passwordRegex,
+      message:
+        "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+    },
+  },
+  confirmPassword: {
+    required: "Please input confirm password",
+    pattern: { value: passwordRegex, message: "Passwords do not match" },
   },
 };
 

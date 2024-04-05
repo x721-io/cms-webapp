@@ -1,19 +1,20 @@
 import { useMemo } from "react";
-import TableAccounts from "./TableAccounts";
+import TableAccounts from "./components/TableAccounts";
 import { useUserFilterStore } from "../../../../store/filters/users/store";
 import Input from "../../../../components/fields/InputField";
 import SearchIcon from "../../../../assets/svg/SearchIcon";
+import { useAccountFilterStore } from "../../../../store/filters/accounts/store";
 
 export default function Accounts() {
   const {
-    filters: { search: userSearchText },
-    updateFilters: updateCollectionFilters,
-  } = useUserFilterStore((state) => state);
+    filters: { search: accountSearchText },
+    updateFilters: updateAccountFilters,
+  } = useAccountFilterStore((state) => state);
 
-  const searchText = useMemo(() => userSearchText, [userSearchText]);
+  const searchText = useMemo(() => accountSearchText, [accountSearchText]);
 
   const handleInputText = (value: any) => {
-    updateCollectionFilters({ search: value });
+    updateAccountFilters({ search: value });
   };
 
   return (

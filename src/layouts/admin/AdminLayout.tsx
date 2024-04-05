@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Sidebar from "../../components/sidebar/Sidebar";
-import ROUTES from "../../routes";
+import routes from "../../routes";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer/Footer";
 
@@ -17,7 +17,7 @@ export default function Admin(props: { [x: string]: any }) {
     );
   }, []);
   useEffect(() => {
-    getActiveRoute(ROUTES as RoutesType[]);
+    getActiveRoute(routes as RoutesType[]);
   }, [location.pathname]);
 
   const getActiveRoute = (routes: RoutesType[]): string | boolean => {
@@ -46,9 +46,9 @@ export default function Admin(props: { [x: string]: any }) {
   //   return activeNavbar;
   // };
 
-  const getRoutes = (ROUTES: RoutesType[]): (JSX.Element | null)[] => {
-    if (Array.isArray(ROUTES)) {
-      return ROUTES.map((prop, key) => {
+  const getRoutes = (routes: RoutesType[]): (JSX.Element | null)[] => {
+    if (Array.isArray(routes)) {
+      return routes.map((prop, key) => {
         if (prop.layout && prop.layout === "/admin") {
           return (
             <Route path={`/${prop.path}`} element={prop.component} key={key} />
@@ -93,7 +93,7 @@ export default function Admin(props: { [x: string]: any }) {
             />
             <div className="pt-5s mx-auto mb-auto h-full min-h-screen p-2 md:pr-2">
               <Routes>
-                {getRoutes(ROUTES)}
+                {getRoutes(routes)}
                 <Route
                   path="/"
                   element={<Navigate to="/admin/default" replace />}

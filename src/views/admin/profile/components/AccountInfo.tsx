@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import Card from "../../../../components/card";
 import Input from "../../../../components/fields/InputField";
 import { formRulesAccount } from "../../../../config/form/rules";
@@ -6,14 +6,15 @@ import FormValidationMessages from "../../../../components/Form/ValidationMessag
 import { FormState } from "../../../../types/form";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import useAccountStore from "../../../../store/account/store";
 import { useAccount } from "../../../../hooks/useAccount";
 import Button from "../../../../components/button";
 import { useNavigate } from "react-router-dom";
+import CardMenu from "./CardMenu";
+import useAuthStore from "../../../../store/auth/store";
 
 const AccountInfo = () => {
   const navigate = useNavigate();
-  const accountProfile = useAccountStore((state) => state.accountProfile);
+  const accountProfile = useAuthStore((state) => state.profile);
   const { onUpdateAccount } = useAccount();
 
   const {
@@ -28,6 +29,7 @@ const AccountInfo = () => {
       twitterLink: accountProfile?.twitterLink,
       telegramLink: accountProfile?.telegramLink,
       phone: accountProfile?.phone,
+      fullName: accountProfile?.fullName,
     },
   });
 
@@ -37,7 +39,7 @@ const AccountInfo = () => {
   };
 
   const onSubmitProfile = async (params: FormState.UpdateAccountInfo) => {
-    const toastId = toast.loading("Uploading Profile...", { type: "info" });
+    const toastId = toast.loading("Updating Profile...", { type: "info" });
 
     try {
       await onUpdateAccount(params);
@@ -63,15 +65,16 @@ const AccountInfo = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmitProfile)}>
-      <Card extra={"w-full h-full p-3"}>
-        {/* Header */}
-        <div className=" mt-2 w-full">
-          <h4 className="px-2 text-xl font-bold text-navy-700 dark:text-white">
-            Account Information
-          </h4>
-        </div>
-        {/* Cards */}
+    <Card extra={"w-full h-full p-3"}>
+      {/* Header */}
+      <div className="mt-1 flex w-full justify-between px-3 pb-1">
+        <h4 className=" text-xl font-bold text-navy-700 dark:text-white">
+          Account Information
+        </h4>
+        <CardMenu />
+      </div>
+      {/* Cards */}
+      <form onSubmit={handleSubmit(onSubmitProfile)}>
         <div className="flex flex-col gap-4 px-0 tablet:grid tablet:grid-cols-2 tablet:px-2 desktop:grid desktop:grid-cols-2">
           <div className="flex w-full flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
             <label className="text-primary mb-2 block font-semibold">
@@ -90,21 +93,21 @@ const AccountInfo = () => {
             </div>
           </div>
 
-          {/*<div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">*/}
-          {/*  <label className="text-primary mb-2 block font-semibold">*/}
-          {/*    Password*/}
-          {/*  </label>*/}
-          {/*  <div className="w-full">*/}
-          {/*    <Input*/}
-          {/*      scale="sm"*/}
-          {/*      className="min-w-0"*/}
-          {/*      placeholder="Minimum 8 characters"*/}
-          {/*      error={!!errors.username}*/}
-          {/*      type="text"*/}
-          {/*      // register={register("password", formRulesAccount.password)}*/}
-          {/*    />*/}
-          {/*  </div>*/}
-          {/*</div>*/}
+          <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+            <label className="text-primary mb-2 block font-semibold">
+              Full Name
+            </label>
+            <div className="w-full">
+              <Input
+                scale="sm"
+                className="min-w-0"
+                placeholder="Minimum 8 characters"
+                error={!!errors.fullName}
+                type="text"
+                register={register("fullName", formRulesAccount.fullName)}
+              />
+            </div>
+          </div>
 
           <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
             <label className="text-primary mb-2 block font-semibold">
@@ -115,7 +118,7 @@ const AccountInfo = () => {
                 scale="sm"
                 className="min-w-0"
                 placeholder="Minimum 8 characters"
-                error={!!errors.username}
+                error={!!errors.email}
                 type="text"
                 register={register("email", formRulesAccount.email)}
               />
@@ -131,7 +134,7 @@ const AccountInfo = () => {
                 scale="sm"
                 className="min-w-0"
                 placeholder="Minimum 8 characters"
-                error={!!errors.username}
+                error={!!errors.twitterLink}
                 type="text"
                 register={register("twitterLink", formRulesAccount.socialLink)}
               />
@@ -147,7 +150,7 @@ const AccountInfo = () => {
                 scale="sm"
                 className="min-w-0"
                 placeholder="Minimum 8 characters"
-                error={!!errors.username}
+                error={!!errors.telegramLink}
                 type="text"
                 register={register("telegramLink", formRulesAccount.socialLink)}
               />
@@ -163,7 +166,7 @@ const AccountInfo = () => {
                 scale="sm"
                 className="min-w-0"
                 placeholder="Minimum 8 characters"
-                error={!!errors.username}
+                error={!!errors.phone}
                 type="text"
                 register={register("phone", formRulesAccount.phone)}
               />
@@ -177,18 +180,18 @@ const AccountInfo = () => {
               scale="sm"
               variant="outlined"
               disabled={!isDirty}
-              className="w-full tablet:w-auto desktop:w-auto"
+              className="flex w-full items-center bg-brand-400 text-white hover:bg-brand-600 active:bg-brand-700 tablet:w-auto desktop:w-auto"
             >
-              Save Account
+              Update Account
             </Button>
           </div>
         ) : (
           <></>
         )}
+      </form>
 
-        <FormValidationMessages errors={errors} />
-      </Card>
-    </form>
+      <FormValidationMessages errors={errors} />
+    </Card>
   );
 };
 

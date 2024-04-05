@@ -1,8 +1,12 @@
 import avatar from "../../../../assets/img/avatars/avatar11.png";
 import banner from "../../../../assets/img/profile/banner.png";
 import Card from "../../../../components/card";
+import { VIEWER } from "../../../../config/contanst";
+import useAuthStore from "../../../../store/auth/store";
 
 const Banner = () => {
+  const account = useAuthStore((state) => state.profile);
+
   return (
     <Card extra={"items-center w-full h-full p-[16px] bg-cover"}>
       {/* Background and profile */}
@@ -18,9 +22,23 @@ const Banner = () => {
       {/* Name and position */}
       <div className="mt-16 flex flex-col items-center">
         <h4 className="text-xl font-bold text-navy-700 dark:text-white">
-          Adela Parkson
+          {account?.fullName ? account?.fullName : account?.username}
         </h4>
-        <p className="text-base font-normal text-gray-600">Product Manager</p>
+        <p className="text-base font-normal text-gray-600">
+          {account?.roles &&
+            account?.roles
+              .filter((role: string) => role !== VIEWER)
+              .map((role: string) =>
+                role
+                  .split("_")
+                  .map(
+                    (word: string) =>
+                      word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                  )
+                  .join(" ")
+              )
+              .join(" ")}
+        </p>
       </div>
 
       {/* Post followers */}
