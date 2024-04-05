@@ -8,7 +8,6 @@ import UpdateRolesModal from "./UpdateRolesModal";
 import ResetPasswordModal from "./ResetPasswordModal";
 import useAuthStore from "../../../../../store/auth/store";
 
-
 interface Props {
   accountId: string;
   transparent?: boolean;
@@ -20,9 +19,7 @@ function CardMenu({ transparent, roles, accountId }: Props) {
   const [showUpdateRolesModal, setShoUpdateRolesModal] = useState(false);
   const [showResetPasswordModal, setShoResetPasswordModal] = useState(false);
 
-  const accountRoles = useAuthStore(
-    (state) => state.profile?.roles || []
-  );
+  const accountRoles = useAuthStore((state) => state.profile?.roles || []);
 
   const roleExists = (role: string) => {
     return accountRoles.includes(role);

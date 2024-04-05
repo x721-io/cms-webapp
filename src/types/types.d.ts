@@ -12,6 +12,6 @@ declare global {
     icon?: JSX.Element;
     component?: JSX.Element;
     links?: RouteType[];
-    roles?: string[]
+    roles?: string[];
   }
 }

@@ -5,7 +5,6 @@ import routes from "../../../routes";
 import DashIcon from "../../icons/DashIcon";
 import useAuthStore from "../../../store/auth/store";
 
-
 export const SidebarLinks = () => {
   let location = useLocation();
   const rolesAccount = useAuthStore((state) => state.profile?.roles || []);
@@ -15,14 +14,17 @@ export const SidebarLinks = () => {
     return location.pathname.includes(routeName);
   };
 
-  const checkAccess = (routeRoles: string[] | undefined, userRoles: string[]) => {
+  const checkAccess = (
+    routeRoles: string[] | undefined,
+    userRoles: string[]
+  ) => {
     if (!routeRoles || routeRoles.length === 0) {
       return true;
     }
     if (!userRoles || userRoles.length === 0) {
       return false;
     }
-    return userRoles.some(role => routeRoles.includes(role));
+    return userRoles.some((role) => routeRoles.includes(role));
   };
 
   // BRAND
@@ -37,7 +39,7 @@ export const SidebarLinks = () => {
             <div className="pr-4">
               {route.icon ? route.icon : <DashIcon />}{" "}
             </div>
-            <li className="my-[3px] flex w-full hover:cursor-pointer items-center">
+            <li className="my-[3px] flex w-full items-center hover:cursor-pointer">
               <Collapsible
                 header={route.name}
                 className={`${
@@ -52,7 +54,7 @@ export const SidebarLinks = () => {
                       <Link key={link.name} to={link.path}>
                         <div className="relative mb-3 flex hover:cursor-pointer">
                           <div
-                            className="my-[3px] flex hover:cursor-pointer items-center "
+                            className="my-[3px] flex items-center hover:cursor-pointer "
                             key={link.name}
                           >
                             <p
@@ -85,15 +87,15 @@ export const SidebarLinks = () => {
                   className="my-[3px] flex cursor-pointer items-center px-8"
                   key={route.name}
                 >
-              <span
-                className={`${
-                  activeRoute(route.path)
-                    ? "font-bold text-brand-500 dark:text-white"
-                    : "font-medium text-gray-500"
-                }`}
-              >
-                {route.icon ? route.icon : <DashIcon />}{" "}
-              </span>
+                  <span
+                    className={`${
+                      activeRoute(route.path)
+                        ? "font-bold text-brand-500 dark:text-white"
+                        : "font-medium text-gray-500"
+                    }`}
+                  >
+                    {route.icon ? route.icon : <DashIcon />}{" "}
+                  </span>
                   <p
                     className={`leading-1 ml-4 flex ${
                       activeRoute(route.path)

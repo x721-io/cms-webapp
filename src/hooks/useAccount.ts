@@ -3,7 +3,6 @@ import { useCallback } from "react";
 import { APIParams } from "../services/api/types";
 import useAuthStore from "../store/auth/store";
 
-
 export const useAccount = () => {
   const api = useMarketplaceApi();
   const { credentials } = useAuthStore();

@@ -5,13 +5,11 @@ import routes from "../../routes";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer/Footer";
 
-
 export default function Admin(props: { [x: string]: any }) {
   const { ...rest } = props;
   const location = useLocation();
   const [open, setOpen] = useState(true);
   const [currentRoute, setCurrentRoute] = useState("Main Dashboard");
-
 
   useEffect(() => {
     window.addEventListener("resize", () =>

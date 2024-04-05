@@ -13,7 +13,6 @@ import EyeOffIcon from "../../assets/svg/EyeOffIcon";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/auth/store";
 
-
 export default function Login() {
   const api = useMarketplaceApi();
   const { onAuth } = useAuth();
@@ -24,7 +23,7 @@ export default function Login() {
   const {
     handleSubmit,
     register,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormState.Login>();
 
   const togglePasswordVisibility = () => {
@@ -43,10 +42,9 @@ export default function Login() {
         type: "success",
         autoClose: 1000,
         closeButton: true,
-        isLoading: false
+        isLoading: false,
       });
       navigate("/admin");
-
     } catch (e) {
       console.error(e);
       toast.update(toastId, {
@@ -54,7 +52,7 @@ export default function Login() {
         type: "error",
         autoClose: 1000,
         closeButton: true,
-        isLoading: false
+        isLoading: false,
       });
     }
   };
@@ -64,7 +62,7 @@ export default function Login() {
       style={{
         backgroundColor: "#c9d6ff",
         background: "linear-gradient(to right, #e2e2e2, #c9d6ff)",
-        height: "100vh"
+        height: "100vh",
       }}
     >
       {/* Login section */}
@@ -106,7 +104,7 @@ export default function Login() {
             <button
               className="linear mt-7 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"
               style={{
-                background: "linear-gradient(to right, #5c6bc0, #512da8)"
+                background: "linear-gradient(to right, #5c6bc0, #512da8)",
               }}
             >
               Login

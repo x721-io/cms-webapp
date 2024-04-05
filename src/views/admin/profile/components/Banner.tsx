@@ -4,7 +4,6 @@ import Card from "../../../../components/card";
 import { VIEWER } from "../../../../config/contanst";
 import useAuthStore from "../../../../store/auth/store";
 
-
 const Banner = () => {
   const account = useAuthStore((state) => state.profile);
 
@@ -32,7 +31,10 @@ const Banner = () => {
               .map((role: string) =>
                 role
                   .split("_")
-                  .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                  .map(
+                    (word: string) =>
+                      word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                  )
                   .join(" ")
               )
               .join(" ")}

@@ -1,5 +1,10 @@
 // Icon Imports
-import { MdBarChart, MdBlock, MdHome, MdOutlineShoppingCart } from "react-icons/md";
+import {
+  MdBarChart,
+  MdBlock,
+  MdHome,
+  MdOutlineShoppingCart,
+} from "react-icons/md";
 
 import MainDashboard from "./views/admin/AdminDashboard";
 import Profile from "./views/admin/profile";
@@ -15,10 +20,9 @@ import {
   ADMIN_NFT,
   ADMIN_USER,
   ADMINISTRATOR,
-  VIEWER
+  VIEWER,
 } from "./config/contanst";
 import CreateBlog from "./views/admin/account/blog";
-
 
 const routes: RoutesType[] = [
   {
@@ -34,7 +38,13 @@ const routes: RoutesType[] = [
     layout: "/admin",
     path: "marketplace",
     icon: <MdOutlineShoppingCart className="h-6 w-6" />,
-    roles: [ADMIN_MARKETPLACE,ADMIN_USER,ADMIN_NFT,ADMIN_COLLECTION,ADMINISTRATOR],
+    roles: [
+      ADMIN_MARKETPLACE,
+      ADMIN_USER,
+      ADMIN_NFT,
+      ADMIN_COLLECTION,
+      ADMINISTRATOR,
+    ],
     component: <Marketplace />,
   },
   {
@@ -42,7 +52,7 @@ const routes: RoutesType[] = [
     layout: "/admin",
     icon: <MdBarChart className="h-6 w-6" />,
     path: "launchpad",
-    roles: [ADMIN_LAUNCHPAD,ADMINISTRATOR],
+    roles: [ADMIN_LAUNCHPAD, ADMINISTRATOR],
     component: <LaunchpadPage />,
   },
   {
@@ -65,10 +75,12 @@ const routes: RoutesType[] = [
         roles: [ADMINISTRATOR],
         component: <CreateAccount />,
       },
-      { name: "Accounts",
+      {
+        name: "Accounts",
         path: "accounts",
         roles: [VIEWER],
-        component: <Accounts /> },
+        component: <Accounts />,
+      },
       {
         name: "Account Detail",
         path: "account-overview",
@@ -87,9 +99,7 @@ const routes: RoutesType[] = [
         path: "create-blog",
         component: <CreateBlog />,
       },
-      { name: "Blogs",
-        path: "blogs",
-        component: <>AAAAA</> },
+      { name: "Blogs", path: "blogs", component: <>AAAAA</> },
     ],
   },
 ];

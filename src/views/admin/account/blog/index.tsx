@@ -5,8 +5,11 @@ import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
 import { Editor } from "@tinymce/tinymce-react";
 import { FormState } from "../../../../types/form";
 import { toast } from "react-toastify";
-import { TINYMCE_API_KEY, TINYMCE_PLUGINS, TINYMCE_TOOLBAR } from "../../../../config/contanst";
-
+import {
+  TINYMCE_API_KEY,
+  TINYMCE_PLUGINS,
+  TINYMCE_TOOLBAR,
+} from "../../../../config/contanst";
 
 interface FormData {
   title: string;
@@ -14,17 +17,14 @@ interface FormData {
 }
 
 type Upload = (
-  blobInfo: { blob: () => Blob; filename: () => string; },
+  blobInfo: { blob: () => Blob; filename: () => string },
   success: (url: string) => void,
   failure: () => void,
   progress: (percent: number) => void
 ) => void;
 
-
-
 export default function CreateBlog() {
-
-const api = useMarketplaceApi();
+  const api = useMarketplaceApi();
 
   const { setCredentials, credentials } = useAuthStore();
 
@@ -36,15 +36,17 @@ const api = useMarketplaceApi();
     console.log("Content was updated:", content);
   };
 
-
-  const handleUpload = async (file: Blob,success: (url: string) => void, failure: () => void) => {
+  const handleUpload = async (
+    file: Blob,
+    success: (url: string) => void,
+    failure: () => void
+  ) => {
     const uploadToast = toast.loading("Uploading Image...");
     try {
-
       const imageFile = new FormData();
       imageFile.append("files[]", file);
 
-      const response = await api.uploadFile(file)
+      const response = await api.uploadFile(file);
       toast.update(uploadToast, {
         render: "upload successfully!",
         type: "success",
@@ -65,13 +67,8 @@ const api = useMarketplaceApi();
     }
   };
 
-  const handleImageUpload:Upload = (
-    blobInfo,
-    success,
-    failure,
-    progress,
-    ) =>
-     new Promise((resolve, reject) => {
+  const handleImageUpload: Upload = (blobInfo, success, failure, progress) =>
+    new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "http://localhost:8000/server.php", true);
 
@@ -118,7 +115,6 @@ const api = useMarketplaceApi();
       xhr.send(formData);
     });
 
-
   return (
     <div className="w-full">
       <h2>Create Blog Post</h2>
@@ -143,7 +139,7 @@ const api = useMarketplaceApi();
               text_color_rows: "4",
               toolbar: TINYMCE_TOOLBAR,
               mobile: {
-                toolbar_drawer: "floating"
+                toolbar_drawer: "floating",
               },
               images_upload_url: "http://localhost:8000/server.php",
               automatic_uploads: true,
@@ -159,13 +155,12 @@ const api = useMarketplaceApi();
               //       failure('HTTP Error: ' + err.message);
               //     });
               // }
-
             }}
-            onEditorChange={handleEditorChange}// toolbar="code"
+            onEditorChange={handleEditorChange} // toolbar="code"
           />
         </div>
         <button type="submit">Create Post</button>
       </form>
     </div>
   );
-};
+}

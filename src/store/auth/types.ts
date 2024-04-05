@@ -1,7 +1,6 @@
 import { APIResponse } from "../../services/api/types";
 import { Account } from "../../types/entitites";
 
-
 export interface AuthStoreState {
   credentials: APIResponse.Login | null;
   profile: Account | null;
