@@ -1,5 +1,10 @@
 // Icon Imports
-import { MdHome, MdOutlineShoppingCart, MdBarChart } from "react-icons/md";
+import {
+  MdBarChart,
+  MdBlock,
+  MdHome,
+  MdOutlineShoppingCart,
+} from "react-icons/md";
 
 import MainDashboard from "./views/admin/AdminDashboard";
 import Profile from "./views/admin/profile";
@@ -8,13 +13,24 @@ import Marketplace from "./views/admin/marketplace/Marketplace";
 import LaunchpadPage from "./views/admin/launchpad/LaunchpadPage";
 import AccountDetail from "./views/admin/account/accountDetail";
 import Accounts from "./views/admin/account/accounts";
+import {
+  ADMIN_COLLECTION,
+  ADMIN_LAUNCHPAD,
+  ADMIN_MARKETPLACE,
+  ADMIN_NFT,
+  ADMIN_USER,
+  ADMINISTRATOR,
+  VIEWER,
+} from "./config/contanst";
+import CreateBlog from "./views/admin/account/blog";
 
-const ROUTES: RoutesType[] = [
+const routes: RoutesType[] = [
   {
     name: "Main Dashboard",
     layout: "/admin",
     path: "default",
     icon: <MdHome className="h-6 w-6" />,
+    roles: [VIEWER],
     component: <MainDashboard />,
   },
   {
@@ -22,6 +38,13 @@ const ROUTES: RoutesType[] = [
     layout: "/admin",
     path: "marketplace",
     icon: <MdOutlineShoppingCart className="h-6 w-6" />,
+    roles: [
+      ADMIN_MARKETPLACE,
+      ADMIN_USER,
+      ADMIN_NFT,
+      ADMIN_COLLECTION,
+      ADMINISTRATOR,
+    ],
     component: <Marketplace />,
   },
   {
@@ -29,6 +52,7 @@ const ROUTES: RoutesType[] = [
     layout: "/admin",
     icon: <MdBarChart className="h-6 w-6" />,
     path: "launchpad",
+    roles: [ADMIN_LAUNCHPAD, ADMINISTRATOR],
     component: <LaunchpadPage />,
   },
   {
@@ -36,19 +60,27 @@ const ROUTES: RoutesType[] = [
     layout: "/admin",
     icon: <MdBarChart className="h-6 w-6" />,
     path: "profile",
+    roles: [VIEWER],
     component: <Profile />,
   },
   {
     name: "Account",
     icon: <MdBarChart className="h-6 w-6" />,
     path: "account",
+    roles: [VIEWER],
     links: [
       {
         name: "Create Account",
         path: "create-account",
+        roles: [ADMINISTRATOR],
         component: <CreateAccount />,
       },
-      { name: "Accounts", path: "accounts", component: <Accounts /> },
+      {
+        name: "Accounts",
+        path: "accounts",
+        roles: [VIEWER],
+        component: <Accounts />,
+      },
       {
         name: "Account Detail",
         path: "account-overview",
@@ -56,5 +88,19 @@ const ROUTES: RoutesType[] = [
       },
     ],
   },
+  {
+    name: "Blog",
+    icon: <MdBlock className="h-6 w-6" />,
+    path: "blog",
+    roles: [VIEWER],
+    links: [
+      {
+        name: "Create Blog",
+        path: "create-blog",
+        component: <CreateBlog />,
+      },
+      { name: "Blogs", path: "blogs", component: <>AAAAA</> },
+    ],
+  },
 ];
-export default ROUTES;
+export default routes;

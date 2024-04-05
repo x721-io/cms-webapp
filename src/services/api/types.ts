@@ -167,7 +167,6 @@ export namespace APIResponse {
     refreshToken: string;
     refreshTokenExpire: number;
     accountId: string;
-    userId: string;
   }
 
   export interface CollectionDetails {

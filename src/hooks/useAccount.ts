@@ -1,20 +1,19 @@
 import { useMarketplaceApi } from "./useMarketplaceApi";
 import { useCallback } from "react";
 import { APIParams } from "../services/api/types";
-import useAccountStore from "../store/account/store";
 import useAuthStore from "../store/auth/store";
 
 export const useAccount = () => {
   const api = useMarketplaceApi();
   const { credentials } = useAuthStore();
   const bearerToken = credentials?.accessToken;
-  const { setAccountProfile } = useAccountStore();
+  const { setProfile } = useAuthStore();
 
   const onUpdateAccount = useCallback(
     async (params: APIParams.UpdateAccount) => {
       if (!bearerToken) return;
       const profile = await api.updateAccount(params);
-      setAccountProfile(profile);
+      setProfile(profile);
     },
     [bearerToken]
   );
@@ -23,6 +22,17 @@ export const useAccount = () => {
     async (params: APIParams.UpdateRoles) => {
       if (!bearerToken) return;
       await api.updateRoles(params);
+    },
+    [bearerToken]
+  );
+
+  const onFetchAccount = useCallback(
+    async (accountId: string) => {
+      if (!bearerToken) return;
+      const account = await api.accountOverview(accountId);
+      if (account) {
+        setProfile(account);
+      }
     },
     [bearerToken]
   );
@@ -38,6 +48,7 @@ export const useAccount = () => {
 
   return {
     onCreateAccount,
+    onFetchAccount,
     onUpdateAccount,
     onUpdateRoles,
     onResetPassword,

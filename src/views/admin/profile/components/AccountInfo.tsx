@@ -6,15 +6,15 @@ import FormValidationMessages from "../../../../components/Form/ValidationMessag
 import { FormState } from "../../../../types/form";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import useAccountStore from "../../../../store/account/store";
 import { useAccount } from "../../../../hooks/useAccount";
 import Button from "../../../../components/button";
 import { useNavigate } from "react-router-dom";
 import CardMenu from "./CardMenu";
+import useAuthStore from "../../../../store/auth/store";
 
 const AccountInfo = () => {
   const navigate = useNavigate();
-  const accountProfile = useAccountStore((state) => state.accountProfile);
+  const accountProfile = useAuthStore((state) => state.profile);
   const { onUpdateAccount } = useAccount();
 
   const {
@@ -29,7 +29,7 @@ const AccountInfo = () => {
       twitterLink: accountProfile?.twitterLink,
       telegramLink: accountProfile?.telegramLink,
       phone: accountProfile?.phone,
-      fullName: accountProfile?.fullName
+      fullName: accountProfile?.fullName,
     },
   });
 
@@ -180,7 +180,7 @@ const AccountInfo = () => {
               scale="sm"
               variant="outlined"
               disabled={!isDirty}
-              className="w-full tablet:w-auto desktop:w-auto flex items-center hover:bg-brand-600 active:bg-brand-700 bg-brand-400 text-white"
+              className="flex w-full items-center bg-brand-400 text-white hover:bg-brand-600 active:bg-brand-700 tablet:w-auto desktop:w-auto"
             >
               Update Account
             </Button>
@@ -188,9 +188,7 @@ const AccountInfo = () => {
         ) : (
           <></>
         )}
-
       </form>
-
 
       <FormValidationMessages errors={errors} />
     </Card>
