@@ -22,7 +22,9 @@ import CreateAccount from './views/admin/account/create';
 import MainDashboard from './views/admin/AdminDashboard';
 import CreateProject from './views/admin/launchpad/projects/CreateProject';
 import Project from './views/admin/launchpad/projects/Project';
-import Marketplace from './views/admin/marketplace/Marketplace';
+import Collection from "./views/admin/marketplace/collection/Collection";
+import NFT from "./views/admin/marketplace/nft/NFT";
+import User from "./views/admin/marketplace/user/User";
 import Profile from './views/admin/profile';
 
 const routes: RoutesType[] = [
@@ -36,7 +38,6 @@ const routes: RoutesType[] = [
     },
     {
         name: 'NFT Marketplace',
-        layout: '/admin',
         path: 'marketplace',
         icon: <MdOutlineShoppingCart className="h-6 w-6" />,
         roles: [
@@ -46,7 +47,23 @@ const routes: RoutesType[] = [
             ADMIN_COLLECTION,
             ADMINISTRATOR,
         ],
-        component: <Marketplace />,
+        links: [
+            {
+              name: "NFT",
+              path: "nft",
+              component: <NFT />,
+            },
+            {
+              name: "Collection",
+              path: "collection",
+              component: <Collection />,
+            },
+            {
+              name: "User",
+              path: "user",
+              component: <User />,
+            },
+          ],
     },
     {
         name: 'Launchpad',

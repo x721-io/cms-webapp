@@ -1,150 +1,127 @@
-import { UseFormReturn, useForm } from "react-hook-form";
-import Input from "../../../../components/fields/InputField";
-import { FormState } from "../../../../types/form";
-import { formRulesCreateProject } from "../../../../config/formRules";
-import Select from "../../../../components/Form/Select";
+import { Label } from "flowbite-react";
 import { FC } from "react";
-import { FormInput } from "./CreateProject";
+import { UseFormReturn, useForm } from "react-hook-form";
+import Select from "../../../../components/Form/Select";
 import InputV2 from "../../../../components/fields/InputFieldV2";
+import { FormState } from "../../../../types/form";
+import { FormInput } from "./CreateProject";
 
 interface CreateInfoProjectProps {
-    mainForm: UseFormReturn<FormInput>
+  mainForm: UseFormReturn<FormInput>;
 }
 
 const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
-    const {mainForm} = props
-    const {watch, getValues} = mainForm
+  const { mainForm } = props;
+  const { watch, getValues } = mainForm;
 
-    const selectOptions = [
-        { label: 'Collection 1', value: '1' },
-        { label: 'Collection 2', value: '2' },
-        { label: 'Collection 3', value: '3' },
-        { label: 'Collection 4', value: '4' },
-    ]
-    const {
-        register,
-        formState: { errors },
-    } = useForm<FormState.CreateProject>();
-    return (
-        <div className="w-full flex flex-col">
-            <div className="flex justify-center flex-col gap-4 max-w-[500px]">
-                {/* Banner */}
-                <div className="flex gap-1 flex-col">
-                    <label className="block mb-2 font-semibold text-primary">
-                        Banner
-                    </label>
-                    <InputV2  
-                        mainForm={mainForm}
-                        fieldName="createProject.banner"
-                    />
-                    {/* <Input
-                        error={!!errors.banner}
-                        register={register("banner", formRulesCreateProject.banner)}
-                    /> */}
-                </div>
-                {/* Logo */}
-                <div className="flex gap-1 flex-col">
-                    <label className="block mb-2 font-semibold text-primary">
-                        Logo
-                    </label>
-                    <Input
-                        error={!!errors.logo}
-                        register={register("logo", formRulesCreateProject.logo)}
-                    />
-                </div>
-                {/* Collection */}
-                <div className="flex gap-1 flex-col">
-                    <label className="block mb-2 font-semibold text-primary">
-                        Collection
-                    </label>
-                    <Select
-                        options={selectOptions}
-                        containerClass="w-full"
-                    />
-                </div>
-                {/* Name */}
-                <div className="flex gap-1 flex-col">
-                    <label className="block mb-2 font-semibold text-primary">
-                        Project name
-                    </label>
-                    <Input
-                        error={!!errors.name}
-                        register={register("name", formRulesCreateProject.name)}
-                    />
-                </div>
-                {/* Organization */}
-                <div className="flex gap-1 flex-col">
-                    <label className="block mb-2 font-semibold text-primary">
-                        Organization
-                    </label>
-                    <Input
-                        error={!!errors.organization}
-                        register={register("organization", formRulesCreateProject.organization)}
-                    />
-                </div>
-                {/* Description */}
-                <div className="flex gap-1 flex-col">
-                    <label className="block mb-2 font-semibold text-primary">
-                        Description
-                    </label>
-                    <Input
-                        error={!!errors.description}
-                        register={register("description", formRulesCreateProject.description)}
-                    />
-                </div>
-                {/* Discord */}
-                <div className="flex gap-1 flex-col">
-                    <label className="block mb-2 font-semibold text-primary">
-                        Discord
-                    </label>
-                    <Input
-                        error={!!errors.discord}
-                        register={register("discord", formRulesCreateProject.discord)}
-                    />
-                </div>
-                {/* Facebook */}
-                <div className="flex gap-1 flex-col">
-                    <label className="block mb-2 font-semibold text-primary">
-                        Facebook
-                    </label>
-                    <Input
-                        error={!!errors.facebook}
-                        register={register("facebook", formRulesCreateProject.facebook)}
-                    />
-                </div>
-                {/* Instagram */}
-                <div className="flex gap-1 flex-col">
-                    <label className="block mb-2 font-semibold text-primary">
-                        Instagram
-                    </label>
-                    <Input
-                        error={!!errors.instagram}
-                        register={register("instagram", formRulesCreateProject.instagram)}
-                    />
-                </div>
-                {/* Twitter */}
-                <div className="flex gap-1 flex-col">
-                    <label className="block mb-2 font-semibold text-primary">
-                        Twitter
-                    </label>
-                    <Input
-                        error={!!errors.twitter}
-                        register={register("twitter", formRulesCreateProject.twitter)}
-                    />
-                </div>
-                {/* Telegram */}
-                <div className="flex gap-1 flex-col">
-                    <label className="block mb-2 font-semibold text-primary">
-                        Telegram
-                    </label>
-                    <Input
-                        error={!!errors.telegram}
-                        register={register("telegram", formRulesCreateProject.telegram)}
-                    />
-                </div>
-               
-            </div>
+  const selectOptions = [
+    { label: "Collection 1", value: "1" },
+    { label: "Collection 2", value: "2" },
+    { label: "Collection 3", value: "3" },
+    { label: "Collection 4", value: "4" },
+  ];
+  const {
+    register,
+    formState: { errors },
+  } = useForm<FormState.CreateProject>();
+  return (
+    <div className="flex w-full flex-col">
+      <Label className="mb-4 text-3xl font-bold">Create Project</Label>
+      <div className="flex flex-col justify-center gap-4">
+        {/* Banner */}
+        <div className="flex flex-col gap-1">
+          <label className="text-primary mb-2 block font-semibold">
+            Banner
+          </label>
+          <InputV2 mainForm={mainForm} fieldName="createProject.banner" />
         </div>
-    )
-}
- export default CreateInfoProject
+        <div className="flex w-full gap-4">
+          <div className="w-full">
+            {/* Logo */}
+            <div className="flex flex-col gap-1">
+              <label className="text-primary mb-2 block font-semibold">
+                Logo
+              </label>
+              <InputV2 mainForm={mainForm} fieldName="createProject.logo" />
+            </div>
+            {/* Collection */}
+            <div className="flex flex-col gap-1">
+              <label className="text-primary mb-2 block font-semibold">
+                Collection
+              </label>
+              <Select options={selectOptions} containerClass="w-full" />
+            </div>
+            {/* Name */}
+            <div className="flex flex-col gap-1">
+              <label className="text-primary mb-2 block font-semibold">
+                Project name
+              </label>
+              <InputV2 mainForm={mainForm} fieldName="createProject.name" />
+            </div>
+            {/* Organization */}
+            <div className="flex flex-col gap-1">
+              <label className="text-primary mb-2 block font-semibold">
+                Organization
+              </label>
+              <InputV2
+                mainForm={mainForm}
+                fieldName="createProject.organization"
+              />
+            </div>
+            {/* Description */}
+            <div className="flex flex-col gap-1">
+              <label className="text-primary mb-2 block font-semibold">
+                Description
+              </label>
+              <InputV2
+                mainForm={mainForm}
+                fieldName="createProject.description"
+              />
+            </div>
+          </div>
+          <div className="w-full">
+            {/* Discord */}
+            <div className="flex flex-col gap-1">
+              <label className="text-primary mb-2 block font-semibold">
+                Discord
+              </label>
+              <InputV2 mainForm={mainForm} fieldName="createProject.discord" />
+            </div>
+            {/* Facebook */}
+            <div className="flex flex-col gap-1">
+              <label className="text-primary mb-2 block font-semibold">
+                Facebook
+              </label>
+              <InputV2 mainForm={mainForm} fieldName="createProject.facebook" />
+            </div>
+            {/* Instagram */}
+            <div className="flex flex-col gap-1">
+              <label className="text-primary mb-2 block font-semibold">
+                Instagram
+              </label>
+              <InputV2
+                mainForm={mainForm}
+                fieldName="createProject.instagram"
+              />
+            </div>
+            {/* Twitter */}
+            <div className="flex flex-col gap-1">
+              <label className="text-primary mb-2 block font-semibold">
+                Twitter
+              </label>
+              <InputV2 mainForm={mainForm} fieldName="createProject.twitter" />
+            </div>
+            {/* Telegram */}
+            <div className="flex flex-col gap-1">
+              <label className="text-primary mb-2 block font-semibold">
+                Telegram
+              </label>
+              <InputV2 mainForm={mainForm} fieldName="createProject.telegram" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default CreateInfoProject;

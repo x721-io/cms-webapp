@@ -1,5 +1,4 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Tabs } from 'flowbite-react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Address } from 'wagmi';
@@ -53,38 +52,39 @@ export default function CreateProject() {
 
     const schema = yup.object({
         createProject: yup.object({
-            name: yup.string().required(),
+            name: yup.string().required('Please input name'),
             collection: yup.string().required(),
-            description: yup.string().required(),
-            discord: yup.string().required(),
-            facebook: yup.string().required(),
-            instagram: yup.string().required(),
-            twitter: yup.string().required(),
-            telegram: yup.string().required(),
-            address: yup.string().nullable().required(),
-            banner: yup.string().required('llllllll'),
-            organization: yup.string().required(),
-            logo: yup.string().required(),
-            collectionId: yup.string().nullable().required(),
+            description: yup.string().required('Please input description'),
+            discord: yup.string().required('Please input total discord'),
+            facebook: yup.string().required('Please input facebook'),
+            instagram: yup.string().required('Please input instagram'),
+            twitter: yup.string().required('Please input total twitter'),
+            telegram: yup.string().required('Please input telegram'),
+            address: yup.string().nullable().required('Please input address'),
+            banner: yup.string().required('Please input banner'),
+            organization: yup.string().required('Please input organization'),
+            logo: yup.string().required('Please input logo'),
+            collectionId: yup.string().nullable().required('Please input collectionId'),
         }),
 
         rounds: yup
             .array()
-            .min(1, 'aaa')
+            .min(1, 'a')
             .of(
                 yup.object({
-                    address: yup.string().nullable().required(),
-                    start: yup.string().required(),
-                    end: yup.string().required(),
-                    roundId: yup.string().required(),
-                    stakeBefore: yup.string().required(),
-                    claimableStart: yup.string().required(),
-                    maxPerWallet: yup.string().required(),
-                    price: yup.string().required(),
-                    totalNftt: yup.string().required(),
-                    instruction: yup.string().required(),
-                    claimableIds: yup.string().required(),
-                    requiredStaking: yup.string().required(),
+                    name: yup.string().nullable().required('Please input name rounds'),
+                    address: yup.string().nullable().required('Please input address rounds'),
+                    start: yup.string().required('Please input start rounds'),
+                    end: yup.string().required('Please input end rounds'),
+                    roundId: yup.string().required('Please input roundId'),
+                    stakeBefore: yup.string().required('Please input stake before rounds'),
+                    claimableStart: yup.string().required('Please input claimable start rounds'),
+                    maxPerWallet: yup.string().required('Please input maxPerWallet rounds'),
+                    price: yup.string().required('Please input price rounds'),
+                    totalNftt: yup.string().required('Please input totalNft rounds'),
+                    instruction: yup.string().required('Please input instruction rounds'),
+                    claimableIds: yup.string().required('Please input required staking rounds'),
+                    requiredStaking: yup.string().required('Please input claimable ids rounds'),
                 }),
             ),
     });
@@ -175,15 +175,10 @@ export default function CreateProject() {
 
     return (
         <form className="flex flex-col items-center justify-center gap-4">
-            <Tabs className="w-full underline">
-                <Tabs.Item active title="Create Project">
-                    <CreateInfoProject mainForm={mainForm} />
-                </Tabs.Item>
-                <Tabs.Item active title="Create Round" className="w-full">
-                    <CreateInfoRound mainForm={mainForm} />
-                </Tabs.Item>
-            </Tabs>
+            <CreateInfoProject mainForm={mainForm} />
+            <CreateInfoRound mainForm={mainForm} />
             <FormValidationMessages errors={errors} />
+
             <div className="flex gap-1">
                 <button
                     onClick={() => reset()}
