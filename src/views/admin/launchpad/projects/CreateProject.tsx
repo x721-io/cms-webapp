@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Address } from 'wagmi';
 import * as yup from 'yup';
-import FormValidationMessages from '../../../../components/Form/ValidationMessages';
 import { useLaunchpadApi } from '../../../../hooks/useLaunchpadApi';
 import { FormState } from '../../../../types/form';
 import { Round } from '../../../../types/launchpad';
@@ -49,11 +48,10 @@ export default function CreateProject() {
         },
         rounds: [],
     };
-
     const schema = yup.object({
         createProject: yup.object({
             name: yup.string().required('Please input name'),
-            collection: yup.string().required(),
+            collection: yup.string().required('Please select collection'),
             description: yup.string().required('Please input description'),
             discord: yup.string().required('Please input total discord'),
             facebook: yup.string().required('Please input facebook'),
@@ -74,6 +72,7 @@ export default function CreateProject() {
                 yup.object({
                     name: yup.string().nullable().required('Please input name rounds'),
                     address: yup.string().nullable().required('Please input address rounds'),
+                    description: yup.string().nullable().required('Please input description rounds'),
                     start: yup.string().required('Please input start rounds'),
                     end: yup.string().required('Please input end rounds'),
                     roundId: yup.string().required('Please input roundId'),
@@ -98,7 +97,6 @@ export default function CreateProject() {
     const {
         setValue,
         handleSubmit,
-        formState: { errors },
         reset,
     } = mainForm;
 
@@ -110,7 +108,7 @@ export default function CreateProject() {
                 id: 1,
                 description: '',
                 name: '',
-                projectId: '55',
+                projectId: '',
                 type: 'U2UMintRoundFCFS',
                 address: null,
                 start: '2024-01-05T14:48:00.000Z',
@@ -119,28 +117,9 @@ export default function CreateProject() {
                 stakeBefore: '2024-01-21T14:48:00.000Z',
                 claimableStart: '2024-03-19T14:48:00.000Z',
                 maxPerWallet: 0,
-                price: '1320000000000000000',
+                price: '',
                 totalNftt: 0,
-                instruction: 'instructionsadfasdf',
-                claimableIds: ['2', '2', '3', '4', '5', '6'],
-                requiredStaking: '0',
-            },
-            {
-                id: 2,
-                description: '',
-                name: '',
-                projectId: '55',
-                type: 'U2UMintRoundFCFS',
-                address: null,
-                start: '2024-01-05T14:48:00.000Z',
-                end: '2024-03-20T14:48:00.000Z',
-                roundId: 0,
-                stakeBefore: '2024-01-21T14:48:00.000Z',
-                claimableStart: '2024-03-19T14:48:00.000Z',
-                maxPerWallet: 0,
-                price: '1320000000000000000',
-                totalNftt: 0,
-                instruction: 'instructionsadfasdf',
+                instruction: '',
                 claimableIds: ['2', '2', '3', '4', '5', '6'],
                 requiredStaking: '0',
             },
@@ -177,7 +156,6 @@ export default function CreateProject() {
         <form className="flex flex-col items-center justify-center gap-4">
             <CreateInfoProject mainForm={mainForm} />
             <CreateInfoRound mainForm={mainForm} />
-            <FormValidationMessages errors={errors} />
 
             <div className="flex gap-1">
                 <button

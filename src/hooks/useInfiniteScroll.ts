@@ -1,9 +1,9 @@
 import { useEffect, useMemo } from "react";
 import useSWRInfinite from "swr/infinite";
 import { APIParams, APIResponse } from "../services/api/types";
-import { useMarketplaceApi } from "./useMarketplaceApi";
 import { sanitizeObject } from "../utils";
 import { useLaunchpadApi } from "./useLaunchpadApi";
+import { useMarketplaceApi } from "./useMarketplaceApi";
 
 interface ListData {
   data: any[];
@@ -87,6 +87,30 @@ export const useFetchAccounts = (filters: APIParams.FetchAccounts) => {
     }),
     (params) =>
       api.fetchAccounts(sanitizeObject(params) as APIParams.FetchAccounts)
+  );
+};
+
+export const useFetchOptionRounds = (filters: APIParams.FetchOptionRounds) => {
+  const api = useLaunchpadApi();
+  return useSWRInfinite(
+    (index) => ({
+      ...filters,
+      page: index + 1,
+    }),
+    (params) =>
+      api.fetchOptionRound(sanitizeObject(params) as APIParams.FetchOptionRounds)
+  );
+};
+
+export const useFetchOptionCollections = (filters: APIParams.FetchOptionCollections) => {
+  const api = useLaunchpadApi();
+  return useSWRInfinite(
+    (index) => ({
+      ...filters,
+      page: index + 1,
+    }),
+    (params) =>
+      api.fetchOptionCollection(sanitizeObject(params) as APIParams.FetchOptionCollections)
   );
 };
 

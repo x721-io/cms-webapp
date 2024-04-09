@@ -186,6 +186,14 @@ export namespace APIParams {
         collectionId?: Address;
         rounds?: Round[];
     }
+
+    export interface FetchOptionRounds extends PaginationParams {
+        name?: string;
+    }
+
+    export interface FetchOptionCollections extends PaginationParams {
+        name?: string;
+    }
 }
 
 /********** =========== API Response types ========== ***********/
@@ -276,6 +284,16 @@ export namespace APIResponse {
     }
 
     export interface ProjectData {
+        data: Project[];
+        paging: Pagination;
+    }
+
+    export interface FetchOptionRounds {
+        data: Project[];
+        paging: Pagination;
+    }
+
+    export interface FetchOptionCollections {
         data: Project[];
         paging: Pagination;
     }

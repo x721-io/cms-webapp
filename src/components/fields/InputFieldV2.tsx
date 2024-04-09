@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes, useMemo } from "react";
 import { Controller, FieldValues, Path, UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
-import { classNames } from "../../utils/string";
 import { useFormHelper } from "../../hooks/useHelper";
+import { classNames } from "../../utils/string";
 import { FormMessageValidate } from "../Form/FormMessageValidate";
 
 export interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -20,7 +20,6 @@ export interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {
 interface InputV2Props<T> extends InputHTMLAttributes<HTMLInputElement> {
   mainForm: UseFormReturn<T extends FieldValues ? T : FieldValues>;
   fieldName: Path<T extends FieldValues ? T : FieldValues>;
-
   containerClass?: string;
   scale?: "md" | "lg" | "sm";
   prependIcon?: React.ReactNode;
@@ -56,11 +55,10 @@ const InputV2 = <T extends FieldValues>(props: InputV2Props<T>) => {
 
   const { onValidateForm } = useFormHelper()
   const { control } = mainForm
-
   const dataValidate = onValidateForm({ mainForm, fieldName });
 
   const baseClass =
-    "bg-surface-soft outline-none placeholder:text-gray-200 placeholder:font-light focus-visible:ring-[0.5px] w-full transition-all";
+    "border-gray-300 border outline-none placeholder:text-gray-200 placeholder:font-light focus-visible:ring-[0.5px] w-full transition-all";
 
   const scaleClass = useMemo(() => {
     switch (scale) {
@@ -139,12 +137,6 @@ const InputV2 = <T extends FieldValues>(props: InputV2Props<T>) => {
         )}
       />
       <FormMessageValidate mainForm={mainForm} fieldName={fieldName} />
-
-      {/* <input
-        className={classNames(baseClass, scaleClass, colorClass, className)}
-        {...register}
-        {...rest}
-      /> */}
       {!!appendIcon && (
         <div
           className={classNames(

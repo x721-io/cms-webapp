@@ -1,9 +1,11 @@
 import { Label } from "flowbite-react";
 import { FC, useMemo } from "react";
-import { UseFormReturn, useForm } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { IoMdTrash } from "react-icons/io";
+import SelectV2 from "../../../../components/Form/SelectV2";
 import InputV2 from "../../../../components/fields/InputFieldV2";
-import { FormState } from "../../../../types/form";
+import { useFetchOptionRounds, useInfiniteScroll } from "../../../../hooks/useInfiniteScroll";
+import { useRoundOptionFilterStore } from "../../../../store/filters/optionRounds/store";
 import { FormInput } from "./CreateProject";
 
 interface CreateInfoRoundProps {
@@ -12,14 +14,22 @@ interface CreateInfoRoundProps {
 
 const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
   const { mainForm } = props;
-  const { watch, getValues } = mainForm;
-
+  const { watch, getValues, setValue } = mainForm;
   const { rounds } = useMemo(() => getValues(), [watch()]);
+  const { filters } = useRoundOptionFilterStore((state) => state);
 
-  const {
-    register,
-    formState: { errors },
-  } = useForm<FormState.CreateProject>();
+  const { data, size, setSize, isLoading } = useFetchOptionRounds(filters);
+  const { list: roundOptions } = useInfiniteScroll({
+    data,
+    loading: isLoading,
+    page: size,
+    onNext: () => setSize(size + 1),
+  });
+  
+  const handleAddRow = () => {
+    
+  };
+
   return (
     <div className="w-full overflow-x-scroll">
       <Label className="mb-4 text-3xl font-bold">Create Round</Label>
@@ -71,9 +81,10 @@ const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
               const prefixField = `rounds.${itemIndex}` as "rounds.0";
 
               return (
-                <tr key={id}>
+                <tr key={id} className="">
                   <td>
-                    <InputV2
+                    <SelectV2
+                      options={roundOptions.concatenatedData}
                       mainForm={mainForm}
                       fieldName={`${prefixField}.name`}
                     />
@@ -94,6 +105,7 @@ const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
                     <InputV2
                       mainForm={mainForm}
                       fieldName={`${prefixField}.type`}
+                      readOnly
                     />
                   </td>
                   <td>
@@ -142,42 +154,13 @@ const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
                     <button className="p-1">
                       <IoMdTrash color="green" size={24} />
                     </button>
+                    <button className="p-1" onClick={handleAddRow}>
+                      Add row
+                    </button>
                   </td>
                 </tr>
               );
             })}
-            {/* <tr
-                                className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600" >
-                                <td className="px-6 py-4">
-                                    <Input
-                                        error={!!errors.startClaim}
-                                        register={register("startClaim", formRulesCreateProject.totalNfttRounds)}
-                                    />
-                                </td>
-                                <td className="px-6 py-4">
-                                    <Input
-                                        error={!!errors.stackingEnd}
-                                        register={register("stackingEnd", formRulesCreateProject.instructionRounds)}
-                                    />
-                                </td>
-                                <td className="px-6 py-4">
-                                    <Input
-                                        error={!!errors.quantity}
-                                        register={register("quantity", formRulesCreateProject.requiredStakingRounds)}
-                                    />
-                                </td>
-                                <td className="px-6 py-4">
-                                    <Input
-                                        error={!!errors.quantity}
-                                        register={register("quantity", formRulesCreateProject.claimableIdsRounds)}
-                                    />
-                                </td>
-                                <td className="px-6 py-4 flex gap-1">
-                                    <button className="p-1">
-                                        <IoMdTrash color="green" size={24} />
-                                    </button>
-                                </td>
-                            </tr> */}
           </tbody>
         </table>
       </div>
