@@ -29,11 +29,14 @@ export const API_ENDPOINTS = {
     OPTION_ROUND: '/cms/option/round',
     OPTION_COLLECTION: '/cms/option/collection',
 
+    CREATE_ACCOUNT: '/cms/account/create-account',
+    UPDATE_ACCOUNT: '/cms/account/update-account',
     ACCOUNT_DETAIL: '/cms/account/get-detail',
-    UPDATE_ACCOUNT: '/cms/update-account',
+    
     UPDATE_ROLES: '/cms/account/update-roles',
     ACCOUNT_ROLES: '/cms/account/get-roles',
+    
     RESET_PASSWORD: '/cms/account/reset-password',
     CHANGE_PASSWORD: '/cms/account/update-password',
-    CREATE_ACCOUNT: '/cms/create-account',
+    
 };

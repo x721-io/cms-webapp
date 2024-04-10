@@ -1,10 +1,12 @@
 import { Label } from "flowbite-react";
-import { FC, useMemo } from "react";
-import { UseFormReturn } from "react-hook-form";
+import { FC, useEffect, useMemo } from "react";
+import { UseFormReturn, useFieldArray } from "react-hook-form";
 import { IoMdTrash } from "react-icons/io";
-import SelectV2 from "../../../../components/Form/SelectV2";
 import InputV2 from "../../../../components/fields/InputFieldV2";
-import { useFetchOptionRounds, useInfiniteScroll } from "../../../../hooks/useInfiniteScroll";
+import {
+  useFetchOptionRounds,
+  useInfiniteScroll,
+} from "../../../../hooks/useInfiniteScroll";
 import { useRoundOptionFilterStore } from "../../../../store/filters/optionRounds/store";
 import { FormInput } from "./CreateProject";
 
@@ -14,7 +16,7 @@ interface CreateInfoRoundProps {
 
 const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
   const { mainForm } = props;
-  const { watch, getValues, setValue } = mainForm;
+  const { watch, getValues, setValue, control } = mainForm;
   const { rounds } = useMemo(() => getValues(), [watch()]);
   const { filters } = useRoundOptionFilterStore((state) => state);
 
@@ -25,10 +27,43 @@ const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
     page: size,
     onNext: () => setSize(size + 1),
   });
-  
-  const handleAddRow = () => {
-    
-  };
+
+  const roundFieldArray = useFieldArray({
+    control,
+    name: "rounds",
+    keyName: "key",
+  });
+  const {
+    append: appendRound,
+    remove: removeRound,
+  } = roundFieldArray;
+
+  const handleAddRow = () => {};
+  console.log("data", data);
+
+  useEffect(() => {
+    if (rounds.length <= 0) {
+      appendRound({
+        id: 1,
+        description: "",
+        name: "",
+        projectId: "",
+        type: "U2UMintRoundFCFS",
+        address: null,
+        start: "2024-01-05T14:48:00.000Z",
+        end: "2024-03-20T14:48:00.000Z",
+        roundId: 0,
+        stakeBefore: "2024-01-21T14:48:00.000Z",
+        claimableStart: "2024-03-19T14:48:00.000Z",
+        maxPerWallet: 0,
+        price: "",
+        totalNftt: 0,
+        instruction: "",
+        claimableIds: ["2", "2", "3", "4", "5", "6"],
+        requiredStaking: "0",
+      });
+    }
+  }, []);
 
   return (
     <div className="w-full overflow-x-scroll">
@@ -77,17 +112,17 @@ const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
           </thead>
           <tbody>
             {rounds.map((item, itemIndex) => {
-              const { id } = item;
+              // const {  } = item.data;
               const prefixField = `rounds.${itemIndex}` as "rounds.0";
 
               return (
-                <tr key={id} className="">
+                <tr key={`${itemIndex}-abc`} className="">
                   <td>
-                    <SelectV2
+                    {/* <SelectV2
                       options={roundOptions.concatenatedData}
                       mainForm={mainForm}
                       fieldName={`${prefixField}.name`}
-                    />
+                    /> */}
                   </td>
                   <td>
                     <InputV2

@@ -3,14 +3,17 @@ import { FC, useState } from "react";
 import { Controller, UseFormReturn, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import ImageUploader from "../../../../components/Form/ImageUploader";
-import SelectV2 from "../../../../components/Form/SelectV2";
 import InputV2 from "../../../../components/fields/InputFieldV2";
-import { useFetchOptionCollections, useInfiniteScroll } from "../../../../hooks/useInfiniteScroll";
+import {
+  useFetchOptionCollections,
+  useInfiniteScroll,
+} from "../../../../hooks/useInfiniteScroll";
 import { useLaunchpadApi } from "../../../../hooks/useLaunchpadApi";
 import { useCollectionOptionFilterStore } from "../../../../store/filters/optionCollections/store";
 import { FormState } from "../../../../types/form";
 import { parseImageUrl } from "../../../../utils/nft";
 import { FormInput } from "./CreateProject";
+import SearchCollectionInput from "./SearchCollectionInput";
 
 interface CreateInfoProjectProps {
   mainForm: UseFormReturn<FormInput>;
@@ -30,13 +33,9 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
     loading: isLoading,
     page: size,
     onNext: () => setSize(size + 1),
-  });  
+  });
 
-  const {
-    control,
-    setValue,
-    clearErrors,
-  } = useForm<FormState.CreateProject>();
+  const { control, setValue, clearErrors } = useForm<FormState.CreateProject>();
 
   const handleUploadBanner = async (file?: Blob) => {
     if (!file) {
@@ -106,7 +105,6 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
     <div className="flex w-full flex-col">
       <Label className="mb-4 text-3xl font-bold">Create Project</Label>
       <div className="flex flex-col justify-center gap-6">
-
         <div className="flex gap-4">
           {/* Banner */}
           <div className="flex w-1/2 flex-col gap-1">
@@ -153,85 +151,77 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
             {/* <InputV2 mainForm={mainForm} fieldName="createProject.logo" /> */}
           </div>
         </div>
-
-        {/* Collection */}
-        <div className="flex flex-col gap-1 tablet:w-1/2 w-full pr-2">
-          <label className="text-primary mb-2 block font-semibold">
-            Collection
-          </label>
-          <SelectV2 options={collectionOptions.concatenatedData} mainForm={mainForm} fieldName="createProject.collection" containerClass="w-1/2" />
+        <div className="grid grid-cols-4 gap-2">
+          {/* Collection */}
+          <div className="flex flex-col gap-1 ">
+            <label className="text-primary mb-2 block font-semibold">
+              Collection
+            </label>
+            <SearchCollectionInput />
+            {/* <SelectV2 options={collectionOptions.concatenatedData} mainForm={mainForm} fieldName="createProject.collection" containerClass="w-1/2" /> */}
+          </div>
+          {/* Name */}
+          <div className="flex flex-col gap-1">
+            <label className="text-primary mb-2 block font-semibold">
+              Project name
+            </label>
+            <InputV2 mainForm={mainForm} fieldName="createProject.name" />
+          </div>
+          {/* Organization */}
+          <div className="flex flex-col gap-1">
+            <label className="text-primary mb-2 block font-semibold">
+              Organization
+            </label>
+            <InputV2
+              mainForm={mainForm}
+              fieldName="createProject.organization"
+            />
+          </div>
+          {/* Discord */}
+          <div className="flex flex-col gap-1">
+            <label className="text-primary mb-2 block font-semibold">
+              Discord
+            </label>
+            <InputV2 mainForm={mainForm} fieldName="createProject.discord" />
+          </div>
+        </div>
+        <div className="grid grid-cols-4 gap-2">
+          {/* Facebook */}
+          <div className="flex flex-col gap-1">
+            <label className="text-primary mb-2 block font-semibold">
+              Facebook
+            </label>
+            <InputV2 mainForm={mainForm} fieldName="createProject.facebook" />
+          </div>
+          {/* Instagram */}
+          <div className="flex flex-col gap-1">
+            <label className="text-primary mb-2 block font-semibold">
+              Instagram
+            </label>
+            <InputV2 mainForm={mainForm} fieldName="createProject.instagram" />
+          </div>
+          {/* Twitter */}
+          <div className="flex flex-col gap-1">
+            <label className="text-primary mb-2 block font-semibold">
+              Twitter
+            </label>
+            <InputV2 mainForm={mainForm} fieldName="createProject.twitter" />
+          </div>
+          {/* Telegram */}
+          <div className="flex flex-col gap-1">
+            <label className="text-primary mb-2 block font-semibold">
+              Telegram
+            </label>
+            <InputV2 mainForm={mainForm} fieldName="createProject.telegram" />
+          </div>
         </div>
 
-        <div className="flex w-full gap-4">
-          <div className="w-full flex flex-col gap-4">
-            {/* Name */}
-            <div className="flex flex-col gap-1">
-              <label className="text-primary mb-2 block font-semibold">
-                Project name
-              </label>
-              <InputV2 mainForm={mainForm} fieldName="createProject.name" />
-            </div>
-            {/* Organization */}
-            <div className="flex flex-col gap-1">
-              <label className="text-primary mb-2 block font-semibold">
-                Organization
-              </label>
-              <InputV2
-                mainForm={mainForm}
-                fieldName="createProject.organization"
-              />
-            </div>
-            {/* Description */}
-            <div className="flex flex-col gap-1">
-              <label className="text-primary mb-2 block font-semibold">
-                Description
-              </label>
-              <InputV2
-                mainForm={mainForm}
-                fieldName="createProject.description"
-              />
-            </div>
-            {/* Discord */}
-            <div className="flex flex-col gap-1">
-              <label className="text-primary mb-2 block font-semibold">
-                Discord
-              </label>
-              <InputV2 mainForm={mainForm} fieldName="createProject.discord" />
-            </div>
-          </div>
-          <div className="w-full flex flex-col gap-4">
-            {/* Facebook */}
-            <div className="flex flex-col gap-1">
-              <label className="text-primary mb-2 block font-semibold">
-                Facebook
-              </label>
-              <InputV2 mainForm={mainForm} fieldName="createProject.facebook" />
-            </div>
-            {/* Instagram */}
-            <div className="flex flex-col gap-1">
-              <label className="text-primary mb-2 block font-semibold">
-                Instagram
-              </label>
-              <InputV2
-                mainForm={mainForm}
-                fieldName="createProject.instagram"
-              />
-            </div>
-            {/* Twitter */}
-            <div className="flex flex-col gap-1">
-              <label className="text-primary mb-2 block font-semibold">
-                Twitter
-              </label>
-              <InputV2 mainForm={mainForm} fieldName="createProject.twitter" />
-            </div>
-            {/* Telegram */}
-            <div className="flex flex-col gap-1">
-              <label className="text-primary mb-2 block font-semibold">
-                Telegram
-              </label>
-              <InputV2 mainForm={mainForm} fieldName="createProject.telegram" />
-            </div>
-          </div>
+        {/* Description */}
+        <div className="flex flex-col gap-1">
+          <label className="text-primary mb-2 block font-semibold">
+            Description
+          </label>
+          <InputV2 mainForm={mainForm} fieldName="createProject.description" />
         </div>
       </div>
     </div>

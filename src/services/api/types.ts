@@ -192,7 +192,7 @@ export namespace APIParams {
     }
 
     export interface FetchOptionCollections extends PaginationParams {
-        name?: string;
+        // name?: string;
     }
 }
 
@@ -289,14 +289,15 @@ export namespace APIResponse {
     }
 
     export interface FetchOptionRounds {
-        data: Project[];
+        data: Round[];
         paging: Pagination;
     }
 
     export interface FetchOptionCollections {
-        data: Project[];
+        data: Collection[];
         paging: Pagination;
     }
 
     export type AccountOverview = Account;
+    export type SearchCollections = FetchCollections;
 }

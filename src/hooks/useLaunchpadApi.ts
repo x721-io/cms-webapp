@@ -97,12 +97,19 @@ export const useLaunchpadApi = () => {
         authHeader()
       ),
 
-    fetchOptionCollection: (
-      params: APIParams.FetchOptionCollections
-    ): Promise<APIResponse.FetchOptionCollections> =>
+      fetchOptionCollection: (
+        params: APIParams.FetchOptionCollections
+      ): Promise<APIResponse.FetchOptionCollections> =>
       launchpadAPI.get(
         API_ENDPOINTS.OPTION_COLLECTION +
           parseQueries(sanitizeObject({ ...params })),
+        authHeader()
+      ),
+
+      searchCollections: (search: string,  params: APIParams.FetchOptionCollections): Promise<APIResponse.FetchOptionCollections> =>
+      launchpadAPI.get(
+        API_ENDPOINTS.OPTION_COLLECTION +
+        parseQueries(sanitizeObject({ ...params, search })),
         authHeader()
       ),
   };

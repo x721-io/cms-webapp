@@ -16,6 +16,7 @@ interface Params {
   loading: boolean | undefined;
   page: number;
   offset?: number;
+  scrollContainerRef?: React.RefObject<HTMLDivElement>;
 }
 
 export const useFetchUserList = (filters: APIParams.FetchUsers) => {
@@ -165,3 +166,66 @@ export const useInfiniteScroll = ({
     isLoadingMore,
   };
 };
+
+
+export const useInfiniteScrollOption = ({
+  data,
+  loading,
+  page,
+  onNext,
+  offset = 800,
+  scrollContainerRef,
+}: Params) => {
+  const list = useMemo(() => {
+    let currentHasNext = false;
+    let concatenatedData: any[] = [];
+
+    if (data && Array.isArray(data)) {
+      data.forEach((currentPage: ListData) => {
+        if (currentPage && Array.isArray(currentPage.data)) {
+          concatenatedData = concatenatedData.concat(currentPage.data);
+          currentHasNext = currentPage.paging.hasNext;
+        }
+      });
+    }
+
+    return { concatenatedData, currentHasNext };
+  }, [data]);
+console.log('scrollContainerRef: ', scrollContainerRef?.current);
+
+  const isLoadingMore =
+    loading || (page > 0 && data && data[page - 1] === undefined);
+
+    useEffect(() => {
+      const handleScroll = () => {
+        const scrollContainer = scrollContainerRef?.current;
+        if (!scrollContainer) return; // Kiểm tra null ở đây
+    
+        const { scrollTop, clientHeight, scrollHeight } = scrollContainer;
+        if (
+          scrollTop > scrollHeight - clientHeight - offset &&
+          !isLoadingMore &&
+          page &&
+          list.currentHasNext
+        ) {
+          onNext();
+        }
+      };
+    
+      if (scrollContainerRef?.current) {
+        scrollContainerRef?.current.addEventListener("scroll", handleScroll);
+      }
+    
+      return () => {
+        if (scrollContainerRef?.current) {
+          scrollContainerRef?.current.removeEventListener("scroll", handleScroll);
+        }
+      };
+    }, [isLoadingMore, page, list.currentHasNext, scrollContainerRef]);
+    
+  return {
+    list,
+    isLoadingMore,
+  };
+};
+

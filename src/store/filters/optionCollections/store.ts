@@ -5,7 +5,7 @@ import { CollectionOptionFilterAction, CollectionOptionFilterState } from "./typ
 const DEFAULT_STATE: CollectionOptionFilterState = {
   showFilters: false,
   filters: {
-    name: "",
+    // name: "",
     page: 1,
     limit: 20,
   },
