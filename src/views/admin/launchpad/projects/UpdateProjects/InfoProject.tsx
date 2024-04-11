@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
-import Select from "../../../../components/Form/Select";
-import Input from "../../../../components/fields/InputField";
-import { formRulesUpdateProject } from "../../../../config/formRules";
-import { FormState } from "../../../../types/form";
+import Select from "../../../../../components/Form/Select";
+import Input from "../../../../../components/fields/InputField";
+import { formRulesUpdateProject } from "../../../../../config/formRules";
+import { FormState } from "../../../../../types/form";
 
 interface Props {
     item?: any

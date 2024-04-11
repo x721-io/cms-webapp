@@ -1,9 +1,9 @@
 import { Spinner } from "flowbite-react";
-import { useFetchProjectList, useInfiniteScroll } from "../../../../hooks/useInfiniteScroll";
-import { useProjectFilterStore } from "../../../../store/filters/projects/store";
-import Text from "../../../../components/Text";
-import UpdateProject from "./UpdateProject";
 import { useState } from "react";
+import Text from "../../../../../components/Text";
+import { useFetchProjectList, useInfiniteScroll } from "../../../../../hooks/useInfiniteScroll";
+import { useProjectFilterStore } from "../../../../../store/filters/projects/store";
+import UpdateProject from "./UpdateProject";
 
 export default function TableProject() {
     const { filters } = useProjectFilterStore((state) => state)

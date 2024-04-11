@@ -1,5 +1,5 @@
+import TableProject from "../UpdateProjects/TableProject";
 import ProjectNavbar from "./ProjectNavbar";
-import TableProject from "./TableProject";
 
 export default function Project() {
   return (

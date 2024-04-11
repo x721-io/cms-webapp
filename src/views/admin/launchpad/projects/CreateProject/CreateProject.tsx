@@ -2,9 +2,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Address } from "wagmi";
 import * as yup from "yup";
-import { FormState } from "../../../../types/form";
-import { Round } from "../../../../types/launchpad";
+import { FormState } from "../../../../../types/form";
+import { Round } from "../../../../../types/launchpad";
 import CreateInfoProject from "./CreateInfoProject";
+import CreateInfoRound from "./CreateInfoRound";
 
 export interface FormInput {
   createProject: {
@@ -153,7 +154,7 @@ export default function CreateProject() {
   return (
     <form className="flex flex-col items-center justify-center gap-4">
       <CreateInfoProject mainForm={mainForm} />
-      {/* <CreateInfoRound mainForm={mainForm} /> */}
+      <CreateInfoRound mainForm={mainForm} />
 
       <div className="flex gap-1">
         <button

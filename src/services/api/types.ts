@@ -188,11 +188,9 @@ export namespace APIParams {
     }
 
     export interface FetchOptionRounds extends PaginationParams {
-        name?: string;
     }
 
     export interface FetchOptionCollections extends PaginationParams {
-        // name?: string;
     }
 }
 

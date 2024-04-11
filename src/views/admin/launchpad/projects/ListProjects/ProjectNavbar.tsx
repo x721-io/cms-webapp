@@ -1,7 +1,7 @@
-import SearchIcon from "../../../../assets/svg/SearchIcon";
-import Input from "../../../../components/fields/InputField";
 import { useMemo } from "react";
-import { useProjectFilterStore } from "../../../../store/filters/projects/store";
+import SearchIcon from "../../../../../assets/svg/SearchIcon";
+import Input from "../../../../../components/fields/InputField";
+import { useProjectFilterStore } from "../../../../../store/filters/projects/store";
 
 export default function ProjectNavbar() {
 
