@@ -1,27 +1,27 @@
 // Icon Imports
 import {
-    MdBarChart,
-    MdBlock,
-    MdHome,
-    MdOutlineShoppingCart,
+  MdBarChart,
+  MdBlock,
+  MdHome,
+  MdOutlineShoppingCart,
 } from 'react-icons/md';
 
 import {
-    ADMIN_COLLECTION,
-    ADMIN_LAUNCHPAD,
-    ADMIN_MARKETPLACE,
-    ADMIN_NFT,
-    ADMIN_USER,
-    ADMINISTRATOR,
-    VIEWER,
+  ADMIN_COLLECTION,
+  ADMIN_LAUNCHPAD,
+  ADMIN_MARKETPLACE,
+  ADMIN_NFT,
+  ADMIN_USER,
+  ADMINISTRATOR,
+  VIEWER,
 } from './config/contanst';
 import AccountDetail from './views/admin/account/accountDetail';
 import Accounts from './views/admin/account/accounts';
 import CreateBlog from './views/admin/account/blog';
 import CreateAccount from './views/admin/account/create';
 import MainDashboard from './views/admin/AdminDashboard';
-import CreateProject from './views/admin/launchpad/projects/CreateProject';
-import Project from './views/admin/launchpad/projects/Project';
+import CreateProject from './views/admin/launchpad/projects/CreateProject/CreateProject';
+import Project from './views/admin/launchpad/projects/ListProjects/Project';
 import Collection from "./views/admin/marketplace/collection/Collection";
 import NFT from "./views/admin/marketplace/nft/NFT";
 import User from "./views/admin/marketplace/user/User";

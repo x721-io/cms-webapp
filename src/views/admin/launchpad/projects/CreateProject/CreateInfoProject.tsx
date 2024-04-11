@@ -2,18 +2,13 @@ import { Label } from "flowbite-react";
 import { FC, useState } from "react";
 import { Controller, UseFormReturn, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import ImageUploader from "../../../../components/Form/ImageUploader";
-import InputV2 from "../../../../components/fields/InputFieldV2";
-import {
-  useFetchOptionCollections,
-  useInfiniteScroll,
-} from "../../../../hooks/useInfiniteScroll";
-import { useLaunchpadApi } from "../../../../hooks/useLaunchpadApi";
-import { useCollectionOptionFilterStore } from "../../../../store/filters/optionCollections/store";
-import { FormState } from "../../../../types/form";
-import { parseImageUrl } from "../../../../utils/nft";
+import ImageUploader from "../../../../../components/Form/ImageUploader";
+import InputV2 from "../../../../../components/fields/InputFieldV2";
+import { useLaunchpadApi } from "../../../../../hooks/useLaunchpadApi";
+import { FormState } from "../../../../../types/form";
+import { parseImageUrl } from "../../../../../utils/nft";
 import { FormInput } from "./CreateProject";
-import SearchCollectionInput from "./SearchCollectionInput";
+import SelectSearchCollection from "./SelectSearchCollection";
 
 interface CreateInfoProjectProps {
   mainForm: UseFormReturn<FormInput>;
@@ -21,19 +16,10 @@ interface CreateInfoProjectProps {
 
 const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
   const { mainForm } = props;
-  const { watch, getValues } = mainForm;
+  // const { watch, getValues } = mainForm;
   const [uploadBanner, setUploadBanner] = useState(false);
   const [uploadLogo, setUploadLogo] = useState(false);
   const api = useLaunchpadApi();
-  const { filters } = useCollectionOptionFilterStore((state) => state);
-
-  const { data, size, setSize, isLoading } = useFetchOptionCollections(filters);
-  const { list: collectionOptions } = useInfiniteScroll({
-    data,
-    loading: isLoading,
-    page: size,
-    onNext: () => setSize(size + 1),
-  });
 
   const { control, setValue, clearErrors } = useForm<FormState.CreateProject>();
 
@@ -157,7 +143,7 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
             <label className="text-primary mb-2 block font-semibold">
               Collection
             </label>
-            <SearchCollectionInput />
+            <SelectSearchCollection />
             {/* <SelectV2 options={collectionOptions.concatenatedData} mainForm={mainForm} fieldName="createProject.collection" containerClass="w-1/2" /> */}
           </div>
           {/* Name */}

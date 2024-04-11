@@ -1,60 +1,77 @@
-import { Label } from "flowbite-react";
-import { FC, useEffect, useMemo } from "react";
+import { Datepicker, Label } from "flowbite-react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { UseFormReturn, useFieldArray } from "react-hook-form";
-import { IoMdTrash } from "react-icons/io";
-import InputV2 from "../../../../components/fields/InputFieldV2";
-import {
-  useFetchOptionRounds,
-  useInfiniteScroll,
-} from "../../../../hooks/useInfiniteScroll";
-import { useRoundOptionFilterStore } from "../../../../store/filters/optionRounds/store";
+import { IoMdAddCircle, IoMdTrash } from "react-icons/io";
+import InputV2 from "../../../../../components/fields/InputFieldV2";
 import { FormInput } from "./CreateProject";
+import SelectSearchRound from "./SelectSearchRound";
 
 interface CreateInfoRoundProps {
   mainForm: UseFormReturn<FormInput>;
 }
 
-const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
+const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
   const { mainForm } = props;
-  const { watch, getValues, setValue, control } = mainForm;
+  const { watch, getValues, control, trigger } = mainForm;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { rounds } = useMemo(() => getValues(), [watch()]);
-  const { filters } = useRoundOptionFilterStore((state) => state);
 
-  const { data, size, setSize, isLoading } = useFetchOptionRounds(filters);
-  const { list: roundOptions } = useInfiniteScroll({
-    data,
-    loading: isLoading,
-    page: size,
-    onNext: () => setSize(size + 1),
-  });
+  const [startDate, setStartDate] = useState<Date | undefined>(undefined);
+
+  const handleStartDateChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const selectedDate = new Date(event.target.value);
+    setStartDate(selectedDate);
+  };
 
   const roundFieldArray = useFieldArray({
     control,
     name: "rounds",
     keyName: "key",
   });
-  const {
-    append: appendRound,
-    remove: removeRound,
-  } = roundFieldArray;
+  const { append: appendRound, remove: removeRound } = roundFieldArray;
 
-  const handleAddRow = () => {};
-  console.log("data", data);
+  const handleAddRow = () => {
+    appendRound({
+      id: rounds.length + 1,
+      description: "",
+      name: "",
+      projectId: "",
+      type: "U2UMintRoundFCFS",
+      address: null,
+      start: "",
+      end: "",
+      roundId: 0,
+      stakeBefore: "",
+      claimableStart: "",
+      maxPerWallet: 0,
+      price: "",
+      totalNftt: 0,
+      instruction: "",
+      claimableIds: ["2", "2", "3", "4", "5", "6"],
+      requiredStaking: "0",
+    });
+  };
+
+  const handleRemoveRow = (index: number) => {
+    removeRound(index);
+  };
 
   useEffect(() => {
     if (rounds.length <= 0) {
       appendRound({
-        id: 1,
+        id: 0,
         description: "",
         name: "",
         projectId: "",
         type: "U2UMintRoundFCFS",
         address: null,
-        start: "2024-01-05T14:48:00.000Z",
-        end: "2024-03-20T14:48:00.000Z",
+        start: "",
+        end: "",
         roundId: 0,
-        stakeBefore: "2024-01-21T14:48:00.000Z",
-        claimableStart: "2024-03-19T14:48:00.000Z",
+        stakeBefore: "",
+        claimableStart: "",
         maxPerWallet: 0,
         price: "",
         totalNftt: 0,
@@ -65,8 +82,10 @@ const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
     }
   }, []);
 
+  console.log("rounds: ", rounds);
+
   return (
-    <div className="w-full overflow-x-scroll">
+    <div className="min-h-[350px] w-full overflow-x-scroll">
       <Label className="mb-4 text-3xl font-bold">Create Round</Label>
       <div className="my-6">
         <table className="text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
@@ -76,13 +95,13 @@ const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
                 Name
               </th>
               <th scope="col" className="px-6 py-3">
-                Description
+                Type
               </th>
               <th scope="col" className="px-6 py-3">
                 Instruction
               </th>
               <th scope="col" className="px-6 py-3">
-                Type
+                Description
               </th>
               <th scope="col" className="px-6 py-3">
                 Total NFT
@@ -112,12 +131,12 @@ const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
           </thead>
           <tbody>
             {rounds.map((item, itemIndex) => {
-              // const {  } = item.data;
               const prefixField = `rounds.${itemIndex}` as "rounds.0";
 
               return (
                 <tr key={`${itemIndex}-abc`} className="">
                   <td>
+                    <SelectSearchRound />
                     {/* <SelectV2
                       options={roundOptions.concatenatedData}
                       mainForm={mainForm}
@@ -126,8 +145,9 @@ const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
                   </td>
                   <td>
                     <InputV2
+                      readOnly
                       mainForm={mainForm}
-                      fieldName={`${prefixField}.description`}
+                      fieldName={`${prefixField}.type`}
                     />
                   </td>
                   <td>
@@ -139,7 +159,7 @@ const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
                   <td>
                     <InputV2
                       mainForm={mainForm}
-                      fieldName={`${prefixField}.type`}
+                      fieldName={`${prefixField}.description`}
                       readOnly
                     />
                   </td>
@@ -156,16 +176,23 @@ const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
                     />
                   </td>
                   <td>
-                    <InputV2
+                    <div className="w-[300px]">
+                      <Datepicker onChange={handleStartDateChange} />
+                    </div>
+
+                    {/* <InputV2
                       mainForm={mainForm}
                       fieldName={`${prefixField}.start`}
-                    />
+                    /> */}
                   </td>
                   <td>
-                    <InputV2
+                    <div className="w-[300px]">
+                      <Datepicker minDate={startDate} />
+                    </div>
+                    {/* <InputV2
                       mainForm={mainForm}
                       fieldName={`${prefixField}.end`}
-                    />
+                    /> */}
                   </td>
                   <td>
                     <InputV2
@@ -186,11 +213,20 @@ const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
                     />
                   </td>
                   <td className="flex items-center justify-center">
-                    <button className="p-1">
+                    <button
+                      type="button"
+                      className="p-1"
+                      onClick={() => handleRemoveRow(itemIndex)}
+                    >
                       <IoMdTrash color="green" size={24} />
                     </button>
-                    <button className="p-1" onClick={handleAddRow}>
-                      Add row
+                    <button
+                      type="button"
+                      className="flex w-[120px] items-center gap-2 rounded-md bg-brandLinear p-2"
+                      onClick={handleAddRow}
+                    >
+                      <IoMdAddCircle color="white" size={24} />
+                      <Label className="text-base text-white">Add row</Label>
                     </button>
                   </td>
                 </tr>
@@ -203,4 +239,4 @@ const CreateRoundProject: FC<CreateInfoRoundProps> = (props) => {
   );
 };
 
-export default CreateRoundProject;
+export default CreateInfoRound;

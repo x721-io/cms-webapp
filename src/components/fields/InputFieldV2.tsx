@@ -87,7 +87,7 @@ const InputV2 = <T extends FieldValues>(props: InputV2Props<T>) => {
   const colorClass = useMemo(() => {
     switch (dataValidate) {
       case 'is-valid':
-        return "text-success ring-success";
+        return "text-green-500 ring-green-500";
       case 'is-invalid':
         return "text-red-600 border-red-600 border-[0.5px]";
       default:

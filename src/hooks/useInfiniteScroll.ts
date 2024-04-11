@@ -110,8 +110,8 @@ export const useFetchOptionCollections = (filters: APIParams.FetchOptionCollecti
       ...filters,
       page: index + 1,
     }),
-    (params) =>
-      api.fetchOptionCollection(sanitizeObject(params) as APIParams.FetchOptionCollections)
+    // (params) =>
+    //   api.fetchOptionCollection(sanitizeObject(params) as APIParams.FetchOptionCollections)
   );
 };
 
