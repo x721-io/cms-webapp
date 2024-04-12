@@ -133,6 +133,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                   </td>
                   <td>
                     <InputV2
+                      readOnly
                       mainForm={mainForm}
                       fieldName={`${prefixField}.type`}
                     />
@@ -189,7 +190,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                   <td>
                     <InputV2
                       mainForm={mainForm}
-                      fieldName={`${prefixField}.requiredStaking`}
+                      fieldName={`${prefixField}.maxPerWallet`}
                     />
                   </td>
                   <td className="flex items-center justify-center">
