@@ -56,7 +56,7 @@ const SelectSearchRound = <T extends FieldValues>(props: Props<T>) => {
   const { mainForm, prefixField } = props;  
   const { setValue, setError, clearErrors } = mainForm;
   const prefixFieldType = `${prefixField}.type` as 'rounds.0.type'
-  const prefixFieldId = `${prefixField}.id` as 'rounds.0.id'
+  const prefixFieldId = `${prefixField}.roundId` as 'rounds.0.roundId'
 
   const api = useLaunchpadApi();
   const [selectedOption, setSelectedOption] = useState<SelectOptionPropsCustom>({

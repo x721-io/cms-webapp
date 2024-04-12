@@ -1,5 +1,5 @@
 import { Label } from "flowbite-react";
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { UseFormReturn, useFieldArray } from "react-hook-form";
 import { IoMdAddCircle, IoMdTrash } from "react-icons/io";
 import InputV2 from "../../../../../components/fields/InputFieldV2";
@@ -12,18 +12,9 @@ interface CreateInfoRoundProps {
 
 const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
   const { mainForm } = props;
-  const { watch, getValues, control, trigger } = mainForm;
+  const { watch, getValues, control } = mainForm;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { rounds } = useMemo(() => getValues(), [watch()]);
-
-  const [startDate, setStartDate] = useState<Date | undefined>(undefined);
-
-  const handleStartDateChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const selectedDate = new Date(event.target.value);
-    setStartDate(selectedDate);
-  };
 
   const roundFieldArray = useFieldArray({
     control,
@@ -34,23 +25,24 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
 
   const handleAddRow = () => {
     appendRound({
-      id: "",
-      description: "",
-      name: "",
-      projectId: "",
-      type: "U2UMintRoundFCFS",
-      address: null,
+      roundId: "",
       start: "",
       end: "",
-      roundId: "2",
-      stakeBefore: "",
       claimableStart: "",
-      maxPerWallet: 0,
-      price: "",
-      totalNftt: 0,
       instruction: "",
-      claimableIds: ["2", "2", "3", "4", "5", "6"],
-      requiredStaking: "0",
+      description: "",
+      totalNftt: "",
+      price: "",
+      stakeBefore: "",
+      maxPerWallet: "",
+
+      id: "",
+      name: "",
+      projectId: "",
+      type: "",
+      address: null,
+      claimableIds: [],
+      requiredStaking: "",
     });
   };
 
@@ -61,40 +53,49 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
   useEffect(() => {
     if (rounds.length <= 0) {
       appendRound({
-        id: "",
-        description: "",
-        name: "",
-        projectId: "",
-        type: "U2UMintRoundFCFS",
-        address: null,
+        roundId: "",
         start: "",
         end: "",
-        roundId:"0",
-        stakeBefore: "",
         claimableStart: "",
-        maxPerWallet: 0,
-        price: "",
-        totalNftt: 0,
         instruction: "",
-        claimableIds: ["2", "2", "3", "4", "5", "6"],
-        requiredStaking: "0",
+        description: "",
+        totalNftt: "",
+        price: "",
+        stakeBefore: "",
+        maxPerWallet: "",
+
+        id: "",
+        name: "",
+        projectId: "",
+        type: "",
+        address: null,
+        claimableIds: [],
+        requiredStaking: "",
       });
     }
   }, []);
 
-
   return (
     <div className="min-h-[350px] w-full overflow-x-scroll">
-      <Label className="mb-4 text-3xl font-bold">Create Round</Label>
+      <Label className="mb-4 text-3xl font-bold">Rounds</Label>
       <div className="my-6">
         <table className="text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
           <thead className=" bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
-            <tr className="">
+            <tr>
               <th scope="col" className="px-6 py-3">
-                Name
+                Round
               </th>
               <th scope="col" className="px-6 py-3">
                 Type
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Start
+              </th>
+              <th scope="col" className="px-6 py-3">
+                End
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Start claim
               </th>
               <th scope="col" className="px-6 py-3">
                 Instruction
@@ -107,15 +108,6 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
               </th>
               <th scope="col" className="px-6 py-3">
                 Price (U2U)
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Start
-              </th>
-              <th scope="col" className="px-6 py-3">
-                End
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Start claim
               </th>
               <th scope="col" className="px-6 py-3">
                 Staking end
@@ -131,16 +123,36 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
           <tbody>
             {rounds.map((item, itemIndex) => {
               const prefixField = `rounds.${itemIndex}` as "rounds.0";
-
               return (
                 <tr key={`${itemIndex}-abc`} className="">
                   <td>
-                    <SelectSearchRound mainForm={mainForm} prefixField={`${prefixField}`} />
+                    <SelectSearchRound
+                      mainForm={mainForm}
+                      prefixField={`${prefixField}`}
+                    />
                   </td>
                   <td>
                     <InputV2
                       mainForm={mainForm}
                       fieldName={`${prefixField}.type`}
+                    />
+                  </td>
+                  <td>
+                    <InputV2
+                      mainForm={mainForm}
+                      fieldName={`${prefixField}.start`}
+                    />
+                  </td>
+                  <td>
+                    <InputV2
+                      mainForm={mainForm}
+                      fieldName={`${prefixField}.end`}
+                    />
+                  </td>
+                  <td>
+                    <InputV2
+                      mainForm={mainForm}
+                      fieldName={`${prefixField}.claimableStart`}
                     />
                   </td>
                   <td>
@@ -167,24 +179,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                       fieldName={`${prefixField}.price`}
                     />
                   </td>
-                  <td>
-                    <InputV2
-                      mainForm={mainForm}
-                      fieldName={`${prefixField}.start`}
-                    />
-                  </td>
-                  <td>
-                    <InputV2
-                      mainForm={mainForm}
-                      fieldName={`${prefixField}.end`}
-                    />
-                  </td>
-                  <td>
-                    <InputV2
-                      mainForm={mainForm}
-                      fieldName={`${prefixField}.claimableStart`}
-                    />
-                  </td>
+
                   <td>
                     <InputV2
                       mainForm={mainForm}

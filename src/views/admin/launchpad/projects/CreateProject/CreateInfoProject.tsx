@@ -18,11 +18,11 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
   const [uploadLogo, setUploadLogo] = useState(false);
   const api = useLaunchpadApi();
 
-  const { control, setValue, clearErrors, getValues } = mainForm;
+  const { control, setValue, clearErrors } = mainForm;
 
   const handleUploadBanner = async (file?: Blob) => {
     if (!file) {
-      // setValue("banner", "");
+      setValue("banner", "");
       return;
     }
     setUploadBanner(true);
@@ -53,7 +53,7 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
 
   const handleUploadLogo = async (file?: Blob) => {
     if (!file) {
-      // setValue("logo", "");
+      setValue("logo", "");
       return;
     }
     setUploadLogo(true);
@@ -85,14 +85,13 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
       <div className="flex flex-col justify-center gap-6">
         <div className="flex gap-4">
           {/* Banner */}
-          <div className="flex w-1/2 flex-col gap-1">
+          <div className="flex flex-col gap-1 flex-1">
             <label className="text-primary mb-2 block font-semibold">
               Banner
             </label>
             <Controller
               name="banner"
               control={control}
-              // rules={formRulesUploadFile.avatar}
               render={({ field: { value } }) => (
                 <ImageUploader
                   value={value}
@@ -104,10 +103,9 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
                 />
               )}
             />
-            {/* <InputV2 mainForm={mainForm} fieldName="createProject.banner" /> */}
           </div>
           {/* Logo */}
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 flex-1">
             <label className="text-primary mb-2 block font-semibold">
               Logo
             </label>
@@ -126,10 +124,9 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
                 />
               )}
             />
-            {/* <InputV2 mainForm={mainForm} fieldName="createProject.logo" /> */}
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-5 gap-2">
           {/* Collection */}
           <div className="flex flex-col gap-1 ">
             <label className="text-primary mb-2 block font-semibold">
@@ -151,6 +148,22 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
             </label>
             <InputV2 mainForm={mainForm} fieldName="organization" />
           </div>
+          {/* ID on chain */}
+          <div className="flex flex-1 flex-col gap-1">
+            <label className="text-primary mb-2 block font-semibold">
+              ID Onchain
+            </label>
+            <InputV2 mainForm={mainForm} fieldName="idOnchain" />
+          </div>
+          {/* Address */}
+          <div className="flex flex-col gap-1">
+            <label className="text-primary mb-2 block font-semibold">
+              Address
+            </label>
+            <InputV2 mainForm={mainForm} fieldName="address" />
+          </div>
+        </div>
+        <div className="grid grid-cols-5 gap-2">
           {/* Discord */}
           <div className="flex flex-col gap-1">
             <label className="text-primary mb-2 block font-semibold">
@@ -158,8 +171,6 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
             </label>
             <InputV2 mainForm={mainForm} fieldName="discord" />
           </div>
-        </div>
-        <div className="grid grid-cols-4 gap-2">
           {/* Facebook */}
           <div className="flex flex-col gap-1">
             <label className="text-primary mb-2 block font-semibold">
@@ -189,7 +200,6 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
             <InputV2 mainForm={mainForm} fieldName="telegram" />
           </div>
         </div>
-
         {/* Description */}
         <div className="flex flex-col gap-1">
           <label className="text-primary mb-2 block font-semibold">

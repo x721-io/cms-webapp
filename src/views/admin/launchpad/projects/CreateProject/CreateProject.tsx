@@ -38,70 +38,46 @@ export default function CreateProject() {
     instagram: "",
     twitter: "",
     telegram: "",
-    address: '0xxx',
+    address: "0xxx",
     banner: "",
     organization: "",
     logo: "",
-    collectionAddress: '',
+    collectionAddress: "",
     rounds: [],
-    idOnchain: '10'
+    idOnchain: "",
   };
   const schema = yup.object({
-    // createProject: yup.object({
-    //   name: yup.string().required("Please input name"),
-    //   collection: yup.string().required("Please select collection"),
-    //   description: yup.string().required("Please input description"),
-    //   discord: yup.string().required("Please input total discord"),
-    //   facebook: yup.string().required("Please input facebook"),
-    //   instagram: yup.string().required("Please input instagram"),
-    //   twitter: yup.string().required("Please input total twitter"),
-    //   telegram: yup.string().required("Please input telegram"),
-    //   address: yup.string().nullable().required("Please input address"),
-    //   banner: yup.string().required("Please input banner"),
-    //   organization: yup.string().required("Please input organization"),
-    //   logo: yup.string().required("Please input logo"),
-    //   collectionAddress: yup
-    //     .string()
-    //     .nullable()
-    //     .required("Please input collectionAddress"),
-    // }),
-    // rounds: yup
-    //   .array()
-    //   .min(1, "a")
-    //   .of(
-    //     yup.object({
-    //       name: yup.string().nullable().required("Please input name rounds"),
-    //       address: yup
-    //         .string()
-    //         .nullable()
-    //         .required("Please input address rounds"),
-    //       description: yup
-    //         .string()
-    //         .nullable()
-    //         .required("Please input description rounds"),
-    //       start: yup.string().required("Please input start rounds"),
-    //       end: yup.string().required("Please input end rounds"),
-    //       roundId: yup.string().required("Please input roundId"),
-    //       stakeBefore: yup
-    //         .string()
-    //         .required("Please input stake before rounds"),
-    //       claimableStart: yup
-    //         .string()
-    //         .required("Please input claimable start rounds"),
-    //       maxPerWallet: yup
-    //         .string()
-    //         .required("Please input maxPerWallet rounds"),
-    //       price: yup.string().required("Please input price rounds"),
-    //       totalNftt: yup.string().required("Please input totalNft rounds"),
-    //       instruction: yup.string().required("Please input instruction rounds"),
-    //       claimableIds: yup
-    //         .string()
-    //         .required("Please input required staking rounds"),
-    //       requiredStaking: yup
-    //         .string()
-    //         .required("Please input claimable ids rounds"),
-    //     })
-    //   ),
+    banner: yup.string().required("Please input banner"),
+    logo: yup.string().required("Please input logo"),
+    collection: yup.string().required("Please select collection"),
+    name: yup.string().required("Please input name"),
+    organization: yup.string().required("Please input organization"),
+    idOnchain: yup.string().required("Please input in onchain"),
+    address: yup.string().nullable().required("Please input address"),
+    discord: yup.string().required("Please input total discord"),
+    facebook: yup.string().required("Please input facebook"),
+    instagram: yup.string().required("Please input instagram"),
+    twitter: yup.string().required("Please input total twitter"),
+    telegram: yup.string().required("Please input telegram"),
+    description: yup.string().required("Please input description"),
+    collectionAddress: yup.string().nullable().required("Please input collectionAddress"),
+    rounds: yup
+      .array()
+      .min(1, "a")
+      .of(
+        yup.object({
+          roundId: yup.string().required("Please input roundId"),
+          start: yup.string().required("Please input start rounds"),
+          end: yup.string().required("Please input end rounds"),
+          claimableStart: yup.string().required("Please input claimable start rounds"),
+          instruction: yup.string().required("Please input instruction rounds"),
+          description: yup.string().required("Please input instruction description"),
+          totalNftt: yup.string().required("Please input totalNft rounds"),
+          price: yup.string().required("Please input price rounds"),
+          stakeBefore: yup.string().required("Please input staking end"),
+          maxPerWallet: yup.string().required("Please input quantity"),
+        })
+      ),
   });
   const mainForm = useForm<FormState.CreateProject>({
     resolver: yupResolver(schema) as any,
@@ -111,11 +87,8 @@ export default function CreateProject() {
   });
 
   const {
-    setValue,
     handleSubmit,
     reset,
-    formState: { errors },
-    getValues,
   } = mainForm;
 
   const onCreateProject = async (params: FormState.CreateProject) => {

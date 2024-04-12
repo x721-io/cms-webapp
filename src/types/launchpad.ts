@@ -24,8 +24,8 @@ export interface Round {
     end: string;
     type: string;
     price: BigNumberish;
-    maxPerWallet: number;
-    totalNftt: number;
+    maxPerWallet: string;
+    totalNftt: string;
     claimableStart: string;
     claimableIds: any[];
     requiredStaking: BigNumberish;
