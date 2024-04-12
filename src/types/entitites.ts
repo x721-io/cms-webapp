@@ -1,4 +1,5 @@
 import { BigNumberish } from "ethers";
+import { Address } from "wagmi";
 import { MarketEventType } from "./market";
 export type AssetType = "ERC721" | "ERC1155";
 export type EntityStatus = "PENDING" | "SUCCESS" | "FAILED";
@@ -65,6 +66,7 @@ export interface Collection {
   totalNft: number;
   floorPrice: string;
   isVerified: boolean;
+  address: Address;
 }
 
 export interface NFT {

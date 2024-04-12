@@ -43,7 +43,7 @@ export default function UpdateProject({ onClose, show, item }: Props) {
             banner: item?.banner,
             organization: item?.organization,
             logo: item?.logo,
-            collectionId: item?.collectionId,
+            collectionAddress: item?.collectionAddress,
         },
     });
 

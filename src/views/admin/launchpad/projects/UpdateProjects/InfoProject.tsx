@@ -31,7 +31,7 @@ export default function InfoProject({ item }: Props) {
             banner: item?.banner,
             organization: item?.organization,
             logo: item?.logo,
-            collectionId: item?.collectionId,
+            collectionAddress: item?.collectionAddress,
         },
     });
     return (

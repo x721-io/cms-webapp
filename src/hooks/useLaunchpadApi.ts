@@ -68,7 +68,7 @@ export const useLaunchpadApi = () => {
     uploadFile: (
       files: Blob[] | Blob,
       metadata?: Record<string, any>
-    ): Promise<APIResponse.UploadImage> => {
+    ): Promise<any[]> => {
       const form = new FormData();
       if (Array.isArray(files)) {
         files.forEach((file) => {

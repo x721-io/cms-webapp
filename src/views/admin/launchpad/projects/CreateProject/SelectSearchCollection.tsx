@@ -1,10 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useCallback, useEffect, useRef, useState } from "react";
-
+import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { UseFormReturn } from "react-hook-form";
+import { Address } from "wagmi";
 import SelectInput, {
   SelectOptionProps,
 } from "../../../../../components/Form/SelectInput";
 import { useLaunchpadApi } from "../../../../../hooks/useLaunchpadApi";
+import { FormState } from "../../../../../types/form";
+
+interface Props {
+  mainForm: UseFormReturn<FormState.CreateProject>;
+}
 
 const LIMIT = 5;
 
@@ -35,11 +41,14 @@ const useIntersectionObserver = (isDataLoading: boolean) => {
   return { lastEntryRef, setHasMore, setPage, page };
 };
 
-function SelectSearchCollection() {
+const SelectSearchCollection: FC<Props> = (props) => {
+  const { mainForm } = props;
+  const {setValue,setError, clearErrors} = mainForm
   const api = useLaunchpadApi();
   const [selectedOption, setSelectedOption] = useState<SelectOptionProps>({
     label: "",
     value: "",
+    type: "",
   });
   const [productOptions, setProductOptions] = useState<SelectOptionProps[]>([]);
   const [isFetchingProducts, setIsFetchingProducts] = useState(true);
@@ -47,20 +56,23 @@ function SelectSearchCollection() {
   const [searchInput, setSearchInput] = useState("");
   const [debouncedSearchInput, setDebouncedSearchInput] = useState("");
 
-  const handleSelect = (option: SelectOptionProps) => { 
+  const handleSelect = (option: SelectOptionProps) => {
     setSearchInput(option?.label);
     setSelectedOption(option);
+    setValue("collectionAddress", option.value)
+
   };
 
   const transformProductToSelectOptions = (
-    products: { name: string | null; id: string }[]
+    products: { name: string | null; id: string; address: Address, type: string}[]
   ) => {
     if (!products) return [];
 
     return products?.map((product) => {
       return {
         label: `${product?.name}`,
-        value: product?.id?.toString(),
+        value: product?.address?.toString(),
+        type: product?.type
       };
     });
   };
@@ -94,8 +106,11 @@ function SelectSearchCollection() {
   const fetchAndSetProducts = async () => {
     try {
       setIsFetchingProducts(true);
-      const data = await api.searchCollections(debouncedSearchInput, {page: 1, limit: 20})    
-      
+      const data = await api.searchCollections(debouncedSearchInput, {
+        page: 1,
+        limit: 20,
+      });
+
       if (page === 1) setProductOptions([]);
 
       setProductOptions((prev) => [
@@ -128,6 +143,6 @@ function SelectSearchCollection() {
       searchInput={searchInput}
     />
   );
-}
+};
 
 export default SelectSearchCollection;

@@ -14,15 +14,15 @@ export type RoundType =
 export type RoundStatus = 'MINTING' | 'ENDED' | 'UPCOMING' | 'CLAIM';
 
 export interface Round {
-    id: number;
+    id: string;
     name: string;
     description: string;
     projectId: string;
-    roundId: number;
+    roundId: string;
     address: Address | null;
     start: string;
     end: string;
-    type: RoundType;
+    type: string;
     price: BigNumberish;
     maxPerWallet: number;
     totalNftt: number;

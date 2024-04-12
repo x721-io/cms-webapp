@@ -1,13 +1,13 @@
-import { Datepicker, Label } from "flowbite-react";
+import { Label } from "flowbite-react";
 import { FC, useEffect, useMemo, useState } from "react";
 import { UseFormReturn, useFieldArray } from "react-hook-form";
 import { IoMdAddCircle, IoMdTrash } from "react-icons/io";
 import InputV2 from "../../../../../components/fields/InputFieldV2";
-import { FormInput } from "./CreateProject";
+import { FormState } from "../../../../../types/form";
 import SelectSearchRound from "./SelectSearchRound";
 
 interface CreateInfoRoundProps {
-  mainForm: UseFormReturn<FormInput>;
+  mainForm: UseFormReturn<FormState.CreateProject>;
 }
 
 const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
@@ -34,7 +34,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
 
   const handleAddRow = () => {
     appendRound({
-      id: rounds.length + 1,
+      id: "",
       description: "",
       name: "",
       projectId: "",
@@ -42,7 +42,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
       address: null,
       start: "",
       end: "",
-      roundId: 0,
+      roundId: "2",
       stakeBefore: "",
       claimableStart: "",
       maxPerWallet: 0,
@@ -61,7 +61,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
   useEffect(() => {
     if (rounds.length <= 0) {
       appendRound({
-        id: 0,
+        id: "",
         description: "",
         name: "",
         projectId: "",
@@ -69,7 +69,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
         address: null,
         start: "",
         end: "",
-        roundId: 0,
+        roundId:"0",
         stakeBefore: "",
         claimableStart: "",
         maxPerWallet: 0,
@@ -82,7 +82,6 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
     }
   }, []);
 
-  console.log("rounds: ", rounds);
 
   return (
     <div className="min-h-[350px] w-full overflow-x-scroll">
@@ -136,16 +135,10 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
               return (
                 <tr key={`${itemIndex}-abc`} className="">
                   <td>
-                    <SelectSearchRound />
-                    {/* <SelectV2
-                      options={roundOptions.concatenatedData}
-                      mainForm={mainForm}
-                      fieldName={`${prefixField}.name`}
-                    /> */}
+                    <SelectSearchRound mainForm={mainForm} prefixField={`${prefixField}`} />
                   </td>
                   <td>
                     <InputV2
-                      readOnly
                       mainForm={mainForm}
                       fieldName={`${prefixField}.type`}
                     />
@@ -160,7 +153,6 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                     <InputV2
                       mainForm={mainForm}
                       fieldName={`${prefixField}.description`}
-                      readOnly
                     />
                   </td>
                   <td>
@@ -176,23 +168,16 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                     />
                   </td>
                   <td>
-                    <div className="w-[300px]">
-                      <Datepicker onChange={handleStartDateChange} />
-                    </div>
-
-                    {/* <InputV2
+                    <InputV2
                       mainForm={mainForm}
                       fieldName={`${prefixField}.start`}
-                    /> */}
+                    />
                   </td>
                   <td>
-                    <div className="w-[300px]">
-                      <Datepicker minDate={startDate} />
-                    </div>
-                    {/* <InputV2
+                    <InputV2
                       mainForm={mainForm}
                       fieldName={`${prefixField}.end`}
-                    /> */}
+                    />
                   </td>
                   <td>
                     <InputV2
@@ -209,7 +194,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                   <td>
                     <InputV2
                       mainForm={mainForm}
-                      fieldName={`${prefixField}.stakeBefore`}
+                      fieldName={`${prefixField}.requiredStaking`}
                     />
                   </td>
                   <td className="flex items-center justify-center">
