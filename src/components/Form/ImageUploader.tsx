@@ -29,7 +29,7 @@ export default function ImageUploader({
 }: Props) {
   const [file, setFile] = useState<Blob | undefined>();
   const inputRef = useRef<HTMLInputElement>(null);
-
+  
   const fileType = useMemo(() => {
     if (!file) return undefined;
     return file.type.split("/")[0];

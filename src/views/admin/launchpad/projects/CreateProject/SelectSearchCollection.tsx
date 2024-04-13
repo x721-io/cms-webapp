@@ -43,7 +43,7 @@ const useIntersectionObserver = (isDataLoading: boolean) => {
 
 const SelectSearchCollection: FC<Props> = (props) => {
   const { mainForm } = props;
-  const {setValue,setError, clearErrors} = mainForm
+  const {setValue} = mainForm
   const api = useLaunchpadApi();
   const [selectedOption, setSelectedOption] = useState<SelectOptionProps>({
     label: "",
@@ -59,8 +59,7 @@ const SelectSearchCollection: FC<Props> = (props) => {
   const handleSelect = (option: SelectOptionProps) => {
     setSearchInput(option?.label);
     setSelectedOption(option);
-    setValue("collectionAddress", option.value)
-
+    setValue("collectionAddress", option.value);
   };
 
   const transformProductToSelectOptions = (
@@ -87,9 +86,9 @@ const SelectSearchCollection: FC<Props> = (props) => {
     }
   }, [productOptions, totalItems]);
 
-  const getSkipValue = () => {
-    return (page - 1) * LIMIT;
-  };
+  // const getSkipValue = () => {
+  //   return (page - 1) * LIMIT;
+  // };
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {

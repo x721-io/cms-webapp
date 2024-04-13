@@ -17,9 +17,11 @@ export default function TableProject() {
         page: size,
         onNext: () => setSize(size + 1)
     });
+
     const handleDetailProject = (item: any) => {
         setSelectedRound(item);
         setShowModalRoundDetail(true);
+        
     };
 
     if (isLoading) {
