@@ -1,13 +1,13 @@
-import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import Collapsible from "../../Collapsible";
 import routes from "../../../routes";
-import DashIcon from "../../icons/DashIcon";
 import useAuthStore from "../../../store/auth/store";
+import Collapsible from "../../Collapsible";
+import DashIcon from "../../icons/DashIcon";
 
 export const SidebarLinks = () => {
   let location = useLocation();
-  const rolesAccount = useAuthStore((state) => state.profile?.roles || []);
+  const rolesAccount = useAuthStore((state) => (state.profile && state.profile.roles) || []);
+
 
   console.log(rolesAccount);
   const activeRoute = (routeName: string) => {
@@ -48,7 +48,7 @@ export const SidebarLinks = () => {
                     : "font-medium text-gray-500"
                 }`}
               >
-                {route.links?.map((link) => {
+                {route.links && route.links.map((link) => {
                   if (checkAccess(link.roles, rolesAccount)) {
                     return (
                       <Link key={link.name} to={link.path}>
@@ -59,7 +59,7 @@ export const SidebarLinks = () => {
                           >
                             <p
                               className={`leading-1 ml-2 flex ${
-                                activeRoute(link?.path)
+                                activeRoute(link && link.path)
                                   ? "font-bold text-brand-500 dark:text-white"
                                   : "font-medium text-gray-500"
                               }`}

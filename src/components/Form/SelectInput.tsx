@@ -11,7 +11,8 @@ const Loader = () => {
 
 export type SelectOptionProps = {
     label: string // displayed label
-    value: string // value used in computation
+    value: string // value used in computatio
+    type: string
 }
 
 type SelectProps = {
@@ -119,7 +120,7 @@ const SelectInput: FC<SelectProps> = ({
 
     return (
         <div className='relative grow'>
-            <button onClick={openDropdown} className="w-full" type='button'>
+            <button onClick={openDropdown} className="w-full relative" type='button'>
                 {isSearchable ? (
                     <input
                         type='text'

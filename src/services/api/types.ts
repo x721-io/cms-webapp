@@ -159,7 +159,7 @@ export namespace APIParams {
         facebook?: string;
         instagram?: string;
         logo?: string;
-        collectionId?: Address;
+        collectionAddress?: string;
         rounds: Round[];
     }
 
@@ -183,7 +183,7 @@ export namespace APIParams {
         facebook?: string;
         instagram?: string;
         logo?: string;
-        collectionId?: Address;
+        collectionAddress?: string;
         rounds?: Round[];
     }
 

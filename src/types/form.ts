@@ -78,6 +78,7 @@ export namespace FormState {
     }
 
     export interface UpdateProject {
+      id?: string;
       name: string;
       collection: string;
       description: string;
@@ -90,7 +91,9 @@ export namespace FormState {
       banner: string;
       organization: string;
       logo: string;
-      collectionId: Address;
+      collectionAddress: string;
+      rounds: Round[];
+      idOnchain: string;
     }
     export interface CreateProject { 
       name: string;
@@ -105,8 +108,9 @@ export namespace FormState {
       banner: string;
       organization: string;
       logo: string;
-      collectionId: Address;
-      rounds: Round[]
+      collectionAddress: string;
+      rounds: Round[];
+      idOnchain: string;
     }
     export interface ResetPassword {
         id: string;

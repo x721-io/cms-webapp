@@ -103,8 +103,8 @@ export const formRulesUpdateProject = {
   organization: {
     required: "Please input organization"
   },
-  collectionId: {
-    required: "Please input collectionId"
+  collectionAddress: {
+    required: "Please input collectionAddress"
   },
   logo: {
     required: "Please input logo"
@@ -146,8 +146,8 @@ export const formRulesCreateProject = {
   organization: {
     required: "Please input organization"
   },
-  collectionId: {
-    required: "Please input collectionId"
+  collectionAddress: {
+    required: "Please input collectionAddress"
   },
   logo: {
     required: "Please input logo"
