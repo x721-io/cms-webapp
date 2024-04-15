@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Address } from "wagmi";
 import * as yup from "yup";
@@ -28,7 +29,7 @@ export interface FormInput {
 
 export default function CreateProject() {
   const api = useLaunchpadApi();
-
+  const navigate = useNavigate();
   const initValue: FormState.CreateProject = {
     name: "",
     collection: "",
@@ -104,6 +105,8 @@ export default function CreateProject() {
         autoClose: 1000,
         closeButton: true,
       });
+      navigate("/admin/projects");
+      reset?.();
     } catch (error: any) {
       console.error("Update project failed:", error);
       toast.update(toastId, {
@@ -114,7 +117,7 @@ export default function CreateProject() {
         closeButton: true,
       });
     } finally {
-      reset?.();
+      
     }
   };
 

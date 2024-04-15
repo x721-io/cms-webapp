@@ -97,9 +97,9 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
                   value={value}
                   onInput={handleUploadBanner}
                   loading={uploadBanner}
-                  // error={!!errors.avatar}
                   maxSize={20}
                   accept=".png,.jpeg, .png, .gif, .webp"
+                  mainForm={mainForm} fieldName="banner"
                 />
               )}
             />
@@ -112,15 +112,14 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
             <Controller
               name="logo"
               control={control}
-              // rules={formRulesUploadFile.banner}
               render={({ field: { value } }) => (
                 <ImageUploader
                   value={value}
                   onInput={handleUploadLogo}
                   loading={uploadLogo}
-                  // error={!!errors.banner}
                   maxSize={20}
                   accept=".png,.jpeg, .png, .gif, .webp"
+                  mainForm={mainForm} fieldName="logo"
                 />
               )}
             />

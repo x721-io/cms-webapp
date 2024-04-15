@@ -120,7 +120,7 @@ const SelectInput: FC<SelectProps> = ({
 
     return (
         <div className='relative grow'>
-            <button onClick={openDropdown} className="w-full" type='button'>
+            <button onClick={openDropdown} className="w-full relative" type='button'>
                 {isSearchable ? (
                     <input
                         type='text'

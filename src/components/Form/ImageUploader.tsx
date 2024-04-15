@@ -1,14 +1,22 @@
 "use client";
 
 import { Spinner } from "flowbite-react";
-import { useMemo, useRef, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { toast } from "react-toastify";
 import CloseIcon from "../../assets/svg/Close";
+import { useFormHelper } from "../../hooks/useHelper";
 import { classNames } from "../../utils/string";
 import Text from "../Text";
 import Button from "../button";
+import { FormMessageValidate } from "./FormMessageValidate";
 
-interface Props {
+interface Props<T> {
   className?: string;
   value?: string | Blob;
   onInput?: (file: Blob | undefined) => void;
@@ -16,20 +24,29 @@ interface Props {
   error?: boolean;
   accept?: string;
   maxSize?: number;
+  mainForm: UseFormReturn<T extends FieldValues ? T : FieldValues>;
+  fieldName: Path<T extends FieldValues ? T : FieldValues>;
 }
 
-export default function ImageUploader({
-  className,
-  value,
-  onInput,
-  loading,
-  error,
-  accept,
-  maxSize = 100, // 100 MB
-}: Props) {
+const ImageUploader = <T extends FieldValues>(props: Props<T>) => {
+  const {
+    mainForm,
+    fieldName,
+    className,
+    value,
+    onInput,
+    loading,
+    error,
+    accept,
+    maxSize = 100, // 100 MB
+  } = props;
+  const { onValidateForm } = useFormHelper()
+  const { control } = mainForm
+  const dataValidate = onValidateForm({ mainForm, fieldName });
+
   const [file, setFile] = useState<Blob | undefined>();
   const inputRef = useRef<HTMLInputElement>(null);
-  
+
   const fileType = useMemo(() => {
     if (!file) return undefined;
     return file.type.split("/")[0];
@@ -44,6 +61,17 @@ export default function ImageUploader({
     if (!file) return "";
     return URL.createObjectURL(file);
   }, [file, value]);
+
+  const colorClass = useMemo(() => {
+    switch (dataValidate) {
+      case 'is-valid':
+        return "text-green-500 ring-green-500";
+      case 'is-invalid':
+        return "text-red-600 border-red-600 border-[0.5px]";
+      default:
+        return "text-primary focus-visible:ring-primary border-gray-300 border";
+    }
+  }, [dataValidate]);
 
   const handleInputImage = (files: FileList | null) => {
     if (files && files[0].size < maxSize * 1024 ** 2) {
@@ -67,9 +95,9 @@ export default function ImageUploader({
   const renderFile = () => {
     if (!file) {
       return (
-        <div className="w-full h-full flex flex-col justify-center items-center gap-6">
+        <div className="flex h-full w-full flex-col items-center justify-center gap-6 mb-4">
           <Text
-            className="font-semibold text-secondary text-center"
+            className="text-secondary text-center font-semibold"
             variant="body-24"
           >
             <span className="uppercase">{accept?.split(",").join(", ")}</span>{" "}
@@ -87,20 +115,25 @@ export default function ImageUploader({
             alt=""
             width={256}
             height={256}
-            className="w-auto h-full object-contain rounded-2xl m-auto"
+            // className="m-auto h-full w-auto rounded-2xl object-contain"
+            className={classNames(
+              'm-auto h-full w-auto rounded-2xl object-contain',
+              className,
+              onValidateForm({ mainForm, fieldName }) === "is-invalid" && colorClass,
+            )}
           />
         );
       case "video":
         return (
-          <video className="w-full h-full rounded-2xl" controls>
+          <video className="h-full w-full rounded-2xl" controls>
             <source src={URL.createObjectURL(file)} type={file.type} />
             Your browser does not support the video tag.
           </video>
         );
       case "audio":
         return (
-          <div className="w-full h-full rounded-2xl bg-black flex justify-center items-end p-2">
-            <audio className="w-full h-[25px]" controls>
+          <div className="flex h-full w-full items-end justify-center rounded-2xl bg-black p-2">
+            <audio className="h-[25px] w-full" controls>
               <source src={URL.createObjectURL(file)} type={file.type} />
               Your browser does not support the audio tag.
             </audio>
@@ -111,19 +144,30 @@ export default function ImageUploader({
     }
   };
 
+  useEffect(() => {
+    if (typeof value === "string" && value !== "") {
+      fetch(value)
+        .then((res) => res.blob())
+        .then((blob) => setFile(blob))
+        .catch((error) => console.error("Error loading image:", error));
+    } else {
+      setFile(undefined);
+    }
+  }, [value]);
+
   return (
     <div
       className={classNames(
-        "relative cursor-pointer p-3 border border-dashed rounded-2xl w-full h-60",
-        error ? "border-error" : "border-tertiary",
-        className,
+        "relative h-60 w-full cursor-pointer rounded-2xl border border-dashed p-3",
+        onValidateForm({ mainForm, fieldName }) === "is-invalid" && colorClass,
+        className
       )}
     >
       <input
         className={
           !!file
             ? "hidden"
-            : `absolute left-0 right-0 w-full h-full opacity-0 cursor-pointer`
+            : `absolute left-0 right-0 h-full w-full cursor-pointer opacity-0`
         }
         type="file"
         ref={inputRef}
@@ -132,6 +176,7 @@ export default function ImageUploader({
       />
 
       {renderFile()}
+      <FormMessageValidate mainForm={mainForm} fieldName={fieldName} />
 
       {!!file &&
         (loading ? (
@@ -139,7 +184,7 @@ export default function ImageUploader({
         ) : (
           <Button
             variant="icon"
-            className="absolute right-0 top-[-18px] bg-gray-200 rounded-md"
+            className="absolute right-0 top-[-18px] rounded-md bg-gray-200"
             onClick={handleClearFile}
           >
             <CloseIcon width={20} height={20} />
@@ -147,4 +192,6 @@ export default function ImageUploader({
         ))}
     </div>
   );
-}
+};
+
+export default ImageUploader
