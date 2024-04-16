@@ -4,6 +4,8 @@ import { UseFormReturn, useFieldArray } from "react-hook-form";
 import { IoMdAddCircle, IoMdTrash } from "react-icons/io";
 import InputV2 from "../../../../../components/fields/InputFieldV2";
 import { FormState } from "../../../../../types/form";
+import DatePickerRange from "./DatePickerRange";
+import DatePickerSingle from "./DatePickerSingle";
 import SelectSearchRound from "./SelectSearchRound";
 
 interface CreateInfoRoundProps {
@@ -12,7 +14,7 @@ interface CreateInfoRoundProps {
 
 const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
   const { mainForm } = props;
-  const { watch, getValues, control } = mainForm;
+  const { watch, getValues, setValue, control } = mainForm;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { rounds } = useMemo(() => getValues(), [watch()]);
 
@@ -89,10 +91,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                 Type
               </th>
               <th scope="col" className="px-6 py-3">
-                Start
-              </th>
-              <th scope="col" className="px-6 py-3">
-                End
+                Start - End
               </th>
               <th scope="col" className="px-6 py-3">
                 Start claim
@@ -129,6 +128,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                     <SelectSearchRound
                       mainForm={mainForm}
                       prefixField={`${prefixField}`}
+                      fieldName={`${prefixField}.roundId`}
                     />
                   </td>
                   <td>
@@ -139,20 +139,16 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                     />
                   </td>
                   <td>
-                    <InputV2
+                    <DatePickerRange
                       mainForm={mainForm}
+                      prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.start`}
                     />
                   </td>
                   <td>
-                    <InputV2
+                    <DatePickerSingle
                       mainForm={mainForm}
-                      fieldName={`${prefixField}.end`}
-                    />
-                  </td>
-                  <td>
-                    <InputV2
-                      mainForm={mainForm}
+                      prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.claimableStart`}
                     />
                   </td>
@@ -182,8 +178,9 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                   </td>
 
                   <td>
-                    <InputV2
+                  <DatePickerSingle
                       mainForm={mainForm}
+                      prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.stakeBefore`}
                     />
                   </td>

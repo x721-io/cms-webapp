@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import useAuthStore from "../../../../store/auth/store";
-import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
 import { Editor } from "@tinymce/tinymce-react";
-import { FormState } from "../../../../types/form";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import {
   TINYMCE_API_KEY,
   TINYMCE_PLUGINS,
   TINYMCE_TOOLBAR,
 } from "../../../../config/contanst";
+import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
+import useAuthStore from "../../../../store/auth/store";
 
 interface FormData {
   title: string;
@@ -28,7 +26,7 @@ export default function CreateBlog() {
 
   const { setCredentials, credentials } = useAuthStore();
 
-  const bearerToken = credentials?.accessToken;
+  const bearerToken = credentials && credentials.accessToken;
 
   const { register, handleSubmit } = useForm<FormData>();
 
@@ -74,7 +72,6 @@ export default function CreateBlog() {
 
       const formData = new FormData();
       formData.append("file", blobInfo.blob(), blobInfo.filename());
-      //console.log(blobInfo.filename())
 
       xhr.upload.onprogress = (e) => {
         progress((e.loaded / e.total) * 100);

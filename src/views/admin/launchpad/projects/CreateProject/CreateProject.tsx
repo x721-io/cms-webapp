@@ -50,7 +50,7 @@ export default function CreateProject() {
   const schema = yup.object({
     banner: yup.string().required("Please input banner"),
     logo: yup.string().required("Please input logo"),
-    // collection: yup.string().required("Please select collection"),
+    collection: yup.string().required("Please select collection"),
     name: yup.string().required("Please input name"),
     organization: yup.string().required("Please input organization"),
     idOnchain: yup.string().required("Please input in onchain"),
@@ -92,9 +92,9 @@ export default function CreateProject() {
     reset,
     formState: {errors}
   } = mainForm;
-  console.log(errors);
+  // console.log(errors);
   
-  const onCreateProject = async (params: FormState.CreateProject) => {
+  const onCreateProject = async (params: FormState.CreateProject) => {    
     const toastId = toast.loading("Uploading Project...", { type: "info" });
     try {
       await api.createProjects(params);

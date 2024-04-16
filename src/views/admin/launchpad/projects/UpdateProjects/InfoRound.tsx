@@ -4,6 +4,8 @@ import { UseFormReturn, useFieldArray } from "react-hook-form";
 import { IoMdAddCircle, IoMdTrash } from "react-icons/io";
 import InputV2 from "../../../../../components/fields/InputFieldV2";
 import { FormState } from "../../../../../types/form";
+import DatePickerRange from "../CreateProject/DatePickerRange";
+import DatePickerSingle from "../CreateProject/DatePickerSingle";
 import SelectSearchRound from "../CreateProject/SelectSearchRound";
 
 interface Props {
@@ -20,11 +22,10 @@ const InfoRound: FC<Props> = (props) => {
     name: "rounds",
     keyName: "key",
   });
-  console.log('rounds: ', rounds);
-  
+
   useEffect(() => {
     if (item && item.rounds) {
-      item.rounds.forEach((roundData: any, index : any) => {
+      item.rounds.forEach((roundData: any, index: any) => {
         const prefixField = `rounds.${index}`;
         Object.keys(roundData).forEach((key) => {
           const fieldName = `${prefixField}.${key}` as "rounds.0";
@@ -34,7 +35,6 @@ const InfoRound: FC<Props> = (props) => {
       });
     }
   }, [item, setValue]);
-
 
   const { append: appendRound, remove: removeRound } = roundFieldArray;
   const handleAddRow = () => {
@@ -58,15 +58,12 @@ const InfoRound: FC<Props> = (props) => {
       claimableIds: [],
       requiredStaking: "",
     });
-    setValue('rounds', item.rounds)
-    
-
+    setValue("rounds", item.rounds);
   };
 
   const handleRemoveRow = (index: number) => {
     removeRound(index);
   };
-
 
   return (
     <div className="w-full">
@@ -81,10 +78,7 @@ const InfoRound: FC<Props> = (props) => {
                 Type
               </th>
               <th scope="col" className="px-6 py-3">
-                Start
-              </th>
-              <th scope="col" className="px-6 py-3">
-                End
+                Start - End
               </th>
               <th scope="col" className="px-6 py-3">
                 Start claim
@@ -121,6 +115,7 @@ const InfoRound: FC<Props> = (props) => {
                     <SelectSearchRound
                       mainForm={mainForm}
                       prefixField={`${prefixField}`}
+                      fieldName={`${prefixField}.roundId`}
                     />
                   </td>
                   <td>
@@ -131,20 +126,16 @@ const InfoRound: FC<Props> = (props) => {
                     />
                   </td>
                   <td>
-                    <InputV2
+                    <DatePickerRange
                       mainForm={mainForm}
+                      prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.start`}
                     />
                   </td>
                   <td>
-                    <InputV2
+                    <DatePickerSingle
                       mainForm={mainForm}
-                      fieldName={`${prefixField}.end`}
-                    />
-                  </td>
-                  <td>
-                    <InputV2
-                      mainForm={mainForm}
+                      prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.claimableStart`}
                     />
                   </td>
@@ -174,8 +165,9 @@ const InfoRound: FC<Props> = (props) => {
                   </td>
 
                   <td>
-                    <InputV2
+                    <DatePickerSingle
                       mainForm={mainForm}
+                      prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.stakeBefore`}
                     />
                   </td>

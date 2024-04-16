@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
-import Dropdown from "../../../../../components/dropdown";
 import { MdPassword, MdRemove } from "react-icons/md";
+import Dropdown from "../../../../../components/dropdown";
 import { ADMINISTRATOR } from "../../../../../config/contanst";
-import UpdateRolesModal from "./UpdateRolesModal";
-import ResetPasswordModal from "./ResetPasswordModal";
 import useAuthStore from "../../../../../store/auth/store";
+import ResetPasswordModal from "./ResetPasswordModal";
+import UpdateRolesModal from "./UpdateRolesModal";
 
 interface Props {
   accountId: string;
@@ -18,8 +18,8 @@ function CardMenu({ transparent, roles, accountId }: Props) {
   const [open, setOpen] = React.useState(false);
   const [showUpdateRolesModal, setShoUpdateRolesModal] = useState(false);
   const [showResetPasswordModal, setShoResetPasswordModal] = useState(false);
+  const accountRoles = useAuthStore((state) => state.profile && state.profile.roles ? state.profile.roles : []);
 
-  const accountRoles = useAuthStore((state) => state.profile?.roles || []);
 
   const roleExists = (role: string) => {
     return accountRoles.includes(role);

@@ -1,23 +1,23 @@
 // Icon Imports
 import {
-  MdBarChart,
-  MdBlock,
-  MdHome,
-  MdOutlineShoppingCart,
+    MdAccountBox,
+    MdBarChart,
+    MdHome,
+    MdOutlineShoppingCart,
+    MdPeople
 } from 'react-icons/md';
 
 import {
-  ADMIN_COLLECTION,
-  ADMIN_LAUNCHPAD,
-  ADMIN_MARKETPLACE,
-  ADMIN_NFT,
-  ADMIN_USER,
-  ADMINISTRATOR,
-  VIEWER,
+    ADMIN_COLLECTION,
+    ADMIN_LAUNCHPAD,
+    ADMIN_MARKETPLACE,
+    ADMIN_NFT,
+    ADMIN_USER,
+    ADMINISTRATOR,
+    VIEWER,
 } from './config/contanst';
 import AccountDetail from './views/admin/account/accountDetail';
 import Accounts from './views/admin/account/accounts';
-import CreateBlog from './views/admin/account/blog';
 import CreateAccount from './views/admin/account/create';
 import MainDashboard from './views/admin/AdminDashboard';
 import CreateProject from './views/admin/launchpad/projects/CreateProject/CreateProject';
@@ -86,14 +86,14 @@ const routes: RoutesType[] = [
     {
         name: 'Profile',
         layout: '/admin',
-        icon: <MdBarChart className="h-6 w-6" />,
+        icon: <MdPeople className="h-6 w-6" />,
         path: 'profile',
         roles: [VIEWER],
         component: <Profile />,
     },
     {
         name: 'Account',
-        icon: <MdBarChart className="h-6 w-6" />,
+        icon: <MdAccountBox className="h-6 w-6" />,
         path: 'account',
         roles: [VIEWER],
         links: [
@@ -116,19 +116,19 @@ const routes: RoutesType[] = [
             },
         ],
     },
-    {
-        name: 'Blog',
-        icon: <MdBlock className="h-6 w-6" />,
-        path: 'blog',
-        roles: [VIEWER],
-        links: [
-            {
-                name: 'Create Blog',
-                path: 'create-blog',
-                component: <CreateBlog />,
-            },
-            { name: 'Blogs', path: 'blogs', component: <>AAAAA</> },
-        ],
-    },
+    // {
+    //     name: 'Blog',
+    //     icon: <MdBlock className="h-6 w-6" />,
+    //     path: 'blog',
+    //     roles: [VIEWER],
+    //     links: [
+    //         {
+    //             name: 'Create Blog',
+    //             path: 'create-blog',
+    //             component: <CreateBlog />,
+    //         },
+    //         { name: 'Blogs', path: 'blogs', component: <>AAAAA</> },
+    //     ],
+    // },
 ];
 export default routes;

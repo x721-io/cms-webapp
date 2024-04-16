@@ -26,7 +26,6 @@ const modalTheme: CustomFlowbiteTheme["modal"] = {
 
 export default function UpdateProject({ onClose, show, item }: Props) {
   const api = useLaunchpadApi();
-    console.log('item: ', item);
     
   const { updateFilters: updateProjectFilters } = useProjectFilterStore(
     (state) => state
@@ -49,9 +48,7 @@ export default function UpdateProject({ onClose, show, item }: Props) {
     collectionAddress: "",
     rounds: [],
     idOnchain: "",
-  };
-  console.log('initValue: ', initValue);
-  
+  };  
 
   const schema = yup.object({
     banner: yup.string().required("Please input banner"),
@@ -100,11 +97,8 @@ export default function UpdateProject({ onClose, show, item }: Props) {
   } = mainForm;
   console.log('error', errors);
   
-
-  
   const onUpdateProject = async (params: FormState.UpdateProject) => {
     const toastId = toast.loading("Uploading Project...", { type: "info" });
-    console.log("param: ", params);
     try {
       await api.updateProject(params);
       updateProjectFilters(params);

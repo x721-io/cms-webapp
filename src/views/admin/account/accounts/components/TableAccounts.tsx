@@ -1,15 +1,15 @@
+import { Spinner } from "flowbite-react";
+import { useState } from "react";
+import Text from "../../../../../components/Text";
+import { VIEWER } from "../../../../../config/contanst";
 import {
   useFetchAccounts,
   useInfiniteScroll,
 } from "../../../../../hooks/useInfiniteScroll";
-import { useAccountFilterStore } from "../../../../../store/filters/accounts/store";
-import { Spinner } from "flowbite-react";
-import Text from "../../../../../components/Text";
-import { getUserAvatarImage } from "../../../../../utils/string";
-import { useState } from "react";
 import { useMarketplaceApi } from "../../../../../hooks/useMarketplaceApi";
+import { useAccountFilterStore } from "../../../../../store/filters/accounts/store";
+import { getUserAvatarImage } from "../../../../../utils/string";
 import CardMenu from "./CardMenu";
-import { VIEWER } from "../../../../../config/contanst";
 
 type CheckboxState = Record<string, boolean>;
 
@@ -100,7 +100,7 @@ export default function TableAccounts() {
           </tr>
         </thead>
         <tbody>
-          {accounts.concatenatedData?.map((account: any) => (
+          {accounts.concatenatedData && accounts.concatenatedData.map((account: any) => (
             <tr
               key={account.id}
               className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"

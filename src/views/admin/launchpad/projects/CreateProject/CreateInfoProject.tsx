@@ -131,7 +131,7 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
             <label className="text-primary mb-2 block font-semibold">
               Collection
             </label>
-            <SelectSearchCollection mainForm={mainForm} />
+            <SelectSearchCollection mainForm={mainForm} fieldName="collection" />
           </div>
           {/* Name */}
           <div className="flex flex-col gap-1">

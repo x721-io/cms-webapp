@@ -24,7 +24,6 @@ export default function SearchCollectionInput() {
   } = useSWRMutation(text.collection || null, (text) =>
     api.searchCollections(text, {page: 1, limit: 20}),
   );
-  console.log('collectionSearchData: ', collectionSearchData);
   
   const handleSearch = () => {
     if (!searchKey || !text[searchKey]) return;

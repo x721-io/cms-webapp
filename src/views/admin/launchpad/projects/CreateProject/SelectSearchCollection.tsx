@@ -1,6 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { UseFormReturn } from "react-hook-form";
+import {
+  InputHTMLAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { FieldValues, UseFormReturn } from "react-hook-form";
 import { Address } from "wagmi";
 import SelectInput, {
   SelectOptionProps,
@@ -8,8 +14,9 @@ import SelectInput, {
 import { useLaunchpadApi } from "../../../../../hooks/useLaunchpadApi";
 import { FormState } from "../../../../../types/form";
 
-interface Props {
+interface Props<T> extends InputHTMLAttributes<HTMLInputElement> {
   mainForm: UseFormReturn<FormState.CreateProject>;
+  fieldName: any;
 }
 
 const LIMIT = 5;
@@ -41,9 +48,9 @@ const useIntersectionObserver = (isDataLoading: boolean) => {
   return { lastEntryRef, setHasMore, setPage, page };
 };
 
-const SelectSearchCollection: FC<Props> = (props) => {
-  const { mainForm } = props;
-  const {setValue} = mainForm
+const SelectSearchCollection = <T extends FieldValues>(props: Props<T>) => {
+  const { mainForm, fieldName } = props;
+  const { setValue } = mainForm;
   const api = useLaunchpadApi();
   const [selectedOption, setSelectedOption] = useState<SelectOptionProps>({
     label: "",
@@ -56,14 +63,20 @@ const SelectSearchCollection: FC<Props> = (props) => {
   const [searchInput, setSearchInput] = useState("");
   const [debouncedSearchInput, setDebouncedSearchInput] = useState("");
 
-  const handleSelect = (option: SelectOptionProps) => {
+  const handleSelectCollection = (option: SelectOptionProps) => {
     setSearchInput(option?.label);
     setSelectedOption(option);
+    setValue("collection", option.value);
     setValue("collectionAddress", option.value);
   };
 
   const transformProductToSelectOptions = (
-    products: { name: string | null; id: string; address: Address, type: string}[]
+    products: {
+      name: string | null;
+      id: string;
+      address: Address;
+      type: string;
+    }[]
   ) => {
     if (!products) return [];
 
@@ -71,7 +84,7 @@ const SelectSearchCollection: FC<Props> = (props) => {
       return {
         label: `${product?.name}`,
         value: product?.address?.toString(),
-        type: product?.type
+        type: product?.type,
       };
     });
   };
@@ -134,12 +147,14 @@ const SelectSearchCollection: FC<Props> = (props) => {
       options={productOptions}
       selected={selectedOption}
       placeholder="Select Collection"
-      handleSelect={handleSelect}
+      handleSelect={handleSelectCollection}
       isFetchingOptions={isFetchingProducts}
       lastOptionRef={lastEntryRef}
       isSearchable={true}
       setSearchInput={setSearchInput}
       searchInput={searchInput}
+      fieldName={fieldName}
+      mainForm={mainForm}
     />
   );
 };

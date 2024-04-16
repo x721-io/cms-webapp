@@ -7,7 +7,7 @@ import {
   useState
 } from "react";
 
-import { FieldValues, UseFormReturn } from "react-hook-form";
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import SelectInput, {
   SelectOptionProps,
 } from "../../../../../components/Form/SelectInput";
@@ -17,6 +17,7 @@ import { FormState } from "../../../../../types/form";
 interface Props<T> extends InputHTMLAttributes<HTMLInputElement> {
   mainForm: UseFormReturn<FormState.CreateProject>;
   prefixField: any;
+  fieldName: Path<T extends FieldValues ? T : FieldValues>;
 }
 
 interface SelectOptionPropsCustom extends SelectOptionProps {
@@ -53,7 +54,7 @@ const useIntersectionObserver = (isDataLoading: boolean) => {
 };
 
 const SelectSearchRound = <T extends FieldValues>(props: Props<T>) => {
-  const { mainForm, prefixField } = props;  
+  const { mainForm, prefixField, fieldName } = props;  
   const { setValue, setError, clearErrors } = mainForm;
   const prefixFieldType = `${prefixField}.type` as 'rounds.0.type'
   const prefixFieldId = `${prefixField}.roundId` as 'rounds.0.roundId'
@@ -155,6 +156,8 @@ const SelectSearchRound = <T extends FieldValues>(props: Props<T>) => {
       isSearchable={true}
       setSearchInput={setSearchInput}
       searchInput={searchInput}
+      mainForm={mainForm}
+      fieldName={fieldName}
     />
   );
 };
