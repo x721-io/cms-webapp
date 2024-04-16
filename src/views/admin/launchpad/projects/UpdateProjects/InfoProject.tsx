@@ -182,7 +182,7 @@ const InfoProject: FC<Props> = (props) => {
           <label className="text-primary mb-2 block font-semibold">
             Collection
           </label>
-          <SelectSearchCollection mainForm={mainForm} fieldName="collection" />
+          <SelectSearchCollection mainForm={mainForm} fieldNameCollection="collection" fieldNameCollectionAddress="collectionAddress" />
         </div>
         {/* Name */}
         <div className="flex flex-col gap-1">

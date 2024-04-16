@@ -51,18 +51,6 @@ const useListenForOutsideClicks = (onOutsideClick: () => void) => {
   return { elementRef };
 };
 
-// const SelectInput: FC<SelectProps> = ({
-//   options,
-//   isFetchingOptions,
-//   lastOptionRef,
-//   isSearchable,
-//   searchInput,
-//   selected = { label: "", value: "" },
-//   placeholder = "Select",
-//   handleSelect,
-//   setSearchInput,
-// }) => {
-
 const SelectInput = <T extends FieldValues>(props: SelectProps<T>) => {
   const {
     fieldName,
@@ -72,7 +60,7 @@ const SelectInput = <T extends FieldValues>(props: SelectProps<T>) => {
     lastOptionRef,
     isSearchable,
     searchInput,
-    selected = { label: "", value: "" },
+    selected,
     placeholder = "Select",
     handleSelect,
     setSearchInput,
@@ -129,7 +117,6 @@ const SelectInput = <T extends FieldValues>(props: SelectProps<T>) => {
     return options?.length > 0
       ? options?.map((option, index) => {
           const isSelected = selected?.value === option.value;
-
           return (
             <button
               type="button"
@@ -185,7 +172,6 @@ const SelectInput = <T extends FieldValues>(props: SelectProps<T>) => {
                   'block h-12 w-full min-w-72 rounded-2xl border border-gray-300 p-3 text-base outline-none transition-all placeholder:font-light placeholder:text-gray-200 focus-visible:ring-[0.5px]',
                   onValidateForm({ mainForm, fieldName }) === "is-invalid" && colorClass,
                 )}
-                // className="block h-12 w-full min-w-72 rounded-2xl border border-gray-300 p-3 text-base outline-none transition-all placeholder:font-light placeholder:text-gray-200 focus-visible:ring-[0.5px]"
                 onChange={(ev) => {
                   setSearchInput?.(ev.target.value);
                 }}

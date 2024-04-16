@@ -26,26 +26,31 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
   const { append: appendRound, remove: removeRound } = roundFieldArray;
 
   const handleAddRow = () => {
-    appendRound({
-      roundId: "",
-      start: "",
-      end: "",
-      claimableStart: "",
-      instruction: "",
-      description: "",
-      totalNftt: "",
-      price: "",
-      stakeBefore: "",
-      maxPerWallet: "",
+    appendRound(
+      {
+        roundId: "",
+        start: "",
+        end: "",
+        claimableStart: "",
+        instruction: "",
+        description: "",
+        totalNftt: "",
+        price: "",
+        stakeBefore: "",
+        maxPerWallet: "",
 
-      id: "",
-      name: "",
-      projectId: "",
-      type: "",
-      address: null,
-      claimableIds: [],
-      requiredStaking: "",
-    });
+        id: "",
+        name: "",
+        projectId: "",
+        type: "",
+        address: null,
+        claimableIds: [],
+        requiredStaking: "",
+      },
+      {
+        shouldFocus: false,
+      }
+    );
   };
 
   const handleRemoveRow = (index: number) => {
@@ -73,6 +78,9 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
         address: null,
         claimableIds: [],
         requiredStaking: "",
+      },
+      {
+        shouldFocus: false,
       });
     }
   }, []);
@@ -178,7 +186,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                   </td>
 
                   <td>
-                  <DatePickerSingle
+                    <DatePickerSingle
                       mainForm={mainForm}
                       prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.stakeBefore`}

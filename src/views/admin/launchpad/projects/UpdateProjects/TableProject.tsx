@@ -2,8 +2,8 @@ import { Spinner } from "flowbite-react";
 import { useState } from "react";
 import Text from "../../../../../components/Text";
 import {
-    useFetchProjectList,
-    useInfiniteScroll,
+  useFetchProjectList,
+  useInfiniteScroll,
 } from "../../../../../hooks/useInfiniteScroll";
 import { useProjectFilterStore } from "../../../../../store/filters/projects/store";
 import UpdateProject from "./UpdateProject";
@@ -59,7 +59,7 @@ export default function TableProject() {
   console.log("items.concatenatedData: ", items.concatenatedData);
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-4 gap-4">
       {items.concatenatedData?.map((item) => (
         <div
           key={item.id}

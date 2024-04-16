@@ -53,7 +53,7 @@ export default function UpdateProject({ onClose, show, item }: Props) {
   const schema = yup.object({
     banner: yup.string().required("Please input banner"),
     logo: yup.string().required("Please input logo"),
-    // collection: yup.string().required("Please select collection"),
+    collection: yup.string().required("Please select collection"),
     name: yup.string().required("Please input name"),
     organization: yup.string().required("Please input organization"),
     idOnchain: yup.string().required("Please input in onchain"),
@@ -71,8 +71,8 @@ export default function UpdateProject({ onClose, show, item }: Props) {
       .of(
         yup.object({
           roundId: yup.string().required("Please input roundId"),
-          start: yup.string().required("Please input start rounds"),
-          end: yup.string().required("Please input end rounds"),
+          // start: yup.string().required("Please input start rounds"),
+          // end: yup.string().required("Please input end rounds"),
           claimableStart: yup.string().required("Please input claimable start rounds"),
           instruction: yup.string().required("Please input instruction rounds"),
           description: yup.string().required("Please input instruction description"),
@@ -127,7 +127,8 @@ export default function UpdateProject({ onClose, show, item }: Props) {
     onClose?.();
     reset?.();
   };
-  
+    console.log('item: ', item);
+    
   return (
     <Modal
       theme={modalTheme}

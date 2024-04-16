@@ -4,19 +4,19 @@ import {
   useCallback,
   useEffect,
   useRef,
-  useState,
+  useState
 } from "react";
-import { FieldValues, UseFormReturn } from "react-hook-form";
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { Address } from "wagmi";
 import SelectInput, {
   SelectOptionProps,
 } from "../../../../../components/Form/SelectInput";
 import { useLaunchpadApi } from "../../../../../hooks/useLaunchpadApi";
-import { FormState } from "../../../../../types/form";
 
 interface Props<T> extends InputHTMLAttributes<HTMLInputElement> {
-  mainForm: UseFormReturn<FormState.CreateProject>;
-  fieldName: any;
+  mainForm: UseFormReturn<T extends FieldValues ? T : FieldValues>;
+  fieldNameCollection: Path<T extends FieldValues ? T : FieldValues>;
+  fieldNameCollectionAddress: Path<T extends FieldValues ? T : FieldValues>;
 }
 
 const LIMIT = 5;
@@ -49,8 +49,10 @@ const useIntersectionObserver = (isDataLoading: boolean) => {
 };
 
 const SelectSearchCollection = <T extends FieldValues>(props: Props<T>) => {
-  const { mainForm, fieldName } = props;
-  const { setValue } = mainForm;
+  const { mainForm,  fieldNameCollection,fieldNameCollectionAddress } = props;
+
+ 
+
   const api = useLaunchpadApi();
   const [selectedOption, setSelectedOption] = useState<SelectOptionProps>({
     label: "",
@@ -62,12 +64,14 @@ const SelectSearchCollection = <T extends FieldValues>(props: Props<T>) => {
   const [totalItems, setTotalItems] = useState(0);
   const [searchInput, setSearchInput] = useState("");
   const [debouncedSearchInput, setDebouncedSearchInput] = useState("");
-
+  const { setValue, trigger } = mainForm;
+  // const dataFieldNameCollection = useMemo(()=>getValues(fieldNameCollection),[watch(fieldNameCollection)])
   const handleSelectCollection = (option: SelectOptionProps) => {
     setSearchInput(option?.label);
     setSelectedOption(option);
-    setValue("collection", option.value);
-    setValue("collectionAddress", option.value);
+    setValue(fieldNameCollection, option.label as any);
+    setValue(fieldNameCollectionAddress, option.value as any);
+    trigger(fieldNameCollection);
   };
 
   const transformProductToSelectOptions = (
@@ -153,7 +157,7 @@ const SelectSearchCollection = <T extends FieldValues>(props: Props<T>) => {
       isSearchable={true}
       setSearchInput={setSearchInput}
       searchInput={searchInput}
-      fieldName={fieldName}
+      fieldName={fieldNameCollection}
       mainForm={mainForm}
     />
   );

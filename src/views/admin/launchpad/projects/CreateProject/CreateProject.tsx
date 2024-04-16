@@ -27,7 +27,7 @@ export interface FormInput {
   rounds: Round[];
 }
 
-export default function CreateProject() {
+const CreateProject=()=> {
   const api = useLaunchpadApi();
   const navigate = useNavigate();
   const initValue: FormState.CreateProject = {
@@ -68,8 +68,8 @@ export default function CreateProject() {
       .of(
         yup.object({
           roundId: yup.string().required("Please input roundId"),
-          start: yup.string().required("Please input start rounds"),
-          end: yup.string().required("Please input end rounds"),
+          // start: yup.string().required("Please input start rounds"),
+          // end: yup.string().required("Please input end rounds"),
           claimableStart: yup.string().required("Please input claimable start rounds"),
           instruction: yup.string().required("Please input instruction rounds"),
           description: yup.string().required("Please input instruction description"),
@@ -122,7 +122,7 @@ export default function CreateProject() {
   };
 
   return (
-    <form className="flex flex-col items-end justify-center gap-4">
+    <div className="flex flex-col items-end justify-center gap-4">
       <CreateInfoProject mainForm={mainForm} />
       <CreateInfoRound mainForm={mainForm} />
 
@@ -141,6 +141,8 @@ export default function CreateProject() {
           Create Project
         </button>
       </div>
-    </form>
+    </div>
   );
 }
+
+export default CreateProject;
