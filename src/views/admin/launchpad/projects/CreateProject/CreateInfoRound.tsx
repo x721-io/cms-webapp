@@ -86,8 +86,8 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
   }, []);
 
   return (
-    <div className="min-h-[350px] w-full overflow-x-scroll">
-      <Label className="mb-4 text-3xl font-bold">Rounds</Label>
+    <div className="min-h-[350px] w-full overflow-x-scroll mt-6">
+      <Label className="mb-2 text-3xl font-bold">Rounds</Label>
       <div className="my-6">
         <table className="text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
           <thead className=" bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">

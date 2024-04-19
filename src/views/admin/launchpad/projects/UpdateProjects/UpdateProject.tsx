@@ -95,7 +95,6 @@ export default function UpdateProject({ onClose, show, item }: Props) {
     reset,
     formState: {errors}
   } = mainForm;
-  console.log('error', errors);
   
   const onUpdateProject = async (params: FormState.UpdateProject) => {
     const toastId = toast.loading("Uploading Project...", { type: "info" });
@@ -127,7 +126,7 @@ export default function UpdateProject({ onClose, show, item }: Props) {
     onClose?.();
     reset?.();
   };
-    console.log('item: ', item);
+
     
   return (
     <Modal

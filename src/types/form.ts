@@ -111,6 +111,7 @@ export namespace FormState {
       collectionAddress: string;
       rounds: Round[];
       idOnchain: string;
+      details: { key: string; content: string }[];
     }
     export interface ResetPassword {
         id: string;

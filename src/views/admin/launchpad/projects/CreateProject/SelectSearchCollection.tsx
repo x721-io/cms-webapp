@@ -51,8 +51,6 @@ const useIntersectionObserver = (isDataLoading: boolean) => {
 const SelectSearchCollection = <T extends FieldValues>(props: Props<T>) => {
   const { mainForm,  fieldNameCollection,fieldNameCollectionAddress } = props;
 
- 
-
   const api = useLaunchpadApi();
   const [selectedOption, setSelectedOption] = useState<SelectOptionProps>({
     label: "",

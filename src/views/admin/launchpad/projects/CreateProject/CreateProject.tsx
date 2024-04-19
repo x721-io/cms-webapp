@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { useLaunchpadApi } from "../../../../../hooks/useLaunchpadApi";
 import { FormState } from "../../../../../types/form";
 import { Round } from "../../../../../types/launchpad";
+import CreateInfoDetail from "./CreateInfoDetail";
 import CreateInfoProject from "./CreateInfoProject";
 import CreateInfoRound from "./CreateInfoRound";
 
@@ -46,6 +47,7 @@ const CreateProject=()=> {
     collectionAddress: "",
     rounds: [],
     idOnchain: "",
+    details: [],
   };
   const schema = yup.object({
     banner: yup.string().required("Please input banner"),
@@ -79,6 +81,15 @@ const CreateProject=()=> {
           maxPerWallet: yup.string().required("Please input quantity"),
         })
       ),
+      details: yup
+      .array()
+      .min(1, "b")
+      .of(
+        yup.object({
+          key: yup.string().required("Please input key"),
+          content: yup.string().required("Please input content"),
+        })
+      ),
   });
   const mainForm = useForm<FormState.CreateProject>({
     resolver: yupResolver(schema) as any,
@@ -90,16 +101,14 @@ const CreateProject=()=> {
   const {
     handleSubmit,
     reset,
-    formState: {errors}
   } = mainForm;
-  // console.log(errors);
   
   const onCreateProject = async (params: FormState.CreateProject) => {    
     const toastId = toast.loading("Uploading Project...", { type: "info" });
     try {
       await api.createProjects(params);
       toast.update(toastId, {
-        render: "Project updated successfully",
+        render: "Project created successfully",
         type: "success",
         isLoading: false,
         autoClose: 1000,
@@ -108,7 +117,7 @@ const CreateProject=()=> {
       navigate("/admin/projects");
       reset?.();
     } catch (error: any) {
-      console.error("Update project failed:", error);
+      console.error("Create project failed:", error);
       toast.update(toastId, {
         render: `Project updating: ${error.message}`,
         type: "error",
@@ -125,14 +134,15 @@ const CreateProject=()=> {
     <div className="flex flex-col items-end justify-center gap-4">
       <CreateInfoProject mainForm={mainForm} />
       <CreateInfoRound mainForm={mainForm} />
+      <CreateInfoDetail mainForm={mainForm} />
 
       <div className="flex gap-1">
-        <button
+        {/* <button
           onClick={() => reset()}
           className="rounded-md border bg-white px-9 py-2 text-base font-medium transition duration-200"
         >
           Cancel
-        </button>
+        </button> */}
         <button
           type="button"
           className="linear rounded-md bg-brand-600 px-4 py-2 text-base font-medium text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700 dark:bg-brand-400 dark:hover:bg-brand-300 dark:active:opacity-90"

@@ -4,9 +4,6 @@ import { UseFormReturn, useFieldArray } from "react-hook-form";
 import { IoMdAddCircle, IoMdTrash } from "react-icons/io";
 import InputV2 from "../../../../../components/fields/InputFieldV2";
 import { FormState } from "../../../../../types/form";
-import DatePickerRange from "../CreateProject/DatePickerRange";
-import DatePickerSingle from "../CreateProject/DatePickerSingle";
-import SelectSearchRound from "../CreateProject/SelectSearchRound";
 
 interface Props {
   item?: any;
@@ -112,11 +109,11 @@ const InfoRound: FC<Props> = (props) => {
               return (
                 <tr key={`${itemIndex}-abc`} className="">
                   <td>
-                    <SelectSearchRound
+                    {/* <SelectSearchRound
                       mainForm={mainForm}
                       prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.roundId`}
-                    />
+                    /> */}
                   </td>
                   <td>
                     <InputV2
@@ -126,18 +123,18 @@ const InfoRound: FC<Props> = (props) => {
                     />
                   </td>
                   <td>
-                    <DatePickerRange
+                    {/* <DatePickerRange
                       mainForm={mainForm}
                       prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.start`}
-                    />
+                    /> */}
                   </td>
                   <td>
-                    <DatePickerSingle
+                    {/* <DatePickerSingle
                       mainForm={mainForm}
                       prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.claimableStart`}
-                    />
+                    /> */}
                   </td>
                   <td>
                     <InputV2
@@ -165,11 +162,11 @@ const InfoRound: FC<Props> = (props) => {
                   </td>
 
                   <td>
-                    <DatePickerSingle
+                    {/* <DatePickerSingle
                       mainForm={mainForm}
                       prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.stakeBefore`}
-                    />
+                    /> */}
                   </td>
                   <td>
                     <InputV2
@@ -199,61 +196,6 @@ const InfoRound: FC<Props> = (props) => {
             })}
           </tbody>
         </table>
-        {/* <table className="text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
-                    <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" className="px-6 py-3">Name</th>
-                            <th scope="col" className="px-6 py-3">Description</th>
-                            <th scope="col" className="px-6 py-3">Instruction</th>
-                            <th scope="col" className="px-6 py-3">Type</th>
-                            <th scope="col" className="px-6 py-3">Total NFT</th>
-                            <th scope="col" className="px-6 py-3">Price (U2U)</th>
-                            <th scope="col" className="px-6 py-3">Start</th>
-                            <th scope="col" className="px-6 py-3">End</th>
-                            <th scope="col" className="px-6 py-3">Start claim</th>
-                            <th scope="col" className="px-6 py-3">Staking end</th>
-                            <th scope="col" className="px-6 py-3">Quantity</th>
-                            <th scope="col" className="px-6 py-3">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {item.rounds?.map((round: any) => (
-                            <tr key={round.id}
-                                className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600" >
-                                <th className="px-6 py-4">{round?.name}</th>
-                                <td className="px-6 py-4">{round?.description}</td>
-                                <td className="px-6 py-4">{round?.instruction}</td>
-                                <td className="px-6 py-4">{round?.type}</td>
-                                <td className="px-6 py-4">{round?.totalNftt}</td>
-                                <td className="px-6 py-4">
-                                    {formatDisplayedNumber(formatEther(round?.price || 0))}
-                                </td>
-                                <td className="px-6 py-4">
-                                    {format(new Date(round?.start) || 0, "yyyy/M/dd")}
-                                </td>
-                                <td className="px-6 py-4">
-                                    {format(new Date(round?.end) || 0, "yyyy/M/dd")}
-                                </td>
-                                <td className="px-6 py-4">
-                                    {format(new Date(round?.claimableStart) || 0, "yyyy/M/dd")}
-                                </td>
-                                <td className="px-6 py-4">
-                                    {format(new Date(round?.stakeBefore) || 0, "yyyy/M/dd")}
-                                </td>
-                                <td className="px-6 py-4">
-                                    {round?.maxPerWallet}
-                                </td>
-
-
-                                <td className="px-6 py-4 flex gap-1">
-                                    <button className="p-1">
-                                        <IoMdTrash color="green" size={24} />
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table> */}
       </div>
     </div>
   );
