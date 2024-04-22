@@ -1,10 +1,10 @@
 import { Address } from "wagmi";
 import {
-  Account,
-  AssetType,
-  Collection,
-  NFT,
-  User,
+    Account,
+    AssetType,
+    Collection,
+    NFT,
+    User,
 } from "../../types/entitites";
 import { Project, Round, RoundStatus } from "../../types/launchpad";
 
@@ -48,6 +48,11 @@ export namespace APIParams {
 
   export interface FetchRounds extends PaginationParams {
     name?: string;
+  }
+
+  export interface FetchProjects extends PaginationParams {
+    name?: string;
+    mode?: RoundStatus;
   }
 
   export interface CreateAccount {
@@ -134,12 +139,59 @@ export namespace APIParams {
     currentPassword: string;
     newPassword: string;
   }
+
+  export interface CreateProject {
+    name?: string;
+    idOnchain?: string;
+    banner?: string;
+    description?: string;
+    organization?: string;
+    website?: string;
+    details?: {
+      key: string;
+      content: string;
+    }[];
+    twitter?: string;
+    telegram?: string;
+    discord?: string;
+    facebook?: string;
+    instagram?: string;
+    logo?: string;
+    collectionAddress?: string;
+    rounds: Round[];
+  }
+
+  export interface UpdateProject {
+    id?: string;
+    name?: string;
+    idOnchain?: string;
+    banner?: string;
+    description?: string;
+    organization?: string;
+    website?: string;
+    details?: [
+      {
+        key: string;
+        content: string;
+      }
+    ];
+    twitter?: string;
+    telegram?: string;
+    discord?: string;
+    facebook?: string;
+    instagram?: string;
+    logo?: string;
+    collectionAddress?: string;
+    rounds?: Round[];
+  }
+
+  export interface FetchOptionRounds extends PaginationParams {}
+
+  export interface FetchOptionCollections extends PaginationParams {}
 }
 
 /********** =========== API Response types ========== ***********/
 export namespace APIResponse {
-  export type FetchProjects = Project[];
-
   export interface Snapshot {
     stakingTotal: string;
     lastDateRecord: Date;
@@ -215,5 +267,31 @@ export namespace APIResponse {
     paging: Pagination;
   }
 
+  export interface FetchProjects {
+    data: Project[];
+    paging: Pagination;
+  }
+
+  export interface RoundData {
+    data: Round[];
+    paging: Pagination;
+  }
+
+  export interface ProjectData {
+    data: Project[];
+    paging: Pagination;
+  }
+
+  export interface FetchOptionRounds {
+    data: Round[];
+    paging: Pagination;
+  }
+
+  export interface FetchOptionCollections {
+    data: Collection[];
+    paging: Pagination;
+  }
+
   export type AccountOverview = Account;
+  export type SearchCollections = FetchCollections;
 }

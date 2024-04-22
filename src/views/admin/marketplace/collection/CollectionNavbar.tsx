@@ -1,8 +1,8 @@
+import { Dropdown } from "flowbite-react";
 import { useEffect, useMemo, useState } from "react";
+import ChevronDownIcon from "../../../../assets/svg/ChevronDown";
 import SearchIcon from "../../../../assets/svg/SearchIcon";
 import Input from "../../../../components/fields/InputField";
-import { Dropdown } from "flowbite-react";
-import ChevronDownIcon from "../../../../assets/svg/ChevronDown";
 import { useCollectionFilterStore } from "../../../../store/filters/collections/store";
 
 export default function CollectionNavbar() {
@@ -61,8 +61,8 @@ export default function CollectionNavbar() {
   };
   const sortCollections = (sortOptionCollection: any) => {
     updateCollectionFilters({
-      orderBy: sortOptionCollection?.orderBy,
-      order: sortOptionCollection?.order,
+      orderBy: sortOptionCollection && sortOptionCollection.orderBy,
+      order: sortOptionCollection && sortOptionCollection.order,
     });
   };
 

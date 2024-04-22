@@ -1,12 +1,12 @@
-import { useMarketplaceApi } from "./useMarketplaceApi";
 import { useCallback } from "react";
 import { APIParams } from "../services/api/types";
 import useAuthStore from "../store/auth/store";
+import { useMarketplaceApi } from "./useMarketplaceApi";
 
 export const useAccount = () => {
   const api = useMarketplaceApi();
   const { credentials } = useAuthStore();
-  const bearerToken = credentials?.accessToken;
+  const bearerToken = credentials && credentials.accessToken;
   const { setProfile } = useAuthStore();
 
   const onUpdateAccount = useCallback(

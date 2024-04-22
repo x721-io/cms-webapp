@@ -1,9 +1,9 @@
 import { useEffect, useMemo } from "react";
 import useSWRInfinite from "swr/infinite";
 import { APIParams, APIResponse } from "../services/api/types";
-import { useMarketplaceApi } from "./useMarketplaceApi";
 import { sanitizeObject } from "../utils";
 import { useLaunchpadApi } from "./useLaunchpadApi";
+import { useMarketplaceApi } from "./useMarketplaceApi";
 
 interface ListData {
   data: any[];
@@ -16,6 +16,7 @@ interface Params {
   loading: boolean | undefined;
   page: number;
   offset?: number;
+  scrollContainerRef?: React.RefObject<HTMLDivElement>;
 }
 
 export const useFetchUserList = (filters: APIParams.FetchUsers) => {
@@ -66,6 +67,18 @@ export const useFetchRoundList = (filters: APIParams.FetchRounds) => {
   );
 };
 
+export const useFetchProjectList = (filters: APIParams.FetchProjects) => {
+  const api = useLaunchpadApi();
+  return useSWRInfinite(
+    (index) => ({
+      ...filters,
+      page: index + 1,
+    }),
+    (params) =>
+      api.fetchProjects(sanitizeObject(params) as APIParams.FetchRounds)
+  );
+};
+
 export const useFetchAccounts = (filters: APIParams.FetchAccounts) => {
   const api = useMarketplaceApi();
   return useSWRInfinite(
@@ -75,6 +88,30 @@ export const useFetchAccounts = (filters: APIParams.FetchAccounts) => {
     }),
     (params) =>
       api.fetchAccounts(sanitizeObject(params) as APIParams.FetchAccounts)
+  );
+};
+
+export const useFetchOptionRounds = (filters: APIParams.FetchOptionRounds) => {
+  const api = useLaunchpadApi();
+  return useSWRInfinite(
+    (index) => ({
+      ...filters,
+      page: index + 1,
+    }),
+    (params) =>
+      api.fetchOptionRound(sanitizeObject(params) as APIParams.FetchOptionRounds)
+  );
+};
+
+export const useFetchOptionCollections = (filters: APIParams.FetchOptionCollections) => {
+  const api = useLaunchpadApi();
+  return useSWRInfinite(
+    (index) => ({
+      ...filters,
+      page: index + 1,
+    }),
+    // (params) =>
+    //   api.fetchOptionCollection(sanitizeObject(params) as APIParams.FetchOptionCollections)
   );
 };
 
@@ -129,3 +166,65 @@ export const useInfiniteScroll = ({
     isLoadingMore,
   };
 };
+
+
+export const useInfiniteScrollOption = ({
+  data,
+  loading,
+  page,
+  onNext,
+  offset = 800,
+  scrollContainerRef,
+}: Params) => {
+  const list = useMemo(() => {
+    let currentHasNext = false;
+    let concatenatedData: any[] = [];
+
+    if (data && Array.isArray(data)) {
+      data.forEach((currentPage: ListData) => {
+        if (currentPage && Array.isArray(currentPage.data)) {
+          concatenatedData = concatenatedData.concat(currentPage.data);
+          currentHasNext = currentPage.paging.hasNext;
+        }
+      });
+    }
+
+    return { concatenatedData, currentHasNext };
+  }, [data]);
+
+  const isLoadingMore =
+    loading || (page > 0 && data && data[page - 1] === undefined);
+
+    useEffect(() => {
+      const handleScroll = () => {
+        const scrollContainer = scrollContainerRef?.current;
+        if (!scrollContainer) return; // Kiểm tra null ở đây
+    
+        const { scrollTop, clientHeight, scrollHeight } = scrollContainer;
+        if (
+          scrollTop > scrollHeight - clientHeight - offset &&
+          !isLoadingMore &&
+          page &&
+          list.currentHasNext
+        ) {
+          onNext();
+        }
+      };
+    
+      if (scrollContainerRef?.current) {
+        scrollContainerRef?.current.addEventListener("scroll", handleScroll);
+      }
+    
+      return () => {
+        if (scrollContainerRef?.current) {
+          scrollContainerRef?.current.removeEventListener("scroll", handleScroll);
+        }
+      };
+    }, [isLoadingMore, page, list.currentHasNext, scrollContainerRef]);
+    
+  return {
+    list,
+    isLoadingMore,
+  };
+};
+

@@ -15,7 +15,7 @@ export const useAuth = () => {
     return credentials;
   };
 
-  const accountId = credentials?.accountId;
+  const accountId = credentials && credentials.accountId;
 
   const onLogout = async () => {
     clearProfile();

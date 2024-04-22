@@ -1,10 +1,9 @@
-import { Project } from "../types/launchpad";
-import { parseQueries, sanitizeObject } from "../utils";
-import { APIParams, APIResponse } from "../services/api/types";
+import { useCallback } from "react";
 import { API_ENDPOINTS } from "../config/api";
 import { launchpadAPI } from "../services/api";
+import { APIParams, APIResponse } from "../services/api/types";
 import useAuthStore from "../store/auth/store";
-import { useCallback } from "react";
+import { parseQueries, sanitizeObject } from "../utils";
 
 export const useLaunchpadApi = () => {
   const { credentials } = useAuthStore();
@@ -43,30 +42,88 @@ export const useLaunchpadApi = () => {
     },
 
     fetchProjects: (
-      params?: APIParams.FetchProjects
-    ): Promise<APIResponse.FetchProjects> => {
-      return launchpadAPI.get(API_ENDPOINTS.LAUNCHPAD + parseQueries(params));
-    },
-    fetchProjectById: (id: string): Promise<Project> => {
-      return launchpadAPI.get(API_ENDPOINTS.LAUNCHPAD + `/${id}`);
-    },
-    checkIsSubscribed: (params: APIParams.SubscribeRoundZero) => {
-      return launchpadAPI.get(
-        API_ENDPOINTS.CHECK_IS_SUBSCRIBED + parseQueries(params)
+      params: APIParams.FetchProjects
+    ): Promise<APIResponse.FetchProjects> =>
+      launchpadAPI.get(
+        API_ENDPOINTS.SEARCH_PROJECT +
+          parseQueries(sanitizeObject({ ...params })),
+        authHeader()
+      ),
+
+    createProjects: (
+      params: APIParams.CreateProject
+    ): Promise<APIResponse.ProjectData> =>
+      launchpadAPI.post(API_ENDPOINTS.CREATE_PROJECT, params, authHeader()),
+
+    updateProject: (params: APIParams.UpdateProject) =>
+      launchpadAPI.put(API_ENDPOINTS.UPDATE_PROJECT, params, authHeader()),
+
+    deleteProject: (roundId: string): Promise<void> => {
+      return launchpadAPI.delete(
+        API_ENDPOINTS.DELETE_PROJECT + `/${roundId}`,
+        authHeader()
       );
     },
-    subscribeRoundZero: (params: APIParams.SubscribeRoundZero) => {
-      return launchpadAPI.post(API_ENDPOINTS.SUBSCRIBE_ROUND_ZERO, params);
-    },
-    fetchSnapshot: (
-      params: APIParams.FetchSnapshot
-    ): Promise<APIResponse.Snapshot> => {
-      return launchpadAPI.get(API_ENDPOINTS.SNAPSHOT + parseQueries(params));
-    },
-    crawlNFTInfo: (params: APIParams.CrawlNFTInfo) => {
-      return launchpadAPI.get(
-        API_ENDPOINTS.NFT_CRAWL_INFO + parseQueries(params)
+
+    uploadFile: (
+      files: Blob[] | Blob,
+      metadata?: Record<string, any>
+    ): Promise<any[]> => {
+      const form = new FormData();
+      if (Array.isArray(files)) {
+        files.forEach((file) => {
+          form.append("files", file);
+        });
+      } else {
+        form.append("files", files, (files as any).name);
+      }
+
+      if (metadata) {
+        form.append("metadata", JSON.stringify(metadata));
+      }
+      return launchpadAPI.post(
+        API_ENDPOINTS.UPLOAD_IMAGE_S3,
+        form,
+        authHeader()
       );
     },
+
+    fetchOptionRound: (
+      params: APIParams.FetchOptionRounds
+    ): Promise<APIResponse.FetchOptionRounds> =>
+      launchpadAPI.get(
+        API_ENDPOINTS.OPTION_ROUND +
+          parseQueries(sanitizeObject({ ...params })),
+        authHeader()
+      ),
+
+    fetchOptionCollection: (
+      params: APIParams.FetchOptionCollections
+    ): Promise<APIResponse.FetchOptionCollections> =>
+      launchpadAPI.get(
+        API_ENDPOINTS.OPTION_COLLECTION +
+          parseQueries(sanitizeObject({ ...params })),
+        authHeader()
+      ),
+
+    searchCollections: (
+      search: string,
+      params: APIParams.FetchOptionCollections
+    ): Promise<APIResponse.FetchOptionCollections> =>
+      launchpadAPI.get(
+        API_ENDPOINTS.OPTION_COLLECTION +
+          parseQueries(sanitizeObject({ ...params, search })),
+        authHeader()
+      ),
+
+    searchRounds: (
+      search: string,
+      params: APIParams.FetchOptionRounds
+    ): Promise<APIResponse.FetchOptionRounds> =>
+      launchpadAPI.get(
+        API_ENDPOINTS.OPTION_ROUND +
+          parseQueries(sanitizeObject({ ...params, search })),
+        authHeader()
+      ),
   };
 };

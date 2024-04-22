@@ -1,13 +1,13 @@
 import { Spinner } from "flowbite-react";
+import { useState } from "react";
+import Text from "../../../../components/Text";
 import {
   useFetchUserList,
   useInfiniteScroll,
 } from "../../../../hooks/useInfiniteScroll";
-import { useUserFilterStore } from "../../../../store/filters/users/store";
-import Text from "../../../../components/Text";
-import { getUserAvatarImage } from "../../../../utils/string";
 import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
-import { useState } from "react";
+import { useUserFilterStore } from "../../../../store/filters/users/store";
+import { getUserAvatarImage } from "../../../../utils/string";
 
 type CheckboxState = Record<string, boolean>;
 
@@ -91,7 +91,7 @@ export default function TableUser() {
         </tr>
       </thead>
       <tbody>
-        {users.concatenatedData?.map((user: any) => (
+        {users.concatenatedData && users.concatenatedData.map((user: any) => (
           <tr
             key={user.id}
             className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"

@@ -30,3 +30,13 @@ export const parseQueries = (queries?: Record<string, any> | undefined) => {
       .join("&")
   );
 };
+
+export const formatDisplayedNumber = (value: string | number) => {
+  if (!value) return "0";
+  const usFormatter = Intl.NumberFormat("en-US", {
+    notation: "compact",
+    compactDisplay: "short",
+  });
+
+  return usFormatter.format(Number(value));
+};

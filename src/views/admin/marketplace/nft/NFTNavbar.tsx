@@ -1,9 +1,9 @@
+import { Dropdown } from "flowbite-react";
 import { useEffect, useMemo, useState } from "react";
+import ChevronDownIcon from "../../../../assets/svg/ChevronDown";
 import SearchIcon from "../../../../assets/svg/SearchIcon";
 import Input from "../../../../components/fields/InputField";
 import { useNFTFilterStore } from "../../../../store/filters/nft/store";
-import { Dropdown } from "flowbite-react";
-import ChevronDownIcon from "../../../../assets/svg/ChevronDown";
 
 export default function NFTNavbar() {
   const dropdownItems = [
@@ -55,8 +55,8 @@ export default function NFTNavbar() {
   };
   const sortNFTs = (sortOptionNFT: any) => {
     updateNFTFilters({
-      orderBy: sortOptionNFT?.orderBy,
-      order: sortOptionNFT?.order,
+      orderBy: sortOptionNFT && sortOptionNFT.orderBy,
+      order: sortOptionNFT && sortOptionNFT.order,
     });
   };
 

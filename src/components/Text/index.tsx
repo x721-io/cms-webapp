@@ -1,7 +1,7 @@
 "use client";
 
-import { classNames } from "../../utils/string";
 import { typography } from "../../config/theme";
+import { classNames } from "../../utils/string";
 
 type VariantType = keyof typeof typography;
 interface Props extends React.HTMLAttributes<HTMLParagraphElement> {
@@ -16,7 +16,7 @@ export default function Text({
   children,
   ...rest
 }: Props) {
-  if (variant?.includes("heading")) {
+  if (variant && variant.includes("heading")) {
     return (
       <h1 className={classNames(className, `text-${variant}`)} {...rest}>
         {children}

@@ -1,13 +1,13 @@
 import { useCallback, useMemo } from "react";
-import { marketplaceApi } from "../services/api";
 import { API_ENDPOINTS } from "../config/api";
+import { marketplaceApi } from "../services/api";
 import { APIParams, APIResponse } from "../services/api/types";
-import { parseQueries, sanitizeObject } from "../utils";
 import useAuthStore from "../store/auth/store";
+import { parseQueries, sanitizeObject } from "../utils";
 
 export const useMarketplaceApi = () => {
   const { credentials } = useAuthStore();
-  const bearerToken = credentials?.accessToken;
+  const bearerToken = credentials && credentials.accessToken;
 
   const authHeader = useCallback(
     (accessToken?: string) => ({
