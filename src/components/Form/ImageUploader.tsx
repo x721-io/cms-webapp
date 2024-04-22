@@ -36,12 +36,10 @@ const ImageUploader = <T extends FieldValues>(props: Props<T>) => {
     value,
     onInput,
     loading,
-    error,
     accept,
     maxSize = 100, // 100 MB
   } = props;
   const { onValidateForm } = useFormHelper()
-  const { control } = mainForm
   const dataValidate = onValidateForm({ mainForm, fieldName });
 
   const [file, setFile] = useState<Blob | undefined>();

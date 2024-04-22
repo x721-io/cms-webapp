@@ -1,34 +1,17 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Address } from "wagmi";
 import * as yup from "yup";
+import { useCreateProjectContract } from "../../../../../hooks/useCreateProjectContract";
 import { useLaunchpadApi } from "../../../../../hooks/useLaunchpadApi";
 import { FormState } from "../../../../../types/form";
-import { Round } from "../../../../../types/launchpad";
 import CreateInfoDetail from "./CreateInfoDetail";
 import CreateInfoProject from "./CreateInfoProject";
 import CreateInfoRound from "./CreateInfoRound";
 
-export interface FormInput {
-  name: string;
-  collection: string;
-  description: string;
-  discord: string;
-  facebook: string;
-  instagram: string;
-  twitter: string;
-  telegram: string;
-  address: Address | null;
-  banner: string;
-  organization: string;
-  logo: string;
-  collectionAddress: Address | null;
-  rounds: Round[];
-}
-
-const CreateProject=()=> {
+const CreateProject = () => {
   const api = useLaunchpadApi();
   const navigate = useNavigate();
   const initValue: FormState.CreateProject = {
@@ -63,7 +46,10 @@ const CreateProject=()=> {
     twitter: yup.string().required("Please input total twitter"),
     telegram: yup.string().required("Please input telegram"),
     description: yup.string().required("Please input description"),
-    collectionAddress: yup.string().nullable().required("Please input collectionAddress"),
+    collectionAddress: yup
+      .string()
+      .nullable()
+      .required("Please input collectionAddress"),
     rounds: yup
       .array()
       .min(1, "a")
@@ -72,16 +58,20 @@ const CreateProject=()=> {
           roundId: yup.string().required("Please input roundId"),
           // start: yup.string().required("Please input start rounds"),
           // end: yup.string().required("Please input end rounds"),
-          claimableStart: yup.string().required("Please input claimable start rounds"),
+          claimableStart: yup
+            .string()
+            .required("Please input claimable start rounds"),
           instruction: yup.string().required("Please input instruction rounds"),
-          description: yup.string().required("Please input instruction description"),
+          description: yup
+            .string()
+            .required("Please input instruction description"),
           totalNftt: yup.string().required("Please input totalNft rounds"),
           price: yup.string().required("Please input price rounds"),
           stakeBefore: yup.string().required("Please input staking end"),
           maxPerWallet: yup.string().required("Please input quantity"),
         })
       ),
-      details: yup
+    details: yup
       .array()
       .min(1, "b")
       .of(
@@ -98,12 +88,9 @@ const CreateProject=()=> {
     defaultValues: { ...initValue },
   });
 
-  const {
-    handleSubmit,
-    reset,
-  } = mainForm;
-  
-  const onCreateProject = async (params: FormState.CreateProject) => {    
+  const { handleSubmit, reset, getValues, watch } = mainForm;
+
+  const onCreateProject = async (params: FormState.CreateProject) => {
     const toastId = toast.loading("Uploading Project...", { type: "info" });
     try {
       await api.createProjects(params);
@@ -126,9 +113,18 @@ const CreateProject=()=> {
         closeButton: true,
       });
     } finally {
-      
     }
   };
+
+  // const {onCreateProjectContract} = useCreateProjectContract()
+
+  const { rounds, collection } = useMemo(() => getValues(), [watch()]);
+  // console.log('roundbbbbb: ', rounds);
+  // console.log('collectionbbb: ', collection);
+
+  
+  const {onCreateProjectContract} = useCreateProjectContract(rounds, collection as any, '0xxx' )
+  
 
   return (
     <div className="flex flex-col items-end justify-center gap-4">
@@ -153,6 +149,6 @@ const CreateProject=()=> {
       </div>
     </div>
   );
-}
+};
 
 export default CreateProject;

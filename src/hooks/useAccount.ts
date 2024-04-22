@@ -15,6 +15,7 @@ export const useAccount = () => {
       const profile = await api.updateAccount(params);
       setProfile(profile);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [bearerToken]
   );
 
@@ -23,6 +24,7 @@ export const useAccount = () => {
       if (!bearerToken) return;
       await api.updateRoles(params);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [bearerToken]
   );
 
@@ -34,6 +36,7 @@ export const useAccount = () => {
         setProfile(account);
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [bearerToken]
   );
 

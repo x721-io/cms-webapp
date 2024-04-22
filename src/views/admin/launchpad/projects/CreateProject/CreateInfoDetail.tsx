@@ -52,6 +52,7 @@ const CreateInfoDetail: FC<CreateInfoDetailProps> = (props) => {
         }
       );
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
