@@ -23,3 +23,13 @@ export const TINYMCE_PLUGINS =
   "advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount";
 export const TINYMCE_TOOLBAR =
   "undo redo | styleselect | fontsizeselect| code | bold italic | alignleft aligncenter alignright alignjustify | outdent indent";
+
+export const SIGN_MESSAGE = {
+  CONNECT: (time: string) =>
+    `I want to login on U2UNFTMarket at ${time}. I accept the U2U Terms of Service https://unicornultra.xyz and I am at least 13 years old.`,
+};
+
+export const RPC_URL = process.env.REACT_APP_PUBLIC_RPC_URL as string;
+export const NETWORK_NAME = process.env.REACT_APP_PUBLIC_NETWORK_NAME as string;
+export const BLOCK_EXPLORER_URL = process.env.REACT_APP_PUBLIC_BLOCK_EXPLORER_URL as string;
+export const CHAIN_ID = process.env.REACT_APP_PUBLIC_CHAIN_ID;

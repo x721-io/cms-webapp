@@ -46,6 +46,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
         address: null,
         claimableIds: [],
         requiredStaking: "",
+        soldAmountNFT: "",
       },
       {
         shouldFocus: false,
@@ -78,6 +79,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
         address: null,
         claimableIds: [],
         requiredStaking: "",
+        soldAmountNFT: "",
       },
       {
         shouldFocus: false,

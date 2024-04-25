@@ -17,6 +17,7 @@ interface Props<T> extends InputHTMLAttributes<HTMLInputElement> {
   mainForm: UseFormReturn<T extends FieldValues ? T : FieldValues>;
   fieldNameCollection: Path<T extends FieldValues ? T : FieldValues>;
   fieldNameCollectionAddress: Path<T extends FieldValues ? T : FieldValues>;
+  fieldNameCollectionAddressContract: Path<T extends FieldValues ? T : FieldValues>;
 }
 
 const LIMIT = 5;
@@ -49,7 +50,12 @@ const useIntersectionObserver = (isDataLoading: boolean) => {
 };
 
 const SelectSearchCollection = <T extends FieldValues>(props: Props<T>) => {
-  const { mainForm,  fieldNameCollection,fieldNameCollectionAddress } = props;
+  const { 
+    mainForm,  
+    fieldNameCollection,
+    fieldNameCollectionAddress, 
+    fieldNameCollectionAddressContract,
+  } = props;
 
   const api = useLaunchpadApi();
   const [selectedOption, setSelectedOption] = useState<SelectOptionProps>({
@@ -69,6 +75,7 @@ const SelectSearchCollection = <T extends FieldValues>(props: Props<T>) => {
     setSelectedOption(option);
     setValue(fieldNameCollection, option.label as any);
     setValue(fieldNameCollectionAddress, option.value as any);
+    setValue(fieldNameCollectionAddressContract, option.value as any);
     trigger(fieldNameCollection);
   };
 

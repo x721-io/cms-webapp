@@ -23,7 +23,7 @@ export interface Round {
     start: string;
     end: string;
     type: string;
-    price: BigNumberish;
+    price: string;
     maxPerWallet: string;
     totalNftt: string;
     claimableStart: string;
@@ -31,6 +31,18 @@ export interface Round {
     requiredStaking: BigNumberish;
     instruction: string;
     stakeBefore: string;
+    soldAmountNFT: string;
+}
+
+export interface RoundContract {
+    type: string;
+    price: BigNumberish;
+    start: string;
+    end: string;
+    claimableStart: string;
+    totalNftt: string;
+    maxPerWallet: string;
+    soldAmountNFT: 0;
 }
 
 export interface Project {

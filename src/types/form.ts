@@ -97,7 +97,7 @@ export namespace FormState {
     }
     export interface CreateProject { 
       name: string;
-      collection: string;
+      collection: {isERC721: boolean, isU2UCollection: boolean, isPreminted: boolean, collectionAddress: Address, owner: Address};
       description: string;
       discord: string;
       facebook: string;

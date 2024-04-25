@@ -37,7 +37,8 @@
     "wagmi": "^1.4.6",
     "web-vitals": "^2.1.4",
     "yup": "^1.4.0",
-    "zustand": "^4.5.2"
+    "zustand": "^4.5.2",
+    "viem": "^1.18.9"
   },
   "scripts": {
     "start": "react-scripts start",
