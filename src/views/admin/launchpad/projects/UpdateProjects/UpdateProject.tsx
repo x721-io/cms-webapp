@@ -26,8 +26,7 @@ const modalTheme: CustomFlowbiteTheme["modal"] = {
 
 export default function UpdateProject({ onClose, show, item }: Props) {
   const api = useLaunchpadApi();
-    console.log('item: ', item);
-    
+
   const { updateFilters: updateProjectFilters } = useProjectFilterStore(
     (state) => state
   );
@@ -50,13 +49,11 @@ export default function UpdateProject({ onClose, show, item }: Props) {
     rounds: [],
     idOnchain: "",
   };
-  console.log('initValue: ', initValue);
-  
 
   const schema = yup.object({
     banner: yup.string().required("Please input banner"),
     logo: yup.string().required("Please input logo"),
-    // collection: yup.string().required("Please select collection"),
+    collection: yup.string().required("Please select collection"),
     name: yup.string().required("Please input name"),
     organization: yup.string().required("Please input organization"),
     idOnchain: yup.string().required("Please input in onchain"),
@@ -67,18 +64,25 @@ export default function UpdateProject({ onClose, show, item }: Props) {
     twitter: yup.string().required("Please input total twitter"),
     telegram: yup.string().required("Please input telegram"),
     description: yup.string().required("Please input description"),
-    collectionAddress: yup.string().nullable().required("Please input collectionAddress"),
+    collectionAddress: yup
+      .string()
+      .nullable()
+      .required("Please input collectionAddress"),
     rounds: yup
       .array()
       .min(1, "a")
       .of(
         yup.object({
           roundId: yup.string().required("Please input roundId"),
-          start: yup.string().required("Please input start rounds"),
-          end: yup.string().required("Please input end rounds"),
-          claimableStart: yup.string().required("Please input claimable start rounds"),
+          // start: yup.string().required("Please input start rounds"),
+          // end: yup.string().required("Please input end rounds"),
+          claimableStart: yup
+            .string()
+            .required("Please input claimable start rounds"),
           instruction: yup.string().required("Please input instruction rounds"),
-          description: yup.string().required("Please input instruction description"),
+          description: yup
+            .string()
+            .required("Please input instruction description"),
           totalNftt: yup.string().required("Please input totalNft rounds"),
           price: yup.string().required("Please input price rounds"),
           stakeBefore: yup.string().required("Please input staking end"),
@@ -96,15 +100,10 @@ export default function UpdateProject({ onClose, show, item }: Props) {
   const {
     handleSubmit,
     reset,
-    formState: {errors}
   } = mainForm;
-  console.log('error', errors);
-  
 
-  
   const onUpdateProject = async (params: FormState.UpdateProject) => {
     const toastId = toast.loading("Uploading Project...", { type: "info" });
-    console.log("param: ", params);
     try {
       await api.updateProject(params);
       updateProjectFilters(params);
@@ -133,7 +132,7 @@ export default function UpdateProject({ onClose, show, item }: Props) {
     onClose?.();
     reset?.();
   };
-  
+
   return (
     <Modal
       theme={modalTheme}
@@ -149,8 +148,8 @@ export default function UpdateProject({ onClose, show, item }: Props) {
           className="flex flex-col items-center justify-center gap-4"
           onSubmit={handleSubmit(onUpdateProject)}
         >
-          <InfoProject item={item} mainForm={mainForm}/>
-          <InfoRound item={item} mainForm={mainForm}/>
+          <InfoProject item={item} mainForm={mainForm} />
+          <InfoRound item={item} mainForm={mainForm} />
           <div className="flex gap-1">
             <button
               onClick={onCloseModal}

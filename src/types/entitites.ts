@@ -42,6 +42,7 @@ export interface Account {
   telegramLink?: string;
   phone?: string;
   roles?: string[];
+  publicKey: Address;
 }
 
 export interface Collection {
@@ -93,4 +94,12 @@ export interface NFT {
   price?: BigNumberish;
   sellStatus?: MarketEventType;
   isActive: boolean;
+}
+
+export interface CollectionContract {
+  isERC721: boolean;
+  isU2UCollection: boolean;
+  isPreminted: boolean;
+  collectionAddress: Address;
+  owner: Address;
 }

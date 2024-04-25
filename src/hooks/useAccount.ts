@@ -1,12 +1,12 @@
-import { useMarketplaceApi } from "./useMarketplaceApi";
 import { useCallback } from "react";
 import { APIParams } from "../services/api/types";
 import useAuthStore from "../store/auth/store";
+import { useMarketplaceApi } from "./useMarketplaceApi";
 
 export const useAccount = () => {
   const api = useMarketplaceApi();
   const { credentials } = useAuthStore();
-  const bearerToken = credentials?.accessToken;
+  const bearerToken = credentials && credentials.accessToken;
   const { setProfile } = useAuthStore();
 
   const onUpdateAccount = useCallback(
@@ -15,6 +15,7 @@ export const useAccount = () => {
       const profile = await api.updateAccount(params);
       setProfile(profile);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [bearerToken]
   );
 
@@ -23,6 +24,7 @@ export const useAccount = () => {
       if (!bearerToken) return;
       await api.updateRoles(params);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [bearerToken]
   );
 
@@ -34,6 +36,7 @@ export const useAccount = () => {
         setProfile(account);
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [bearerToken]
   );
 

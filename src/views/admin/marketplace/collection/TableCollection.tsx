@@ -1,13 +1,13 @@
 import { Spinner } from "flowbite-react";
+import { useState } from "react";
 import Text from "../../../../components/Text";
-import { useCollectionFilterStore } from "../../../../store/filters/collections/store";
 import {
   useFetchCollectionList,
   useInfiniteScroll,
 } from "../../../../hooks/useInfiniteScroll";
-import { getCollectionAvatarImage } from "../../../../utils/string";
-import { useState } from "react";
 import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
+import { useCollectionFilterStore } from "../../../../store/filters/collections/store";
+import { getCollectionAvatarImage } from "../../../../utils/string";
 
 type CheckboxState = Record<string, boolean>;
 
@@ -105,7 +105,7 @@ export default function TableCollection() {
         </tr>
       </thead>
       <tbody>
-        {collections.concatenatedData?.map((collection: any) => (
+        {collections.concatenatedData && collections.concatenatedData.map((collection: any) => (
           <tr className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
             <th
               scope="row"

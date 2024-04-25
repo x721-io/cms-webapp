@@ -1,13 +1,13 @@
 import { Spinner } from "flowbite-react";
+import { useState } from "react";
 import Text from "../../../../components/Text";
-import { convertImageUrl } from "../../../../utils/nft";
-import { useNFTFilterStore } from "../../../../store/filters/nft/store";
 import {
   useFetchNFTList,
   useInfiniteScroll,
 } from "../../../../hooks/useInfiniteScroll";
-import { useState } from "react";
 import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
+import { useNFTFilterStore } from "../../../../store/filters/nft/store";
+import { convertImageUrl } from "../../../../utils/nft";
 import ModalNFTDetail from "./ModalNFTDetail";
 type CheckboxState = Record<string, boolean>;
 
@@ -101,7 +101,7 @@ export default function TableNFT() {
           </tr>
         </thead>
         <tbody>
-          {items.concatenatedData?.map((item) => (
+          {items.concatenatedData && items.concatenatedData.map((item) => (
             <tr
               key={item.id}
               className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"

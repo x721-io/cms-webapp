@@ -4,6 +4,8 @@ import { UseFormReturn, useFieldArray } from "react-hook-form";
 import { IoMdAddCircle, IoMdTrash } from "react-icons/io";
 import InputV2 from "../../../../../components/fields/InputFieldV2";
 import { FormState } from "../../../../../types/form";
+import DatePickerRange from "./DatePickerRange";
+import DatePickerSingle from "./DatePickerSingle";
 import SelectSearchRound from "./SelectSearchRound";
 
 interface CreateInfoRoundProps {
@@ -12,7 +14,7 @@ interface CreateInfoRoundProps {
 
 const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
   const { mainForm } = props;
-  const { watch, getValues, control } = mainForm;
+  const { watch, getValues, setValue, control } = mainForm;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { rounds } = useMemo(() => getValues(), [watch()]);
 
@@ -24,26 +26,32 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
   const { append: appendRound, remove: removeRound } = roundFieldArray;
 
   const handleAddRow = () => {
-    appendRound({
-      roundId: "",
-      start: "",
-      end: "",
-      claimableStart: "",
-      instruction: "",
-      description: "",
-      totalNftt: "",
-      price: "",
-      stakeBefore: "",
-      maxPerWallet: "",
+    appendRound(
+      {
+        roundId: "",
+        start: "",
+        end: "",
+        claimableStart: "",
+        instruction: "",
+        description: "",
+        totalNftt: "",
+        price: "",
+        stakeBefore: "",
+        maxPerWallet: "",
 
-      id: "",
-      name: "",
-      projectId: "",
-      type: "",
-      address: null,
-      claimableIds: [],
-      requiredStaking: "",
-    });
+        id: "",
+        name: "",
+        projectId: "",
+        type: "",
+        address: null,
+        claimableIds: [],
+        requiredStaking: "",
+        soldAmountNFT: "",
+      },
+      {
+        shouldFocus: false,
+      }
+    );
   };
 
   const handleRemoveRow = (index: number) => {
@@ -71,13 +79,17 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
         address: null,
         claimableIds: [],
         requiredStaking: "",
+        soldAmountNFT: "",
+      },
+      {
+        shouldFocus: false,
       });
     }
   }, []);
 
   return (
-    <div className="min-h-[350px] w-full overflow-x-scroll">
-      <Label className="mb-4 text-3xl font-bold">Rounds</Label>
+    <div className="min-h-[350px] w-full overflow-x-scroll mt-6">
+      <Label className="mb-2 text-3xl font-bold">Rounds</Label>
       <div className="my-6">
         <table className="text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
           <thead className=" bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
@@ -89,10 +101,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                 Type
               </th>
               <th scope="col" className="px-6 py-3">
-                Start
-              </th>
-              <th scope="col" className="px-6 py-3">
-                End
+                Start - End
               </th>
               <th scope="col" className="px-6 py-3">
                 Start claim
@@ -129,6 +138,7 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                     <SelectSearchRound
                       mainForm={mainForm}
                       prefixField={`${prefixField}`}
+                      fieldName={`${prefixField}.roundId`}
                     />
                   </td>
                   <td>
@@ -139,20 +149,16 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                     />
                   </td>
                   <td>
-                    <InputV2
+                    <DatePickerRange
                       mainForm={mainForm}
+                      prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.start`}
                     />
                   </td>
                   <td>
-                    <InputV2
+                    <DatePickerSingle
                       mainForm={mainForm}
-                      fieldName={`${prefixField}.end`}
-                    />
-                  </td>
-                  <td>
-                    <InputV2
-                      mainForm={mainForm}
+                      prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.claimableStart`}
                     />
                   </td>
@@ -182,8 +188,9 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
                   </td>
 
                   <td>
-                    <InputV2
+                    <DatePickerSingle
                       mainForm={mainForm}
+                      prefixField={`${prefixField}`}
                       fieldName={`${prefixField}.stakeBefore`}
                     />
                   </td>

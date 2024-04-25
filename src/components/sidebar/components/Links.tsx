@@ -8,8 +8,6 @@ export const SidebarLinks = () => {
   let location = useLocation();
   const rolesAccount = useAuthStore((state) => (state.profile && state.profile.roles) || []);
 
-
-  console.log(rolesAccount);
   const activeRoute = (routeName: string) => {
     return location.pathname.includes(routeName);
   };

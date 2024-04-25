@@ -5,7 +5,6 @@ import ImageUploader from "../../../../../components/Form/ImageUploader";
 import InputV2 from "../../../../../components/fields/InputFieldV2";
 import { useLaunchpadApi } from "../../../../../hooks/useLaunchpadApi";
 import { FormState } from "../../../../../types/form";
-import SelectSearchCollection from "../CreateProject/SelectSearchCollection";
 
 interface Props {
   mainForm: UseFormReturn<FormState.UpdateProject>;
@@ -132,7 +131,6 @@ const InfoProject: FC<Props> = (props) => {
       setUploadLogo(false);
     }
   };
-
   return (
     <div className="flex w-full flex-col gap-4">
       <div className="flex gap-4">
@@ -182,7 +180,7 @@ const InfoProject: FC<Props> = (props) => {
           <label className="text-primary mb-2 block font-semibold">
             Collection
           </label>
-          <SelectSearchCollection mainForm={mainForm} />
+          {/* <SelectSearchCollection mainForm={mainForm} fieldNameCollection="collection" fieldNameCollectionAddress="collectionAddress" fieldNameCollectionAddressContract="collection.collectionAddress"/> */}
         </div>
         {/* Name */}
         <div className="flex flex-col gap-1">

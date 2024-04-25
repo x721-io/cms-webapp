@@ -191,7 +191,6 @@ export const useInfiniteScrollOption = ({
 
     return { concatenatedData, currentHasNext };
   }, [data]);
-console.log('scrollContainerRef: ', scrollContainerRef?.current);
 
   const isLoadingMore =
     loading || (page > 0 && data && data[page - 1] === undefined);

@@ -1,15 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { UseFormReturn } from "react-hook-form";
+import {
+  InputHTMLAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from "react";
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { Address } from "wagmi";
 import SelectInput, {
   SelectOptionProps,
 } from "../../../../../components/Form/SelectInput";
 import { useLaunchpadApi } from "../../../../../hooks/useLaunchpadApi";
-import { FormState } from "../../../../../types/form";
 
-interface Props {
-  mainForm: UseFormReturn<FormState.CreateProject>;
+interface Props<T> extends InputHTMLAttributes<HTMLInputElement> {
+  mainForm: UseFormReturn<T extends FieldValues ? T : FieldValues>;
+  fieldNameCollection: Path<T extends FieldValues ? T : FieldValues>;
+  fieldNameCollectionAddress: Path<T extends FieldValues ? T : FieldValues>;
+  fieldNameCollectionAddressContract: Path<T extends FieldValues ? T : FieldValues>;
 }
 
 const LIMIT = 5;
@@ -41,9 +49,14 @@ const useIntersectionObserver = (isDataLoading: boolean) => {
   return { lastEntryRef, setHasMore, setPage, page };
 };
 
-const SelectSearchCollection: FC<Props> = (props) => {
-  const { mainForm } = props;
-  const {setValue} = mainForm
+const SelectSearchCollection = <T extends FieldValues>(props: Props<T>) => {
+  const { 
+    mainForm,  
+    fieldNameCollection,
+    fieldNameCollectionAddress, 
+    fieldNameCollectionAddressContract,
+  } = props;
+
   const api = useLaunchpadApi();
   const [selectedOption, setSelectedOption] = useState<SelectOptionProps>({
     label: "",
@@ -55,15 +68,24 @@ const SelectSearchCollection: FC<Props> = (props) => {
   const [totalItems, setTotalItems] = useState(0);
   const [searchInput, setSearchInput] = useState("");
   const [debouncedSearchInput, setDebouncedSearchInput] = useState("");
-
-  const handleSelect = (option: SelectOptionProps) => {
+  const { setValue, trigger } = mainForm;
+  // const dataFieldNameCollection = useMemo(()=>getValues(fieldNameCollection),[watch(fieldNameCollection)])
+  const handleSelectCollection = (option: SelectOptionProps) => {
     setSearchInput(option?.label);
     setSelectedOption(option);
-    setValue("collectionAddress", option.value);
+    setValue(fieldNameCollection, option.label as any);
+    setValue(fieldNameCollectionAddress, option.value as any);
+    setValue(fieldNameCollectionAddressContract, option.value as any);
+    trigger(fieldNameCollection);
   };
 
   const transformProductToSelectOptions = (
-    products: { name: string | null; id: string; address: Address, type: string}[]
+    products: {
+      name: string | null;
+      id: string;
+      address: Address;
+      type: string;
+    }[]
   ) => {
     if (!products) return [];
 
@@ -71,7 +93,7 @@ const SelectSearchCollection: FC<Props> = (props) => {
       return {
         label: `${product?.name}`,
         value: product?.address?.toString(),
-        type: product?.type
+        type: product?.type,
       };
     });
   };
@@ -134,12 +156,14 @@ const SelectSearchCollection: FC<Props> = (props) => {
       options={productOptions}
       selected={selectedOption}
       placeholder="Select Collection"
-      handleSelect={handleSelect}
+      handleSelect={handleSelectCollection}
       isFetchingOptions={isFetchingProducts}
       lastOptionRef={lastEntryRef}
       isSearchable={true}
       setSearchInput={setSearchInput}
       searchInput={searchInput}
+      fieldName={fieldNameCollection}
+      mainForm={mainForm}
     />
   );
 };
