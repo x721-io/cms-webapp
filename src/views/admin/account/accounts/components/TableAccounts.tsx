@@ -100,97 +100,98 @@ export default function TableAccounts() {
           </tr>
         </thead>
         <tbody>
-          {accounts.concatenatedData && accounts.concatenatedData.map((account: any) => (
-            <tr
-              key={account.id}
-              className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
-            >
-              <td className="px-4 py-3 text-center">
-                <div className="flex w-full items-center gap-2">
-                  <div className="h-[40px] w-[40px]">
-                    <img
-                      src={getUserAvatarImage(account)}
-                      alt="User Avatar"
-                      className="h-full w-full rounded-full object-cover"
-                    />
+          {accounts.concatenatedData &&
+            accounts.concatenatedData.map((account: any) => (
+              <tr
+                key={account.id}
+                className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
+              >
+                <td className="px-4 py-3 text-center">
+                  <div className="flex w-full items-center gap-2">
+                    <div className="h-[40px] w-[40px]">
+                      <img
+                        src={getUserAvatarImage(account)}
+                        alt="User Avatar"
+                        className="h-full w-full rounded-full object-cover"
+                      />
+                    </div>
+                    <div className="text-base font-semibold text-gray-900 dark:text-white">
+                      {account.username}
+                    </div>
                   </div>
-                  <div className="text-base font-semibold text-gray-900 dark:text-white">
-                    {account.username}
+                </td>
+
+                <td className="px-4 py-3 text-center">{account.email}</td>
+                <td className="px-4 py-3 text-center">
+                  {account.telegramLink ? (
+                    <a
+                      href={account.telegramLink}
+                      className="text-blue-500 hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Telegram
+                    </a>
+                  ) : (
+                    <span className="text-center text-gray-400">N/A</span>
+                  )}
+                </td>
+                <td className="px-4 py-3 text-center">
+                  {account.twitterLink ? (
+                    <a
+                      href={account.twitterLink}
+                      className="text-blue-500 hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      X (Twitter)
+                    </a>
+                  ) : (
+                    <span className="text-center text-gray-400">N/A</span>
+                  )}
+                </td>
+
+                <td className="px-4 py-3 text-center">{account.phone}</td>
+                <td className="px-4 py-3 text-center ">
+                  {account.roles &&
+                    account.roles
+                      .filter((role: string) => role !== VIEWER)
+                      .map((role: string, index: number) => (
+                        <div key={index}>
+                          {role
+                            .split("_")
+                            .map(
+                              (word: string) =>
+                                word.charAt(0).toUpperCase() +
+                                word.slice(1).toLowerCase()
+                            )
+                            .join(" ")}
+                          {index < account.roles.length - 1 && " "}
+                        </div>
+                      ))}
+                </td>
+
+                <td className="px-4 py-3 text-center">
+                  <div className="flex items-center justify-center gap-2">
+                    <label className=" inline-flex cursor-pointer items-center">
+                      <input
+                        type="checkbox"
+                        value=""
+                        className="peer sr-only "
+                        checked={activeUser[account.id] ?? account.isActive}
+                        onChange={(e) =>
+                          handleActiveUser(account.id, e.target.checked)
+                        }
+                      />
+                      <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
+                    </label>
                   </div>
-                </div>
-              </td>
-
-              <td className="px-4 py-3 text-center">{account.email}</td>
-              <td className="px-4 py-3 text-center">
-                {account.telegramLink ? (
-                  <a
-                    href={account.telegramLink}
-                    className="text-blue-500 hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Telegram
-                  </a>
-                ) : (
-                  <span className="text-center text-gray-400">N/A</span>
-                )}
-              </td>
-              <td className="px-4 py-3 text-center">
-                {account.twitterLink ? (
-                  <a
-                    href={account.twitterLink}
-                    className="text-blue-500 hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    X (Twitter)
-                  </a>
-                ) : (
-                  <span className="text-center text-gray-400">N/A</span>
-                )}
-              </td>
-
-              <td className="px-4 py-3 text-center">{account.phone}</td>
-              <td className="px-4 py-3 text-center ">
-                {account.roles &&
-                  account.roles
-                    .filter((role: string) => role !== VIEWER)
-                    .map((role: string, index: number) => (
-                      <div key={index}>
-                        {role
-                          .split("_")
-                          .map(
-                            (word: string) =>
-                              word.charAt(0).toUpperCase() +
-                              word.slice(1).toLowerCase()
-                          )
-                          .join(" ")}
-                        {index < account.roles.length - 1 && " "}
-                      </div>
-                    ))}
-              </td>
-
-              <td className="px-4 py-3 text-center">
-                <div className="flex items-center justify-center gap-2">
-                  <label className=" inline-flex cursor-pointer items-center">
-                    <input
-                      type="checkbox"
-                      value=""
-                      className="peer sr-only "
-                      checked={activeUser[account.id] ?? account.isActive}
-                      onChange={(e) =>
-                        handleActiveUser(account.id, e.target.checked)
-                      }
-                    />
-                    <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
-                  </label>
-                </div>
-              </td>
-              <td className="py-3 text-center">
-                <CardMenu accountId={account.id} roles={account.roles} />
-              </td>
-            </tr>
-          ))}
+                </td>
+                <td className="py-3 text-center">
+                  <CardMenu accountId={account.id} roles={account.roles} />
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
 

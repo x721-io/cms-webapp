@@ -1,5 +1,11 @@
 import React, { InputHTMLAttributes, useMemo } from "react";
-import { Controller, FieldValues, Path, UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
+import {
+  Controller,
+  FieldValues,
+  Path,
+  UseFormRegisterReturn,
+  UseFormReturn,
+} from "react-hook-form";
 import { useFormHelper } from "../../hooks/useHelper";
 import { classNames } from "../../utils/string";
 import { FormMessageValidate } from "../Form/FormMessageValidate";
@@ -30,11 +36,9 @@ interface InputV2Props<T> extends InputHTMLAttributes<HTMLInputElement> {
   success?: boolean;
   errorMessage?: string;
   register?: UseFormRegisterReturn;
-
 }
 
 const InputV2 = <T extends FieldValues>(props: InputV2Props<T>) => {
-
   const {
     mainForm,
     fieldName,
@@ -51,10 +55,10 @@ const InputV2 = <T extends FieldValues>(props: InputV2Props<T>) => {
     register,
     onChange,
     ...rest
-  } = props
+  } = props;
 
-  const { onValidateForm } = useFormHelper()
-  const { control } = mainForm
+  const { onValidateForm } = useFormHelper();
+  const { control } = mainForm;
   const dataValidate = onValidateForm({ mainForm, fieldName });
 
   const baseClass =
@@ -86,9 +90,9 @@ const InputV2 = <T extends FieldValues>(props: InputV2Props<T>) => {
 
   const colorClass = useMemo(() => {
     switch (dataValidate) {
-      case 'is-valid':
+      case "is-valid":
         return "text-green-500 ring-green-500";
-      case 'is-invalid':
+      case "is-invalid":
         return "text-red-600 border-red-600 border-[0.5px]";
       default:
         return "text-primary focus-visible:ring-primary border-gray-300 border";
@@ -97,10 +101,7 @@ const InputV2 = <T extends FieldValues>(props: InputV2Props<T>) => {
 
   return (
     <div
-      className={classNames(
-        "relative flex w-full flex-col",
-        containerClass
-      )}
+      className={classNames("relative flex w-full flex-col", containerClass)}
     >
       {!!prependIcon && (
         <div
@@ -124,12 +125,13 @@ const InputV2 = <T extends FieldValues>(props: InputV2Props<T>) => {
               baseClass,
               scaleClass,
               className,
-              onValidateForm({ mainForm, fieldName }) === "is-invalid" && colorClass,
+              onValidateForm({ mainForm, fieldName }) === "is-invalid" &&
+                colorClass
             )}
             onChange={(data) => {
               field.onChange(data);
 
-              if (typeof onChange === 'function') {
+              if (typeof onChange === "function") {
                 onChange(data);
               }
             }}
@@ -149,6 +151,6 @@ const InputV2 = <T extends FieldValues>(props: InputV2Props<T>) => {
       )}
     </div>
   );
-}
+};
 
 export default InputV2;

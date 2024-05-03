@@ -9,7 +9,9 @@ export const classNames = (
 export const getUserAvatarImage = (
   user?: Partial<Pick<User, "username" | "avatar">> | null
 ) => {
-  return user && user.avatar ? user.avatar : `https://avatar.vercel.sh/${user?.username}`;
+  return user && user.avatar
+    ? user.avatar
+    : `https://avatar.vercel.sh/${user?.username}`;
 };
 
 export const getCollectionAvatarImage = (

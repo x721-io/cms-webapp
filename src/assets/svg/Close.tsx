@@ -3,10 +3,7 @@ interface IconProps {
   height: number;
 }
 
-export default function CloseIcon({
-  width,
-  height,
-}: IconProps) {
+export default function CloseIcon({ width, height }: IconProps) {
   return (
     <svg
       width={width}

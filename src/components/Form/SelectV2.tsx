@@ -88,10 +88,7 @@ const SelectV2 = <T extends FieldValues>(props: Props<T>) => {
 
   return (
     <div
-      className={classNames(
-        "relative flex w-auto flex-col",
-        containerClass
-      )}
+      className={classNames("relative flex w-auto flex-col", containerClass)}
     >
       {!!prependIcon && (
         <div
@@ -128,7 +125,7 @@ const SelectV2 = <T extends FieldValues>(props: Props<T>) => {
           >
             {options.map((option, index) => (
               <option key={index} value={option.value}>
-                { option.name || option.label}
+                {option.name || option.label}
               </option>
             ))}
           </select>

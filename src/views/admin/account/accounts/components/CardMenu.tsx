@@ -18,8 +18,9 @@ function CardMenu({ transparent, roles, accountId }: Props) {
   const [open, setOpen] = React.useState(false);
   const [showUpdateRolesModal, setShoUpdateRolesModal] = useState(false);
   const [showResetPasswordModal, setShoResetPasswordModal] = useState(false);
-  const accountRoles = useAuthStore((state) => state.profile && state.profile.roles ? state.profile.roles : []);
-
+  const accountRoles = useAuthStore((state) =>
+    state.profile && state.profile.roles ? state.profile.roles : []
+  );
 
   const roleExists = (role: string) => {
     return accountRoles.includes(role);

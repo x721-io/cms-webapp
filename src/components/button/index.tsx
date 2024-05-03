@@ -1,5 +1,5 @@
-import { Spinner } from "flowbite-react";
 import React, { useMemo } from "react";
+import { Spinner } from "flowbite-react";
 import { classNames } from "../../utils/string";
 
 export interface ButtonProps
@@ -81,7 +81,7 @@ export default function Button({
 
   return (
     <button
-      type={type !== undefined ? type : "button"}
+      type={type ?? "button"}
       disabled={disabled}
       className={classNames(
         baseClass,

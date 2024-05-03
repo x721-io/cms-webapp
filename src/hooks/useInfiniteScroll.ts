@@ -99,17 +99,21 @@ export const useFetchOptionRounds = (filters: APIParams.FetchOptionRounds) => {
       page: index + 1,
     }),
     (params) =>
-      api.fetchOptionRound(sanitizeObject(params) as APIParams.FetchOptionRounds)
+      api.fetchOptionRound(
+        sanitizeObject(params) as APIParams.FetchOptionRounds
+      )
   );
 };
 
-export const useFetchOptionCollections = (filters: APIParams.FetchOptionCollections) => {
+export const useFetchOptionCollections = (
+  filters: APIParams.FetchOptionCollections
+) => {
   const api = useLaunchpadApi();
   return useSWRInfinite(
     (index) => ({
       ...filters,
       page: index + 1,
-    }),
+    })
     // (params) =>
     //   api.fetchOptionCollection(sanitizeObject(params) as APIParams.FetchOptionCollections)
   );
@@ -167,7 +171,6 @@ export const useInfiniteScroll = ({
   };
 };
 
-
 export const useInfiniteScrollOption = ({
   data,
   loading,
@@ -195,36 +198,35 @@ export const useInfiniteScrollOption = ({
   const isLoadingMore =
     loading || (page > 0 && data && data[page - 1] === undefined);
 
-    useEffect(() => {
-      const handleScroll = () => {
-        const scrollContainer = scrollContainerRef?.current;
-        if (!scrollContainer) return; // Kiểm tra null ở đây
-    
-        const { scrollTop, clientHeight, scrollHeight } = scrollContainer;
-        if (
-          scrollTop > scrollHeight - clientHeight - offset &&
-          !isLoadingMore &&
-          page &&
-          list.currentHasNext
-        ) {
-          onNext();
-        }
-      };
-    
-      if (scrollContainerRef?.current) {
-        scrollContainerRef?.current.addEventListener("scroll", handleScroll);
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollContainer = scrollContainerRef?.current;
+      if (!scrollContainer) return; // Kiểm tra null ở đây
+
+      const { scrollTop, clientHeight, scrollHeight } = scrollContainer;
+      if (
+        scrollTop > scrollHeight - clientHeight - offset &&
+        !isLoadingMore &&
+        page &&
+        list.currentHasNext
+      ) {
+        onNext();
       }
-    
-      return () => {
-        if (scrollContainerRef?.current) {
-          scrollContainerRef?.current.removeEventListener("scroll", handleScroll);
-        }
-      };
-    }, [isLoadingMore, page, list.currentHasNext, scrollContainerRef]);
-    
+    };
+
+    if (scrollContainerRef?.current) {
+      scrollContainerRef?.current.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (scrollContainerRef?.current) {
+        scrollContainerRef?.current.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [isLoadingMore, page, list.currentHasNext, scrollContainerRef]);
+
   return {
     list,
     isLoadingMore,
   };
 };
-

@@ -105,62 +105,65 @@ export default function TableCollection() {
         </tr>
       </thead>
       <tbody>
-        {collections.concatenatedData && collections.concatenatedData.map((collection: any) => (
-          <tr className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
-            <th
-              scope="row"
-              className="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white"
-            >
-              <div className="flex items-center gap-2 ps-3">
-                <div className="h-[50px] w-[50px]">
-                  <img
-                    src={getCollectionAvatarImage(collection)}
-                    alt="Collection Avatar"
-                    className="h-full w-full rounded-full object-cover"
-                  />
+        {collections.concatenatedData &&
+          collections.concatenatedData.map((collection: any) => (
+            <tr className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
+              <th
+                scope="row"
+                className="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white"
+              >
+                <div className="flex items-center gap-2 ps-3">
+                  <div className="h-[50px] w-[50px]">
+                    <img
+                      src={getCollectionAvatarImage(collection)}
+                      alt="Collection Avatar"
+                      className="h-full w-full rounded-full object-cover"
+                    />
+                  </div>
+                  <div className="text-base font-semibold">
+                    {collection.name}
+                  </div>
                 </div>
-                <div className="text-base font-semibold">{collection.name}</div>
-              </div>
-            </th>
-            <td className="px-6 py-4">{collection.type}</td>
-            <td className="px-6 py-4">
-              <div className="flex gap-2">
-                <label className="mb-5 inline-flex cursor-pointer items-center">
-                  <input
-                    type="checkbox"
-                    value=""
-                    className="peer sr-only"
-                    checked={
-                      verifyCollection[collection.id] ?? collection.isVerified
-                    }
-                    onChange={(e) =>
-                      handleVerifyCollection(collection.id, e.target.checked)
-                    }
-                  />
-                  <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
-                </label>
-              </div>
-            </td>
-            <td className="px-6 py-4">
-              <div className="flex gap-2">
-                <label className="mb-5 inline-flex cursor-pointer items-center">
-                  <input
-                    type="checkbox"
-                    value=""
-                    className="peer sr-only"
-                    checked={
-                      activeCollection[collection.id] ?? collection.isActive
-                    }
-                    onChange={(e) =>
-                      handleActiveCollection(collection.id, e.target.checked)
-                    }
-                  />
-                  <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
-                </label>
-              </div>
-            </td>
-          </tr>
-        ))}
+              </th>
+              <td className="px-6 py-4">{collection.type}</td>
+              <td className="px-6 py-4">
+                <div className="flex gap-2">
+                  <label className="mb-5 inline-flex cursor-pointer items-center">
+                    <input
+                      type="checkbox"
+                      value=""
+                      className="peer sr-only"
+                      checked={
+                        verifyCollection[collection.id] ?? collection.isVerified
+                      }
+                      onChange={(e) =>
+                        handleVerifyCollection(collection.id, e.target.checked)
+                      }
+                    />
+                    <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
+                  </label>
+                </div>
+              </td>
+              <td className="px-6 py-4">
+                <div className="flex gap-2">
+                  <label className="mb-5 inline-flex cursor-pointer items-center">
+                    <input
+                      type="checkbox"
+                      value=""
+                      className="peer sr-only"
+                      checked={
+                        activeCollection[collection.id] ?? collection.isActive
+                      }
+                      onChange={(e) =>
+                        handleActiveCollection(collection.id, e.target.checked)
+                      }
+                    />
+                    <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
+                  </label>
+                </div>
+              </td>
+            </tr>
+          ))}
       </tbody>
     </table>
   );

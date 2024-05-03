@@ -4,7 +4,7 @@ import {
   useCallback,
   useEffect,
   useRef,
-  useState
+  useState,
 } from "react";
 
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
@@ -21,7 +21,7 @@ interface Props<T> extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 interface SelectOptionPropsCustom extends SelectOptionProps {
-  type: string
+  type: string;
 }
 
 const LIMIT = 5;
@@ -54,18 +54,22 @@ const useIntersectionObserver = (isDataLoading: boolean) => {
 };
 
 const SelectSearchRound = <T extends FieldValues>(props: Props<T>) => {
-  const { mainForm, prefixField, fieldName } = props;  
+  const { mainForm, prefixField, fieldName } = props;
   const { setValue, setError, clearErrors } = mainForm;
-  const prefixFieldType = `${prefixField}.type` as 'rounds.0.type'
-  const prefixFieldId = `${prefixField}.roundId` as 'rounds.0.roundId'
+  const prefixFieldType = `${prefixField}.type` as "rounds.0.type";
+  const prefixFieldId = `${prefixField}.roundId` as "rounds.0.roundId";
 
   const api = useLaunchpadApi();
-  const [selectedOption, setSelectedOption] = useState<SelectOptionPropsCustom>({
-    label: "",
-    value: "",
-    type: "",
-  });
-  const [productOptions, setProductOptions] = useState<SelectOptionPropsCustom[]>([]);
+  const [selectedOption, setSelectedOption] = useState<SelectOptionPropsCustom>(
+    {
+      label: "",
+      value: "",
+      type: "",
+    }
+  );
+  const [productOptions, setProductOptions] = useState<
+    SelectOptionPropsCustom[]
+  >([]);
   const [isFetchingProducts, setIsFetchingProducts] = useState(true);
   const [totalItems, setTotalItems] = useState(0);
   const [searchInput, setSearchInput] = useState("");
@@ -79,7 +83,7 @@ const SelectSearchRound = <T extends FieldValues>(props: Props<T>) => {
   };
 
   const transformProductToSelectOptions = (
-    products: { name: string | null; id: string; type: string}[]
+    products: { name: string | null; id: string; type: string }[]
   ) => {
     if (!products) return [];
 
@@ -87,7 +91,7 @@ const SelectSearchRound = <T extends FieldValues>(props: Props<T>) => {
       return {
         label: `${product?.name}`,
         value: product?.id?.toString(),
-        type: product?.type
+        type: product?.type,
       };
     });
   };
@@ -134,7 +138,7 @@ const SelectSearchRound = <T extends FieldValues>(props: Props<T>) => {
       ]);
       setTotalItems(data?.paging.page);
     } catch (error) {
-      alert("Something went wrong");
+      // alert("Something went wrong");
       console.log({ error });
     } finally {
       setIsFetchingProducts(false);

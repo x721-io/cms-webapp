@@ -6,7 +6,9 @@ import DashIcon from "../../icons/DashIcon";
 
 export const SidebarLinks = () => {
   let location = useLocation();
-  const rolesAccount = useAuthStore((state) => (state.profile && state.profile.roles) || []);
+  const rolesAccount = useAuthStore(
+    (state) => (state.profile && state.profile.roles) || []
+  );
 
   const activeRoute = (routeName: string) => {
     return location.pathname.includes(routeName);
@@ -46,34 +48,35 @@ export const SidebarLinks = () => {
                     : "font-medium text-gray-500"
                 }`}
               >
-                {route.links && route.links.map((link) => {
-                  if (checkAccess(link.roles, rolesAccount)) {
-                    return (
-                      <Link key={link.name} to={link.path}>
-                        <div className="relative mb-3 flex hover:cursor-pointer">
-                          <div
-                            className="my-[3px] flex items-center hover:cursor-pointer "
-                            key={link.name}
-                          >
-                            <p
-                              className={`leading-1 ml-2 flex ${
-                                activeRoute(link && link.path)
-                                  ? "font-bold text-brand-500 dark:text-white"
-                                  : "font-medium text-gray-500"
-                              }`}
+                {route.links &&
+                  route.links.map((link) => {
+                    if (checkAccess(link.roles, rolesAccount)) {
+                      return (
+                        <Link key={link.name} to={link.path}>
+                          <div className="relative mb-3 flex hover:cursor-pointer">
+                            <div
+                              className="my-[3px] flex items-center hover:cursor-pointer "
+                              key={link.name}
                             >
-                              {link.name}
-                            </p>
+                              <p
+                                className={`leading-1 ml-2 flex ${
+                                  activeRoute(link && link.path)
+                                    ? "font-bold text-brand-500 dark:text-white"
+                                    : "font-medium text-gray-500"
+                                }`}
+                              >
+                                {link.name}
+                              </p>
+                            </div>
+                            {activeRoute(link.path) ? (
+                              <div className="absolute right-0 top-px h-9 w-1 rounded-lg bg-brand-500 dark:bg-brand-400" />
+                            ) : null}
                           </div>
-                          {activeRoute(link.path) ? (
-                            <div className="absolute right-0 top-px h-9 w-1 rounded-lg bg-brand-500 dark:bg-brand-400" />
-                          ) : null}
-                        </div>
-                      </Link>
-                    );
-                  }
-                  return null;
-                })}
+                        </Link>
+                      );
+                    }
+                    return null;
+                  })}
               </Collapsible>
             </li>
           </div>

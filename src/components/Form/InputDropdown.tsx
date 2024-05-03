@@ -19,7 +19,7 @@ export default function InputDropdown({
 }: Props) {
   const [showDropdown, setShowDropdown] = useState(false);
   const container = useRef<HTMLDivElement>(null);
-  
+
   const handleClose = () => setShowDropdown(false);
 
   const handler = (event: any) => {
@@ -44,12 +44,12 @@ export default function InputDropdown({
       {!!renderDropdown && (
         <div
           className={classNames(
-            "w-full desktop:p-3 tablet:p-2 desktop:rounded-2xl tablet:rounded-2xl absolute z-50 desktop:border-[0.5px] tablet:border-0 shadow-sm mt-3 transition-all bg-white desktop:max-h-200 tablet:max-h-200 max-h-auto overflow-auto",
-            showDropdown ? "block" : "hidden",
+            "desktop:max-h-200 tablet:max-h-200 max-h-auto absolute z-50 mt-3 w-full overflow-auto bg-white shadow-sm transition-all tablet:rounded-2xl tablet:border-0 tablet:p-2 desktop:rounded-2xl desktop:border-[0.5px] desktop:p-3",
+            showDropdown ? "block" : "hidden"
           )}
         >
           {loading ? (
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col items-center justify-center">
               <Spinner size="xl" />
             </div>
           ) : (

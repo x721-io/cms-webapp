@@ -56,7 +56,6 @@ export default function TableProject() {
       </div>
     );
   }
-  console.log("items.concatenatedData: ", items.concatenatedData);
 
   return (
     <div className="grid grid-cols-4 gap-4">
@@ -70,12 +69,10 @@ export default function TableProject() {
             width={384}
             height={384}
             src={item.banner}
-            className="h-full w-full rounded-2xl tablet:h-96 tablet:w-96 desktop:h-[100px] desktop:w-[100px] object-cover"
+            className="h-full w-full rounded-2xl object-cover tablet:h-96 tablet:w-96 desktop:h-[100px] desktop:w-[100px]"
             alt=""
           />
-          <Text
-            className="cursor-pointer text-2xl font-bold text-black"
-          >
+          <Text className="cursor-pointer text-2xl font-bold text-black">
             Project: {item.name}
           </Text>
           <div className="flex w-full flex-col gap-2">

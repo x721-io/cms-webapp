@@ -15,9 +15,10 @@ const DatePickerSingle = <T extends FieldValues>(
 ) => {
   const { mainForm, prefixField } = props;
 
-  const prefixFieldStartClaim = `${prefixField}.claimableStart` as "rounds.0.start";
-  const prefixFieldStakeBefore = `${prefixField}.stakeBefore` as "rounds.0.stakeBefore";
-
+  const prefixFieldStartClaim =
+    `${prefixField}.claimableStart` as "rounds.0.start";
+  const prefixFieldStakeBefore =
+    `${prefixField}.stakeBefore` as "rounds.0.stakeBefore";
 
   const { setValue } = mainForm;
   const [dateRange, setDateRange] = useState({
@@ -28,7 +29,10 @@ const DatePickerSingle = <T extends FieldValues>(
   const handleValueChange = (newValue: any) => {
     setDateRange(newValue);
     setValue(prefixFieldStartClaim, new Date(newValue.startDate).toISOString());
-    setValue(prefixFieldStakeBefore, new Date(newValue.startDate).toISOString());
+    setValue(
+      prefixFieldStakeBefore,
+      new Date(newValue.startDate).toISOString()
+    );
   };
   return (
     <>
