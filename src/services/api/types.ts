@@ -1,10 +1,10 @@
 import { Address } from "wagmi";
 import {
-    Account,
-    AssetType,
-    Collection,
-    NFT,
-    User,
+  Account,
+  AssetType,
+  Collection,
+  NFT,
+  User,
 } from "../../types/entitites";
 import { Project, Round, RoundStatus } from "../../types/launchpad";
 
@@ -188,6 +188,9 @@ export namespace APIParams {
   export interface FetchOptionRounds extends PaginationParams {}
 
   export interface FetchOptionCollections extends PaginationParams {}
+  export interface RefreshToken {
+    refreshToken: string;
+  }
 }
 
 /********** =========== API Response types ========== ***********/

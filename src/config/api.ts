@@ -39,4 +39,5 @@ export const API_ENDPOINTS = {
     RESET_PASSWORD: '/cms/account/reset-password',
     CHANGE_PASSWORD: '/cms/account/update-password',
     
+    REFRESH_TOKEN: '/cms/refresh-token',
 };

@@ -9,6 +9,29 @@ export const useMarketplaceApi = () => {
   const { credentials } = useAuthStore();
   const bearerToken = credentials && credentials.accessToken;
 
+  // const getBearerToken = async () => {
+  //   if (credentials) {
+  //     if (credentials.accessTokenExpire >= Date.now()) {
+  //       try {
+  //         const refreshedTokenResponse = await marketplaceApi.post(API_ENDPOINTS.REFRESH_TOKEN, { refreshToken: credentials.refreshToken });
+  //         const { accessToken, accessTokenExpire } = refreshedTokenResponse.data;
+  //         setCredentials({
+  //           ...credentials,
+  //           accessToken,
+  //           accessTokenExpire
+  //         });
+    //         return accessToken;
+  //       } catch (error) {
+  //         console.error("Error refreshing access token:", error);
+  //         // window.location.href = "/login";
+  //         // throw new Error("Unable to refresh access token");
+  //       }
+  //     }
+  //     return credentials.accessToken;
+  //   }
+  // };
+  // const bearerToken =  getBearerToken();  
+
   const authHeader = useCallback(
     (accessToken?: string) => ({
       headers: { Authorization: `Bearer ${accessToken || bearerToken}` },
@@ -119,6 +142,8 @@ export const useMarketplaceApi = () => {
           API_ENDPOINTS.ACCOUNT_ROLES + `/${id}`,
           authHeader()
         ),
+        refreshToken: (params: APIParams.RefreshToken) =>
+          marketplaceApi.post(API_ENDPOINTS.REFRESH_TOKEN, params, authHeader()),
     };
   }, [authHeader]);
 };
