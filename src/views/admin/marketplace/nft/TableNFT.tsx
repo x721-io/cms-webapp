@@ -1,58 +1,171 @@
-import avatar from "../../../../assets/avatars/avatar1.png";
+import { Spinner } from "flowbite-react";
+import { useState } from "react";
+import Text from "../../../../components/Text";
+import {
+  useFetchNFTList,
+  useInfiniteScroll,
+} from "../../../../hooks/useInfiniteScroll";
+import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
+import { useNFTFilterStore } from "../../../../store/filters/nft/store";
+import { convertImageUrl } from "../../../../utils/nft";
+import ModalNFTDetail from "./ModalNFTDetail";
+type CheckboxState = Record<string, boolean>;
 
 export default function TableNFT() {
+  const api = useMarketplaceApi();
+  const { filters } = useNFTFilterStore((state) => state);
+  const { error, isLoading, setSize, size, data } = useFetchNFTList(filters);
+  const [activeNFT, setActiveNFT] = useState<CheckboxState>({});
+  const [showModalNFTDetail, setShowModalNFTDetail] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const { list: items } = useInfiniteScroll({
+    data,
+    loading: isLoading,
+    page: size,
+    onNext: () => setSize(size + 1),
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex h-56 w-full items-center justify-center">
+        <Spinner size="xl" />
+      </div>
+    );
+  }
+
+  if (error && !items) {
+    return (
+      <div className="border-disabled flex h-56 w-full items-center justify-center rounded-2xl border border-dashed p-7">
+        <Text variant="heading-xs" className="text-center">
+          Network Error!
+          <br />
+          Please try again later
+        </Text>
+      </div>
+    );
+  }
+
+  if (!items.concatenatedData || !items.concatenatedData.length) {
+    return (
+      <div className="border-disabled flex h-56 w-full items-center justify-center rounded-2xl border border-dashed p-7">
+        <Text className="text-secondary text-body-18 font-semibold">
+          Nothing to show
+        </Text>
+      </div>
+    );
+  }
+
+  const handleActiveNFT = async (
+    collectionId: any,
+    itemId: any,
+    active: boolean
+  ) => {
+    try {
+      await api.handleActiveNFT({
+        collectionId: collectionId,
+        id: itemId,
+        isActive: active,
+      });
+      setActiveNFT((prevState) => ({
+        ...prevState,
+        [itemId]: active,
+      }));
+    } catch (error) {
+      console.error(":", error);
+    }
+  };
+
+  const handleDetailNFT = (item: any) => {
+    setSelectedItem(item);
+    setShowModalNFTDetail(true);
+  };
+
   return (
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" className="px-6 py-3">
-            Name
-          </th>
-          <th scope="col" className="px-6 py-3">
-            Type
-          </th>
-          <th scope="col" className="px-6 py-3">
-            Status
-          </th>
-          <th scope="col" className="px-6 py-3">
-            Active
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-          <th
-            scope="row"
-            className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
-          >
-            <div className="ps-3 flex gap-2 items-center">
-              <div className="w-[50px] h-[50px]">
-                <img
-                  src={avatar}
-                  alt="NFT Avatar"
-                  className="rounded-full w-full h-full object-cover"
-                />
-              </div>
-              <div className="text-base font-semibold">Neil Sims</div>
-            </div>
-          </th>
-          <td className="px-6 py-4">type</td>
-          <td className="px-6 py-4">
-            <div className="flex items-center">
-              <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>{" "}
+    <div>
+      <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
+        <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" className="px-6 py-3">
+              Name
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Type
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Status
+            </th>
+            <th scope="col" className="px-6 py-3">
               Active
-            </div>
-          </td>
-          <td className="px-6 py-4">
-            <div className="flex gap-2">
-              <label className="inline-flex items-center mb-5 cursor-pointer">
-                <input type="checkbox" value="" className="sr-only peer" />
-                <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-              </label>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.concatenatedData &&
+            items.concatenatedData.map((item) => (
+              <tr
+                key={item.id}
+                className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
+              >
+                <th
+                  scope="row"
+                  className="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white"
+                >
+                  <div
+                    className="flex cursor-pointer items-center gap-2 ps-3"
+                    onClick={() => handleDetailNFT(item)}
+                  >
+                    <div className="h-[50px] w-[50px]">
+                      <img
+                        src={convertImageUrl(item.animationUrl || item.image)}
+                        alt="NFT Avatar"
+                        className="h-full w-full rounded-full object-cover"
+                      />
+                    </div>
+                    <div className="text-base font-semibold">{item.name}</div>
+                  </div>
+                </th>
+                <td className="px-6 py-4">{item.collection.type}</td>
+                <td className="px-6 py-4">
+                  <div className="flex items-center">
+                    {item.status === "SUCCESS" ? (
+                      <div className="me-2 h-2.5 w-2.5 rounded-full bg-green-500"></div>
+                    ) : item.status === "PENDING" ? (
+                      <div className="me-2 h-2.5 w-2.5 rounded-full bg-yellow-500"></div>
+                    ) : (
+                      <div className="me-2 h-2.5 w-2.5 rounded-full bg-red-500"></div>
+                    )}{" "}
+                    {item.status}
+                  </div>
+                </td>
+                <td className="px-6 py-4">
+                  <div className="flex gap-2">
+                    <label className="mb-5 inline-flex cursor-pointer items-center">
+                      <input
+                        type="checkbox"
+                        className="peer sr-only"
+                        checked={activeNFT[item.id] ?? item.isActive}
+                        onChange={(e) =>
+                          handleActiveNFT(
+                            item.collectionId,
+                            item.id,
+                            e.target.checked
+                          )
+                        }
+                      />
+                      <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
+                    </label>
+                  </div>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+      <ModalNFTDetail
+        item={selectedItem}
+        show={showModalNFTDetail}
+        onClose={() => setShowModalNFTDetail(false)}
+      />
+    </div>
   );
 }

@@ -7,10 +7,11 @@ declare global {
    */
   interface RoutesType {
     name: string;
-    layout: string;
-    component: JSX.Element;
-    icon: JSX.Element | string;
+    layout?: string;
     path: string;
-    secondary?: boolean;
+    icon?: JSX.Element;
+    component?: JSX.Element;
+    links?: RouteType[];
+    roles?: string[];
   }
 }
