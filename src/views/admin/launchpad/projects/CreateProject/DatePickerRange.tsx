@@ -3,7 +3,8 @@ import { FieldValues, UseFormReturn } from "react-hook-form";
 import Datepicker from "react-tailwindcss-datepicker";
 import { FormState } from "../../../../../types/form";
 
-interface DatePickerRangeProps<T> extends InputHTMLAttributes<HTMLInputElement> {
+interface DatePickerRangeProps<T>
+  extends InputHTMLAttributes<HTMLInputElement> {
   mainForm: UseFormReturn<FormState.CreateProject>;
   fieldName: any;
   prefixField: any;
@@ -12,13 +13,12 @@ interface DatePickerRangeProps<T> extends InputHTMLAttributes<HTMLInputElement> 
 const DatePickerRange = <T extends FieldValues>(
   props: DatePickerRangeProps<T>
 ) => {
-  const {mainForm , prefixField} = props;
+  const { mainForm, prefixField } = props;
 
-  const prefixFieldStart = `${prefixField}.start` as 'rounds.0.start'
-  const prefixFieldEnd = `${prefixField}.end` as 'rounds.0.end'
+  const prefixFieldStart = `${prefixField}.start` as "rounds.0.start";
+  const prefixFieldEnd = `${prefixField}.end` as "rounds.0.end";
 
-
-  const { setValue} = mainForm
+  const { setValue } = mainForm;
   const [dateRange, setDateRange] = useState({
     startDate: null,
     endDate: null,

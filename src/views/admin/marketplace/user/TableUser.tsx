@@ -91,68 +91,69 @@ export default function TableUser() {
         </tr>
       </thead>
       <tbody>
-        {users.concatenatedData && users.concatenatedData.map((user: any) => (
-          <tr
-            key={user.id}
-            className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
-          >
-            <th
-              scope="row"
-              className="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white"
+        {users.concatenatedData &&
+          users.concatenatedData.map((user: any) => (
+            <tr
+              key={user.id}
+              className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
             >
-              <div className="flex items-center gap-2 ps-3">
-                <div className="h-[50px] w-[50px]">
-                  <img
-                    src={getUserAvatarImage(user)}
-                    alt="User Avatar"
-                    className="h-full w-full rounded-full object-cover"
-                  />
+              <th
+                scope="row"
+                className="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white"
+              >
+                <div className="flex items-center gap-2 ps-3">
+                  <div className="h-[50px] w-[50px]">
+                    <img
+                      src={getUserAvatarImage(user)}
+                      alt="User Avatar"
+                      className="h-full w-full rounded-full object-cover"
+                    />
+                  </div>
+                  <div className="text-base font-semibold">{user.username}</div>
                 </div>
-                <div className="text-base font-semibold">{user.username}</div>
-              </div>
-            </th>
-            <td className="px-6 py-4">{user.email}</td>
-            <td className="px-6 py-4">
-              {user.accountStatus}
-              <div className="flex items-center">
-                {user.accountStatus === true ? (
-                  <div className="me-2 h-2.5 w-2.5 rounded-full bg-green-500"></div>
-                ) : (
-                  <div className="me-2 h-2.5 w-2.5 rounded-full bg-red-500"></div>
-                )}{" "}
-                {user.accountStatus === true ? "Verified" : "Not verified"}
-              </div>
-            </td>
-            <td className="px-6 py-4">
-              <div className="flex items-center">
-                {user.verifyEmail === true ? (
-                  <div className="me-2 h-2.5 w-2.5 rounded-full bg-green-500"></div>
-                ) : (
-                  <div className="me-2 h-2.5 w-2.5 rounded-full bg-red-500"></div>
-                )}{" "}
-                {user.verifyEmail === true
-                  ? "Verified email"
-                  : "Not verified email"}
-              </div>
-            </td>
-            <td className="px-6 py-4">
-              <div className="flex gap-2">
-                <label className="mb-5 inline-flex cursor-pointer items-center">
-                  <input
-                    type="checkbox"
-                    value=""
-                    className="peer sr-only"
-                    checked={activeUser[user.id] ?? user.isActive}
-                    onChange={(e) =>
-                      handleActiveUser(user.id, e.target.checked)
-                    }
-                  />
-                  <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
-                </label>
-              </div>
-            </td>
-          </tr>
-        ))}
+              </th>
+              <td className="px-6 py-4">{user.email}</td>
+              <td className="px-6 py-4">
+                {user.accountStatus}
+                <div className="flex items-center">
+                  {user.accountStatus === true ? (
+                    <div className="me-2 h-2.5 w-2.5 rounded-full bg-green-500"></div>
+                  ) : (
+                    <div className="me-2 h-2.5 w-2.5 rounded-full bg-red-500"></div>
+                  )}{" "}
+                  {user.accountStatus === true ? "Verified" : "Not verified"}
+                </div>
+              </td>
+              <td className="px-6 py-4">
+                <div className="flex items-center">
+                  {user.verifyEmail === true ? (
+                    <div className="me-2 h-2.5 w-2.5 rounded-full bg-green-500"></div>
+                  ) : (
+                    <div className="me-2 h-2.5 w-2.5 rounded-full bg-red-500"></div>
+                  )}{" "}
+                  {user.verifyEmail === true
+                    ? "Verified email"
+                    : "Not verified email"}
+                </div>
+              </td>
+              <td className="px-6 py-4">
+                <div className="flex gap-2">
+                  <label className="mb-5 inline-flex cursor-pointer items-center">
+                    <input
+                      type="checkbox"
+                      value=""
+                      className="peer sr-only"
+                      checked={activeUser[user.id] ?? user.isActive}
+                      onChange={(e) =>
+                        handleActiveUser(user.id, e.target.checked)
+                      }
+                    />
+                    <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
+                  </label>
+                </div>
+              </td>
+            </tr>
+          ))}
       </tbody>
     </table>
   );

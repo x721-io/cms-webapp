@@ -169,8 +169,9 @@ const SelectInput = <T extends FieldValues>(props: SelectProps<T>) => {
                 type="text"
                 {...field}
                 className={classNames(
-                  'block h-12 w-full min-w-72 rounded-2xl border border-gray-300 p-3 text-base outline-none transition-all placeholder:font-light placeholder:text-gray-200 focus-visible:ring-[0.5px]',
-                  onValidateForm({ mainForm, fieldName }) === "is-invalid" && colorClass,
+                  "block h-12 w-full min-w-72 rounded-2xl border border-gray-300 p-3 text-base outline-none transition-all placeholder:font-light placeholder:text-gray-200 focus-visible:ring-[0.5px]",
+                  onValidateForm({ mainForm, fieldName }) === "is-invalid" &&
+                    colorClass
                 )}
                 onChange={(ev) => {
                   setSearchInput?.(ev.target.value);

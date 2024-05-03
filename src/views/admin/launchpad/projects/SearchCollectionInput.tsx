@@ -7,12 +7,8 @@ import { useSearchCollection } from "../../../../hooks/useSearch";
 import SearchCollectionTab from "./CollectionTab";
 
 export default function SearchCollectionInput() {
-  const {
-    handleTextInput,
-    searchKey,
-    text,
-    searchString,
-  } = useSearchCollection();
+  const { handleTextInput, searchKey, text, searchString } =
+    useSearchCollection();
 
   const api = useLaunchpadApi();
 
@@ -22,9 +18,9 @@ export default function SearchCollectionInput() {
     isMutating: searchingCollection,
     reset: resetCollection,
   } = useSWRMutation(text.collection || null, (text) =>
-    api.searchCollections(text, {page: 1, limit: 20}),
+    api.searchCollections(text, { page: 1, limit: 20 })
   );
-  
+
   const handleSearch = () => {
     if (!searchKey || !text[searchKey]) return;
     return searchCollection();
@@ -41,22 +37,22 @@ export default function SearchCollectionInput() {
   return (
     <>
       <InputDropdown
-          closeOnClick
-          className=""
-          containerClass="w-1/2"
-          value={searchString}
-          placeholder="Type for collections, NFTs etc"
-          onChange={(event) => {
-            handleTextInput(event.target.value)
-          }}
-          renderDropdown={(onclose) => (
-            <SearchCollectionTab
-                  loading={searchingCollection}
-                  data={collectionSearchData}
-                  onClose={onclose}
-                />
-          )}
-        />
+        closeOnClick
+        className=""
+        containerClass="w-1/2"
+        value={searchString}
+        placeholder="Type for collections, NFTs etc"
+        onChange={(event) => {
+          handleTextInput(event.target.value);
+        }}
+        renderDropdown={(onclose) => (
+          <SearchCollectionTab
+            loading={searchingCollection}
+            data={collectionSearchData}
+            onClose={onclose}
+          />
+        )}
+      />
     </>
   );
 }

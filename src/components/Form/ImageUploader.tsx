@@ -1,12 +1,7 @@
 "use client";
 
 import { Spinner } from "flowbite-react";
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { toast } from "react-toastify";
 import CloseIcon from "../../assets/svg/Close";
@@ -40,8 +35,8 @@ const ImageUploader = <T extends FieldValues>(props: Props<T>) => {
     accept,
     maxSize = 100, // 100 MB
   } = props;
-  const { onValidateForm } = useFormHelper()
-  const { control } = mainForm
+  const { onValidateForm } = useFormHelper();
+  const { control } = mainForm;
   const dataValidate = onValidateForm({ mainForm, fieldName });
 
   const [file, setFile] = useState<Blob | undefined>();
@@ -64,9 +59,9 @@ const ImageUploader = <T extends FieldValues>(props: Props<T>) => {
 
   const colorClass = useMemo(() => {
     switch (dataValidate) {
-      case 'is-valid':
+      case "is-valid":
         return "text-green-500 ring-green-500";
-      case 'is-invalid':
+      case "is-invalid":
         return "text-red-600 border-red-600 border-[0.5px]";
       default:
         return "text-primary focus-visible:ring-primary border-gray-300 border";
@@ -95,7 +90,7 @@ const ImageUploader = <T extends FieldValues>(props: Props<T>) => {
   const renderFile = () => {
     if (!file) {
       return (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-6 mb-4">
+        <div className="mb-4 flex h-full w-full flex-col items-center justify-center gap-6">
           <Text
             className="text-secondary text-center font-semibold"
             variant="body-24"
@@ -117,9 +112,10 @@ const ImageUploader = <T extends FieldValues>(props: Props<T>) => {
             height={256}
             // className="m-auto h-full w-auto rounded-2xl object-contain"
             className={classNames(
-              'm-auto h-full w-auto rounded-2xl object-contain',
+              "m-auto h-full w-auto rounded-2xl object-contain",
               className,
-              onValidateForm({ mainForm, fieldName }) === "is-invalid" && colorClass,
+              onValidateForm({ mainForm, fieldName }) === "is-invalid" &&
+                colorClass
             )}
           />
         );
@@ -194,4 +190,4 @@ const ImageUploader = <T extends FieldValues>(props: Props<T>) => {
   );
 };
 
-export default ImageUploader
+export default ImageUploader;

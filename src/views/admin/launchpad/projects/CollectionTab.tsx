@@ -25,9 +25,8 @@ export default function SearchCollectionTab({ loading, data, onClose }: Props) {
       </div>
     );
   }
-  
-  console.log('data: ', data);
-  
+
+
   return (
     <div className="flex h-[200px] flex-col gap-2 pt-4">
       {data.data.map((collection) => {

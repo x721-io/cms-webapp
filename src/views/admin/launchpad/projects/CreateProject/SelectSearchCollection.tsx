@@ -4,7 +4,7 @@ import {
   useCallback,
   useEffect,
   useRef,
-  useState
+  useState,
 } from "react";
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { Address } from "wagmi";
@@ -49,7 +49,7 @@ const useIntersectionObserver = (isDataLoading: boolean) => {
 };
 
 const SelectSearchCollection = <T extends FieldValues>(props: Props<T>) => {
-  const { mainForm,  fieldNameCollection,fieldNameCollectionAddress } = props;
+  const { mainForm, fieldNameCollection, fieldNameCollectionAddress } = props;
 
   const api = useLaunchpadApi();
   const [selectedOption, setSelectedOption] = useState<SelectOptionProps>({
@@ -133,7 +133,7 @@ const SelectSearchCollection = <T extends FieldValues>(props: Props<T>) => {
       ]);
       setTotalItems(data?.paging.page);
     } catch (error) {
-      alert("Something went wrong");
+      // alert("Something went wrong");
       console.log({ error });
     } finally {
       setIsFetchingProducts(false);

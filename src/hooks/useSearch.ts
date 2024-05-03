@@ -1,9 +1,8 @@
 import { useMemo, useState } from "react";
 
 export const useSearchCollection = () => {
-
   const [text, setText] = useState<Record<string, string>>({
-    collection: ""
+    collection: "",
   });
 
   const searchKey = useMemo(() => {
@@ -20,7 +19,7 @@ export const useSearchCollection = () => {
 
   const searchString = useMemo(
     () => (searchKey ? text[searchKey] : ""),
-    [searchKey, text],
+    [searchKey, text]
   );
 
   return {
@@ -40,7 +39,6 @@ export const useSearchCollection = () => {
 
 //   const [text, setText] = useState<string>("");
 
-
 //   const handleTextInput = async (value: string) => {
 //     setText(value);
 //   };
@@ -55,4 +53,3 @@ export const useSearchCollection = () => {
 //     searchString,
 //   };
 // };
-

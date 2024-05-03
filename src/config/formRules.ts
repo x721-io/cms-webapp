@@ -37,10 +37,10 @@ export const formRulesCreateRound = {
     required: "Please input round name",
   },
   description: {
-    required: "Please input description"
+    required: "Please input description",
   },
   instruction: {
-    required: "Please input instruction"
+    required: "Please input instruction",
   },
   type: {
     required: "Please input type round",
@@ -68,7 +68,7 @@ export const formRulesCreateRound = {
   },
 };
 
-// Update Round 
+// Update Round
 export const formRulesUpdateProject = {
   banner: {
     required: "Please input banner",
@@ -80,19 +80,19 @@ export const formRulesUpdateProject = {
     required: "Please input collection",
   },
   description: {
-    required: "Please input description"
+    required: "Please input description",
   },
   discord: {
-    required: "Please input total discord"
+    required: "Please input total discord",
   },
   facebook: {
     required: "Please input facebook",
   },
   instagram: {
-    required: "Please input instagram"
+    required: "Please input instagram",
   },
   twitter: {
-    required: "Please input total twitter"
+    required: "Please input total twitter",
   },
   telegram: {
     required: "Please input telegram",
@@ -101,17 +101,17 @@ export const formRulesUpdateProject = {
     required: "Please input address",
   },
   organization: {
-    required: "Please input organization"
+    required: "Please input organization",
   },
   collectionAddress: {
-    required: "Please input collectionAddress"
+    required: "Please input collectionAddress",
   },
   logo: {
-    required: "Please input logo"
-  }
+    required: "Please input logo",
+  },
 };
 
-// Create Project 
+// Create Project
 export const formRulesCreateProject = {
   banner: {
     required: "Please input banner",
@@ -123,19 +123,19 @@ export const formRulesCreateProject = {
     required: "Please input collection",
   },
   description: {
-    required: "Please input description"
+    required: "Please input description",
   },
   discord: {
-    required: "Please input total discord"
+    required: "Please input total discord",
   },
   facebook: {
     required: "Please input facebook",
   },
   instagram: {
-    required: "Please input instagram"
+    required: "Please input instagram",
   },
   twitter: {
-    required: "Please input total twitter"
+    required: "Please input total twitter",
   },
   telegram: {
     required: "Please input telegram",
@@ -144,53 +144,52 @@ export const formRulesCreateProject = {
     required: "Please input address",
   },
   organization: {
-    required: "Please input organization"
+    required: "Please input organization",
   },
   collectionAddress: {
-    required: "Please input collectionAddress"
+    required: "Please input collectionAddress",
   },
   logo: {
-    required: "Please input logo"
+    required: "Please input logo",
   },
   rounds: [
     {
       addressRounds: {
-        required: "Please input addressRounds"
+        required: "Please input addressRounds",
       },
       startRounds: {
-        required: "Please input startRounds"
+        required: "Please input startRounds",
       },
       endRounds: {
-        required: "Please input endRounds"
+        required: "Please input endRounds",
       },
       roundId: {
-        required: "Please input roundId"
+        required: "Please input roundId",
       },
       stakeBeforeRounds: {
-        required: "Please input stakeBeforeRounds"
+        required: "Please input stakeBeforeRounds",
       },
       claimableStartRounds: {
-        required: "Please input claimableStartRounds"
+        required: "Please input claimableStartRounds",
       },
       maxPerWalletRounds: {
-        required: "Please input maxPerWalletRounds"
+        required: "Please input maxPerWalletRounds",
       },
       priceRounds: {
-        required: "Please input priceRounds"
+        required: "Please input priceRounds",
       },
       totalNfttRounds: {
-        required: "Please input totalNfttRounds"
+        required: "Please input totalNfttRounds",
       },
       instructionRounds: {
-        required: "Please input instructionRounds"
+        required: "Please input instructionRounds",
       },
       requiredStakingRounds: {
-        required: "Please input requiredStakingRounds"
+        required: "Please input requiredStakingRounds",
       },
       claimableIdsRounds: {
-        required: "Please input claimableIdsRounds"
+        required: "Please input claimableIdsRounds",
       },
-    }
-  ]
-
+    },
+  ],
 };

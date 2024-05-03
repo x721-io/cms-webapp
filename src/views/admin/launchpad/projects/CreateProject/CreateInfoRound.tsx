@@ -59,34 +59,36 @@ const CreateInfoRound: FC<CreateInfoRoundProps> = (props) => {
 
   useEffect(() => {
     if (rounds.length <= 0) {
-      appendRound({
-        roundId: "",
-        start: "",
-        end: "",
-        claimableStart: "",
-        instruction: "",
-        description: "",
-        totalNftt: "",
-        price: "",
-        stakeBefore: "",
-        maxPerWallet: "",
+      appendRound(
+        {
+          roundId: "",
+          start: "",
+          end: "",
+          claimableStart: "",
+          instruction: "",
+          description: "",
+          totalNftt: "",
+          price: "",
+          stakeBefore: "",
+          maxPerWallet: "",
 
-        id: "",
-        name: "",
-        projectId: "",
-        type: "",
-        address: null,
-        claimableIds: [],
-        requiredStaking: "",
-      },
-      {
-        shouldFocus: false,
-      });
+          id: "",
+          name: "",
+          projectId: "",
+          type: "",
+          address: null,
+          claimableIds: [],
+          requiredStaking: "",
+        },
+        {
+          shouldFocus: false,
+        }
+      );
     }
   }, []);
 
   return (
-    <div className="min-h-[350px] w-full overflow-x-scroll mt-6">
+    <div className="mt-6 min-h-[350px] w-full overflow-x-scroll">
       <Label className="mb-2 text-3xl font-bold">Rounds</Label>
       <div className="my-6">
         <table className="text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">

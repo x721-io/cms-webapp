@@ -85,7 +85,7 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
       <div className="flex flex-col justify-center gap-6">
         <div className="flex gap-4">
           {/* Banner */}
-          <div className="flex flex-col gap-1 flex-1">
+          <div className="flex flex-1 flex-col gap-1">
             <label className="text-primary mb-2 block font-semibold">
               Banner
             </label>
@@ -99,13 +99,14 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
                   loading={uploadBanner}
                   maxSize={20}
                   accept=".png,.jpeg, .png, .gif, .webp"
-                  mainForm={mainForm} fieldName="banner"
+                  mainForm={mainForm}
+                  fieldName="banner"
                 />
               )}
             />
           </div>
           {/* Logo */}
-          <div className="flex flex-col gap-1 flex-1">
+          <div className="flex flex-1 flex-col gap-1">
             <label className="text-primary mb-2 block font-semibold">
               Logo
             </label>
@@ -119,7 +120,8 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
                   loading={uploadLogo}
                   maxSize={20}
                   accept=".png,.jpeg, .png, .gif, .webp"
-                  mainForm={mainForm} fieldName="logo"
+                  mainForm={mainForm}
+                  fieldName="logo"
                 />
               )}
             />
@@ -131,7 +133,11 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
             <label className="text-primary mb-2 block font-semibold">
               Collection
             </label>
-            <SelectSearchCollection mainForm={mainForm} fieldNameCollection="collection" fieldNameCollectionAddress="collectionAddress"/>
+            <SelectSearchCollection
+              mainForm={mainForm}
+              fieldNameCollection="collection"
+              fieldNameCollectionAddress="collectionAddress"
+            />
           </div>
           {/* Name */}
           <div className="flex flex-col gap-1">

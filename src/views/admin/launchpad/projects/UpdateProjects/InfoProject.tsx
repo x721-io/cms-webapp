@@ -151,7 +151,8 @@ const InfoProject: FC<Props> = (props) => {
                 // error={!!errors.avatar}
                 maxSize={20}
                 accept=".png,.jpeg, .png, .gif, .webp"
-                mainForm={mainForm} fieldName="banner"
+                mainForm={mainForm}
+                fieldName="banner"
               />
             )}
           />
@@ -169,7 +170,8 @@ const InfoProject: FC<Props> = (props) => {
                 loading={uploadLogo}
                 maxSize={20}
                 accept=".png,.jpeg, .png, .gif, .webp"
-                mainForm={mainForm} fieldName="logo"
+                mainForm={mainForm}
+                fieldName="logo"
               />
             )}
           />
@@ -181,7 +183,11 @@ const InfoProject: FC<Props> = (props) => {
           <label className="text-primary mb-2 block font-semibold">
             Collection
           </label>
-          <SelectSearchCollection mainForm={mainForm} fieldNameCollection="collection" fieldNameCollectionAddress="collectionAddress" />
+          <SelectSearchCollection
+            mainForm={mainForm}
+            fieldNameCollection="collection"
+            fieldNameCollectionAddress="collectionAddress"
+          />
         </div>
         {/* Name */}
         <div className="flex flex-col gap-1">
