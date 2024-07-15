@@ -23,3 +23,6 @@ export const TINYMCE_PLUGINS =
   "advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount";
 export const TINYMCE_TOOLBAR =
   "undo redo | styleselect | fontsizeselect| code | bold italic | alignleft aligncenter alignright alignjustify | outdent indent";
+
+
+export const ALLOWED_DOMAIN_URL ='https://ipfs.io/ipfs/,testnet-api.memetaverse.club,u2u-images.s3.ap-southeast-1.amazonaws.com,copper-defensive-cod-42.mypinata.cloud,ug-assets-dev.s3.ap-southeast-1.amazonaws.com,https://testnet-peer.memetaverse.club/,https://apricot-worried-junglefowl-562.mypinata.cloud/';
