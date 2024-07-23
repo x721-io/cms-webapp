@@ -6,7 +6,7 @@ import { Spinner } from "flowbite-react";
 import { toast } from "react-toastify";
 import { MdClose, MdFileUpload } from "react-icons/md";
 import Text from "../Text";
-import { classNames } from "../../utils/string";
+import { classNames } from "@/utils/string";
 import Button from "../button";
 
 interface Props {

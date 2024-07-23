@@ -5,6 +5,7 @@ import { sanitizeObject } from "../utils";
 import { useLaunchpadApi } from "./useLaunchpadApi";
 import { useMarketplaceApi } from "./useMarketplaceApi";
 
+
 interface ListData {
   data: any[];
   paging: APIResponse.Pagination;
@@ -105,19 +106,19 @@ export const useFetchOptionRounds = (filters: APIParams.FetchOptionRounds) => {
   );
 };
 
-export const useFetchOptionCollections = (
-  filters: APIParams.FetchOptionCollections
-) => {
-  const api = useLaunchpadApi();
-  return useSWRInfinite(
-    (index) => ({
-      ...filters,
-      page: index + 1,
-    })
-    // (params) =>
-    //   api.fetchOptionCollection(sanitizeObject(params) as APIParams.FetchOptionCollections)
-  );
-};
+// export const useFetchOptionCollections = (
+//   filters: APIParams.FetchOptionCollections
+// ) => {
+//   const api = useLaunchpadApi();
+//   return useSWRInfinite(
+//     (index) => ({
+//       ...filters,
+//       page: index + 1,
+//     })
+//     // (params) =>
+//     //   api.fetchOptionCollection(sanitizeObject(params) as APIParams.FetchOptionCollections)
+//   );
+// };
 
 export const useInfiniteScroll = ({
   data,
@@ -201,7 +202,7 @@ export const useInfiniteScrollOption = ({
   useEffect(() => {
     const handleScroll = () => {
       const scrollContainer = scrollContainerRef?.current;
-      if (!scrollContainer) return; // Kiểm tra null ở đây
+      if (!scrollContainer) return;
 
       const { scrollTop, clientHeight, scrollHeight } = scrollContainer;
       if (
@@ -220,9 +221,11 @@ export const useInfiniteScrollOption = ({
 
     return () => {
       if (scrollContainerRef?.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         scrollContainerRef?.current.removeEventListener("scroll", handleScroll);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoadingMore, page, list.currentHasNext, scrollContainerRef]);
 
   return {

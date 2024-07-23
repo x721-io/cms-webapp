@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   InputHTMLAttributes,
   useCallback,
@@ -20,11 +19,6 @@ interface Props<T> extends InputHTMLAttributes<HTMLInputElement> {
   fieldName: Path<T extends FieldValues ? T : FieldValues>;
 }
 
-interface SelectOptionPropsCustom extends SelectOptionProps {
-  type: string;
-}
-
-const LIMIT = 5;
 
 const useIntersectionObserver = (isDataLoading: boolean) => {
   const [page, setPage] = useState(1);
@@ -55,12 +49,11 @@ const useIntersectionObserver = (isDataLoading: boolean) => {
 
 const SelectSearchRound = <T extends FieldValues>(props: Props<T>) => {
   const { mainForm, prefixField, fieldName } = props;
-  const { setValue, setError, clearErrors } = mainForm;
-  const prefixFieldType = `${prefixField}.type` as "rounds.0.type";
+  const { setValue } = mainForm;
   const prefixFieldId = `${prefixField}.roundId` as "rounds.0.roundId";
 
   const api = useLaunchpadApi();
-  const [selectedOption, setSelectedOption] = useState<SelectOptionPropsCustom>(
+  const [selectedOption, setSelectedOption] = useState<SelectOptionProps>(
     {
       label: "",
       value: "",
@@ -68,22 +61,21 @@ const SelectSearchRound = <T extends FieldValues>(props: Props<T>) => {
     }
   );
   const [productOptions, setProductOptions] = useState<
-    SelectOptionPropsCustom[]
+    SelectOptionProps[]
   >([]);
   const [isFetchingProducts, setIsFetchingProducts] = useState(true);
   const [totalItems, setTotalItems] = useState(0);
   const [searchInput, setSearchInput] = useState("");
   const [debouncedSearchInput, setDebouncedSearchInput] = useState("");
 
-  const handleSelect = (option: SelectOptionPropsCustom) => {
+  const handleSelect = (option: SelectOptionProps) => {
     setSearchInput(option?.label);
     setSelectedOption(option);
     setValue(prefixFieldId, option.value);
-    setValue(prefixFieldType, option.type);
   };
 
   const transformProductToSelectOptions = (
-    products: { name: string | null; id: string; type: string }[]
+    products: { name: string ; id: string ; type : string}[]
   ) => {
     if (!products) return [];
 
@@ -104,11 +96,8 @@ const SelectSearchRound = <T extends FieldValues>(props: Props<T>) => {
     if (!isFetchingProducts) {
       setHasMore(productOptions?.length < totalItems);
     }
-  }, [productOptions, totalItems]);
+  }, [isFetchingProducts, productOptions, setHasMore, totalItems]);
 
-  const getSkipValue = () => {
-    return (page - 1) * LIMIT;
-  };
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -120,7 +109,7 @@ const SelectSearchRound = <T extends FieldValues>(props: Props<T>) => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [searchInput]);
+  }, [searchInput, setPage]);
 
   const fetchAndSetProducts = async () => {
     try {
@@ -147,6 +136,7 @@ const SelectSearchRound = <T extends FieldValues>(props: Props<T>) => {
 
   useEffect(() => {
     fetchAndSetProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, debouncedSearchInput]);
 
   return (

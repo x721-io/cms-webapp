@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import { Controller, UseFormReturn } from "react-hook-form";
 import { toast } from "react-toastify";
-import ImageUploader from "../../../../../components/Form/ImageUploader";
-import InputV2 from "../../../../../components/fields/InputFieldV2";
-import { useLaunchpadApi } from "../../../../../hooks/useLaunchpadApi";
-import { FormState } from "../../../../../types/form";
+import ImageUploader from "@/components/Form/ImageUploader";
+import InputV2 from "@/components/fields/InputFieldV2";
+import { useLaunchpadApi } from "@/hooks/useLaunchpadApi";
+import { FormState } from "@/types/form";
 import SelectSearchCollection from "../CreateProject/SelectSearchCollection";
 
 interface Props {

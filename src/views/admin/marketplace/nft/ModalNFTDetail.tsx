@@ -1,5 +1,5 @@
 import { CustomFlowbiteTheme, Modal, ModalProps } from "flowbite-react";
-import { convertImageUrl } from "../../../../utils/nft";
+
 
 interface Props extends ModalProps {
   item: any;

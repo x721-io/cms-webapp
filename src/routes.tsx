@@ -1,13 +1,14 @@
 // Icon Imports
-import { MdAccountBox, MdOutlineShoppingCart, MdPeople } from "react-icons/md";
+import { MdAccountBox, MdBarChart, MdOutlineShoppingCart, MdPeople } from "react-icons/md";
 
 import {
   ADMIN_COLLECTION,
+  ADMIN_LAUNCHPAD,
   ADMIN_MARKETPLACE,
   ADMIN_NFT,
   ADMIN_USER,
   ADMINISTRATOR,
-  VIEWER,
+  VIEWER
 } from "./config/contanst";
 import Accounts from "./views/admin/account/accounts";
 import CreateAccount from "./views/admin/account/create";
@@ -15,6 +16,9 @@ import Collection from "./views/admin/marketplace/collection/Collection";
 import NFT from "./views/admin/marketplace/nft/NFT";
 import User from "./views/admin/marketplace/user/User";
 import Profile from "./views/admin/profile";
+import CreateProject from "./views/admin/launchpad/projects/CreateProject/CreateProject";
+import Project from "./views/admin/account/accountDetail/components/Project";
+
 
 const routes: RoutesType[] = [
   // {
@@ -25,24 +29,24 @@ const routes: RoutesType[] = [
   //     roles: [VIEWER],
   //     component: <MainDashboard />,
   // },
-  // {
-  //     name: 'Launchpad',
-  //     icon: <MdBarChart className="h-6 w-6" />,
-  //     path: '',
-  //     roles: [ADMIN_LAUNCHPAD, ADMINISTRATOR],
-  //     links: [
-  //         {
-  //             name: 'Create Project',
-  //             path: 'create-project',
-  //             component: <CreateProject />,
-  //         },
-  //         {
-  //             name: 'Projects',
-  //             path: 'projects',
-  //             component: <Project />,
-  //         },
-  //     ],
-  // },
+  {
+      name: 'Launchpad',
+      icon: <MdBarChart className="h-6 w-6" />,
+      path: '',
+      roles: [ADMIN_LAUNCHPAD, ADMINISTRATOR],
+      links: [
+          {
+              name: 'Create Project',
+              path: 'create-project',
+              component: <CreateProject />,
+          },
+          {
+              name: 'Projects',
+              path: 'projects',
+              component: <Project />,
+          },
+      ],
+  },
   {
     name: "Profile",
     layout: "/admin",

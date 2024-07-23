@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   InputHTMLAttributes,
   useCallback,
@@ -19,7 +18,6 @@ interface Props<T> extends InputHTMLAttributes<HTMLInputElement> {
   fieldNameCollectionAddress: Path<T extends FieldValues ? T : FieldValues>;
 }
 
-const LIMIT = 5;
 
 const useIntersectionObserver = (isDataLoading: boolean) => {
   const [page, setPage] = useState(1);
@@ -99,11 +97,7 @@ const SelectSearchCollection = <T extends FieldValues>(props: Props<T>) => {
     if (!isFetchingProducts) {
       setHasMore(productOptions?.length < totalItems);
     }
-  }, [productOptions, totalItems]);
-
-  // const getSkipValue = () => {
-  //   return (page - 1) * LIMIT;
-  // };
+  }, [isFetchingProducts, productOptions, setHasMore, totalItems]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -115,6 +109,7 @@ const SelectSearchCollection = <T extends FieldValues>(props: Props<T>) => {
     return () => {
       clearTimeout(timeoutId);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInput]);
 
   const fetchAndSetProducts = async () => {
@@ -142,6 +137,7 @@ const SelectSearchCollection = <T extends FieldValues>(props: Props<T>) => {
 
   useEffect(() => {
     fetchAndSetProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, debouncedSearchInput]);
 
   return (

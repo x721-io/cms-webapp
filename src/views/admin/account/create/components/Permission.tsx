@@ -41,6 +41,7 @@ function Permission() {
     if (roles) {
       setValue("roles", roles);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roles]);
 
   return (

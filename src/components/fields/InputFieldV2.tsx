@@ -81,7 +81,7 @@ const InputV2 = <T extends FieldValues>(props: InputV2Props<T>) => {
       case "md":
       default:
         return classNames(
-          "text-base rounded-2xl min-w-72 h-12 p-3",
+          "text-base rounded-xl min-w-72 h-12 p-3",
           !!prependIcon && "ps-10",
           !!appendIcon && "pe-10"
         );

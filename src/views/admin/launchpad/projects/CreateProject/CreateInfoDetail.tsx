@@ -12,9 +12,8 @@ interface CreateInfoDetailProps {
 
 const CreateInfoDetail: FC<CreateInfoDetailProps> = (props) => {
   const { mainForm } = props;
-  const { watch, getValues, control } = mainForm;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const { details } = useMemo(() => getValues(), [watch()]);
+  const {  getValues, control } = mainForm;
+  const { details } = useMemo(() => getValues(), [getValues]);
   const detailFieldArray = useFieldArray({
     control,
     name: "details",
@@ -52,22 +51,22 @@ const CreateInfoDetail: FC<CreateInfoDetailProps> = (props) => {
         }
       );
     }
-  }, []);
+  }, [appendDetail, details]);
 
   return (
     <div className="mt-6 flex w-full flex-col">
       <Label className="mb-4 text-3xl font-bold">Detail</Label>
-      <div className="my-6">
-        <table className="text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
+      <div className="my-6 w-full">
+        <table className="text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right w-full">
           <thead className=" bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="px-6 py-3">
+              <th  className="px-6 py-3">
                 Key
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th  className="px-6 py-3">
                 Content
               </th>
-              <th scope="col" className="px-6 py-3"></th>
+              <th  className="px-6 py-3"></th>
             </tr>
           </thead>
           <tbody>
@@ -75,7 +74,7 @@ const CreateInfoDetail: FC<CreateInfoDetailProps> = (props) => {
               const prefixField = `details.${itemIndex}` as "details.0";
               return (
                 <tr key={`${itemIndex}-detail`} className="">
-                  <td className="flex items-start">
+                  <td className="flex items-start pr-4">
                     <InputV2
                       mainForm={mainForm}
                       fieldName={`${prefixField}.key`}
@@ -88,21 +87,23 @@ const CreateInfoDetail: FC<CreateInfoDetailProps> = (props) => {
                       className="h-[100px]"
                     />
                   </td>
-                  <td className="flex items-center justify-center">
+                  <td className="flex flex-col items-center justify-center w-full gap-2 pl-4">
                     <button
                       type="button"
-                      className="p-1"
-                      onClick={() => handleRemoveRow(itemIndex)}
-                    >
-                      <IoMdTrash color="green" size={24} />
-                    </button>
-                    <button
-                      type="button"
-                      className="flex w-[120px] items-center gap-2 rounded-md bg-brandLinear p-2"
+                      className="flex w-full items-center justify-center gap-2 rounded-md bg-brandLinear p-2"
                       onClick={handleAddRow}
                     >
                       <IoMdAddCircle color="white" size={24} />
                       <Label className="text-base text-white">Add row</Label>
+                    </button>
+                    <button
+                      type="button"
+                      className="flex w-full items-center justify-center gap-2 rounded-md bg-red-500 p-2"
+                      onClick={() => handleRemoveRow(itemIndex)}
+                    >
+                      <Label className="text-base text-white">Remove row</Label>
+                      <IoMdTrash color="white" size={24} />
+
                     </button>
                   </td>
                 </tr>

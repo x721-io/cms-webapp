@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Controller, FieldValues, UseFormReturn } from "react-hook-form";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useFormHelper } from "../../hooks/useHelper";
@@ -136,7 +136,7 @@ const SelectInput = <T extends FieldValues>(props: SelectProps<T>) => {
                 title={option.label}
                 className={`${
                   isSelected ? "font-semibold " : "font-normal"
-                } text-text-tertiary text-shades/black block cursor-pointer truncate text-[0.625rem] font-normal leading-[0.8rem]`}
+                } text-text-tertiary text-shades/black block cursor-pointer truncate text-base`}
               >
                 {option.label}
               </span>
@@ -169,7 +169,7 @@ const SelectInput = <T extends FieldValues>(props: SelectProps<T>) => {
                 type="text"
                 {...field}
                 className={classNames(
-                  "block h-12 w-full min-w-72 rounded-2xl border border-gray-300 p-3 text-base outline-none transition-all placeholder:font-light placeholder:text-gray-200 focus-visible:ring-[0.5px]",
+                  "block h-12 w-full min-w-72 rounded-xl border border-gray-300 p-3 text-base outline-none transition-all placeholder:font-light placeholder:text-gray-200 focus-visible:ring-[0.5px]",
                   onValidateForm({ mainForm, fieldName }) === "is-invalid" &&
                     colorClass
                 )}

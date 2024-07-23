@@ -1,6 +1,7 @@
 "use client";
 
-import { typography } from "../../config/theme";
+import { typography } from "@/config/theme";
+import React from "react";
 import { classNames } from "../../utils/string";
 
 type VariantType = keyof typeof typography;

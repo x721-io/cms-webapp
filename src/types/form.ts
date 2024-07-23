@@ -1,5 +1,6 @@
 import { Address } from "wagmi";
 import { Round } from "./launchpad";
+import { BigNumberish } from "ethers";
 
 export namespace FormState {
     export interface Login {
@@ -100,11 +101,11 @@ export namespace FormState {
       collection: string;
       description: string;
       discord: string;
+      website: string;
       facebook: string;
       instagram: string;
       twitter: string;
       telegram: string;
-      address: Address;
       banner: string;
       organization: string;
       logo: string;

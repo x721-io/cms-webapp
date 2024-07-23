@@ -2,8 +2,8 @@ import { Label } from "flowbite-react";
 import { FC, useEffect, useMemo } from "react";
 import { UseFormReturn, useFieldArray } from "react-hook-form";
 import { IoMdAddCircle, IoMdTrash } from "react-icons/io";
-import InputV2 from "../../../../../components/fields/InputFieldV2";
-import { FormState } from "../../../../../types/form";
+import InputV2 from "@/components/fields/InputFieldV2";
+import { FormState } from "@/types/form";
 
 interface Props {
   item?: any;
@@ -115,13 +115,13 @@ const InfoRound: FC<Props> = (props) => {
                       fieldName={`${prefixField}.roundId`}
                     /> */}
                   </td>
-                  <td>
-                    <InputV2
-                      readOnly
-                      mainForm={mainForm}
-                      fieldName={`${prefixField}.type`}
-                    />
-                  </td>
+                  {/*<td>*/}
+                  {/*  <InputV2*/}
+                  {/*    readOnly*/}
+                  {/*    mainForm={mainForm}*/}
+                  {/*    fieldName={`${prefixField}.type`}*/}
+                  {/*  />*/}
+                  {/*</td>*/}
                   <td>
                     {/* <DatePickerRange
                       mainForm={mainForm}
@@ -142,12 +142,12 @@ const InfoRound: FC<Props> = (props) => {
                       fieldName={`${prefixField}.instruction`}
                     />
                   </td>
-                  <td>
-                    <InputV2
-                      mainForm={mainForm}
-                      fieldName={`${prefixField}.description`}
-                    />
-                  </td>
+                  {/*<td>*/}
+                  {/*  <InputV2*/}
+                  {/*    mainForm={mainForm}*/}
+                  {/*    fieldName={`${prefixField}.description`}*/}
+                  {/*  />*/}
+                  {/*</td>*/}
                   <td>
                     <InputV2
                       mainForm={mainForm}

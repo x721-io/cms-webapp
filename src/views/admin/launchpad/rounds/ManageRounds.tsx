@@ -2,15 +2,15 @@ import { Spinner } from "flowbite-react";
 import {
   useFetchRoundList,
   useInfiniteScroll,
-} from "../../../../hooks/useInfiniteScroll";
-import { useRoundFilterStore } from "../../../../store/filters/rounds/store";
-import Text from "../../../../components/Text";
+} from "@/hooks/useInfiniteScroll";
+import { useRoundFilterStore } from "@/store/filters/rounds/store";
+import Text from "@/components/Text";
 import { IoMdTrash } from "react-icons/io";
 import { FiEdit3 } from "react-icons/fi";
 import { MdAdd } from "react-icons/md";
 import UpdateRound from "./UpdateRound";
 import { useEffect, useState } from "react";
-import { useLaunchpadApi } from "../../../../hooks/useLaunchpadApi";
+import { useLaunchpadApi } from "@/hooks/useLaunchpadApi";
 import CreateRound from "./CreateRound";
 import { toast } from "react-toastify";
 

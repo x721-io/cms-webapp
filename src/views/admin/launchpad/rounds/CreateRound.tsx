@@ -1,11 +1,11 @@
 import { CustomFlowbiteTheme, Modal, ModalProps } from "flowbite-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import FormValidationMessages from "../../../../components/Form/ValidationMessages";
-import Input from "../../../../components/fields/InputField";
-import { formRulesCreateRound } from "../../../../config/formRules";
-import { useLaunchpadApi } from "../../../../hooks/useLaunchpadApi";
-import { FormState } from "../../../../types/form";
+import FormValidationMessages from "@/components/Form/ValidationMessages";
+import Input from "@/components/fields/InputField";
+import { formRulesCreateRound } from "@/config/formRules";
+import { useLaunchpadApi } from "@/hooks/useLaunchpadApi";
+import { FormState } from "@/types/form";
 
 interface Props extends ModalProps {
   // item: any;

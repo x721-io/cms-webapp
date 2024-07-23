@@ -15,7 +15,7 @@ export const useAccount = () => {
       const profile = await api.updateAccount(params);
       setProfile(profile);
     },
-    [bearerToken]
+    [api, bearerToken, setProfile]
   );
 
   const onUpdateRoles = useCallback(
@@ -23,7 +23,7 @@ export const useAccount = () => {
       if (!bearerToken) return;
       await api.updateRoles(params);
     },
-    [bearerToken]
+    [api, bearerToken]
   );
 
   const onFetchAccount = useCallback(
@@ -34,7 +34,7 @@ export const useAccount = () => {
         setProfile(account);
       }
     },
-    [bearerToken]
+    [api, bearerToken, setProfile]
   );
 
   const onCreateAccount = (params: APIParams.CreateAccount) =>

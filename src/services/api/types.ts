@@ -6,7 +6,7 @@ import {
   NFT,
   User,
 } from "../../types/entitites";
-import { Project, Round, RoundStatus } from "../../types/launchpad";
+import { Project, Round, RoundStatus, SearchRound } from "../../types/launchpad";
 
 /********** =========== Queries & Params for Api call ========== ***********/
 export namespace APIParams {
@@ -286,7 +286,7 @@ export namespace APIResponse {
   }
 
   export interface FetchOptionRounds {
-    data: Round[];
+    data: SearchRound[];
     paging: Pagination;
   }
 

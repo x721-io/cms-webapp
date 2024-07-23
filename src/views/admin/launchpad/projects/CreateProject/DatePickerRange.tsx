@@ -1,17 +1,18 @@
 import { InputHTMLAttributes, useState } from "react";
-import { FieldValues, UseFormReturn } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import Datepicker from "react-tailwindcss-datepicker";
 import { FormState } from "../../../../../types/form";
 
-interface DatePickerRangeProps<T>
+
+interface DatePickerRangeProps
   extends InputHTMLAttributes<HTMLInputElement> {
   mainForm: UseFormReturn<FormState.CreateProject>;
   fieldName: any;
   prefixField: any;
 }
 
-const DatePickerRange = <T extends FieldValues>(
-  props: DatePickerRangeProps<T>
+const DatePickerRange = (
+  props: DatePickerRangeProps
 ) => {
   const { mainForm, prefixField } = props;
 
@@ -38,7 +39,7 @@ const DatePickerRange = <T extends FieldValues>(
         useRange={false}
         onChange={(value) => handleValueChange(value)}
         classNames={{
-          input: () => "w-[300px] border border-gray-300 rounded-2xl p-3",
+          input: () => "w-full border border-gray-300 rounded-2xl p-3",
         }}
       />
     </>

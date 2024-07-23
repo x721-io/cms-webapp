@@ -3,6 +3,7 @@ import { FieldValues, UseFormReturn } from "react-hook-form";
 import Datepicker from "react-tailwindcss-datepicker";
 import { FormState } from "../../../../../types/form";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface DatePickerDatePickerStartClaimProps<T>
   extends InputHTMLAttributes<HTMLInputElement> {
   mainForm: UseFormReturn<FormState.CreateProject>;
@@ -42,7 +43,7 @@ const DatePickerSingle = <T extends FieldValues>(
         useRange={false}
         onChange={(value) => handleValueChange(value)}
         classNames={{
-          input: () => "w-[300px] border border-gray-300 rounded-2xl p-3",
+          input: () => " w-full border border-gray-300 rounded-2xl p-3",
         }}
       />
     </>

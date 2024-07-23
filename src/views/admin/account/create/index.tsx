@@ -2,16 +2,16 @@ import { useState } from "react";
 import AccountInfo from "./components/AccountInfo";
 import Permission from "./components/Permission";
 import Upload from "../../profile/components/Upload";
-import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
 import { useNavigate } from "react-router-dom";
 import { useFormContext } from "react-hook-form";
 import { FormState } from "../../../../types/form";
 import { useAccount } from "../../../../hooks/useAccount";
 import { toast } from "react-toastify";
+import { Spinner } from "flowbite-react";
 
 export default function CreateTab() {
-  const api = useMarketplaceApi();
   const navigate = useNavigate();
+
   const [isLoading, setLoading] = useState(false);
 
   const { handleSubmit, reset } = useFormContext<FormState.CreateAccount>();
@@ -57,6 +57,14 @@ export default function CreateTab() {
       setLoading(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex h-56 w-full items-center justify-center">
+        <Spinner size="xl" />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-8">

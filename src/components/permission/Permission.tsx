@@ -63,7 +63,7 @@ function UpdatePermission({ accountRoles, accountId, onClose }: Props) {
       setValue("roles", roles);
       setValue("id", id);
     }
-  }, [roles]);
+  }, [accountId, id, roles, setValue]);
 
   const onSubmit = async (params: FormState.UpdateRoles) => {
     const toastId = toast.loading("Uploading Roles...", { type: "info" });

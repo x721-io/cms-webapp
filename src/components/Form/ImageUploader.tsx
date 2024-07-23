@@ -11,6 +11,7 @@ import Text from "../Text";
 import Button from "../button";
 import { FormMessageValidate } from "./FormMessageValidate";
 
+
 interface Props<T> {
   className?: string;
   value?: string | Blob;
@@ -31,12 +32,10 @@ const ImageUploader = <T extends FieldValues>(props: Props<T>) => {
     value,
     onInput,
     loading,
-    error,
     accept,
     maxSize = 100, // 100 MB
   } = props;
   const { onValidateForm } = useFormHelper();
-  const { control } = mainForm;
   const dataValidate = onValidateForm({ mainForm, fieldName });
 
   const [file, setFile] = useState<Blob | undefined>();
@@ -98,7 +97,7 @@ const ImageUploader = <T extends FieldValues>(props: Props<T>) => {
             <span className="uppercase">{accept?.split(",").join(", ")}</span>{" "}
             Max {maxSize}mb.
           </Text>
-          <Button variant="primary">Choose File</Button>
+          <Button className='bg-white' variant="primary">Choose File</Button>
         </div>
       );
     }
@@ -154,7 +153,7 @@ const ImageUploader = <T extends FieldValues>(props: Props<T>) => {
   return (
     <div
       className={classNames(
-        "relative h-60 w-full cursor-pointer rounded-2xl border border-dashed p-3",
+        "relative h-60 w-full cursor-pointer rounded-2xl border border-dashed border-gray-500 p-3",
         onValidateForm({ mainForm, fieldName }) === "is-invalid" && colorClass,
         className
       )}

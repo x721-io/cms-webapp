@@ -13,21 +13,23 @@ export type RoundType =
 
 export type RoundStatus = "MINTING" | "ENDED" | "UPCOMING" | "CLAIM";
 
-export interface Round {
+export interface SearchRound {
   id: string;
   name: string;
-  description: string;
-  projectId: string;
+  type: string;
+}
+
+
+export interface Round {
   roundId: string;
   address: Address | null;
   start: string;
   end: string;
-  type: string;
   price: BigNumberish;
   maxPerWallet: string;
   totalNftt: string;
   claimableStart: string;
-  claimableIds: any[];
+  claimableIds: {id:string}[];
   requiredStaking: BigNumberish;
   instruction: string;
   stakeBefore: string;

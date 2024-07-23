@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import TableAccounts from "./components/TableAccounts";
-import { useUserFilterStore } from "../../../../store/filters/users/store";
 import Input from "../../../../components/fields/InputField";
 import SearchIcon from "../../../../assets/svg/SearchIcon";
 import { useAccountFilterStore } from "../../../../store/filters/accounts/store";

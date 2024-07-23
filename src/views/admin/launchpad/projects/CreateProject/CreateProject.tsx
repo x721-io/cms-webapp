@@ -11,6 +11,7 @@ import CreateInfoDetail from "./CreateInfoDetail";
 import CreateInfoProject from "./CreateInfoProject";
 import CreateInfoRound from "./CreateInfoRound";
 
+
 export interface FormInput {
   name: string;
   collection: string;
@@ -23,7 +24,7 @@ export interface FormInput {
   address: Address | null;
   banner: string;
   organization: string;
-  logo: string;
+  logo?: string;
   collectionAddress: Address | null;
   rounds: Round[];
 }
@@ -40,7 +41,7 @@ const CreateProject = () => {
     instagram: "",
     twitter: "",
     telegram: "",
-    address: "0xxx",
+    website: "",
     banner: "",
     organization: "",
     logo: "",
@@ -49,6 +50,7 @@ const CreateProject = () => {
     idOnchain: "",
     details: [],
   };
+
   const schema = yup.object({
     banner: yup.string().required("Please input banner"),
     logo: yup.string().required("Please input logo"),
@@ -56,48 +58,34 @@ const CreateProject = () => {
     name: yup.string().required("Please input name"),
     organization: yup.string().required("Please input organization"),
     idOnchain: yup.string().required("Please input in onchain"),
-    address: yup.string().nullable().required("Please input address"),
+    website: yup.string().nullable().required("Please input website"),
     discord: yup.string().required("Please input total discord"),
     facebook: yup.string().required("Please input facebook"),
     instagram: yup.string().required("Please input instagram"),
     twitter: yup.string().required("Please input total twitter"),
     telegram: yup.string().required("Please input telegram"),
     description: yup.string().required("Please input description"),
-    collectionAddress: yup
-      .string()
-      .nullable()
-      .required("Please input collectionAddress"),
-    rounds: yup
-      .array()
-      .min(1, "a")
-      .of(
-        yup.object({
-          roundId: yup.string().required("Please input roundId"),
-          // start: yup.string().required("Please input start rounds"),
-          // end: yup.string().required("Please input end rounds"),
-          claimableStart: yup
-            .string()
-            .required("Please input claimable start rounds"),
-          instruction: yup.string().required("Please input instruction rounds"),
-          description: yup
-            .string()
-            .required("Please input instruction description"),
-          totalNftt: yup.string().required("Please input totalNft rounds"),
-          price: yup.string().required("Please input price rounds"),
-          stakeBefore: yup.string().required("Please input staking end"),
-          maxPerWallet: yup.string().required("Please input quantity"),
-        })
-      ),
-    details: yup
-      .array()
-      .min(1, "b")
-      .of(
-        yup.object({
-          key: yup.string().required("Please input key"),
-          content: yup.string().required("Please input content"),
-        })
-      ),
+    collectionAddress: yup.string().nullable().required("Please input collectionAddress"),
+    rounds: yup.array().min(1, "a").of(
+      yup.object({
+        roundId: yup.string().required("Please input roundId"),
+        claimableStart: yup.string().required("Please input claimable start rounds"),
+        instruction: yup.string().required("Please input instruction rounds"),
+        // description: yup.string().required("Please input instruction description"),
+        totalNftt: yup.string().required("Please input totalNft rounds"),
+        price: yup.string().required("Please input price rounds"),
+        stakeBefore: yup.string().required("Please input staking end"),
+        maxPerWallet: yup.string().required("Please input quantity"),
+      })
+    ),
+    details: yup.array().min(1, "b").of(
+      yup.object({
+        key: yup.string().required("Please input key"),
+        content: yup.string().required("Please input content"),
+      })
+    ),
   });
+
   const mainForm = useForm<FormState.CreateProject>({
     resolver: yupResolver(schema) as any,
     mode: "all",
@@ -109,8 +97,15 @@ const CreateProject = () => {
 
   const onCreateProject = async (params: FormState.CreateProject) => {
     const toastId = toast.loading("Uploading Project...", { type: "info" });
+
     try {
-      await api.createProjects(params);
+      const data:any = { ...params }
+      data.rounds.forEach((round:any) => {
+        const {claimableIds} = round
+        round.claimableIds = claimableIds.map((x: { id: any }) =>x.id);
+      })
+
+      await api.createProjects(data);
       toast.update(toastId, {
         render: "Project created successfully",
         type: "success",
@@ -129,32 +124,34 @@ const CreateProject = () => {
         autoClose: 1000,
         closeButton: true,
       });
-    } finally {
     }
   };
 
   return (
-    <div className="flex flex-col items-end justify-center gap-4">
-      <CreateInfoProject mainForm={mainForm} />
-      <CreateInfoRound mainForm={mainForm} />
-      <CreateInfoDetail mainForm={mainForm} />
+    // <form onSubmit={handleSubmit(onCreateProject)}>
+      <div className="flex flex-col items-end justify-center gap-4">
+        <CreateInfoProject mainForm={mainForm} />
+        <CreateInfoRound mainForm={mainForm} />
+        <CreateInfoDetail mainForm={mainForm} />
 
-      <div className="flex gap-1">
-        {/* <button
+        <div className="flex gap-1 w-full">
+          {/* <button
           onClick={() => reset()}
           className="rounded-md border bg-white px-9 py-2 text-base font-medium transition duration-200"
         >
           Cancel
         </button> */}
-        <button
-          type="button"
-          className="linear rounded-md bg-brand-600 px-4 py-2 text-base font-medium text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700 dark:bg-brand-400 dark:hover:bg-brand-300 dark:active:opacity-90"
-          onClick={() => handleSubmit(onCreateProject)()}
-        >
-          Create Project
-        </button>
+          <button
+            type="button"
+            className="linear w-full rounded-md bg-green-500 px-4 py-2 text-base uppercase font-bold text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700 dark:bg-brand-400 dark:hover:bg-brand-300 dark:active:opacity-90"
+            onClick={()=>{handleSubmit(onCreateProject)()}}
+          >
+            Create Project
+          </button>
+        </div>
       </div>
-    </div>
+    // </form>
+
   );
 };
 

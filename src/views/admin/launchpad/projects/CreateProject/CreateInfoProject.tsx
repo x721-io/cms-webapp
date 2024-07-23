@@ -82,7 +82,7 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
   return (
     <div className="flex w-full flex-col">
       <Label className="mb-4 text-3xl font-bold">Create Project</Label>
-      <div className="flex flex-col justify-center gap-6">
+      <div className="flex flex-col justify-center gap-6 w-full">
         <div className="flex gap-4">
           {/* Banner */}
           <div className="flex flex-1 flex-col gap-1">
@@ -127,78 +127,93 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
             />
           </div>
         </div>
-        <div className="grid grid-cols-5 gap-2">
-          {/* Collection */}
-          <div className="flex flex-col gap-1 ">
-            <label className="text-primary mb-2 block font-semibold">
-              Collection
-            </label>
-            <SelectSearchCollection
-              mainForm={mainForm}
-              fieldNameCollection="collection"
-              fieldNameCollectionAddress="collectionAddress"
-            />
+        <div className="w-full flex flex-col gap-3">
+          <div className='flex gap-4 w-full'>
+            {/* Collection */}
+            <div className="flex flex-col gap-1 w-full">
+              <label className="text-primary mb-2 block font-semibold">
+                Collection
+              </label>
+              <SelectSearchCollection
+                mainForm={mainForm}
+                fieldNameCollection="collection"
+                fieldNameCollectionAddress="collectionAddress"
+              />
+            </div>
+            {/* Name */}
+            <div className="flex flex-col gap-1 w-full">
+              <label className="text-primary mb-2 block font-semibold">
+                Project name
+              </label>
+              <InputV2 mainForm={mainForm} fieldName="name" />
+            </div>
           </div>
-          {/* Name */}
-          <div className="flex flex-col gap-1">
-            <label className="text-primary mb-2 block font-semibold">
-              Project name
-            </label>
-            <InputV2 mainForm={mainForm} fieldName="name" />
+
+          <div className='flex w-full gap-4'>
+            {/* Organization */}
+            <div className="flex flex-col gap-1 w-full">
+              <label className="text-primary mb-2 block font-semibold">
+                Organization
+              </label>
+              <InputV2 mainForm={mainForm} fieldName="organization" />
+            </div>
+            {/* ID on chain */}
+            <div className="flex flex-col gap-1 w-full">
+              <label className="text-primary mb-2 block font-semibold">
+                ID Onchain
+              </label>
+              <InputV2 mainForm={mainForm} fieldName="idOnchain" />
+            </div>
           </div>
-          {/* Organization */}
-          <div className="flex flex-col gap-1">
-            <label className="text-primary mb-2 block font-semibold">
-              Organization
-            </label>
-            <InputV2 mainForm={mainForm} fieldName="organization" />
+
+
+          <div className='w-full gap-4 flex'>
+            {/* Address */}
+            <div className="flex flex-col gap-1 w-full">
+              <label className="text-primary mb-2 block font-semibold">
+                Website
+              </label>
+              <InputV2 mainForm={mainForm} fieldName="website" />
+            </div>
+            {/* Discord */}
+            <div className="flex flex-col gap-1 w-full">
+              <label className="text-primary mb-2 block font-semibold">
+                Discord
+              </label>
+              <InputV2 mainForm={mainForm} fieldName="discord" />
+            </div>
           </div>
-          {/* ID on chain */}
-          <div className="flex flex-1 flex-col gap-1">
-            <label className="text-primary mb-2 block font-semibold">
-              ID Onchain
-            </label>
-            <InputV2 mainForm={mainForm} fieldName="idOnchain" />
-          </div>
-          {/* Address */}
-          <div className="flex flex-col gap-1">
-            <label className="text-primary mb-2 block font-semibold">
-              Address
-            </label>
-            <InputV2 mainForm={mainForm} fieldName="address" />
-          </div>
+
+
         </div>
-        <div className="grid grid-cols-5 gap-2">
-          {/* Discord */}
-          <div className="flex flex-col gap-1">
-            <label className="text-primary mb-2 block font-semibold">
-              Discord
-            </label>
-            <InputV2 mainForm={mainForm} fieldName="discord" />
-          </div>
+
+        <div className="w-full gap-4 flex">
           {/* Facebook */}
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 w-full">
             <label className="text-primary mb-2 block font-semibold">
               Facebook
             </label>
             <InputV2 mainForm={mainForm} fieldName="facebook" />
           </div>
           {/* Instagram */}
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 w-full">
             <label className="text-primary mb-2 block font-semibold">
               Instagram
             </label>
             <InputV2 mainForm={mainForm} fieldName="instagram" />
           </div>
+        </div>
+
+        <div className="w-full flex gap-4">
           {/* Twitter */}
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 w-full">
             <label className="text-primary mb-2 block font-semibold">
               Twitter
             </label>
             <InputV2 mainForm={mainForm} fieldName="twitter" />
           </div>
           {/* Telegram */}
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 w-full">
             <label className="text-primary mb-2 block font-semibold">
               Telegram
             </label>
@@ -206,7 +221,7 @@ const CreateInfoProject: FC<CreateInfoProjectProps> = (props) => {
           </div>
         </div>
         {/* Description */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 w-full">
           <label className="text-primary mb-2 block font-semibold">
             Description
           </label>
