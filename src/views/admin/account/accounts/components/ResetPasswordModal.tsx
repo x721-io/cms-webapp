@@ -5,7 +5,7 @@ import Input from "../../../../../components/fields/InputField";
 import { formRulesResetPassword } from "../../../../../config/form/rules";
 import { useForm } from "react-hook-form";
 import { FormState } from "@/types/form";
-import Button from "../../../../../components/button/CustomButton";
+import Button from "../../../../../components/Button/CustomButton";
 import { toast } from "react-toastify";
 import { useAccount } from "../../../../../hooks/useAccount";
 import FormValidationMessages from "../../../../../components/Form/ValidationMessages";

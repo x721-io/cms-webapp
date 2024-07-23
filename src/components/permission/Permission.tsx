@@ -14,7 +14,7 @@ import {
   CREATOR,
   VIEWER,
 } from "../../config/contanst";
-import Button from "../button/CustomButton";
+import Button from "../Button/CustomButton";
 import FormValidationMessages from "../Form/ValidationMessages";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
