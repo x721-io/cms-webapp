@@ -2,13 +2,13 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import FormValidationMessages from "../../../../components/Form/ValidationMessages";
-import Button from "../../../../components/button/index";
+import Button from "../../../../components/Button";
 import Card from "../../../../components/card";
 import Input from "../../../../components/fields/InputField";
 import { formRulesAccount } from "../../../../config/form/rules";
 import { useAccount } from "../../../../hooks/useAccount";
 import useAuthStore from "../../../../store/auth/store";
-import { FormState } from "../../../../types/form";
+import { FormState } from "@/types/form";
 import CardMenu from "./CardMenu";
 
 const AccountInfo = () => {

@@ -8,7 +8,7 @@ import CloseIcon from "../../assets/svg/Close";
 import { useFormHelper } from "../../hooks/useHelper";
 import { classNames } from "../../utils/string";
 import Text from "../Text";
-import Button from "../button";
+import Button from "../Button";
 import { FormMessageValidate } from "./FormMessageValidate";
 
 

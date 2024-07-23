@@ -135,12 +135,12 @@ const CreateProject = () => {
         <CreateInfoDetail mainForm={mainForm} />
 
         <div className="flex gap-1 w-full">
-          {/* <button
+          {/* <Button
           onClick={() => reset()}
           className="rounded-md border bg-white px-9 py-2 text-base font-medium transition duration-200"
         >
           Cancel
-        </button> */}
+        </Button> */}
           <button
             type="button"
             className="linear w-full rounded-md bg-green-500 px-4 py-2 text-base uppercase font-bold text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700 dark:bg-brand-400 dark:hover:bg-brand-300 dark:active:opacity-90"
