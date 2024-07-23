@@ -19,12 +19,15 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["*"]
     }
   },
   "include": [
-    "src/**/*", "src/**/*.ts", "**/*.tsx"
+    "src/**/*.tsx", "src/**/*.ts", "**/*.tsx","react-app-env.d.ts","src/**/*"
   ],
+  "exclude": ["node_modules"]
+
 
 }

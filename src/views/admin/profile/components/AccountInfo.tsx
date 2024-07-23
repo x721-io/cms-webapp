@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import FormValidationMessages from "../../../../components/Form/ValidationMessages";
-import Button from "../../../../components/button";
+import Button from "../../../../components/button/index";
 import Card from "../../../../components/card";
 import Input from "../../../../components/fields/InputField";
 import { formRulesAccount } from "../../../../config/form/rules";

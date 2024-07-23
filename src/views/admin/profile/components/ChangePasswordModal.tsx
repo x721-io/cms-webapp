@@ -9,7 +9,7 @@ import { formRulesResetPassword } from "../../../../config/form/rules";
 import EyeIcon from "../../../../assets/svg/EyeIcon";
 import EyeOffIcon from "../../../../assets/svg/EyeOffIcon";
 import Input from "../../../../components/fields/InputField";
-import Button from "../../../../components/button";
+import Button from "../../../../components/button/index";
 import FormValidationMessages from "../../../../components/Form/ValidationMessages";
 
 interface Props extends ModalProps {
