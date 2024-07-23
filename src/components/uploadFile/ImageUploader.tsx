@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { MdClose, MdFileUpload } from "react-icons/md";
 import Text from "../Text";
 import { classNames } from "@/utils/string";
-import Button from "../Button";
+import Button from "../button/CustomButton";
 
 interface Props {
   className?: string;
