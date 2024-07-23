@@ -10,7 +10,7 @@ export interface ButtonProps
   loadingText?: string;
 }
 
-export default function Button({
+ const Button = ({
   className,
   loading,
   loadingText,
@@ -20,7 +20,7 @@ export default function Button({
   disabled,
   type,
   ...rest
-}: ButtonProps) {
+}: ButtonProps) => {
   const baseClass = useMemo(() => {
     return classNames(
       `transition-all duration-500 whitespace-nowrap text-ellipsis`,
@@ -105,3 +105,4 @@ export default function Button({
     </button>
   );
 }
+export default Button;
