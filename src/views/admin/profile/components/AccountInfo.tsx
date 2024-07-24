@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import FormValidationMessages from "../../../../components/Form/ValidationMessages";
-import Button from "../../../../components/Button/CustomButton";
+import CustomButton from "../../../../components/Button/CustomButton";
 import Card from "../../../../components/card";
 import Input from "../../../../components/fields/InputField";
 import { formRulesAccount } from "../../../../config/form/rules";
@@ -174,7 +174,7 @@ const AccountInfo = () => {
         </div>
         {isDirty ? (
           <div className="flex w-full items-center justify-center pt-5 tablet:w-auto desktop:w-auto">
-            <Button
+            <CustomButton
               type="submit"
               scale="sm"
               variant="outlined"
@@ -182,7 +182,7 @@ const AccountInfo = () => {
               className="flex w-full items-center bg-brand-400 text-white hover:bg-brand-600 active:bg-brand-700 tablet:w-auto desktop:w-auto"
             >
               Update Account
-            </Button>
+            </CustomButton>
           </div>
         ) : (
           <></>

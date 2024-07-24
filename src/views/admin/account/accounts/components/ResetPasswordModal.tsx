@@ -5,7 +5,7 @@ import Input from "../../../../../components/fields/InputField";
 import { formRulesResetPassword } from "../../../../../config/form/rules";
 import { useForm } from "react-hook-form";
 import { FormState } from "@/types/form";
-import Button from "../../../../../components/Button/CustomButton";
+import CustomButton from "../../../../../components/Button/CustomButton";
 import { toast } from "react-toastify";
 import { useAccount } from "../../../../../hooks/useAccount";
 import FormValidationMessages from "../../../../../components/Form/ValidationMessages";
@@ -162,7 +162,7 @@ export default function ResetPasswordModal({
               </div>
               {isDirty ? (
                 <div className="flex w-full items-center justify-center pt-5 tablet:w-auto desktop:w-auto">
-                  <Button
+                  <CustomButton
                     type="submit"
                     scale="sm"
                     variant="outlined"
@@ -170,7 +170,7 @@ export default function ResetPasswordModal({
                     className="flex w-full items-center justify-center tablet:w-auto desktop:w-auto"
                   >
                     Confirm
-                  </Button>
+                  </CustomButton>
                 </div>
               ) : (
                 <></>

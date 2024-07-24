@@ -12,13 +12,14 @@ import {
   ADMIN_USER,
   ADMINISTRATOR,
   CREATOR,
-  VIEWER,
+  VIEWER
 } from "../../config/contanst";
-import Button from "../Button/CustomButton";
+import CustomButton from "../Button/CustomButton";
 import FormValidationMessages from "../Form/ValidationMessages";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useAccount } from "../../hooks/useAccount";
+
 
 const toggleSwitchTheme: CustomFlowbiteTheme["toggleSwitch"] = {
   root: {
@@ -189,14 +190,14 @@ function UpdatePermission({ accountRoles, accountId, onClose }: Props) {
       </Card>
 
       <div className="flex w-full items-center justify-center pt-5 tablet:w-auto desktop:w-auto">
-        <Button
+        <CustomButton
           type="submit"
           scale="sm"
           variant="outlined"
           className="flex w-full items-center justify-center tablet:w-auto desktop:w-auto"
         >
           Update Roles
-        </Button>
+        </CustomButton>
       </div>
       <FormValidationMessages errors={errors} />
     </form>

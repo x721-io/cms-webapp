@@ -9,7 +9,7 @@ import { formRulesResetPassword } from "../../../../config/form/rules";
 import EyeIcon from "../../../../assets/svg/EyeIcon";
 import EyeOffIcon from "../../../../assets/svg/EyeOffIcon";
 import Input from "../../../../components/fields/InputField";
-import Button from "../../../../components/Button/CustomButton";
+import CustomButton from "../../../../components/Button/CustomButton";
 import FormValidationMessages from "../../../../components/Form/ValidationMessages";
 
 interface Props extends ModalProps {
@@ -187,7 +187,7 @@ export default function ResetPasswordModal({ onClose, show }: Props) {
               </div>
               {isDirty ? (
                 <div className="flex w-full items-center justify-center pt-5 tablet:w-auto desktop:w-auto">
-                  <Button
+                  <CustomButton
                     type="submit"
                     scale="sm"
                     variant="outlined"
@@ -195,7 +195,7 @@ export default function ResetPasswordModal({ onClose, show }: Props) {
                     className="flex w-full items-center justify-center tablet:w-auto desktop:w-auto"
                   >
                     Confirm
-                  </Button>
+                  </CustomButton>
                 </div>
               ) : (
                 <></>

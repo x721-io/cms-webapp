@@ -8,7 +8,7 @@ import CloseIcon from "../../assets/svg/Close";
 import { useFormHelper } from "../../hooks/useHelper";
 import { classNames } from "../../utils/string";
 import Text from "../Text";
-import Button from "../Button/CustomButton";
+import CustomButton from "../Button/CustomButton";
 import { FormMessageValidate } from "./FormMessageValidate";
 
 
@@ -97,7 +97,7 @@ const ImageUploader = <T extends FieldValues>(props: Props<T>) => {
             <span className="uppercase">{accept?.split(",").join(", ")}</span>{" "}
             Max {maxSize}mb.
           </Text>
-          <Button className='bg-white' variant="primary">Choose File</Button>
+          <CustomButton className='bg-white' variant="primary">Choose File</CustomButton>
         </div>
       );
     }
@@ -177,13 +177,13 @@ const ImageUploader = <T extends FieldValues>(props: Props<T>) => {
         (loading ? (
           <Spinner className="absolute right-0 top-[-18px]" />
         ) : (
-          <Button
+          <CustomButton
             variant="icon"
             className="absolute right-0 top-[-18px] rounded-md bg-gray-200"
             onClick={handleClearFile}
           >
             <CloseIcon width={20} height={20} />
-          </Button>
+          </CustomButton>
         ))}
     </div>
   );

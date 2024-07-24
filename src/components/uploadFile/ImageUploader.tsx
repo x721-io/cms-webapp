@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { MdClose, MdFileUpload } from "react-icons/md";
 import Text from "../Text";
 import { classNames } from "@/utils/string";
-import Button from "../Button/CustomButton";
+import CustomButton from "../Button/CustomButton";
 
 interface Props {
   className?: string;
@@ -143,13 +143,13 @@ export default function ImageUploader({
         (loading ? (
           <Spinner className="absolute right-0 top-[-18px]" />
         ) : (
-          <Button
+          <CustomButton
             variant="icon"
             className="absolute right-0 top-[-18px]"
             onClick={handleClearFile}
           >
             <MdClose width={20} height={20} />
-          </Button>
+          </CustomButton>
         ))}
     </div>
   );

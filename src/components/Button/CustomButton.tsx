@@ -10,7 +10,7 @@ export interface ButtonProps
   loadingText?: string;
 }
 
- const Button = ({
+ const CustomButton = ({
   className,
   loading,
   loadingText,
@@ -105,4 +105,4 @@ export interface ButtonProps
     </button>
   );
 }
-export default Button;
+export default CustomButton;
