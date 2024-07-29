@@ -81,15 +81,27 @@ export const formRulesResetPassword = {
 export const formRulesUploadFile = {
   avatar: {
     validate: {
-      required: (v: Blob[]) =>
-        (v && v.length > 0) || "Account image is required",
-      audio: (values: Blob[]) => {
-        if (values && values.length > 0) {
-          const firstFileType = values[0].type.split("/")[0];
-          if (firstFileType && firstFileType !== "audio") return true;
-          return !!values[1] || "Cover photo is required";
+      required: (v: Blob | undefined) =>
+        (v && v.size > 0) || 'Image is required',
+      audio: (values: Blob | undefined) => {
+        if (values && values.size > 0) {
+          const fileType = values.type.split('/')[0];
+          if (fileType && fileType !== 'audio') {
+            return 'File must be an audio file';
+          }
+          return true;
         }
-        return "Cover photo is required";
+        return 'Cover photo is required';
+      },
+      image: (values: Blob | undefined) => {
+        if (values && values.size > 0) {
+          const fileType = values.type.split('/')[0];
+          if (fileType && fileType !== 'image') {
+            return 'File must be an image';
+          }
+          return true;
+        }
+        return 'Image is required';
       },
     },
   },

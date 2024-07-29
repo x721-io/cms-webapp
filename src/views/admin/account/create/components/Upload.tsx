@@ -3,42 +3,43 @@ import { Controller, useForm } from "react-hook-form";
 import ImageUploader from "../../../../../components/uploadFile/ImageUploader";
 import { ALLOWED_IMAGE_TYPES } from "../../../../../config/contanst";
 import { FormState } from "../../../../../types/form";
-import { useMemo } from "react";
+import { formRulesUploadFile } from "../../../../../config/form/rules";
+
 
 const Upload = () => {
   const {
     control,
-    clearErrors,
-    setValue,
-    watch,
-    formState: { isSubmitting },
+    // clearErrors,
+    // setValue,
+    // watch,
+    formState: { isSubmitting, errors },
   } = useForm<FormState.CreateAccount>();
 
-  const media = watch("avatar");
-  const isNonImageNFT = useMemo(() => {
-    if (!media || !media?.length) return false;
-    const fileType = media[0].type.split("/")[0];
-    if (!fileType) return false;
-    return fileType !== "image";
-  }, [media]);
+  // const media = watch("avatar");
+  // const isNonImageNFT = useMemo(() => {
+  //   if (!media || !media?.length) return false;
+  //   const fileType = media[0].type.split("/")[0];
+  //   if (!fileType) return false;
+  //   return fileType !== "image";
+  // }, [media]);
 
-  const handleSelectMedia = (file?: Blob) => {
-    if (!file) {
-      setValue("avatar", []);
-    } else {
-      setValue("avatar", [file]);
-      clearErrors("avatar");
-    }
-  };
+  // const handleSelectMedia = (file?: Blob) => {
+  //   if (!file) {
+  //     setValue("avatar", []);
+  //   } else {
+  //     setValue("avatar", [file]);
+  //     clearErrors("avatar");
+  //   }
+  // };
 
-  const handleSelectCoverImage = (file?: Blob) => {
-    if (!file) {
-      setValue("avatar", [media[0]]);
-    } else {
-      setValue("avatar", [media[0], file]);
-      clearErrors("avatar");
-    }
-  };
+  // const handleSelectCoverImage = (file?: Blob) => {
+  //   if (!file) {
+  //     setValue("avatar", [media[0]]);
+  //   } else {
+  //     setValue("avatar", [media[0], file]);
+  //     clearErrors("avatar");
+  //   }
+  // };
 
   return (
     <Card className="grid h-full w-full grid-cols-1 gap-3 rounded-[20px] bg-white bg-clip-border p-3 font-dm shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:shadow-none 2xl:grid-cols-11">
@@ -47,35 +48,35 @@ const Upload = () => {
           <Controller
             name="avatar"
             control={control}
-            // rules={formRulesUploadFile.avatar}
-            render={({ field: { value } }) => (
+            rules={formRulesUploadFile.avatar}
+            render={({ field }) => (
               <ImageUploader
                 loading={isSubmitting}
-                // error={!!errors.avatar}
+                error={!!errors.avatar}
                 accept={ALLOWED_IMAGE_TYPES}
                 maxSize={100}
-                onInput={handleSelectMedia}
+                onInput={(file) => field.onChange(file)}
               />
             )}
           />
 
-          {isNonImageNFT && (
-            <div>
-              <Controller
-                name="avatar"
-                control={control}
-                render={({ field: { value } }) => (
-                  <ImageUploader
-                    loading={isSubmitting}
-                    // error={!!errors.avatar}
-                    accept={ALLOWED_IMAGE_TYPES}
-                    maxSize={20}
-                    onInput={handleSelectCoverImage}
-                  />
-                )}
-              />
-            </div>
-          )}
+          {/*{isNonImageNFT && (*/}
+          {/*  <div>*/}
+          {/*    <Controller*/}
+          {/*      name="avatar"*/}
+          {/*      control={control}*/}
+          {/*      render={({ field: { value } }) => (*/}
+          {/*        <ImageUploader*/}
+          {/*          loading={isSubmitting}*/}
+          {/*          error={!!errors.avatar}*/}
+          {/*          accept={ALLOWED_IMAGE_TYPES}*/}
+          {/*          maxSize={20}*/}
+          {/*          onInput={handleSelectCoverImage}*/}
+          {/*        />*/}
+          {/*      )}*/}
+          {/*    />*/}
+          {/*  </div>*/}
+          {/*)}*/}
         </div>
       </div>
       <div className="col-span-5 flex h-full w-full flex-col justify-center overflow-hidden rounded-xl bg-white pb-4 pl-3 dark:!bg-navy-800">

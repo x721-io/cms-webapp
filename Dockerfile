@@ -5,6 +5,11 @@ RUN apk update && \
 
 WORKDIR /app
 COPY package*.json ./
+
+RUN rm -rf node_modules
+RUN rm -rf dist
+RUN rm -rf build
+
 RUN yarn
 COPY . .
 RUN yarn build

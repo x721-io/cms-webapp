@@ -15,8 +15,8 @@ export const alphabetOnlyRegex = new RegExp(/^[A-Z]+$/i);
 export const noSpecialCharacterRegex = new RegExp(/^[A-Za-z0-9 ]+$/);
 export const numberRegex = new RegExp(/^[0-9 ]+$/);
 export const decimalRegex = new RegExp(/^[0-9]+([.,][0-9]+)?$/);
-export const nameRegex = new RegExp(/^[A-Za-z0-9_-]{3,25}$/);
-export const usernameRegex = new RegExp(/^[A-Za-z0-9_ -]{3,25}$/);
+export const nameRegex = new RegExp(/^[A-Z][a-z]+(?: [A-Z][a-z]+)*(?:-[A-Z][a-z]+)?$/);
+export const usernameRegex = new RegExp(/^(?:[a-zA-Z][a-zA-Z0-9._]{2,15}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
 export const passwordRegex = new RegExp(
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
 );

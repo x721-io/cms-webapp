@@ -1,6 +1,6 @@
 import { Address } from "wagmi";
 import { Round } from "./launchpad";
-import { BigNumberish } from "ethers";
+
 
 export namespace FormState {
     export interface Login {
@@ -9,7 +9,7 @@ export namespace FormState {
     }
 
     export interface CreateAccount {
-        avatar: Blob[];
+        avatar: Blob;
         username: string;
         fullName: string;
         password: string;

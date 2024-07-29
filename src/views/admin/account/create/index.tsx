@@ -1,16 +1,20 @@
 import { useState } from "react";
 import AccountInfo from "./components/AccountInfo";
 import Permission from "./components/Permission";
-import Upload from "../../profile/components/Upload";
+// import Upload from "../../profile/components/Upload";
 import { useNavigate } from "react-router-dom";
 import { useFormContext } from "react-hook-form";
 import { FormState } from "../../../../types/form";
 import { useAccount } from "../../../../hooks/useAccount";
 import { toast } from "react-toastify";
 import { Spinner } from "flowbite-react";
+import Upload from "../../account/create/components/Upload";
+import { useMarketplaceApi } from "../../../../hooks/useMarketplaceApi";
+
 
 export default function CreateTab() {
   const navigate = useNavigate();
+  const api = useMarketplaceApi();
 
   const [isLoading, setLoading] = useState(false);
 
@@ -23,11 +27,22 @@ export default function CreateTab() {
     navigate("/admin/create-account");
   };
 
+  // const media = watch("avatar");
+
+  // const isNonImageNFT = useMemo(() => {
+  //   if (!media || !media?.length) return false;
+  //   const fileType = media[0].type.split("/")[0];
+  //   if (!fileType) return false;
+  //   return fileType !== "image";
+  // }, [media]);
+
   const onSubmit = async ({ avatar, ...rest }: FormState.CreateAccount) => {
     setLoading(true);
     const createAccountToast = toast.loading("Creating Account...");
     try {
-      // const { fileHashes } = await api.uploadFile(avatar)
+      const { fileHashes } = await api.uploadFile(avatar)
+
+      console.log('fileHashes',fileHashes);
 
       toast.update(createAccountToast, { render: "Sending transaction" });
       // const [avatar1, avatar2] = fileHashes

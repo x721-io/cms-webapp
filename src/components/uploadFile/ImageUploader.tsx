@@ -3,15 +3,15 @@
 // import CloseIcon from '@/components/Icon/Close'
 import { useMemo, useRef, useState } from "react";
 import { Spinner } from "flowbite-react";
-import { toast } from "react-toastify";
 import { MdClose, MdFileUpload } from "react-icons/md";
 import Text from "../Text";
-import { classNames } from "@/utils/string";
+import { classNames } from "../../utils/string";
 import CustomButton from "../Button/CustomButton";
+
 
 interface Props {
   className?: string;
-  value?: string | Blob;
+  image?: string | Blob;
   onInput?: (file: Blob | undefined) => void;
   loading?: boolean;
   error?: boolean;
@@ -21,7 +21,7 @@ interface Props {
 
 export default function ImageUploader({
   className,
-  value,
+  image,
   onInput,
   loading,
   error,
@@ -29,39 +29,68 @@ export default function ImageUploader({
   maxSize = 100, // 100 MB
 }: Props) {
   const [file, setFile] = useState<Blob | undefined>();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputFileRef = useRef<HTMLInputElement>(null);
 
+
+  const allowed: any = {
+    image: {
+      extensions: ['jpg', 'jpeg', 'png', 'gif'],
+      size: 1000000,
+    },
+  };
   const fileType = useMemo(() => {
     if (!file) return undefined;
     return file.type.split("/")[0];
   }, [file]);
 
   const previewImage = useMemo(() => {
-    if (value) {
-      if (typeof value === "string") return value;
-      return URL.createObjectURL(value);
+    if (image) {
+      if (typeof image === 'string') return image;
+      return URL.createObjectURL(image);
     }
 
-    if (!file) return "";
+    if (!file) return '';
     return URL.createObjectURL(file);
-  }, [file, value]);
+  }, [file, image]);
 
-  const handleInputImage = (files: FileList | null) => {
-    if (files && files[0].size < maxSize * 1024 ** 2) {
-      onInput?.(files[0]);
-      setFile(files[0]);
-    } else {
-      onInput?.(undefined);
-      setFile(undefined);
-      toast.error(`File extension is larger than the allowed size`);
+  const handleInputUploadFile = (files: FileList | null) => {
+    if (files && files.length > 0) {
+      const file = files[0];
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
+      let newFileType = '';
+
+      if (allowed.image.extensions.includes(fileExtension)) {
+        newFileType = 'image';
+      } else if (allowed.video.extensions.includes(fileExtension)) {
+        newFileType = 'video';
+      } else if (allowed.audio.extensions.includes(fileExtension)) {
+        newFileType = 'audio';
+      } else {
+        // toast.error(`File extension is not valid.`);
+        if (inputFileRef && inputFileRef.current) {
+          inputFileRef.current.value = '';
+        }
+      }
+
+      if (allowed[newFileType]) {
+        if (file.size > allowed[newFileType].size) {
+          // toast.error(`File extension is larger than the allowed size`);
+          onInput?.(undefined);
+          setFile(undefined);
+        } else {
+          onInput?.(file);
+          setFile(file);
+          return;
+        }
+      }
     }
   };
 
   const handleClearFile = () => {
     onInput?.(undefined);
     setFile(undefined);
-    if (inputRef && inputRef.current) {
-      inputRef.current.value = "";
+    if (inputFileRef && inputFileRef.current) {
+      inputFileRef.current.value = "";
     }
   };
 
@@ -132,9 +161,9 @@ export default function ImageUploader({
             : `absolute left-0 right-0 h-full w-full cursor-pointer opacity-0`
         }
         type="file"
-        ref={inputRef}
+        ref={inputFileRef}
         accept={accept}
-        onChange={(e) => handleInputImage(e.target.files)}
+        onChange={(e) => handleInputUploadFile(e.target.files)}
       />
 
       {renderFile()}

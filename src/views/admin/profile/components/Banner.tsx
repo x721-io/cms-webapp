@@ -6,7 +6,6 @@ import useAuthStore from "../../../../store/auth/store";
 
 const Banner = () => {
   const account = useAuthStore((state) => state.profile);
-
   return (
     <Card extra={"items-center w-full h-full p-[16px] bg-cover"}>
       {/* Background and profile */}
