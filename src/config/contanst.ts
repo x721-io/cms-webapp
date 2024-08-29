@@ -26,3 +26,10 @@ export const TINYMCE_TOOLBAR =
 
 
 export const ALLOWED_DOMAIN_URL ='https://ipfs.io/ipfs/,testnet-api.memetaverse.club,u2u-images.s3.ap-southeast-1.amazonaws.com,copper-defensive-cod-42.mypinata.cloud,ug-assets-dev.s3.ap-southeast-1.amazonaws.com,https://testnet-peer.memetaverse.club/,https://apricot-worried-junglefowl-562.mypinata.cloud/,https://indigo-accessible-raccoon-107.mypinata.cloud/ipfs/';
+
+
+export const RPC_URL = process.env.REACT_APP_RPC_URL as string;
+export const NETWORK_NAME = process.env.REACT_APP_NETWORK_NAME as string;
+export const BLOCK_EXPLORER_URL = process.env
+  .REACT_APP_BLOCK_EXPLORER_URL as string;
+export const CHAIN_ID = process.env.REACT_APP_CHAIN_ID;

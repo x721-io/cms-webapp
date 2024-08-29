@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Address } from "wagmi";
+import { Address } from "viem";
 import * as yup from "yup";
 import { useLaunchpadApi } from "../../../../../hooks/useLaunchpadApi";
 import { FormState } from "../../../../../types/form";

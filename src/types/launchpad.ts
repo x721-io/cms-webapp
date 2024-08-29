@@ -1,5 +1,5 @@
 import { BigNumberish } from "ethers";
-import { Address } from "wagmi";
+import { Address } from "viem";
 import { Collection } from "./entitites";
 
 export type RoundType =

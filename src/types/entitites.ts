@@ -1,5 +1,5 @@
 import { BigNumberish } from "ethers";
-import { Address } from "wagmi";
+import { Address } from "viem";
 import { MarketEventType } from "./market";
 export type AssetType = "ERC721" | "ERC1155";
 export type EntityStatus = "PENDING" | "SUCCESS" | "FAILED";

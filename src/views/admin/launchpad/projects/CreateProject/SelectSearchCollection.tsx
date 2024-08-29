@@ -6,11 +6,11 @@ import {
   useState,
 } from "react";
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
-import { Address } from "wagmi";
 import SelectInput, {
   SelectOptionProps,
 } from "../../../../../components/Form/SelectInput";
 import { useLaunchpadApi } from "../../../../../hooks/useLaunchpadApi";
+import { Address } from "viem";
 
 interface Props<T> extends InputHTMLAttributes<HTMLInputElement> {
   mainForm: UseFormReturn<T extends FieldValues ? T : FieldValues>;
